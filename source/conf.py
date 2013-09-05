@@ -20,6 +20,8 @@ import sys, os
 
 # -- General configuration -----------------------------------------------------
 
+import sphinx_bootstrap_theme
+
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
 
@@ -94,15 +96,17 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'bootstrap'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+html_theme_options = {
+    'bootswatch_theme': 'amelia'
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = []
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -113,12 +117,12 @@ html_theme = 'default'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-#html_logo = None
+html_logo = '_static/logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-#html_favicon = None
+html_favicon = '_static/logo.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -186,7 +190,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'UnderstandingJSONSchema.tex', u'Understanding JSON Schema Documentation',
+  ('index', 'UnderstandingJSONSchema.tex', u'Understanding JSON Schema',
    u'Michael Droettboom, et al', 'manual'),
 ]
 
@@ -216,7 +220,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'understandingjsonschema', u'Understanding JSON Schema Documentation',
+    ('index', 'understandingjsonschema', u'Understanding JSON Schema',
      [u'Michael Droettboom, et al'], 1)
 ]
 
@@ -230,8 +234,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'UnderstandingJSONSchema', u'Understanding JSON Schema Documentation',
-   u'Michael Droettboom, et al', 'UnderstandingJSONSchema', 'One line description of project.',
+  ('index', 'UnderstandingJSONSchema', u'Understanding JSON Schema',
+   u'Michael Droettboom, et al', 'UnderstandingJSONSchema',
+   u'JSON Schema documentation for mere mortals.',
    'Miscellaneous'),
 ]
 
