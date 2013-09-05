@@ -1,3 +1,10 @@
+notifications:
+  email:
+    - mdboom@gmail.com
+
+  on_success: change
+  on_failure: always
+
 env:
   global:
     - secure: RbRoGpIx2UsYu65WStM8gapZMNi1Wi/1p9EFdPck6pYw0oJ0VueDqXjklbmZBWQpRNLHArph/WQGPXt/Ao3VyQsj5FPTzyMyYZv0naFCPrWoUo0oRTv0KkWMkxKSd0fR42ef7dZF9OOlrvgjf3GR5mzJmsLy11YFP6BccJJUNwU=
