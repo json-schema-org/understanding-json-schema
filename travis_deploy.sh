@@ -29,6 +29,8 @@ if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
         git rm -rf .
         # Copy the built files to the root
         cp -r build/html/* .
+        cp build/latex/UnderstandingJSONSchema.pdf .
+        cp build/epub/UnderstaningJSONSchema.epub .
         # Delete the original location of the built files
         rm -rf build
         # We need to tell github this is not a Jekyll document
