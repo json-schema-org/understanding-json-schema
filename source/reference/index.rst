@@ -3,15 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Understanding JSON Schema
-=========================
+JSON Schema Reference
+=====================
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
-   reference/index.rst
+   basic_types.rst
+   schema.rst
+   referencing.rst
+   regular_expressions.rst
+
+
+Indices and tables
+==================
 
 * :ref:`genindex`
+* :ref:`modindex`
 * :ref:`search`

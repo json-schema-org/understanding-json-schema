@@ -36,7 +36,7 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # The encoding of source files.
-#source_encoding = 'utf-8-sig'
+source_encoding = 'utf-8'
 
 # The master toctree document.
 master_doc = 'index'
@@ -69,7 +69,7 @@ release = '0.1'
 exclude_patterns = []
 
 # The reST default role (used for this markup: `text`) to use for all documents.
-#default_role = None
+default_role = "ref"
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 #add_function_parentheses = True
@@ -84,6 +84,9 @@ exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
+
+# The default language for highlighting
+highlight_language = 'javascript'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
