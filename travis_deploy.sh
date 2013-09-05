@@ -20,12 +20,17 @@ if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
 	git config --global user.email ${GH_EMAIL}
         git config --global user.name "Michael Droettboom"
 
+        # Create a new "orphaned" branch -- we don't need history for
+        # the built products
 	git checkout --orphan $GH_PAGESBRANCH
 
         # This will delete all of the git-managed files here, but not
         # the results of the build
         git rm -rf .
+        # Copy the built files to the root
         cp -r build/html/* .
+        # Delete the original location of the built files
+        rm -rf build
         git add *
         git commit -m "Generated from sources"
 
