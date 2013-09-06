@@ -23,8 +23,6 @@ before_install:
 
 install:
   - make html
-  - make latexpdf
-  - make epub
 
 script:
   - bash -x ./travis_deploy.sh
