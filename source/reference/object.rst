@@ -6,6 +6,17 @@
 object
 ------
 
+Objects are the mapping type in JSON, used for mapping "keys" to
+"values".  In JSON, the "keys" must always be strings.  Each of these
+pairs in conventionally referred to as a "property".
+
+.. note::
+   In Python, objects are analogous to the ``dict`` type.  It is
+   confusing that Python uses the word ``object`` to refer to
+   something else.  Additionally, note that while Python may use any
+   hashable object as a key, JSON requires that the keys are always
+   strings.
+
 .. schema_example::
     { "type": "object" }
     --
@@ -28,6 +39,20 @@ object
         "Pluto"   : 1.25e22
     }
     --X
+    // Using non-strings as keys is invalid JSON:
+    {
+        0.01 : "cm"
+        1    : "m",
+        1000 : "km"
+    }
+    --X
     "Not an object"
     --X
     ["An", "array", "not", "an", "object"]
+
+.. index::
+   single: object, properties
+   single: properties
+
+Properties
+''''''''''

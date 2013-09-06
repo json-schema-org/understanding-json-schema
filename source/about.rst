@@ -6,11 +6,23 @@ data.  However, learning to use it by reading its specification is
 like learning to drive a car by looking at its blueprints.  You don't
 need to know how the steering wheel transfers motion to the front
 wheels if all you want to do is steer the car in a particular
-direction.
+direction.  This document, therefore, aims to be the driving
+instructor for JSON Schema.  It's for those that want to write it and
+understand it, but maybe aren't interested in building their own
+car---er, writing their own JSON Schema validator---anytime soon.
 
-This document aims to be the missing JSON Schema manual for mere
-mortals.  It should be easy to find out how to do things, and the
-rationales for doing things a particular way should be clear.
+Bias
+----
+
+The names of the basic types in Javascript and, by extension, JSON can
+be confusing, particularly when coming from another dynamic language.
+I'm a Python programmer by day, so I've notated here when the names
+for things are different from what they are in Python.  I am by no
+means trying to create a Python bias, but it is what I know, so I've
+started there.  I hope this document will be useful to programmers of
+all stripes, however, so if you're interested in translating the
+Python references into Algol-68 or any other language you may know,
+pull requests are welcome!
 
 Examples
 --------
@@ -21,6 +33,12 @@ schema, illustrating a particular principle, followed by short JSON
 snippets that are either valid or invalid against that schema.  Valid
 examples are in green, with a checkmark in the right-hand margin.
 Invalid examples are in red, with a cross in the right-hand margin.
+Often there are comments in between to explain we something is or
+isn't valid.
+
+.. note::
+    These examples are tested automatically whenever the document is
+    built, so hopefully they are not just helpful, but also correct!
 
 For example, here's a snippet illustrating how to use the ``number``
 type:
@@ -33,11 +51,11 @@ type:
     --
     -1
     --
-    // simple floating point number
+    // Simple floating point number:
     5.0
     --
-    // exponential notation also works
+    // Exponential notation also works:
     2.99792458e8
     --X
-    // numbers as strings are rejected
+    // Numbers as strings are rejected:
     "42"

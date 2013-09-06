@@ -25,7 +25,11 @@ def split_content(l):
         try:
             json_content = json.loads(content)
         except ValueError:
-            raise ValueError("Invalid json: {0}".format(content))
+            if should_pass:
+                raise ValueError("Invalid json: {0}".format(content))
+            else:
+                # A complex number will never validate
+                json_content = 1+1j
         parts.append(AttrDict({
             'should_pass': should_pass,
             'content': content,
