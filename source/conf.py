@@ -110,7 +110,7 @@ html_theme = 'bootstrap'
 # https://github.com/ryan-roemer/sphinx-bootstrap-theme
 
 html_theme_options = {
-    'bootswatch_theme': 'simplex'
+    'bootswatch_theme': 'flatly'
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
