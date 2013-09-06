@@ -1,0 +1,36 @@
+div.highlight pre {
+    background-color: transparent;
+}
+
+div.jsonschema-pass {
+    margin-left: 48px;
+}
+
+div.jsonschema-fail {
+    margin-left: 48px;
+}
+
+div.jsonschema .highlight {
+    background-color: #f5f5f5;
+    background-image: url(schema.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+div.jsonschema-pass .highlight {
+    background-color: #eeffcc;
+    background-image: url(pass.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+div.jsonschema-fail .highlight {
+    background-color: #ffcccc;
+    background-image: url(fail.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+p.jsonschema-comment {
+    margin-left: 48px;
+}

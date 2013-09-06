@@ -15,11 +15,3 @@ Contents:
    schema.rst
    referencing.rst
    regular_expressions.rst
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

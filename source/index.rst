@@ -11,6 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   about.rst
    reference/index.rst
 
 * :ref:`genindex`

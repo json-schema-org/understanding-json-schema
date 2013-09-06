@@ -16,7 +16,7 @@ import sys, os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath(os.path.dirname('__file__')))
 
 # -- General configuration -----------------------------------------------------
 
@@ -27,7 +27,8 @@ import sphinx_bootstrap_theme
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.mathjax', 'sphinx.ext.ifconfig']
+extensions = ['sphinx.ext.mathjax', 'sphinx.ext.ifconfig',
+              'sphinxext.jsonschemaext']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -43,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Understanding JSON Schema'
-copyright = u'2013, Michael Droettboom, et al'
+copyright = u'2013, Space Telescope Science Institute'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -152,22 +153,22 @@ html_use_smartypants = True
 #html_additional_pages = {}
 
 # If false, no module index is generated.
-#html_domain_indices = True
+html_domain_indices = False
 
 # If false, no index is generated.
-#html_use_index = True
+html_use_index = True
 
 # If true, the index is split into individual pages for each letter.
 #html_split_index = False
 
 # If true, links to the reST sources are added to the pages.
-#html_show_sourcelink = True
+html_show_sourcelink = False
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
-#html_show_sphinx = True
+html_show_sphinx = True
 
 # If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
-#html_show_copyright = True
+html_show_copyright = True
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the
@@ -210,10 +211,10 @@ latex_logo = '_static/logo.pdf'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-#latex_use_parts = False
+latex_use_parts = True
 
 # If true, show page references after internal links.
-#latex_show_pagerefs = False
+latex_show_pagerefs = True
 
 # If true, show URL addresses after external links.
 #latex_show_urls = False
@@ -222,7 +223,7 @@ latex_logo = '_static/logo.pdf'
 #latex_appendices = []
 
 # If false, no module index is generated.
-#latex_domain_indices = True
+latex_domain_indices = False
 
 
 # -- Options for manual page output --------------------------------------------
@@ -267,9 +268,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = u'Understanding JSON Schema'
-epub_author = u'Michael Droettboom, et al'
-epub_publisher = u'Michael Droettboom, et al'
-epub_copyright = u'2013, Michael Droettboom, et al'
+epub_author = u'Michael Droettboom'
+epub_publisher = u'Space Telescope Science Institute'
+epub_copyright = u'2013, Space Telescope Science Institute'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
