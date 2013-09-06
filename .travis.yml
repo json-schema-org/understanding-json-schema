@@ -19,7 +19,6 @@ before_install:
   - pip install sphinx
   - pip install sphinx_bootstrap_theme
   - pip install jsonschema
-  - sudo apt-get install texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended texlive-latex-recommended
 
 install:
   - make html
