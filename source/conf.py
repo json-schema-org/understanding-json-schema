@@ -109,7 +109,7 @@ html_theme = 'bootstrap'
 # https://github.com/ryan-roemer/sphinx-bootstrap-theme
 
 html_theme_options = {
-    'bootswatch_theme': 'amelia'
+    'bootswatch_theme': 'readable'
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
