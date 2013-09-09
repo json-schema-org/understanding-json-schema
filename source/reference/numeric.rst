@@ -21,7 +21,7 @@ The ``integer`` type is used for integral numbers.
 
 .. note::
 
-    In Python, this is analogous to the ``int`` type.
+    In Python, "integer" is analogous to the ``int`` type.
 
 .. schema_example::
 
@@ -51,7 +51,7 @@ numbers, so there is no way to test for them in JSON Schema.
 
 .. note::
 
-    In Python, this is analogous to the ``float`` type.
+    In Python, "number" is analogous to the ``float`` type.
 
 .. schema_example::
 

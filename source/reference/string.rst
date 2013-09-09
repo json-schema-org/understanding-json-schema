@@ -10,8 +10,8 @@ The ``string`` type is used for strings of text.  It may contain
 Unicode characters.
 
 .. note::
-   In Python, it is analogous to the ``unicode`` type on Python 2.x,
-   and the ``str`` type on Python 3.x.
+   In Python, "string" is analogous to the ``unicode`` type on Python
+   2.x, and the ``str`` type on Python 3.x.
 
 .. schema_example::
 

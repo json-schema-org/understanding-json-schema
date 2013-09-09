@@ -10,7 +10,7 @@ Arrays are used for ordered elements.  In JSON, each element in an
 array may be of a different type.
 
 .. note::
-   In Python, this is analogous to a ``list`` or ``tuple`` type,
+   In Python, "array" is analogous to a ``list`` or ``tuple`` type,
    depending on usage.  However, the ``json`` module in the Python
    standard library will always use Python lists to represent JSON
    arrays.
@@ -30,7 +30,7 @@ array may be of a different type.
    single: additionalItems
 
 Items
------
+'''''
 
 By default, the elements of the array may be any thing at all.
 However, it's usually useful to validate the items of the array
@@ -55,7 +55,7 @@ There are two ways in which arrays are generally used in JSON:
 .. _list-validation:
 
 List validation
-'''''''''''''''
+~~~~~~~~~~~~~~~
 
 List validation is useful for arrays of arbitrary length where each
 item matches the same schema.  For this kind of array, set the
@@ -94,7 +94,7 @@ number:
 .. _tuple-validation:
 
 Tuple validation
-''''''''''''''''
+~~~~~~~~~~~~~~~~
 
 Tuple validation is useful when the array is a collection of items
 where each has a different schema and the ordinal index of each item
@@ -209,7 +209,7 @@ extra items in the array.
    single: maxItems
 
 Length
-------
+''''''
 
 The length of the array can be specified using the ``minItems`` and
 ``maxItems`` keywords.  The value of each keyword must be a
@@ -239,7 +239,7 @@ non-negative number.  These keywords work whether doing
    single: uniqueItems
 
 Uniqueness
-----------
+''''''''''
 
 A schema can ensure that each of the items in an array are unique.
 Simple set the ``uniqueItems`` keyword to ``true``.
