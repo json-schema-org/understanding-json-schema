@@ -3,6 +3,9 @@
 {# Include our new CSS file into existing ones. #}
 {% set css_files = css_files + ['_static/jsonschema.css']%}
 
+{# Include some custom js #}
+{% set script_files = script_files + ['_static/jsonschema.js']%}
+
 {% block header %}
   {{ super() }}
   <a href="https://github.com/spacetelescope/understanding-json-schema"

@@ -34,3 +34,20 @@ div.jsonschema-fail .highlight {
 p.jsonschema-comment {
     margin-left: 48px;
 }
+
+.tabbable {
+    margin-bottom: 12px;
+}
+
+.nav {
+    margin-bottom: 0px;
+    margin-left: 0;
+    list-style: none;
+}
+
+.tab-content {
+    padding: 9.5px;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}

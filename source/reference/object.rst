@@ -10,12 +10,16 @@ Objects are the mapping type in JSON, used for mapping "keys" to
 "values".  In JSON, the "keys" must always be strings.  Each of these
 pairs in conventionally referred to as a "property".
 
-.. note::
-   In Python, objects are analogous to the ``dict`` type.  It is
+.. language_specific::
+   --Python
+   In Python, "objects" are analogous to the ``dict`` type.  It is
    confusing that Python uses the word ``object`` to refer to
    something else.  Additionally, note that while Python may use any
    hashable object as a key, JSON requires that the keys are always
    strings.
+   --Ruby
+   In Ruby, "objects" are analogous to something else.
+
 
 .. schema_example::
     { "type": "object" }
