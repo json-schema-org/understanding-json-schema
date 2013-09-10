@@ -22,8 +22,7 @@ if (supports_html5_storage()) {
             }
         }
 
-        /* When a tab is checked set it as the preferred language */
-        $jqTheme(document).on('shown', 'a[data-toggle="tab"]', function (e) {
+        $jqTheme('a[data-toggle="tab"]').on('shown', function (e) {
             var language = e.target.href.split("_")[1];
             localStorage.setItem("preferred-language", language);
         })
