@@ -19,8 +19,8 @@ integer
 
 The ``integer`` type is used for integral numbers.
 
-.. note::
-
+.. language_specific::
+    --Python
     In Python, "integer" is analogous to the ``int`` type.
 
 .. schema_example::
@@ -49,8 +49,8 @@ The ``number`` type is used for any numeric type, either integers or
 floating point numbers.  JSON has no standard way to represent complex
 numbers, so there is no way to test for them in JSON Schema.
 
-.. note::
-
+.. language_specific::
+    --Python
     In Python, "number" is analogous to the ``float`` type.
 
 .. schema_example::

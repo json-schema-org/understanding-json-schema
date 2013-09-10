@@ -70,7 +70,7 @@ def depart_tab_node(self, node):
 
 
 def make_id(self, language):
-    return hex(id(self))[2:] + language
+    return '{0}_{1}'.format(hex(id(self))[2:], language)
 
 
 class LanguageSpecificDirective(Directive):

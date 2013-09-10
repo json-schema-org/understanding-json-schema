@@ -56,12 +56,12 @@ stick to the subset of that syntax described below.
 - ``{x}?``, ``{x,y}?``, ``{x,}?``: Lazy versions of the above
   expressions.
 
-.. note::
-
+.. language_specific::
+   --Python
    This subset of Javascript regular expressions is compatible with
    Python regular expressions.  Pay close attention to what is
-   missing.  Notably, it is not recommended to use ``.`` to match any
-   character.
+   missing, however.  Notably, it is not recommended to use ``.`` to
+   match any character.
 
 Example
 '''''''

@@ -11,21 +11,42 @@ instructor for JSON Schema.  It's for those that want to write it and
 understand it, but maybe aren't interested in building their own
 car---er, writing their own JSON Schema validator---anytime soon.
 
-Bias
-----
+Conventions
+-----------
 
-The names of the basic types in Javascript and, by extension, JSON can
-be confusing, particularly when coming from another dynamic language.
-I'm a Python programmer by day, so I've notated here when the names
-for things are different from what they are in Python.  I am by no
-means trying to create a Python bias, but it is what I know, so I've
-started there.  I hope this document will be useful to programmers of
-all stripes, however, so if you're interested in translating the
-Python references into Algol-68 or any other language you may know,
-pull requests are welcome!
+Language-specific notes
+'''''''''''''''''''''''
+
+The names of the basic types in Javascript and JSON can be confusing
+when coming from another dynamic language.  I'm a Python programmer by
+day, so I've notated here when the names for things are different from
+what they are in Python, and any other Python-specific advice for
+using JSON and JSON Schema.  I'm by no means trying to create a Python
+bias to this document, but it is what I know, so I've started there.
+In the long run, I hope this document will be useful to programmers of
+all stripes, so if you're interested in translating the Python
+references into Algol-68 or any other language you may know, pull
+requests are welcome!
+
+The language-specific sections are shown with tabs for each language.
+Once you choose a language, that choice will be remembered as you read
+on from page to page.
+
+For example, here's a language-specific section with advice on using
+JSON in a few different languages:
+
+.. language_specific::
+    --Python
+    In Python, JSON can be read using the json module in the standard
+    library.
+    --Ruby
+    In Ruby, JSON can be read using the json gem.
+    --C
+    For C, you may want to consider using `Jansson
+    <http://www.digip.org/jansson/>`_ to read and write JSON.
 
 Examples
---------
+''''''''
 
 There are many examples throughout this document, and they all follow
 the same format.  At the beginning of each example is a short JSON

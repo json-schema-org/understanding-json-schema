@@ -17,8 +17,6 @@ pairs in conventionally referred to as a "property".
    something else.  Additionally, note that while Python may use any
    hashable object as a key, JSON requires that the keys are always
    strings.
-   --Ruby
-   In Ruby, "objects" are analogous to something else.
 
 
 .. schema_example::
