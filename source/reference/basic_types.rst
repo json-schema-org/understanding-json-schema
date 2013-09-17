@@ -22,6 +22,9 @@ more specific.  For example, numeric types have a way of specifying a
 numeric range, that would not be applicable to other types.  These
 validation keywords are described along with each of the types.
 
+There are also validation keywords that work with any type, which are
+described in `generic`.
+
 These types have analogs in most programming languages, though they
 may go by different names.
 

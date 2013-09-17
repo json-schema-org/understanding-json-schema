@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    basic_types.rst
+   generic.rst
    schema.rst
    referencing.rst
    regular_expressions.rst

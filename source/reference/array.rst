@@ -25,6 +25,7 @@ array may be of a different type.
     --X
     {"Not": "an array"}
 
+
 .. index::
    single: array; items
    single: items

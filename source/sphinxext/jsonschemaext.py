@@ -76,7 +76,7 @@ class SchemaExampleDirective(Directive):
             is_valid = True
             try:
                 jsonschema.validate(part.json, schema.json)
-            except jsonschema.ValidationError:
+            except jsonschema.ValidationError as e:
                 is_valid = False
             except jsonschema.SchemaError as e:
                 raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
