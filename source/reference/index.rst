@@ -11,8 +11,13 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   basic_types.rst
-   generic.rst
+   type.rst
+   regular_expressions.rst
+   format.rst
+   metadata.rst
+   default.rst
+   enum.rst
+   combining.rst
    schema.rst
    referencing.rst
-   regular_expressions.rst
+   structuring.rst

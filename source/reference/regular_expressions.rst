@@ -1,13 +1,17 @@
+.. index::
+   single: regular expressions
+
 .. _regular-expressions:
 
 Regular Expressions
 ===================
 
-The `pattern` and `patternProperties` keywords use regular expressions
-to express constraints.  The regular expression syntax used is from
-Javascript (ECMA 262, specifically [TODO]). However, that complete
-syntax is not widely supported, therefore it is recommended that you
-stick to the subset of that syntax described below.
+The :ref:`pattern <pattern>` and `patternProperties` keywords use
+regular expressions to express constraints.  The regular expression
+syntax used is from Javascript (ECMA 262, specifically
+[TODO]). However, that complete syntax is not widely supported,
+therefore it is recommended that you stick to the subset of that
+syntax described below.
 
 - A single unicode character (other than the special characters
   below) matches itself.

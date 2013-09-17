@@ -43,12 +43,10 @@ you can use one of these predefined values:
    - ``http://json-schema.org/draft-03/schema#``
 
      JSON Schema written against JSON Schema, draft v3
-     [json-schema-03].
 
    - ``http://json-schema.org/draft-03/hyper-schema#``
 
      JSON Schema hyperschema written against JSON Schema, draft v3
-     [json-schema-03].
 
 Additionally, if you have extended the JSON Schema language to include
 your own custom keywords for validating values, you can use a custom

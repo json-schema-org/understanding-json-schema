@@ -59,10 +59,10 @@ non-negative number.
    single: string; regular expression
    single: pattern
 
-.. _pattern:
-
 Regular Expressions
 '''''''''''''''''''
+
+.. _pattern:
 
 The ``pattern`` keyword is used to restrict a string to a particular
 regular expression.  The regular expression syntax is the one defined

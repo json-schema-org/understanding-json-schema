@@ -6,6 +6,14 @@
 null
 ----
 
+The null type is generally used to represent a missing value.  When a
+schema specifies a ``type`` of ``null``, it has only one acceptable
+value: ``null``.
+
+.. language_specific::
+   --Python
+   In Python, ``null`` is analogous to ``None``.
+
 .. schema_example::
     { "type": "null" }
     --
