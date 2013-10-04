@@ -59,6 +59,7 @@ def split_content(l):
 
 class SchemaExampleDirective(Directive):
     has_content = True
+    validate = True
 
     def run(self):
         result = []
@@ -73,26 +74,29 @@ class SchemaExampleDirective(Directive):
         result.append(literal)
 
         for part in parts:
-            is_valid = True
-            try:
-                jsonschema.validate(part.json, schema.json)
-            except jsonschema.ValidationError as e:
-                is_valid = False
-            except jsonschema.SchemaError as e:
-                raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
-                    str(e), schema.content))
+            if self.validate:
+                is_valid = True
+                try:
+                    jsonschema.validate(part.json, schema.json)
+                except jsonschema.ValidationError as e:
+                    is_valid = False
+                except jsonschema.SchemaError as e:
+                    raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
+                        str(e), schema.content))
 
-            if is_valid != part.should_pass:
-                if part.should_pass:
-                    raise ValueError(
-                        "Doc says fragment should pass, "
-                        "but it does not validate:\n" +
-                        part.content)
-                else:
-                    raise ValueError(
-                        "Doc says fragment should not pass, "
-                        "but it validates:\n" +
-                        part.content)
+                if is_valid != part.should_pass:
+                    if part.should_pass:
+                        raise ValueError(
+                            "Doc says fragment should pass, "
+                            "but it does not validate:\n" +
+                            part.content)
+                    else:
+                        raise ValueError(
+                            "Doc says fragment should not pass, "
+                            "but it validates:\n" +
+                            part.content)
+            else:
+                is_valid = part.should_pass
 
             if len(part.comment):
                 paragraph = nodes.paragraph('', '')
@@ -116,5 +120,11 @@ class SchemaExampleDirective(Directive):
         return result
 
 
+class SchemaExampleNoValidationDirective(SchemaExampleDirective):
+    validate = False
+
+
 def setup(app):
     app.add_directive('schema_example', SchemaExampleDirective)
+    app.add_directive('schema_example_novalid',
+                      SchemaExampleNoValidationDirective)

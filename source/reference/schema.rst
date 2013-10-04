@@ -2,6 +2,8 @@
    single: $schema
    single: schema; keyword
 
+.. _schema:
+
 The $schema keyword
 ===================
 

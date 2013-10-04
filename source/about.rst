@@ -1,82 +1,165 @@
-About this document
-===================
+.. _about:
 
-JSON Schema is a powerful tool for validating the structure of JSON
-data.  However, learning to use it by reading its specification is
-like learning to drive a car by looking at its blueprints.  You don't
-need to know how the steering wheel transfers motion to the front
-wheels if all you want to do is steer the car in a particular
-direction.  This document, therefore, aims to be the driving
-instructor for JSON Schema.  It's for those that want to write it and
-understand it, but maybe aren't interested in building their own
-car---er, writing their own JSON Schema validator---anytime soon.
+What is a schema?
+=================
 
-Conventions
------------
+If you've ever used XML Schema, RelaxNG or ASN.1 you probably already
+know what a schema is and you can happily skip along to the next
+section.  If all that sounds like gobbledygook to you, you've come to
+the right place.  To define what JSON Schema is, we should probably
+first define what JSON is.
 
-Language-specific notes
-'''''''''''''''''''''''
+JSON stands for "JavaScript Object Notation", a simple data
+interchange format.  It began as a notation for the world wide web.
+Since JavaScript exists in most web browsers, and JSON is based on
+JavaScript, it's very easy to support there.  However, it's proved
+useful enough and simple enough that it is now used in many other
+contexts that don't involve web surfing.
 
-The names of the basic types in Javascript and JSON can be confusing
-when coming from another dynamic language.  I'm a Python programmer by
-day, so I've notated here when the names for things are different from
-what they are in Python, and any other Python-specific advice for
-using JSON and JSON Schema.  I'm by no means trying to create a Python
-bias to this document, but it is what I know, so I've started there.
-In the long run, I hope this document will be useful to programmers of
-all stripes, so if you're interested in translating the Python
-references into Algol-68 or any other language you may know, pull
-requests are welcome!
+At its heart, JSON is built on the following data structures:
 
-The language-specific sections are shown with tabs for each language.
-Once you choose a language, that choice will be remembered as you read
-on from page to page.
+    - object::
 
-For example, here's a language-specific section with advice on using
-JSON in a few different languages:
+        { "key1": "value2", "key2": "value2" }
+
+    - array::
+
+        [ "first", "second", "third" ]
+
+    - number::
+
+        42
+
+    - string::
+
+        "This is a string"
+
+    - boolean::
+
+        true
+        false
+
+    - null::
+
+        null
+
+These types have analogs in most programming languages, though they
+may go by different names.
 
 .. language_specific::
     --Python
-    In Python, JSON can be read using the json module in the standard
-    library.
-    --Ruby
-    In Ruby, JSON can be read using the json gem.
-    --C
-    For C, you may want to consider using `Jansson
-    <http://www.digip.org/jansson/>`_ to read and write JSON.
+    The following table maps from the names of Javascript types to
+    their analogous types in Python:
 
-Examples
-''''''''
+    +----------+-----------+
+    |Javascript|Python     |
+    +----------+-----------+
+    |string    |string     |
+    |          |[#1]_      |
+    +----------+-----------+
+    |integer   |int        |
+    +----------+-----------+
+    |number    |float      |
+    +----------+-----------+
+    |object    |dict       |
+    +----------+-----------+
+    |array     |list       |
+    +----------+-----------+
+    |boolean   |bool       |
+    +----------+-----------+
+    |null      |None       |
+    +----------+-----------+
 
-There are many examples throughout this document, and they all follow
-the same format.  At the beginning of each example is a short JSON
-schema, illustrating a particular principle, followed by short JSON
-snippets that are either valid or invalid against that schema.  Valid
-examples are in green, with a checkmark in the right-hand margin.
-Invalid examples are in red, with a cross in the right-hand margin.
-Often there are comments in between to explain we something is or
-isn't valid.
+    .. rubric:: Footnotes
 
-.. note::
-    These examples are tested automatically whenever the document is
-    built, so hopefully they are not just helpful, but also correct!
+    .. [#1] Since Javascript strings always support unicode, they are
+            analogous to ``unicode`` on Python 2.x and ``str`` on
+            Python 3.x.
 
-For example, here's a snippet illustrating how to use the ``number``
-type:
+With these simple data types, all kinds of structured data can be
+represented.  With that great flexibility comes great responsibility,
+however, as the same concept could be represented in myriad ways.  For
+example, you could imagine representing information about a person in
+JSON in a few different ways::
+
+    {
+      "name": "George Washington",
+      "birthday": "February 22, 1732",
+      "address": "Mount Vernon, Virginia, United States"
+    }
+
+    {
+      "first_name": "George",
+      "last_name": "Washington",
+      "birthday": "1732-02-22",
+      "address": {
+        "street_address": "3200 Mount Vernon Memorial Highway",
+        "city": "Mount Vernon",
+        "state": "Virginia",
+        "country": "United States"
+      }
+    }
+
+Both representations are equally valid, though one is clearly more
+formal than the other.  The design of a record will largely depend on
+its intended use within the application, so there's no right or wrong
+here.  However, when an application says "give me a JSON record for a
+person", it's important to know exactly how that record should look:
+what fields are expected, and how are the values to be represented?
+That's where JSON Schema comes in.  The following JSON Schema fragment
+describes how the second example above is structured.  Don't worry too
+much about the details.  That will be explained in due time:
 
 .. schema_example::
 
-    { "type": "number" }
-    --
-    42
-    --
-    -1
-    --
-    // Simple floating point number:
-    5.0
-    --
-    // Exponential notation also works:
-    2.99792458e8
+    {
+      "type": "object",
+      "properties": {
+        "first_name": { "type": "string" },
+        "last_name": { "type": "string" },
+        "birthday": { "type": "string", "format": "date-time" },
+        "address": {
+          "type": "object",
+          "properties": {
+            "street_address": { "type": "string" },
+            "city": { "type": "string" },
+            "state": { "type": "string" },
+            "country": { "type" : "string" }
+          }
+        }
+      }
+    }
     --X
-    // Numbers as strings are rejected:
-    "42"
+    // By "validating" the first example against this schema, you can see that it fails:
+    {
+      "name": "George Washington",
+      "birthday": "February 22, 1732",
+      "address": "Mount Vernon, Virginia, United States"
+    }
+    --
+    // And the second example passes:
+    {
+      "first_name": "George",
+      "last_name": "Washington",
+      "birthday": "22-02-1732",
+      "address": {
+        "street_address": "3200 Mount Vernon Memorial Highway",
+        "city": "Mount Vernon",
+        "state": "Virginia",
+        "country": "United States"
+      }
+    }
+
+You may have noticed that the JSON Schema itself is written in JSON.
+It is structured data itself, not a computer program.  It's just a
+declarative format for "data describing the structure of other data".
+This is both its strength and its weakness (which it shares with other
+similar schema languages).  It is easy to concisely describe the
+surface structure of data, and automate validating data against it.
+However, since a JSON Schema can't contain arbitrary code, there are
+certain constraints on the relationships between data elements that
+can't be expressed.  Any "validation tool" for a sufficiently complex
+data format, therefore, will likely have two phases of validation: one
+at the schema (or structural) level, and one at the semantic level.
+The latter check will likely need to be implemented using a
+traditional programming language.
