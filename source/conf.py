@@ -110,7 +110,6 @@ html_theme = 'bootstrap'
 # https://github.com/ryan-roemer/sphinx-bootstrap-theme
 
 html_theme_options = {
-    'bootswatch_theme': 'flatly',
     'navbar_site_name': 'Document',
     'navbar_pagenav': False
 }
