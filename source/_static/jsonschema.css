@@ -51,3 +51,11 @@ p.jsonschema-comment {
     border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd;
 }
+
+code, pre {
+    font-family: Inconsolata,Monaco,Menlo,Consolas,"Courier New",monospace;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Alef","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
