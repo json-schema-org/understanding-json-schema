@@ -1,7 +1,7 @@
 {% extends "!layout.html" %}
 
 {# Include our new CSS file into existing ones. #}
-{% set css_files = css_files + ['_static/jsonschema.css']%}
+{% set css_files = ['_static/jsonschema.css'] + css_files%}
 
 <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Alef' rel='stylesheet' type='text/css'>
