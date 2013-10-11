@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Understanding JSON Schema'
-copyright = u'2013, Space Telescope Science Institute'
+copyright = u'2013, Michael Droettboom, Space Telescope Science Institute'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -110,7 +110,9 @@ html_theme = 'bootstrap'
 # https://github.com/ryan-roemer/sphinx-bootstrap-theme
 
 html_theme_options = {
-    'bootswatch_theme': 'flatly'
+    'bootswatch_theme': 'flatly',
+    'navbar_site_name': 'Document',
+    'navbar_pagenav': False
 }
 
 # Add any paths that contain custom themes here, relative to this directory.

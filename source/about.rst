@@ -104,11 +104,12 @@ Both representations are equally valid, though one is clearly more
 formal than the other.  The design of a record will largely depend on
 its intended use within the application, so there's no right or wrong
 here.  However, when an application says "give me a JSON record for a
-person", it's important to know exactly how that record should look:
-what fields are expected, and how are the values to be represented?
-That's where JSON Schema comes in.  The following JSON Schema fragment
-describes how the second example above is structured.  Don't worry too
-much about the details.  That will be explained in due time:
+person", it's important to know exactly how that record should look.
+For example, what fields are expected, and how are the values to be
+represented?  That's where JSON Schema comes in.  The following JSON
+Schema fragment describes how the second example above is structured.
+Don't worry too much about the details for now.  The details are all
+explained in subsequent chapters.
 
 .. schema_example::
 
@@ -162,4 +163,4 @@ can't be expressed.  Any "validation tool" for a sufficiently complex
 data format, therefore, will likely have two phases of validation: one
 at the schema (or structural) level, and one at the semantic level.
 The latter check will likely need to be implemented using a
-traditional programming language.
+more general-purpose programming language.

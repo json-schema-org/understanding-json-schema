@@ -247,17 +247,184 @@ must be a non-negative integer.
 
 
 .. index::
-   single: object; regular expression
-   single: patternProperties
+   single: object; dependencies
+   single: dependencies
+
 
 Dependencies
 ''''''''''''
 
-.. TODO
+.. note::
+    This is an advanced feature of JSON Schema.  Treacherous waters
+    ahead.
+
+The ``dependencies`` keyword allows the schema of the object to change
+based on the presence of certain special properties.
+
+There are two forms of dependencies in JSON Schema:
+
+- **Property dependencies** declare that certain other properties must
+  be present if a given property is present.
+
+- **Schema dependencies** declare that the schema changes when a
+  given property is present.
+
+Property dependencies
+^^^^^^^^^^^^^^^^^^^^^
+
+Let's start with the simpler case of property dependencies.  For
+example, suppose we have a schema representing a customer.  If you
+have their credit card number, you also want to ensure you have a
+billing address.  If you don't have their credit card number, a
+billing address would not be required.  We represent this dependency
+of one property on another using the ``dependencies`` keyword. It
+takes an object.  Each entry in the object maps from the name of a
+property, let's call it *p*, to an array of strings listing properties
+that are required whenever *p* is present.
+
+.. schema_example::
+    {
+      "type": "object",
+
+      "properties": {
+         "name": { "type": "string" },
+         "credit_card": { "type": "number" },
+         "billing_address": { "type": "string" }
+      },
+
+      "required": ["name"],
+
+      "dependencies": {
+         "credit_card": ["billing_address"]
+      }
+    }
+    --
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555,
+      "billing_address": "555 Debtor's Lane"
+    }
+    --X
+    // This instance has a ``credit_card``, but it's missing a
+    // ``billing_address``.
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555
+    }
+    --
+    // This is ok, since we have neither a ``credit_card``, or a
+    // ``billing_address``.
+    {
+      "name": "John Doe"
+    }
+    --
+    // Note that dependencies are not bi-directional.  It's ok to have
+    // a billing address without a credit card number.
+    {
+      "name": "John Doe",
+      "billing_address": "555 Debtor's Lane"
+    }
+
+To fix the last issue above (that dependencies are not
+bi-directional), you can, of course, define the dependencies
+explicitly bi-directionally.
+
+.. schema_example::
+    {
+      "type": "object",
+
+      "properties": {
+         "name": { "type": "string" },
+         "credit_card": { "type": "number" },
+         "billing_address": { "type": "string" }
+      },
+
+      "required": ["name"],
+
+      "dependencies": {
+         "credit_card": ["billing_address"],
+         "billing_address": ["credit_card"]
+      }
+    }
+    --X
+    // This instance has a ``credit_card``, but it's missing a
+    // ``billing_address``.
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555
+    }
+    --X
+    // This has a ``billing_address``, but is missing a
+    // ``credit_card``.
+    {
+      "name": "John Doe",
+      "billing_address": "555 Debtor's Lane"
+    }
+
+
+Schema dependencies
+^^^^^^^^^^^^^^^^^^^
+
+Schema dependencies work like property dependencies, but instead of
+just specifying other required properties, they can extend the schema
+to have other constraints.
+
+[TODO: Write a good example here.]
+
+.. index::
+   single: object; regular expression
+   single: patternProperties
+
+.. _patternProperties:
 
 Pattern Properties
 ''''''''''''''''''
 
-The names of properties can also be defined using regular expressions.
+As we saw above, ``additionalProperties`` can restrict the object so
+that it either has no extra properties that weren't explicitly listed,
+or specify a schema for any additional properties on the object.
+Sometimes that isn't enough, and you may want to restrict the names of
+the extra properties, or you may want to say that, given a particular
+kind of name, the value should match a particular schema.
+``patternProperties`` is a new keyword that maps from regular
+expressions to schemas.  If an additional property matches a given
+regular expression, it must also validate against the corresponding
+schema.
 
-.. TODO
+.. note::
+    ``patternProperties`` only has effect if ``additionalProperties``
+    is set to ``false``.
+
+.. note::
+    When defining the regular expressions, it's important to note that
+    the expression may match anywhere within the property name.  For
+    example, the regular expression ``"p"`` will match any property
+    name with a ``p`` in it, not just a property whose name is simply
+    ``"p"``.  It's perhaps less confusing as a matter of course to
+    surround the regular expression in ``^...$``, for example,
+    ``"^p$"``.
+
+In this example, any additional properties whose names start with the
+prefix ``S_`` must be strings, and any with the prefix ``I_`` must be
+integers.  Any properties explicitly defined are also accepted, and
+any additional properties that do not match either regular expression
+are forbidden.
+
+.. schema_example::
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "integer" }
+      }
+    }
+    --
+    { "S_25": "This is a string" }
+    --
+    { "I_0": 42 }
+    --X
+    // If the name starts with ``S_``, it must be a string
+    { "S_0": 42 }
+    --X
+    { "I_42": "This is a string" }

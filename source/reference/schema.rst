@@ -54,5 +54,3 @@ Additionally, if you have extended the JSON Schema language to include
 your own custom keywords for validating values, you can use a custom
 URI for ``$schema``.  It must not be one of the predefined values
 above.
-
-.. TODO: Example

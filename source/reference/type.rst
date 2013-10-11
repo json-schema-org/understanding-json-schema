@@ -4,8 +4,8 @@
 
 .. _type:
 
-type
-====
+Type-specific keywords
+======================
 
 The ``type`` keyword is fundamental to JSON Schema.  It specifies the
 data type for a schema.

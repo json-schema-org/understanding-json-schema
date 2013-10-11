@@ -16,6 +16,16 @@ those that want to write it and understand it, but maybe aren't
 interested in building their own car---er, writing their own JSON
 Schema validator---just yet.
 
+.. image:: _static/octopus.png
+    :alt: octopus
+    :align: right
+
+.. note::
+
+    This document describes JSON Schema draft 4.  Earlier versions of
+    JSON Schema are not completely compatible with the format
+    described here.
+
 **Where to begin?**
 
     - This document uses some novel `conventions <conventions>` for
@@ -25,8 +35,8 @@ Schema validator---just yet.
     - If you're not sure what a schema
       is, check out `about`.
 
-    - `basics` chapter should be enough to
-      get you started with understanding the `reference`.
+    - `basics` chapter should be enough to get you started with
+      understanding the core `reference`.
 
     - When you start developing large schemas with many nested and
       repeated sections, check out `structuring`.

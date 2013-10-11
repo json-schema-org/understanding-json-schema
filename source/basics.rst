@@ -3,9 +3,9 @@
 The basics
 ==========
 
-Now that we've described what a schema is, and hopefully justified the
-need for schema languages, we can get down to writing a simple JSON
-Schema.
+In :ref:`about`, we described what a schema is, and hopefully
+justified the need for schema languages.  Here, we proceed to
+write a simple JSON Schema.
 
 Hello, World!
 -------------
@@ -30,9 +30,8 @@ The ``type`` keyword
 
 Of course, we wouldn't be using JSON Schema if we wanted to just
 accept everything.  The most common thing to do in a JSON Schema is to
-restrict what's acceptable to a specific type.  The `type` keyword is
-used for that.  For example, in the following, only strings are
-accepted:
+restrict to a specific type.  The ``type`` keyword is used for that.
+For example, in the following, only strings are accepted:
 
 .. schema_example::
 
@@ -42,7 +41,7 @@ accepted:
    --X
    42
 
-The `type` keyword is described in more detail in the reference section.
+The ``type`` keyword is described in more detail in `type`.
 
 Declaring JSON Schema
 ---------------------

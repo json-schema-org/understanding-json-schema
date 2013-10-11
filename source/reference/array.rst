@@ -41,15 +41,14 @@ against some schema as well.  This is done using the ``items`` and
 
 There are two ways in which arrays are generally used in JSON:
 
-- As a sequence of arbitrary length where each item matches the same
-  schema.  For this usage, see `list-validation`.
+- **List validation:** a sequence of arbitrary length where each
+  item matches the same schema.
 
-- As a sequence of fixed length where each item may match a different
-  schema.  In this usage, the ordinal index of each item is meaningful
-  as to how the value is interpreted.  (This usage is often given a
-  whole separate type in some programming languages, such as Python's
-  ``tuple``).  For this usage, see `tuple-validation`.
-
+- **Tuple validation:** a sequence of fixed length where each item may
+  have a different schema.  In this usage, the index (or location) of
+  each item is meaningful as to how the value is interpreted.  (This
+  usage is often given a whole separate type in some programming
+  languages, such as Python's ``tuple``).
 
 .. index::
    single: array; list validation
@@ -86,8 +85,6 @@ number:
    --
    // The empty array is always valid:
    []
-
-.. TODO: Example with multiple schemas per item
 
 
 .. index::

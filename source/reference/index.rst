@@ -9,11 +9,7 @@ Contents:
    :maxdepth: 2
 
    type.rst
-   regular_expressions.rst
-   format.rst
-   metadata.rst
-   default.rst
-   enum.rst
+   generic.rst
    combining.rst
    schema.rst
-   referencing.rst
+   regular_expressions.rst

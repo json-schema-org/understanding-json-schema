@@ -8,8 +8,9 @@ Regular Expressions
 
 The :ref:`pattern <pattern>` and `patternProperties` keywords use
 regular expressions to express constraints.  The regular expression
-syntax used is from Javascript (ECMA 262, specifically
-[TODO]). However, that complete syntax is not widely supported,
+syntax used is from Javascript (`ECMA 262
+<http://www.ecma-international.org/publications/standards/Ecma-262.htm>`__,
+specifically). However, that complete syntax is not widely supported,
 therefore it is recommended that you stick to the subset of that
 syntax described below.
 
@@ -77,11 +78,13 @@ with an optional area code:
 
    {
       "type": "string",
-      "pattern": "(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}"
+      "pattern": "^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$"
    }
    --
    "555-1212"
    --
    "(888)555-1212"
+   --X
+   "(888)555-1212 ext. 532"
    --X
    "(800)FLOWERS"

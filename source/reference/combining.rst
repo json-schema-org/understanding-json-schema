@@ -45,6 +45,10 @@ The keywords used to combine schemas are:
 All of these keywords must be set to an array, where each item is a
 schema.
 
+In addition, there is:
+
+- `not`: Must *not* be valid against the given schema
+
 .. index::
    single: allOf
    single: combining schemas; allOf
@@ -153,3 +157,30 @@ subschemas.  The following schema is equivalent to the one above:
         { "multipleOf": 3 }
       ]
     }
+
+.. index::
+   single: not
+   single: combining schemas; not
+
+.. _not:
+
+
+not
+---
+
+This doesn't strictly combine schemas, but it fits well on this page
+along with other things that help to modify the effect of schemas in
+some way.  The ``not`` keyword declares that a instance validates if
+it doesn't validate against the given subschema.
+
+For example, the following schema validates against anything that is
+not a string:
+
+.. schema_example::
+    { "not": { "type": "string" } }
+    --
+    42
+    --
+    { "key": "value" }
+    --X
+    "I am a string"
