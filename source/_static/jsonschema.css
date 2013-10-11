@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Alef);
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
+
 div.highlight pre {
     background-color: transparent;
 }
@@ -57,5 +60,9 @@ code, pre {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Alef","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.navbar {
     font-family: "Alef","Helvetica Neue",Helvetica,Arial,sans-serif;
 }

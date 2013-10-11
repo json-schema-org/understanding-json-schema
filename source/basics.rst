@@ -25,8 +25,8 @@ completely valid schema that will accept any valid JSON.
    --
    { "an": [ "arbitrarily", "nested" ], "data": "structure" }
 
-The ``type`` keyword
---------------------
+The type keyword
+----------------
 
 Of course, we wouldn't be using JSON Schema if we wanted to just
 accept everything.  The most common thing to do in a JSON Schema is to
