@@ -47,10 +47,6 @@ Schema validator---just yet.
       resources, including the official specification and tools for
       working with JSON Schema from various programming languages.
 
-.. only:: html
-
-    - There is also a `print version of this document
-      <http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf>`__.
 
 .. only:: html
 
@@ -64,6 +60,11 @@ Schema validator---just yet.
    basics.rst
    reference/index.rst
    structuring.rst
+
+.. only:: html
+
+   There is also a `print version of this document
+   <http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf>`__.
 
 .. only:: html
 
