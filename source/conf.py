@@ -198,7 +198,6 @@ latex_elements = {
     # Additional stuff for the LaTeX preamble.
     'preamble': r'''
     % Use a more modern-looking monospace font
-    \usepackage[sfdefault]{cabin}
     \usepackage{inconsolata}
     \usepackage{bbding}
     \usepackage{fixltx2e}
