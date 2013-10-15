@@ -12,16 +12,26 @@ data type for a schema.
 
 At its core, JSON Schema defines the following basic types:
 
-.. toctree::
-   :maxdepth: 1
+.. only:: html
 
-   string.rst
-   numeric.rst
-   object.rst
-   array.rst
-   boolean.rst
-   null.rst
+    .. toctree::
+       :maxdepth: 1
 
+       string.rst
+       numeric.rst
+       object.rst
+       array.rst
+       boolean.rst
+       null.rst
+
+.. only:: latex
+
+   - `string`
+   - `numeric`
+   - `object`
+   - `array`
+   - `boolean`
+   - `null`
 
 These types have analogs in most programming languages, though they
 may go by different names.
@@ -90,3 +100,15 @@ structured data types:
    "Life, the universe, and everything"
    --X
    ["Life", "the universe", "and everything"]
+
+.. only:: latex
+
+    .. toctree::
+       :maxdepth: 1
+
+       string.rst
+       numeric.rst
+       object.rst
+       array.rst
+       boolean.rst
+       null.rst

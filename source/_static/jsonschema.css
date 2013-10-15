@@ -1,5 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Alef);
+@import url(http://fonts.googleapis.com/css?family=Cabin);
 @import url(http://fonts.googleapis.com/css?family=Inconsolata);
+
+div.admonition {
+    margin-top: 0;
+}
 
 div.highlight pre {
     background-color: transparent;
@@ -59,10 +63,7 @@ code, pre {
     font-family: Inconsolata,Monaco,Menlo,Consolas,"Courier New",monospace;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "Alef","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.navbar {
-    font-family: "Alef","Helvetica Neue",Helvetica,Arial,sans-serif;
+.navbar, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Cabin","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: normal;
 }

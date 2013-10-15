@@ -123,8 +123,49 @@ class SchemaExampleDirective(Directive):
 class SchemaExampleNoValidationDirective(SchemaExampleDirective):
     validate = False
 
+from sphinx.writers.latex import LaTeXTranslator
+original_literal_node_visit = LaTeXTranslator.visit_literal_block
+original_literal_node_depart = LaTeXTranslator.depart_literal_block
+
+
+def visit_literal_node_latex(self, node):
+    return original_literal_node_visit(self, node)
+
+
+def depart_literal_node_latex(self, node):
+    adjust = False
+    color = "gray"
+    char = ""
+    if 'jsonschema-pass' in node['classes']:
+        char = r"\Checkmark"
+        color = "ForestGreen"
+        adjust = True
+    elif 'jsonschema-fail' in node['classes']:
+        char = r"\XSolidBrush"
+        color = "BrickRed"
+        adjust = True
+    elif 'jsonschema' in node['classes']:
+        char = r"\{ json schema \}"
+
+    if adjust:
+        self.body.append(r"\begin{adjustwidth}{2.5em}{0pt}")
+    self.body.append(r"\begin{jsonframe}{%s}{%s}" % (char, color))
+    original_literal_node_depart(self, node)
+    self.body.append(r"\end{jsonframe}")
+    if adjust:
+        self.body.append(r"\end{adjustwidth}")
+
 
 def setup(app):
     app.add_directive('schema_example', SchemaExampleDirective)
     app.add_directive('schema_example_novalid',
                       SchemaExampleNoValidationDirective)
+
+    app.add_node(nodes.literal_block,
+                 latex=(visit_literal_node_latex, depart_literal_node_latex))
+
+
+latex_preamble = r"""
+\usepackage{changepage}
+\usepackage[dvipsnames]{xcolor}
+"""

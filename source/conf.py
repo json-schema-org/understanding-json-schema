@@ -185,6 +185,9 @@ htmlhelp_basename = 'UnderstandingJSONSchemadoc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
+from sphinxext import jsonschemaext
+from sphinxext import language_specific
+
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     'papersize': 'letterpaper',
@@ -193,17 +196,28 @@ latex_elements = {
     'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
-    'preamble': '''
+    'preamble': r'''
     % Use a more modern-looking monospace font
+    \usepackage[sfdefault]{cabin}
     \usepackage{inconsolata}
-    ''',
+    \usepackage{bbding}
+    \usepackage{fixltx2e}
+    \MakeRobust\marginpar
+
+    \makeatletter
+        \def\marginparright{\@mparswitchfalse}
+        \def\marginparoutside{\@mparswitchtrue}
+    \makeatother
+    ''' + jsonschemaext.latex_preamble + language_specific.latex_preamble,
+
+    'fncychap': '\\usepackage[Conny]{fncychap}'
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'UnderstandingJSONSchema.tex', u'Understanding JSON Schema',
-   u'Michael Droettboom, et al', 'manual'),
+   u'Michael Droettboom, et al\\\\Space Telescope Science Institute', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -212,7 +226,7 @@ latex_logo = '_static/logo.pdf'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-latex_use_parts = True
+latex_use_parts = False
 
 # If true, show page references after internal links.
 latex_show_pagerefs = True

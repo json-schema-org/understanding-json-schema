@@ -41,10 +41,9 @@ There are many examples throughout this document, and they all follow
 the same format.  At the beginning of each example is a short JSON
 schema, illustrating a particular principle, followed by short JSON
 snippets that are either valid or invalid against that schema.  Valid
-examples are in green, with a checkmark in the right-hand margin.
-Invalid examples are in red, with a cross in the right-hand margin.
-Often there are comments in between to explain we something is or
-isn't valid.
+examples are in green, with a checkmark.  Invalid examples are in red,
+with a cross.  Often there are comments in between to explain we
+something is or isn't valid.
 
 .. note::
     These examples are tested automatically whenever the document is

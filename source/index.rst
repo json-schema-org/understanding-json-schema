@@ -16,9 +16,11 @@ those that want to write it and understand it, but maybe aren't
 interested in building their own car---er, writing their own JSON
 Schema validator---just yet.
 
-.. image:: _static/octopus.png
-    :alt: octopus
-    :align: right
+.. only:: html
+
+    .. image:: _static/octopus.png
+        :alt: octopus
+        :align: right
 
 .. note::
 
@@ -45,7 +47,9 @@ Schema validator---just yet.
       resources, including the official specification and tools for
       working with JSON Schema from various programming languages.
 
-Contents:
+.. only:: html
+
+    Contents:
 
 .. toctree::
    :maxdepth: 1
@@ -56,5 +60,7 @@ Contents:
    reference/index.rst
    structuring.rst
 
-* :ref:`genindex`
-* :ref:`search`
+.. only:: html
+
+    * :ref:`genindex`
+    * :ref:`search`
