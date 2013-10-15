@@ -49,6 +49,11 @@ Schema validator---just yet.
 
 .. only:: html
 
+    - There is also a `print version of this document
+      <http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf>`__.
+
+.. only:: html
+
     Contents:
 
 .. toctree::

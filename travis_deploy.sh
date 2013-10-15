@@ -29,6 +29,7 @@ if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
         git rm -rf .
         # Copy the built files to the root
         cp -r build/html/* .
+        cp -r build/latex/*.pdf .
 
         # Delete the original location of the built files
         rm -rf build

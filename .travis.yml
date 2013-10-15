@@ -19,9 +19,10 @@ before_install:
   - pip install sphinx
   - pip install sphinx_bootstrap_theme
   - pip install jsonschema
+  - pip install texlive-latex-common texlive-latex-extras
 
 install:
-  - make html
+  - make html latexpdf
 
 script:
   - bash -x ./travis_deploy.sh
