@@ -3,13 +3,11 @@
 JSON Schema Reference
 =====================
 
-Contents:
-
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   type.rst
-   generic.rst
-   combining.rst
-   schema.rst
-   regular_expressions.rst
+    type.rst
+    generic.rst
+    combining.rst
+    schema.rst
+    regular_expressions.rst

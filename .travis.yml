@@ -19,7 +19,8 @@ before_install:
   - pip install sphinx
   - pip install sphinx_bootstrap_theme
   - pip install jsonschema
-  - sudo apt-get install texlive-latex-base texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended texlive-latex-recommended
+  - bash -x ./install-texlive.sh
+  - export PATH=$PWD/texlive/bin/x86_64-linux:$PATH
 
 install:
   - make html latexpdf
