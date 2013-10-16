@@ -438,10 +438,6 @@ matches a given regular expression, it must also validate against the
 corresponding schema.
 
 .. note::
-    ``patternProperties`` only takes effect if
-    ``additionalProperties`` is set to ``false``.
-
-.. note::
     When defining the regular expressions, it's important to note that
     the expression may match anywhere within the property name.  For
     example, the regular expression ``"p"`` will match any property
@@ -459,7 +455,6 @@ match either regular expression are forbidden.
 .. schema_example::
     {
       "type": "object",
-      "additionalProperties": false,
       "patternProperties": {
         "^S_": { "type": "string" },
         "^I_": { "type": "integer" }
@@ -474,7 +469,38 @@ match either regular expression are forbidden.
     { "S_0": 42 }
     --X
     { "I_42": "This is a string" }
-    --X
+    --
     // This is a key that doesn't match any of the regular
     // expressions:
     { "keyword": "value" }
+
+``patternProperties`` can be used in conjunction with
+``additionalProperties``.  In that case, ``additionalProperties`` will
+refer to any properties that are not explicitly listed in
+``properties`` and don't match any of the ``patternProperties``.  In
+the following example, based on above, we add a ``"builtin"``
+property, which must be a number, and declare that all additional
+properties (that are neither built-in or matched by
+``patternProperties``) must be strings:
+
+.. schema_example::
+    {
+      "type": "object",
+      "properties": {
+        "builtin": { "type": "number" }
+      },
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "integer" }
+      },
+      "additionalProperties": { "type": "string" }
+    }
+    --
+    { "builtin": 42 }
+    --
+    // This is a key that doesn't match any of the regular
+    // expressions:
+    { "keyword": "value" }
+    --X
+    // It must be a string:
+    { "keyword": 42 }
