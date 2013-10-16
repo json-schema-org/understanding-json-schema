@@ -34,9 +34,9 @@ array may be of a different type.
 Items
 '''''
 
-By default, the elements of the array may be any thing at all.
-However, it's usually useful to validate the items of the array
-against some schema as well.  This is done using the ``items`` and
+By default, the elements of the array may be anything at all.
+However, it's often useful to validate the items of the array against
+some schema as well.  This is done using the ``items`` and
 ``additionalItems`` keywords.
 
 There are two ways in which arrays are generally used in JSON:
@@ -157,10 +157,10 @@ Here's the example schema:
     // This address is missing a street number
     ["Palais de l'Élysée"]
     --
-    // It's ok to not provide all of the items:
+    // It's okay to not provide all of the items:
     [10, "Downing", "Street"]
     --
-    // And, by default, it's also ok add additional items to end:
+    // And, by default, it's also okay add additional items to end:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
 The ``additionalItems`` keyword controls whether it's valid to have

@@ -186,7 +186,7 @@ latex_preamble = r"""
     {\strut #1};}}%
    }%
    \mdfsetup{innertopmargin=10pt,linecolor=#2,%
-             linewidth=1pt,topline=true,
+             linewidth=1pt,topline=true,nobreak=true,
              frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
    \begin{mdframed}[]\relax%
    }{\end{mdframed}}

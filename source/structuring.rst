@@ -6,14 +6,14 @@
 Structuring a complex schema
 ============================
 
-When writing computer programs of any given complexity, it's commonly
-accepted that "structuring" the program into reusable functions is
-better than copying-and-pasting duplicate bits of code everywhere they
-are used.  Likewise in JSON Schema, for anything but the most trivial
-schema, it's really useful to structure the schema into parts that can
-be reused in a number of places.  This chapter will present some
-practical examples that use the tools available for reusing and
-structuring schemas.
+When writing computer programs of even moderate complexity, it's
+commonly accepted that "structuring" the program into reusable
+functions is better than copying-and-pasting duplicate bits of code
+everywhere they are used.  Likewise in JSON Schema, for anything but
+the most trivial schema, it's really useful to structure the schema
+into parts that can be reused in a number of places.  This chapter
+will present some practical examples that use the tools available for
+reusing and structuring schemas.
 
 Reuse
 -----
@@ -24,10 +24,10 @@ Addresses are always the same---they have a street address, city and
 state---so we don't want to duplicate that part of the schema
 everywhere we want to store an address.  Not only does it make the
 schema more verbose, but it makes updating it in the future more
-difficult.  If our company were to go international in the future and
-we wanted to add a country field to all the addresses, it would be
-better to do this in a single place rather than everywhere that
-addresses are used.
+difficult.  If our imaginary company were to start international
+business in the future and we wanted to add a country field to all the
+addresses, it would be better to do this in a single place rather than
+everywhere that addresses are used.
 
 So let's start with the schema that defines an address::
 
@@ -77,9 +77,10 @@ The value of ``$ref`` is a string in a format called `JSON Pointer
     <http://www.w3.org/TR/xpath/>`_ from the XML world, but it is much
     simpler.
 
-The ``#`` refers to the current document, and then the ``/`` separated
-keys thereafter just traverse the keys in the objects in the document.
-Therefore, in our example ``"#/definitions/address"`` means:
+The pound symbol (``#``) refers to the current document, and then the
+slash (``/``) separated keys thereafter just traverse the keys in the
+objects in the document.  Therefore, in our example
+``"#/definitions/address"`` means:
 
     1) go to the root of the document
     2) find the value of the key ``"definitions"``
@@ -157,14 +158,16 @@ type::
 
     "shipping_address": {
       "allOf": [
-
+        // Here, we include our "core" address schema...
         { "$ref": "#/definitions/address" },
 
-        { "properties":
-          { "type": { "enum": [ "residential", "business" ] } },
+        // ...and then extend it with stuff specific to a shipping
+        // address
+        { "properties": {
+            "type": { "enum": [ "residential", "business" ] }
+          },
           "required": ["type"]
         }
-
       ]
     }
 
@@ -203,7 +206,7 @@ Tying this all together,
       }
     }
     --X
-    // This fails, because it's missing an address type
+    // This fails, because it's missing an address type:
     {
       "shipping_address": {
         "street_address": "1600 Pennsylvania Avenue NW",

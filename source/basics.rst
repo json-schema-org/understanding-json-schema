@@ -10,7 +10,7 @@ write a simple JSON Schema.
 Hello, World!
 -------------
 
-When learning any new language it's often helpful to start with the
+When learning any new language, it's often helpful to start with the
 simplest thing possible.  In JSON Schema, an empty object is a
 completely valid schema that will accept any valid JSON.
 
@@ -29,9 +29,19 @@ The type keyword
 ----------------
 
 Of course, we wouldn't be using JSON Schema if we wanted to just
-accept everything.  The most common thing to do in a JSON Schema is to
-restrict to a specific type.  The ``type`` keyword is used for that.
-For example, in the following, only strings are accepted:
+accept any JSON document.  The most common thing to do in a JSON
+Schema is to restrict to a specific type.  The ``type`` keyword is
+used for that.
+
+.. note::
+
+    When this book refers to JSON Schema "keywords", it means the
+    "key" part of the key/value pair in an object.  Most of the work
+    of writing a JSON Schema involves mapping a special "keyword" to a
+    value within an object.
+
+For example, in the following, only strings are
+accepted:
 
 .. schema_example::
 
@@ -43,19 +53,22 @@ For example, in the following, only strings are accepted:
 
 The ``type`` keyword is described in more detail in `type`.
 
-Declaring JSON Schema
----------------------
+Declaring a JSON Schema
+-----------------------
 
 Since JSON Schema is itself JSON, it's not always easy to tell when
 something is JSON Schema or just an arbitrary chunk of JSON.  The
 ``$schema`` keyword is used to declare that something is JSON Schema.
 It's generally good practice to include it, though it is not required.
-(For brevity, it isn't included in most of the examples in this
-document.)
+
+.. note::
+    For brevity, the ``$schema`` keyword isn't included in most of the
+    examples in this book, but it should always be used in the real
+    world.
 
 .. schema_example::
 
-   { "$schema": "http://json-schema.org/schema#" }
+    { "$schema": "http://json-schema.org/schema#" }
 
 You can also use this keyword to declare which version of the JSON
 Schema specification that the schema is written to.  See `schema` for

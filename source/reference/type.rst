@@ -38,11 +38,11 @@ may go by different names.
 
 .. language_specific::
     --Python
-    The following table maps from the names of Javascript types to
+    The following table maps from the names of JavaScript types to
     their analogous types in Python:
 
     +----------+-----------+
-    |Javascript|Python     |
+    |JavaScript|Python     |
     +----------+-----------+
     |string    |string     |
     |          |[#1]_      |
@@ -62,20 +62,18 @@ may go by different names.
 
     .. rubric:: Footnotes
 
-    .. [#1] Since Javascript strings always support unicode, they are
+    .. [#1] Since JavaScript strings always support unicode, they are
             analogous to ``unicode`` on Python 2.x and ``str`` on
             Python 3.x.
 
-The ``type`` keyword may either be a string or an array.  If it's a
-string, it is the name of oone of the basic types above.  If it is an
-array, it must be an array of strings, where each string is the name
-of one of the basic types, and each element is unique.
+The ``type`` keyword may either be a string or an array:
 
-Each of these types have their own keywords to make the validation
-more specific.  For example, numeric types have a way of specifying a
-numeric range, that would not be applicable to other types.  In this
-reference, these validation keywords are described along with each of
-their corresponding types.
+    - If it's a string, it is the name of one of the basic types above.
+
+    - If it is an array, it must be an array of strings, where each
+      string is the name of one of the basic types, and each element
+      is unique.  In this case, the JSON snippet is valid if it
+      matches *any* of the given types.
 
 Here is a simple example of using the ``type`` keyword:
 
@@ -100,6 +98,12 @@ structured data types:
    "Life, the universe, and everything"
    --X
    ["Life", "the universe", "and everything"]
+
+For each of these types, there are keywords that only apply to those
+types.  For example, numeric types have a way of specifying a numeric
+range, that would not be applicable to other types.  In this
+reference, these validation keywords are described along with each of
+their corresponding types in the following chapters.
 
 .. only:: latex
 

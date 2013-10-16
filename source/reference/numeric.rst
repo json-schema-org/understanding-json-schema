@@ -5,11 +5,16 @@
 
 .. _numeric:
 
-number
-------
+Numeric types
+-------------
 
 There are two numeric types in JSON Schema: `integer` and `number`.  They
 share the same validation keywords.
+
+.. note::
+
+    JSON has no standard way to represent complex numbers, so there is
+    no way to test for them in JSON Schema.
 
 .. _integer:
 
@@ -46,8 +51,7 @@ number
 ''''''
 
 The ``number`` type is used for any numeric type, either integers or
-floating point numbers.  JSON has no standard way to represent complex
-numbers, so there is no way to test for them in JSON Schema.
+floating point numbers.
 
 .. language_specific::
     --Python
@@ -112,16 +116,18 @@ Ranges of numbers are specified using a combination of the
 - ``minimum`` specifies a minimum numeric value.
 
 - ``exclusiveMinimum`` is a boolean.  When ``true``, it indicates that
-  the range includes the minimum value, i.e., :math:`x\ge min`.  When
-  ``false`` (or not included), it indicates that the range does not
-  include the minimum value, i.e., :math:`x > min`.
+  the range includes the minimum value, i.e., :math:`x\ge
+  \mathrm{min}`.  When ``false`` (or not included), it indicates that
+  the range does not include the minimum value, i.e., :math:`x >
+  \mathrm{min}`.
 
 - ``maximum`` specifies a maximum numeric value.
 
 - ``exclusiveMaximum`` is a boolean.  When ``true``, it indicates that
-  the range includes the maximum value, i.e., :math:`x\le max`.  When
-  ``false`` (or not included), it indicates that the range does not
-  include the maximum value, i.e., :math:`x < max`.
+  the range includes the maximum value, i.e., :math:`x\le
+  \mathrm{max}`.  When ``false`` (or not included), it indicates that
+  the range does not include the maximum value, i.e., :math:`x <
+  \mathrm{max}`.
 
 .. schema_example::
     {

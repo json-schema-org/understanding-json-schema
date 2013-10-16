@@ -6,10 +6,10 @@
 Combining schemas
 =================
 
-JSON Schema includes a few facilities for combining schemas together.
+JSON Schema includes a few keywords for combining schemas together.
 Note that this doesn't necessarily mean combining schemas from
 multiple files or JSON trees, though these facilities help to enable
-that and are described in `structuring`).  Combining schemas may be as
+that and are described in `structuring`.  Combining schemas may be as
 simple as allowing a value to be validated against multiple criteria
 at the same time.
 
@@ -168,7 +168,7 @@ subschemas.  The following schema is equivalent to the one above:
 not
 ---
 
-This doesn't strictly combine schemas, but it fits well on this page
+This doesn't strictly combine schemas, but it belongs in this chapter
 along with other things that help to modify the effect of schemas in
 some way.  The ``not`` keyword declares that a instance validates if
 it doesn't validate against the given subschema.

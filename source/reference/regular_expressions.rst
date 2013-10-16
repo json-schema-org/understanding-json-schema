@@ -8,7 +8,7 @@ Regular Expressions
 
 The :ref:`pattern <pattern>` and `patternProperties` keywords use
 regular expressions to express constraints.  The regular expression
-syntax used is from Javascript (`ECMA 262
+syntax used is from JavaScript (`ECMA 262
 <http://www.ecma-international.org/publications/standards/Ecma-262.htm>`__,
 specifically). However, that complete syntax is not widely supported,
 therefore it is recommended that you stick to the subset of that
@@ -46,7 +46,7 @@ syntax described below.
 
 - ``+?``, ``*?``, ``??``: The ``*``, ``+``, and ``?`` qualifiers are
   all greedy; they match as much text as possible. Sometimes this
-  behavior isn’t desired and you want to match as few characters as
+  behavior isn't desired and you want to match as few characters as
   possible.
 
 - ``{x}``: Match exactly ``x`` occurrences of the preceding regular
@@ -63,7 +63,7 @@ syntax described below.
 
 .. language_specific::
    --Python
-   This subset of Javascript regular expressions is compatible with
+   This subset of JavaScript regular expressions is compatible with
    Python regular expressions.  Pay close attention to what is
    missing, however.  Notably, it is not recommended to use ``.`` to
    match any character.

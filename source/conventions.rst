@@ -1,18 +1,18 @@
 .. _conventions:
 
-Conventions used in this document
-=================================
+Conventions used in this book
+=============================
 
 Language-specific notes
 -----------------------
 
-The names of the basic types in Javascript and JSON can be confusing
+The names of the basic types in JavaScript and JSON can be confusing
 when coming from another dynamic language.  I'm a Python programmer by
 day, so I've notated here when the names for things are different from
 what they are in Python, and any other Python-specific advice for
 using JSON and JSON Schema.  I'm by no means trying to create a Python
-bias to this document, but it is what I know, so I've started there.
-In the long run, I hope this document will be useful to programmers of
+bias to this book, but it is what I know, so I've started there.
+In the long run, I hope this book will be useful to programmers of
 all stripes, so if you're interested in translating the Python
 references into Algol-68 or any other language you may know, pull
 requests are welcome!
@@ -37,7 +37,7 @@ JSON in a few different languages:
 Examples
 --------
 
-There are many examples throughout this document, and they all follow
+There are many examples throughout this book, and they all follow
 the same format.  At the beginning of each example is a short JSON
 schema, illustrating a particular principle, followed by short JSON
 snippets that are either valid or invalid against that schema.  Valid
@@ -46,7 +46,7 @@ with a cross.  Often there are comments in between to explain we
 something is or isn't valid.
 
 .. note::
-    These examples are tested automatically whenever the document is
+    These examples are tested automatically whenever the book is
     built, so hopefully they are not just helpful, but also correct!
 
 For example, here's a snippet illustrating how to use the ``number``

@@ -1,8 +1,8 @@
 Generic keywords
 ================
 
-This page lists some miscellaneous properties that are available for
-all JSON types.
+This chapter lists some miscellaneous properties that are available
+for all JSON types.
 
 .. index::
    single: metadata
@@ -18,16 +18,17 @@ JSON Schema includes a few keywords, ``title``, ``description`` and
 ``default``, that aren't strictly used for validation, but are used to
 describe parts of a schema.
 
-``title`` and ``description`` values must be strings.  A "title" will
-preferrably be short, whereas a "description" will provide explanation
-about the purpose of data described by the schema.  Neither are
-required, but they are encouraged for good practice.
+The ``title`` and ``description`` keywords must be strings.  A "title"
+will preferably be short, whereas a "description" will provide a more
+lengthy explanation about the purpose of the data described by the
+schema.  Neither are required, but they are encouraged for good
+practice.
 
-``default`` specifies a default value for an item.  JSON processing
-tools may use this information to provide a default value for a
-missing key/value pair, though many JSON schema validators simply
-ignore the ``default`` keyword.  It should validate against the schema
-in which it resides, but that isn't required.
+The ``default`` keyword specifies a default value for an item.  JSON
+processing tools may use this information to provide a default value
+for a missing key/value pair, though many JSON schema validators
+simply ignore the ``default`` keyword.  It should validate against the
+schema in which it resides, but that isn't required.
 
 .. schema_example::
     {
@@ -63,16 +64,18 @@ The following is an example for validating street light colors:
 
 You can use ``enum`` even without a type, to accept values of
 different types.  Let's extend the example to use ``null`` to indicate
-"off".
+"off", and also add 42, just for fun.
 
 .. schema_example::
    {
-     "enum": ["red", "amber", "green", null]
+     "enum": ["red", "amber", "green", null, 42]
    }
    --
    "red"
    --
    null
+   --
+   42
    --X
    0
 
@@ -87,6 +90,6 @@ be valid against the enclosing schema:
    --
    "red"
    --X
-   // This is in the ``enum``, but it's invalid against ``"type": "string"``, so
-   // it's invalid:
+   // This is in the ``enum``, but it's invalid against ``{ "type":
+   // "string" }``, so it's ultimately invalid:
    null

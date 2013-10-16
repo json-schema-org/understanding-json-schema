@@ -10,11 +10,11 @@ JSON Schema is a powerful tool for validating the structure of JSON
 data.  However, learning to use it by reading its specification is
 like learning to drive a car by looking at its blueprints.  You don't
 need to know how an internal combustion engine fits together if all
-you want to do is pick up the groceries.  This document, therefore,
-aims to be the friendly driving instructor for JSON Schema.  It's for
-those that want to write it and understand it, but maybe aren't
-interested in building their own car---er, writing their own JSON
-Schema validator---just yet.
+you want to do is pick up the groceries.  This book, therefore, aims
+to be the friendly driving instructor for JSON Schema.  It's for those
+that want to write it and understand it, but maybe aren't interested
+in building their own car---er, writing their own JSON Schema
+validator---just yet.
 
 .. only:: html
 
@@ -24,18 +24,17 @@ Schema validator---just yet.
 
 .. note::
 
-    This document describes JSON Schema draft 4.  Earlier versions of
-    JSON Schema are not completely compatible with the format
-    described here.
+    This book describes JSON Schema draft 4.  Earlier versions of JSON
+    Schema are not completely compatible with the format described
+    here.
 
 **Where to begin?**
 
-    - This document uses some novel `conventions <conventions>` for
+    - This book uses some novel `conventions <conventions>` for
       showing schema examples and relating JSON Schema to your
       programming language of choice.
 
-    - If you're not sure what a schema
-      is, check out `about`.
+    - If you're not sure what a schema is, check out `about`.
 
     - `basics` chapter should be enough to get you started with
       understanding the core `reference`.
