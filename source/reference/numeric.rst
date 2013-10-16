@@ -37,10 +37,40 @@ The ``integer`` type is used for integral numbers.
     -1
     --X
     // Floating point numbers are rejected:
-    5.0
+    3.1415926
     --X
     // Numbers as strings are rejected:
     "42"
+
+.. warning::
+
+    The precise treatment of the "integer" type may depend on the
+    implementation of your JSON Schema validator.  JavaScript (and
+    thus also JSON) does not have distinct types for integers and
+    floating-point values.  Therefore, JSON Schema can not use type
+    alone to distinguish between integers and non-integers.  The JSON
+    Schema specification recommends, but does not require, that
+    validators use the mathematical value to determine whether a
+    number is an integer, and not the type alone.  Therefore, there is
+    some disagreement between validators on this point.  For example,
+    a JavaScript-based may accept ``1.0`` as an integer, whereas the
+    Python-based `jsonschema
+    <https://pypi.python.org/pypi/jsonschema>`__ does not.
+
+Clever use of the ``multipleOf`` keyword (see `multiples`) can be used
+to get around this discrepancy.  For example, the following likely has
+the same behavior on all JSON Schema implementations:
+
+.. schema_example::
+
+    { "type": "number", "multipleOf": 1.0 }
+    --
+    42
+    --
+    42.0
+    --X
+    3.14156926
+
 
 .. index::
    single: number
@@ -77,6 +107,8 @@ floating point numbers.
 .. index::
    single: multipleOf
    single: number; multiple of
+
+.. _multiples:
 
 Multiples
 '''''''''

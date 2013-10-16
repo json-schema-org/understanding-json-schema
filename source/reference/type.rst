@@ -47,9 +47,8 @@ may go by different names.
     |string    |string     |
     |          |[#1]_      |
     +----------+-----------+
-    |integer   |int        |
-    +----------+-----------+
-    |number    |float      |
+    |number    |int/float  |
+    |          |[#2]_      |
     +----------+-----------+
     |object    |dict       |
     +----------+-----------+
@@ -65,6 +64,9 @@ may go by different names.
     .. [#1] Since JavaScript strings always support unicode, they are
             analogous to ``unicode`` on Python 2.x and ``str`` on
             Python 3.x.
+
+    .. [#2] JavaScript does not have separate types for integer and
+            floating-point.
 
 The ``type`` keyword may either be a string or an array:
 
