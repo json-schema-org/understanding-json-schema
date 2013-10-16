@@ -4,7 +4,7 @@ JSON Schema Reference
 =====================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     type.rst
     generic.rst
