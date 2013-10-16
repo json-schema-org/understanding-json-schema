@@ -116,17 +116,17 @@ Ranges of numbers are specified using a combination of the
 - ``minimum`` specifies a minimum numeric value.
 
 - ``exclusiveMinimum`` is a boolean.  When ``true``, it indicates that
-  the range includes the minimum value, i.e., :math:`x\ge
+  the range excludes the minimum value, i.e., :math:`x >
   \mathrm{min}`.  When ``false`` (or not included), it indicates that
-  the range does not include the minimum value, i.e., :math:`x >
+  the range includes the minimum value, i.e., :math:`x \ge
   \mathrm{min}`.
 
 - ``maximum`` specifies a maximum numeric value.
 
 - ``exclusiveMaximum`` is a boolean.  When ``true``, it indicates that
-  the range includes the maximum value, i.e., :math:`x\le
+  the range excludes the maximum value, i.e., :math:`x <
   \mathrm{max}`.  When ``false`` (or not included), it indicates that
-  the range does not include the maximum value, i.e., :math:`x <
+  the range does not include the maximum value, i.e., :math:`x \le
   \mathrm{max}`.
 
 .. schema_example::
