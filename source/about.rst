@@ -29,6 +29,7 @@ At its heart, JSON is built on the following data structures:
     - number::
 
         42
+        3.1415926
 
     - string::
 
@@ -57,9 +58,8 @@ may go by different names.
     |string    |string     |
     |          |[#1]_      |
     +----------+-----------+
-    |integer   |int        |
-    +----------+-----------+
-    |number    |float      |
+    |number    |int/float  |
+    |          |[#2]_      |
     +----------+-----------+
     |object    |dict       |
     +----------+-----------+
@@ -75,6 +75,9 @@ may go by different names.
     .. [#1] Since JavaScript strings always support unicode, they are
             analogous to ``unicode`` on Python 2.x and ``str`` on
             Python 3.x.
+
+    .. [#2] JavaScript does not have separate types for integer and
+            floating-point.
 
 With these simple data types, all kinds of structured data can be
 represented.  With that great flexibility comes great responsibility,
@@ -131,7 +134,8 @@ for now.  They are explained in subsequent chapters.
       }
     }
     --X
-    // By "validating" the first example against this schema, you can see that it fails:
+    // By "validating" the first example against this schema, you can
+    // see that it fails:
     {
       "name": "George Washington",
       "birthday": "February 22, 1732",
