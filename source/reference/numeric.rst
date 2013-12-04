@@ -158,7 +158,7 @@ Ranges of numbers are specified using a combination of the
 - ``exclusiveMaximum`` is a boolean.  When ``true``, it indicates that
   the range excludes the maximum value, i.e., :math:`x <
   \mathrm{max}`.  When ``false`` (or not included), it indicates that
-  the range does not include the maximum value, i.e., :math:`x \le
+  the range includes the maximum value, i.e., :math:`x \le
   \mathrm{max}`.
 
 .. schema_example::
