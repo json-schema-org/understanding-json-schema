@@ -42,7 +42,7 @@ the same format.  At the beginning of each example is a short JSON
 schema, illustrating a particular principle, followed by short JSON
 snippets that are either valid or invalid against that schema.  Valid
 examples are in green, with a checkmark.  Invalid examples are in red,
-with a cross.  Often there are comments in between to explain we
+with a cross.  Often there are comments in between to explain why
 something is or isn't valid.
 
 .. note::
