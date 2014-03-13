@@ -31,7 +31,7 @@ you can use one of these predefined values:
 
    - ``http://json-schema.org/hyper-schema#``
 
-     JSON Schema written against the current version of the
+     JSON Schema hyperschema written against the current version of the
      specification.
 
    - ``http://json-schema.org/draft-04/schema#``
