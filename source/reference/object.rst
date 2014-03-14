@@ -22,6 +22,17 @@ conventionally referred to as a "property".
    everything, whereas in JSON it is used only to mean a mapping from
    string keys to values.
 
+   --Ruby
+   In Ruby, "objects" are analogous to the ``Hash`` type. An important
+   difference, however, is that all keys in JSON must be strings, and therefore
+   any non-string keys are converted over to their string representation.
+
+   Try not to be confused by the two uses of the word "object" here:
+   Ruby uses the word ``Object`` to mean the generic base class for
+   everything, whereas in JSON it is used only to mean a mapping from
+   string keys to values.
+
+
 .. schema_example::
     { "type": "object" }
     --

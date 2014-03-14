@@ -15,6 +15,9 @@ such as 1 and 0, are not accepted by the schema.
    In Python, "boolean" is analogous to ``bool``.  Note that in JSON,
    ``true`` and ``false`` are lower case, whereas in Python they are
    capitalized (``True`` and ``False``).
+   --Ruby
+   In Ruby, "boolean" is analogous to ``TrueClass`` and ``FalseClass``.  Note
+   that in Ruby there is no ``Boolean`` class.
 
 .. schema_example::
     { "type": "boolean" }
