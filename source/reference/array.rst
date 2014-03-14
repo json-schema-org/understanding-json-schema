@@ -16,7 +16,7 @@ array may be of a different type.
    standard library will always use Python lists to represent JSON
    arrays.
    --Ruby
-   In Ruby, "array" is analogous to a ``Array`` type,
+   In Ruby, "array" is analogous to a ``Array`` type.
 
 .. schema_example::
     { "type": "array" }
