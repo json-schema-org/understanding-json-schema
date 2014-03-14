@@ -13,6 +13,8 @@ Unicode characters.
    --Python
    In Python, "string" is analogous to the ``unicode`` type on Python
    2.x, and the ``str`` type on Python 3.x.
+   --Ruby
+   In Ruby, "string" is analogous to the ``String`` type.
 
 .. schema_example::
 

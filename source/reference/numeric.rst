@@ -27,6 +27,8 @@ The ``integer`` type is used for integral numbers.
 .. language_specific::
     --Python
     In Python, "integer" is analogous to the ``int`` type.
+    --Ruby
+    In Ruby, "integer" is analogous to the ``Integer`` type.
 
 .. schema_example::
 
@@ -86,6 +88,8 @@ floating point numbers.
 .. language_specific::
     --Python
     In Python, "number" is analogous to the ``float`` type.
+    --Ruby
+    In Ruby, "number" is analogous to the ``Float`` type.
 
 .. schema_example::
 
