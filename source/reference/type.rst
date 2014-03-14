@@ -68,6 +68,33 @@ may go by different names.
     .. [#2] JavaScript does not have separate types for integer and
             floating-point.
 
+
+    --Ruby
+    The following table maps from the names of JavaScript types to
+    their analogous types in Ruby:
+
+    +----------+----------------------+
+    |JavaScript|Ruby                  |
+    +----------+----------------------+
+    |string    |String                |
+    +----------+----------------------+
+    |number    |Integer/Float         |
+    |          |[#3]_                 |
+    +----------+----------------------+
+    |object    |Hash                  |
+    +----------+----------------------+
+    |array     |Array                 |
+    +----------+----------------------+
+    |boolean   |TrueClass/FalseClass  |
+    +----------+----------------------+
+    |null      |NilClass              |
+    +----------+----------------------+
+
+    .. rubric:: Footnotes
+
+    .. [#3] JavaScript does not have separate types for integer and
+            floating-point.
+
 The ``type`` keyword may either be a string or an array:
 
     - If it's a string, it is the name of one of the basic types above.
