@@ -82,9 +82,9 @@ slash (``/``) separated keys thereafter just traverse the keys in the
 objects in the document.  Therefore, in our example
 ``"#/definitions/address"`` means:
 
-    1) go to the root of the document
-    2) find the value of the key ``"definitions"``
-    3) within that object, find the value of the key ``"address"``
+1) go to the root of the document
+2) find the value of the key ``"definitions"``
+3) within that object, find the value of the key ``"address"``
 
 ``$ref`` can also be a relative or absolute URI, so if you prefer to
 include your definitions in separate files, you can also do that.  For

@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Understanding JSON Schema'
-copyright = u'2013, Michael Droettboom, Space Telescope Science Institute'
+copyright = u'2013-2014, Michael Droettboom, Space Telescope Science Institute'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -286,7 +286,7 @@ texinfo_documents = [
 epub_title = u'Understanding JSON Schema'
 epub_author = u'Michael Droettboom'
 epub_publisher = u'Space Telescope Science Institute'
-epub_copyright = u'2013, Space Telescope Science Institute'
+epub_copyright = u'2013-2014, Space Telescope Science Institute'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

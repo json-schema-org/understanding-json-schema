@@ -24,31 +24,31 @@ If you need to declare that your schema was written against a specific
 version of the JSON Schema standard, and not just the latest version,
 you can use one of these predefined values:
 
-   - ``http://json-schema.org/schema#``
+- ``http://json-schema.org/schema#``
 
-     JSON Schema written against the current version of the
-     specification.
+  JSON Schema written against the current version of the
+  specification.
 
-   - ``http://json-schema.org/hyper-schema#``
+- ``http://json-schema.org/hyper-schema#``
 
-     JSON Schema hyperschema written against the current version of the
-     specification.
+  JSON Schema hyperschema written against the current version of the
+  specification.
 
-   - ``http://json-schema.org/draft-04/schema#``
+- ``http://json-schema.org/draft-04/schema#``
 
-     JSON Schema written against this version.
+  JSON Schema written against this version.
 
-   - ``http://json-schema.org/draft-04/hyper-schema#``
+- ``http://json-schema.org/draft-04/hyper-schema#``
 
-     JSON Schema hyperschema written against this version.
+  JSON Schema hyperschema written against this version.
 
-   - ``http://json-schema.org/draft-03/schema#``
+- ``http://json-schema.org/draft-03/schema#``
 
-     JSON Schema written against JSON Schema, draft v3
+  JSON Schema written against JSON Schema, draft v3
 
-   - ``http://json-schema.org/draft-03/hyper-schema#``
+- ``http://json-schema.org/draft-03/hyper-schema#``
 
-     JSON Schema hyperschema written against JSON Schema, draft v3
+  JSON Schema hyperschema written against JSON Schema, draft v3
 
 Additionally, if you have extended the JSON Schema language to include
 your own custom keywords for validating values, you can use a custom

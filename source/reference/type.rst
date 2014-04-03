@@ -97,12 +97,12 @@ may go by different names.
 
 The ``type`` keyword may either be a string or an array:
 
-    - If it's a string, it is the name of one of the basic types above.
+- If it's a string, it is the name of one of the basic types above.
 
-    - If it is an array, it must be an array of strings, where each
-      string is the name of one of the basic types, and each element
-      is unique.  In this case, the JSON snippet is valid if it
-      matches *any* of the given types.
+- If it is an array, it must be an array of strings, where each string
+  is the name of one of the basic types, and each element is unique.
+  In this case, the JSON snippet is valid if it matches *any* of the
+  given types.
 
 Here is a simple example of using the ``type`` keyword:
 

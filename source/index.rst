@@ -30,21 +30,21 @@ validator---just yet.
 
 **Where to begin?**
 
-    - This book uses some novel `conventions <conventions>` for
-      showing schema examples and relating JSON Schema to your
-      programming language of choice.
+- This book uses some novel `conventions <conventions>` for showing
+  schema examples and relating JSON Schema to your programming
+  language of choice.
 
-    - If you're not sure what a schema is, check out `about`.
+- If you're not sure what a schema is, check out `about`.
 
-    - `basics` chapter should be enough to get you started with
-      understanding the core `reference`.
+- `basics` chapter should be enough to get you started with
+  understanding the core `reference`.
 
-    - When you start developing large schemas with many nested and
-      repeated sections, check out `structuring`.
+- When you start developing large schemas with many nested and
+  repeated sections, check out `structuring`.
 
-    - `json-schema.org <http://json-schema.org>`__ has a number of
-      resources, including the official specification and tools for
-      working with JSON Schema from various programming languages.
+- `json-schema.org <http://json-schema.org>`__ has a number of
+  resources, including the official specification and tools for
+  working with JSON Schema from various programming languages.
 
 
 .. only:: html

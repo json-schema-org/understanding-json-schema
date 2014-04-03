@@ -18,31 +18,31 @@ contexts that don't involve web surfing.
 
 At its heart, JSON is built on the following data structures:
 
-    - object::
+- object::
 
-        { "key1": "value2", "key2": "value2" }
+  { "key1": "value2", "key2": "value2" }
 
-    - array::
+- array::
 
-        [ "first", "second", "third" ]
+  [ "first", "second", "third" ]
 
-    - number::
+- number::
 
-        42
-        3.1415926
+  42
+  3.1415926
 
-    - string::
+- string::
 
-        "This is a string"
+  "This is a string"
 
-    - boolean::
+- boolean::
 
-        true
-        false
+  true
+  false
 
-    - null::
+- null::
 
-        null
+  null
 
 These types have analogs in most programming languages, though they
 may go by different names.

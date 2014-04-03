@@ -43,6 +43,10 @@ class language_specific_pages(nodes.Element):
         nodes.Element.__init__(self, *args, **kwargs)
 
 
+class section(nodes.Element):
+    pass
+
+
 def visit_language_specific_pages_node_html(self, node):
     node['classes'] = ['tabbable']
 
@@ -77,12 +81,12 @@ def visit_language_specific_pages_node_html(self, node):
 
     node.append(ul)
 
-    pages = nodes.admonition()
+    pages = section()
     pages['classes'] = ['tab-content']
 
     first = True
     for part in node.parts:
-        page = nodes.admonition()
+        page = section()
         page['classes'] = ['tab-pane']
         if first:
             page['classes'].append('active')
