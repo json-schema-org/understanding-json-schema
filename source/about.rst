@@ -20,7 +20,7 @@ At its heart, JSON is built on the following data structures:
 
 - object::
 
-  { "key1": "value2", "key2": "value2" }
+  { "key1": "value1", "key2": "value2" }
 
 - array::
 
