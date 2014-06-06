@@ -243,7 +243,7 @@ Uniqueness
 ''''''''''
 
 A schema can ensure that each of the items in an array are unique.
-Simple set the ``uniqueItems`` keyword to ``true``.
+Simply set the ``uniqueItems`` keyword to ``true``.
 
 .. schema_example::
    {
