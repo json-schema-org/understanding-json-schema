@@ -26,23 +26,29 @@ At its heart, JSON is built on the following data structures:
 
   [ "first", "second", "third" ]
 
-- number::
+- number:
 
-  42
-  3.1415926
+  .. code-block:: text
 
-- string::
+     42
+     3.1415926
+
+- string:
 
   "This is a string"
 
-- boolean::
+- boolean:
 
-  true
-  false
+  .. code-block:: text
 
-- null::
+     true
+     false
 
-  null
+- null:
+
+  .. code-block:: text
+
+     null
 
 These types have analogs in most programming languages, though they
 may go by different names.
