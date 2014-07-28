@@ -8,6 +8,10 @@ from sphinx.util.nodes import set_source_info
 import jsonschema
 
 
+class jsonschema_node(nodes.Element):
+    pass
+
+
 class AttrDict(dict):
     def __init__(self, *args, **kwargs):
         super(AttrDict, self).__init__(*args, **kwargs)
@@ -66,12 +70,15 @@ class SchemaExampleDirective(Directive):
 
         schema, parts = split_content(self.content)
 
+        container = jsonschema_node()
+        set_source_info(self, container)
         literal = nodes.literal_block(
             schema.content, schema.content)
         literal['language'] = 'javascript'
-        literal['classes'] = ['jsonschema']
+        literal['classes'] = container['classes'] = ['jsonschema']
         set_source_info(self, literal)
-        result.append(literal)
+        container.children.append(literal)
+        result.append(container)
 
         for part in parts:
             if self.validate:
@@ -107,15 +114,18 @@ class SchemaExampleDirective(Directive):
                 set_source_info(self, paragraph)
                 result.append(paragraph)
 
+            container = jsonschema_node()
+            set_source_info(self, container)
             literal = nodes.literal_block(
                 part.content, part.content)
             literal['language'] = 'javascript'
             if is_valid:
-                literal['classes'] = ['jsonschema-pass']
+                literal['classes'] = container['classes'] = ['jsonschema-pass']
             else:
-                literal['classes'] = ['jsonschema-fail']
+                literal['classes'] = container['classes'] = ['jsonschema-fail']
             set_source_info(self, literal)
-            result.append(literal)
+            container.children.append(literal)
+            result.append(container)
 
         return result
 
@@ -123,16 +133,16 @@ class SchemaExampleDirective(Directive):
 class SchemaExampleNoValidationDirective(SchemaExampleDirective):
     validate = False
 
-from sphinx.writers.latex import LaTeXTranslator
-original_literal_node_visit = LaTeXTranslator.visit_literal_block
-original_literal_node_depart = LaTeXTranslator.depart_literal_block
+
+def visit_jsonschema_node_html(self, node):
+    pass
 
 
-def visit_literal_node_latex(self, node):
-    return original_literal_node_visit(self, node)
+def depart_jsonschema_node_html(self, node):
+    pass
 
 
-def depart_literal_node_latex(self, node):
+def visit_jsonschema_node_latex(self, node):
     adjust = False
     color = "gray"
     char = ""
@@ -150,7 +160,15 @@ def depart_literal_node_latex(self, node):
     if adjust:
         self.body.append(r"\begin{adjustwidth}{2.5em}{0pt}")
     self.body.append(r"\begin{jsonframe}{%s}{%s}" % (char, color))
-    original_literal_node_depart(self, node)
+
+
+def depart_jsonschema_node_latex(self, node):
+    adjust = False
+    if 'jsonschema-pass' in node['classes']:
+        adjust = True
+    elif 'jsonschema-fail' in node['classes']:
+        adjust = True
+
     self.body.append(r"\end{jsonframe}")
     if adjust:
         self.body.append(r"\end{adjustwidth}")
@@ -161,8 +179,9 @@ def setup(app):
     app.add_directive('schema_example_novalid',
                       SchemaExampleNoValidationDirective)
 
-    app.add_node(nodes.literal_block,
-                 latex=(visit_literal_node_latex, depart_literal_node_latex))
+    app.add_node(jsonschema_node,
+                 html=(visit_jsonschema_node_html, depart_jsonschema_node_html),
+                 latex=(visit_jsonschema_node_latex, depart_jsonschema_node_latex))
 
 
 latex_preamble = r"""
