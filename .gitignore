@@ -1,2 +1,5 @@
 build
 *.pyc
+texlive
+install-tl*
+install-tl-unx.tar.gz
