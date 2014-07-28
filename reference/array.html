@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>array &mdash; Understanding JSON Schema 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Understanding JSON Schema 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Type-specific keywords" href="type.html" />
+    <link rel="next" title="boolean" href="boolean.html" />
+    <link rel="prev" title="object" href="object.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+  
+  <a href="https://github.com/spacetelescope/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="object.html" title="Previous Chapter: object"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; object</span>
+    </a>
+  </li>
+  <li>
+    <a href="boolean.html" title="Next Chapter: boolean"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">boolean &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="array">
+<span id="index-0"></span><span id="id1"></span><h1>array<a class="headerlink" href="#array" title="Permalink to this headline">¶</a></h1>
+<p>Arrays are used for ordered elements.  In JSON, each element in an
+array may be of a different type.</p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Language-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#2eb2050_Python">Python</a></li>
+<li><a data-toggle="tab" href="#2eb2050_Ruby">Ruby</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="2eb2050_Python">
+In Python, &#8220;array&#8221; is analogous to a <tt class="docutils literal"><span class="pre">list</span></tt> or <tt class="docutils literal"><span class="pre">tuple</span></tt> type,
+depending on usage.  However, the <tt class="docutils literal"><span class="pre">json</span></tt> module in the Python
+standard library will always use Python lists to represent JSON
+arrays.</div>
+<div class="tab-pane section" id="2eb2050_Ruby">
+In Ruby, &#8220;array&#8221; is analogous to a <tt class="docutils literal"><span class="pre">Array</span></tt> type.</div>
+</div>
+</div><div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;different&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;types&quot;</span> <span class="o">:</span> <span class="s2">&quot;of values&quot;</span> <span class="p">}]</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span><span class="s2">&quot;Not&quot;</span><span class="o">:</span> <span class="s2">&quot;an array&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="items">
+<span id="index-1"></span><h2>Items<a class="headerlink" href="#items" title="Permalink to this headline">¶</a></h2>
+<p>By default, the elements of the array may be anything at all.
+However, it&#8217;s often useful to validate the items of the array against
+some schema as well.  This is done using the <tt class="docutils literal"><span class="pre">items</span></tt> and
+<tt class="docutils literal"><span class="pre">additionalItems</span></tt> keywords.</p>
+<p>There are two ways in which arrays are generally used in JSON:</p>
+<ul class="simple">
+<li><strong>List validation:</strong> a sequence of arbitrary length where each
+item matches the same schema.</li>
+<li><strong>Tuple validation:</strong> a sequence of fixed length where each item may
+have a different schema.  In this usage, the index (or location) of
+each item is meaningful as to how the value is interpreted.  (This
+usage is often given a whole separate type in some programming
+languages, such as Python&#8217;s <tt class="docutils literal"><span class="pre">tuple</span></tt>).</li>
+</ul>
+<div class="section" id="list-validation">
+<span id="index-2"></span><span id="id2"></span><h3>List validation<a class="headerlink" href="#list-validation" title="Permalink to this headline">¶</a></h3>
+<p>List validation is useful for arrays of arbitrary length where each
+item matches the same schema.  For this kind of array, set the
+<tt class="docutils literal"><span class="pre">items</span></tt> keyword to a single schema that will be used to validate all
+of the items in the array.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When <tt class="docutils literal"><span class="pre">items</span></tt> is a single schema, the <tt class="docutils literal"><span class="pre">additionalItems</span></tt> keyword
+is meaningless, and it should not be used.</p>
+</div>
+<p>In the following example, we define that each item in an array is a
+number:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">A single &#8220;non-number&#8221; causes the whole array to be invalid:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">The empty array is always valid:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tuple-validation">
+<span id="index-3"></span><span id="id3"></span><h3>Tuple validation<a class="headerlink" href="#tuple-validation" title="Permalink to this headline">¶</a></h3>
+<p>Tuple validation is useful when the array is a collection of items
+where each has a different schema and the ordinal index of each item
+is meaningful.</p>
+<p>For example, you may represent a street address such as:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="mi">1600</span> <span class="nx">Pennsylvania</span> <span class="nx">Avenue</span> <span class="nx">NW</span>
+</pre></div>
+</div>
+<p>as a 4-tuple of the form:</p>
+<blockquote>
+<div>[number, street_name, street_type, direction]</div></blockquote>
+<p>Each of these fields will have a different schema:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">number</span></tt>: The address number.  Must be a number.</li>
+<li><tt class="docutils literal"><span class="pre">street_name</span></tt>: The name of the street.  Must be a string.</li>
+<li><tt class="docutils literal"><span class="pre">street_type</span></tt>: The type of street.  Should be a string from a
+fixed set of values.</li>
+<li><tt class="docutils literal"><span class="pre">direction</span></tt>: The city quadrant of the address.  Should be a string
+from a different set of values.</li>
+</ul>
+<p>To do this, we set the <tt class="docutils literal"><span class="pre">items</span></tt> keyword to an array, where each item
+is a schema that corresponds to each index of the document&#8217;s array.
+That is, an array where the first element validates the first element
+of the input array, the second element validates the second element of
+the input array, etc.</p>
+<p>Here&#8217;s the example schema:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Street&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;Boulevard&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;NW&quot;</span><span class="p">,</span> <span class="s2">&quot;NE&quot;</span><span class="p">,</span> <span class="s2">&quot;SW&quot;</span><span class="p">,</span> <span class="s2">&quot;SE&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;NW&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">&#8220;Drive&#8221; is not one of the acceptable street types:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;Sussex&quot;</span><span class="p">,</span> <span class="s2">&quot;Drive&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This address is missing a street number</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="s2">&quot;Palais de l&#39;Élysée&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">It&#8217;s okay to not provide all of the items:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Downing&quot;</span><span class="p">,</span> <span class="s2">&quot;Street&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">And, by default, it&#8217;s also okay add additional items to end:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;NW&quot;</span><span class="p">,</span> <span class="s2">&quot;Washington&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">additionalItems</span></tt> keyword controls whether it&#8217;s valid to have
+additional items in the array beyond what is defined in the schema.
+Here, we&#8217;ll reuse the example schema above, but set
+<tt class="docutils literal"><span class="pre">additionalItems</span></tt> to <tt class="docutils literal"><span class="pre">false</span></tt>, which has the effect of disallowing
+extra items in the array.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Street&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;Boulevard&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;NW&quot;</span><span class="p">,</span> <span class="s2">&quot;NE&quot;</span><span class="p">,</span> <span class="s2">&quot;SW&quot;</span><span class="p">,</span> <span class="s2">&quot;SE&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;additionalItems&quot;</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;NW&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">It&#8217;s ok to not provide all of the items:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">But, since <tt class="docutils literal"><span class="pre">additionalItems</span></tt> is <tt class="docutils literal"><span class="pre">false</span></tt>, we can&#8217;t provide
+extra items:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;NW&quot;</span><span class="p">,</span> <span class="s2">&quot;Washington&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="length">
+<span id="index-4"></span><h2>Length<a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h2>
+<p>The length of the array can be specified using the <tt class="docutils literal"><span class="pre">minItems</span></tt> and
+<tt class="docutils literal"><span class="pre">maxItems</span></tt> keywords.  The value of each keyword must be a
+non-negative number.  These keywords work whether doing
+<a class="reference internal" href="#list-validation"><em>List validation</em></a> or <a class="reference internal" href="#tuple-validation"><em>Tuple validation</em></a>.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;minItems&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;maxItems&quot;</span><span class="o">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[]</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="uniqueness">
+<span id="index-5"></span><h2>Uniqueness<a class="headerlink" href="#uniqueness" title="Permalink to this headline">¶</a></h2>
+<p>A schema can ensure that each of the items in an array are unique.
+Simply set the <tt class="docutils literal"><span class="pre">uniqueItems</span></tt> keyword to <tt class="docutils literal"><span class="pre">true</span></tt>.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;uniqueItems&quot;</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">The empty array always passes:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2014, Michael Droettboom, Space Telescope Science Institute.<br/>
+      Last updated on Jul 28, 2014.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>string &mdash; Understanding JSON Schema 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.1.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Understanding JSON Schema 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Type-specific keywords" href="type.html" />
+    <link rel="next" title="Numeric types" href="numeric.html" />
+    <link rel="prev" title="null" href="null.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+  
+  <a href="https://github.com/spacetelescope/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="null.html" title="Previous Chapter: null"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; null</span>
+    </a>
+  </li>
+  <li>
+    <a href="numeric.html" title="Next Chapter: Numeric types"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Numeric types &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="string">
+<span id="index-0"></span><span id="id1"></span><h1>string<a class="headerlink" href="#string" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">string</span></tt> type is used for strings of text.  It may contain
+Unicode characters.</p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Language-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#2ecd9d0_Python">Python</a></li>
+<li><a data-toggle="tab" href="#2ecd9d0_Ruby">Ruby</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="2ecd9d0_Python">
+In Python, &#8220;string&#8221; is analogous to the <tt class="docutils literal"><span class="pre">unicode</span></tt> type on Python
+2.x, and the <tt class="docutils literal"><span class="pre">str</span></tt> type on Python 3.x.</div>
+<div class="tab-pane section" id="2ecd9d0_Ruby">
+In Ruby, &#8220;string&#8221; is analogous to the <tt class="docutils literal"><span class="pre">String</span></tt> type.</div>
+</div>
+</div><div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;This is a string&quot;</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Unicode characters:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;Déjà vu&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;42&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="mi">42</span>
+</pre></div>
+</div>
+<div class="section" id="length">
+<span id="index-1"></span><h2>Length<a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h2>
+<p>The length of a string can be constrained using the <tt class="docutils literal"><span class="pre">minLength</span></tt> and
+<tt class="docutils literal"><span class="pre">maxLength</span></tt> keywords.  For both keywords, the value must be a
+non-negative number.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;minLength&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;maxLength&quot;</span><span class="o">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;A&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;AB&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;ABC&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;ABCD&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="regular-expressions">
+<span id="index-2"></span><h2>Regular Expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h2>
+<p id="pattern">The <tt class="docutils literal"><span class="pre">pattern</span></tt> keyword is used to restrict a string to a particular
+regular expression.  The regular expression syntax is the one defined
+in JavaScript (<a class="reference external" href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMA 262</a>
+specifically).  See <a class="reference internal" href="regular_expressions.html#regular-expressions"><em>Regular Expressions</em></a> for more information.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When defining the regular expressions, it&#8217;s important to note that
+the string is considered valid if the expression matches anywhere
+within the string.  For example, the regular expression <tt class="docutils literal"><span class="pre">&quot;p&quot;</span></tt>
+will match any string with a <tt class="docutils literal"><span class="pre">p</span></tt> in it, such as <tt class="docutils literal"><span class="pre">&quot;apple&quot;</span></tt> not
+just a string that is simply <tt class="docutils literal"><span class="pre">&quot;p&quot;</span></tt>.  Therefore, it is usually
+less confusing, as a matter of course, to surround the regular
+expression in <tt class="docutils literal"><span class="pre">^...$</span></tt>, for example, <tt class="docutils literal"><span class="pre">&quot;^p$&quot;</span></tt>, unless there is a
+good reason not to do so.</p>
+</div>
+<p>The following example matches a simple North American telephone number
+with an optional area code:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+   <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;555-1212&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;(888)555-1212&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;(888)555-1212 ext. 532&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;(800)FLOWERS&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="format">
+<span id="index-3"></span><span id="id2"></span><h2>Format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">format</span></tt> keyword allows for basic semantic validation on certain
+kinds of string values that are commonly used.  This allows values to
+be constrained beyond what the other tools in JSON Schema, including
+<a class="reference internal" href="regular_expressions.html#regular-expressions"><em>Regular Expressions</em></a> can do.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">JSON Schema implementations are not required to implement this
+part of the specification, and many of them do not.</p>
+</div>
+<p>There is a bias toward networking-related formats in the JSON Schema
+specification, most likely due to its heritage in web technologies.
+However, custom formats may also be used, as long as the parties
+exchanging the JSON documents also exchange information about the
+custom format types.  A JSON Schema validator will ignore any format
+type that it does not understand.</p>
+<div class="section" id="built-in-formats">
+<h3>Built-in formats<a class="headerlink" href="#built-in-formats" title="Permalink to this headline">¶</a></h3>
+<p>The following is the list of formats specified in the JSON Schema
+specification.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&quot;date-time&quot;</span></tt>: Date representation, as defined by <a class="reference external" href="http://tools.ietf.org/html/rfc3339">RFC 3339, section
+5.6</a>.</li>
+<li><tt class="docutils literal"><span class="pre">&quot;email&quot;</span></tt>: Internet email address, see <a class="reference external" href="http://tools.ietf.org/html/rfc5322">RFC 5322,
+section 3.4.1</a>.</li>
+<li><tt class="docutils literal"><span class="pre">&quot;hostname&quot;</span></tt>: Internet host name, see <a class="reference external" href="http://tools.ietf.org/html/rfc1034">RFC 1034, section 3.1</a>.</li>
+<li><tt class="docutils literal"><span class="pre">&quot;ipv4&quot;</span></tt>: IPv4 address, according to dotted-quad ABNF syntax as
+defined in <a class="reference external" href="http://tools.ietf.org/html/rfc2673">RFC 2673, section 3.2</a>.</li>
+<li><tt class="docutils literal"><span class="pre">&quot;ipv6&quot;</span></tt>: IPv6 address, as defined in <a class="reference external" href="http://tools.ietf.org/html/rfc2373">RFC 2373, section 2.2</a>.</li>
+<li><tt class="docutils literal"><span class="pre">&quot;uri&quot;</span></tt>: A universal resource identifier (URI), according to
+<a class="reference external" href="http://tools.ietf.org/html/rfc3986">RFC3986</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2014, Michael Droettboom, Space Telescope Science Institute.<br/>
+      Last updated on Jul 28, 2014.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
