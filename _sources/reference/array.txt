@@ -242,7 +242,7 @@ non-negative number.  These keywords work whether doing
 Uniqueness
 ''''''''''
 
-A schema can ensure that each of the items in an array are unique.
+A schema can ensure that each of the items in an array is unique.
 Simply set the ``uniqueItems`` keyword to ``true``.
 
 .. schema_example::
