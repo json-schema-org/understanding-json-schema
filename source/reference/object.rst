@@ -14,7 +14,7 @@ conventionally referred to as a "property".
    --Python
    In Python, "objects" are analogous to the ``dict`` type.  An
    important difference, however, is that while Python dictionaries
-   may use anything hashable as a key, in JSON, all the keys
+   may use anything hashable as a key, in JSON all the keys
    must be strings.
 
    Try not to be confused by the two uses of the word "object" here:
