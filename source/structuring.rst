@@ -29,6 +29,9 @@ business in the future and we wanted to add a country field to all the
 addresses, it would be better to do this in a single place rather than
 everywhere that addresses are used.
 
+.. note::
+    This is part of the v4 spec only, and does not exist in v3.
+
 So let's start with the schema that defines an address::
 
     {
