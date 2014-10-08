@@ -30,7 +30,7 @@ addresses, it would be better to do this in a single place rather than
 everywhere that addresses are used.
 
 .. note::
-    This is part of the v4 spec only, and does not exist in v3.
+    This is part of the draft 4 spec only, and does not exist in draft 3.
 
 So let's start with the schema that defines an address::
 
