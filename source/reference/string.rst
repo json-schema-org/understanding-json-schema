@@ -25,6 +25,8 @@ Unicode characters.
     // Unicode characters:
     "Déjà vu"
     --
+    ""
+    --
     "42"
     --X
     42
