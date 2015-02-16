@@ -479,6 +479,7 @@ match either regular expression are forbidden.
     // If the name starts with ``S_``, it must be a string
     { "S_0": 42 }
     --X
+    // If the name starts with ``I_``, it must be an integer
     { "I_42": "This is a string" }
     --
     // This is a key that doesn't match any of the regular
