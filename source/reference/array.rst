@@ -162,7 +162,7 @@ Here's the example schema:
     // It's okay to not provide all of the items:
     [10, "Downing", "Street"]
     --
-    // And, by default, it's also okay add additional items to end:
+    // And, by default, it's also okay to add additional items to end:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
 The ``additionalItems`` keyword controls whether it's valid to have
