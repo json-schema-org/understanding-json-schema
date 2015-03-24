@@ -16,7 +16,7 @@ branches:
     - master
 
 before_install:
-  - pip install sphinx
+  - pip install sphinx==1.2
   - pip install sphinx_bootstrap_theme
   - pip install jsonschema
   - bash -x ./install-texlive.sh
