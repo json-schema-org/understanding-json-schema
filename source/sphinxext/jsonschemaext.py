@@ -77,7 +77,7 @@ class SchemaExampleDirective(Directive):
         literal['language'] = 'javascript'
         literal['classes'] = container['classes'] = ['jsonschema']
         set_source_info(self, literal)
-        container.children.append(literal)
+        container.append(literal)
         result.append(container)
 
         for part in parts:
@@ -124,7 +124,7 @@ class SchemaExampleDirective(Directive):
             else:
                 literal['classes'] = container['classes'] = ['jsonschema-fail']
             set_source_info(self, literal)
-            container.children.append(literal)
+            container.append(literal)
             result.append(container)
 
         return result
