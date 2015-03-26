@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Numeric types &mdash; Understanding JSON Schema 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Understanding JSON Schema 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Type-specific keywords" href="type.html" />
+    <link rel="next" title="object" href="object.html" />
+    <link rel="prev" title="string" href="string.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+  
+  <a href="https://github.com/spacetelescope/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="string.html" title="Previous Chapter: string"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; string</span>
+    </a>
+  </li>
+  <li>
+    <a href="object.html" title="Next Chapter: object"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">object &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="numeric-types">
+<span id="numeric"></span><span id="index-0"></span><h1>Numeric types<a class="headerlink" href="#numeric-types" title="Permalink to this headline">¶</a></h1>
+<p>There are two numeric types in JSON Schema: <a class="reference internal" href="#integer"><span>integer</span></a> and <a class="reference internal" href="#number"><span>number</span></a>.  They
+share the same validation keywords.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">JSON has no standard way to represent complex numbers, so there is
+no way to test for them in JSON Schema.</p>
+</div>
+<div class="section" id="integer">
+<span id="id1"></span><h2>integer<a class="headerlink" href="#integer" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">integer</span></code> type is used for integral numbers.</p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Language-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#2afe20748750_Python">Python</a></li>
+<li><a data-toggle="tab" href="#2afe20748750_Ruby">Ruby</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="2afe20748750_Python">
+In Python, &#8220;integer&#8221; is analogous to the <code class="docutils literal"><span class="pre">int</span></code> type.</div>
+<div class="tab-pane section" id="2afe20748750_Ruby">
+In Ruby, &#8220;integer&#8221; is analogous to the <code class="docutils literal"><span class="pre">Integer</span></code> type.</div>
+</div>
+</div><div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">42</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Floating point numbers are rejected:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="mf">3.1415926</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Numbers as strings are rejected:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;42&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The precise treatment of the &#8220;integer&#8221; type may depend on the
+implementation of your JSON Schema validator.  JavaScript (and
+thus also JSON) does not have distinct types for integers and
+floating-point values.  Therefore, JSON Schema can not use type
+alone to distinguish between integers and non-integers.  The JSON
+Schema specification recommends, but does not require, that
+validators use the mathematical value to determine whether a
+number is an integer, and not the type alone.  Therefore, there is
+some disagreement between validators on this point.  For example,
+a JavaScript-based may accept <code class="docutils literal"><span class="pre">1.0</span></code> as an integer, whereas the
+Python-based <a class="reference external" href="https://pypi.python.org/pypi/jsonschema">jsonschema</a> does not.</p>
+</div>
+<p>Clever use of the <code class="docutils literal"><span class="pre">multipleOf</span></code> keyword (see <a class="reference internal" href="#multiples"><span>Multiples</span></a>) can be used
+to get around this discrepancy.  For example, the following likely has
+the same behavior on all JSON Schema implementations:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="s2">&quot;multipleOf&quot;</span><span class="o">:</span> <span class="mf">1.0</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">42</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mf">42.0</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="mf">3.14156926</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="number">
+<span id="index-1"></span><span id="id2"></span><h2>number<a class="headerlink" href="#number" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">number</span></code> type is used for any numeric type, either integers or
+floating point numbers.</p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Language-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#2afe1bae2410_Python">Python</a></li>
+<li><a data-toggle="tab" href="#2afe1bae2410_Ruby">Ruby</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="2afe1bae2410_Python">
+In Python, &#8220;number&#8221; is analogous to the <code class="docutils literal"><span class="pre">float</span></code> type.</div>
+<div class="tab-pane section" id="2afe1bae2410_Ruby">
+In Ruby, &#8220;number&#8221; is analogous to the <code class="docutils literal"><span class="pre">Float</span></code> type.</div>
+</div>
+</div><div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">42</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Simple floating point number:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mf">5.0</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Exponential notation also works:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mf">2.99792458e8</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Numbers as strings are rejected:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;42&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiples">
+<span id="index-2"></span><span id="id3"></span><h2>Multiples<a class="headerlink" href="#multiples" title="Permalink to this headline">¶</a></h2>
+<p>Numbers can be restricted to a multiple of a given number, using the
+<code class="docutils literal"><span class="pre">multipleOf</span></code> keyword.  It may be set to any positive number.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span>       <span class="o">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;multipleOf&quot;</span> <span class="o">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">0</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">10</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">20</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Not a multiple of 10:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="mi">23</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="range">
+<span id="index-3"></span><h2>Range<a class="headerlink" href="#range" title="Permalink to this headline">¶</a></h2>
+<p>Ranges of numbers are specified using a combination of the
+<code class="docutils literal"><span class="pre">minimum</span></code>, <code class="docutils literal"><span class="pre">maximum</span></code>, <code class="docutils literal"><span class="pre">exclusiveMinimum</span></code> and
+<code class="docutils literal"><span class="pre">exclusiveMaximum</span></code> keywords.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">minimum</span></code> specifies a minimum numeric value.</li>
+<li><code class="docutils literal"><span class="pre">exclusiveMinimum</span></code> is a boolean.  When <code class="docutils literal"><span class="pre">true</span></code>, it indicates that
+the range excludes the minimum value, i.e., <span class="math">\(x &gt;
+\mathrm{min}\)</span>.  When <code class="docutils literal"><span class="pre">false</span></code> (or not included), it indicates that
+the range includes the minimum value, i.e., <span class="math">\(x \ge
+\mathrm{min}\)</span>.</li>
+<li><code class="docutils literal"><span class="pre">maximum</span></code> specifies a maximum numeric value.</li>
+<li><code class="docutils literal"><span class="pre">exclusiveMaximum</span></code> is a boolean.  When <code class="docutils literal"><span class="pre">true</span></code>, it indicates that
+the range excludes the maximum value, i.e., <span class="math">\(x &lt;
+\mathrm{max}\)</span>.  When <code class="docutils literal"><span class="pre">false</span></code> (or not included), it indicates that
+the range includes the maximum value, i.e., <span class="math">\(x \le
+\mathrm{max}\)</span>.</li>
+</ul>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;minimum&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">&quot;maximum&quot;</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+  <span class="s2">&quot;exclusiveMaximum&quot;</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Less than <code class="docutils literal"><span class="pre">minimum</span></code>:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment"><code class="docutils literal"><span class="pre">exclusiveMinimum</span></code> was not specified, so 0 is included:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">0</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">10</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">99</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment"><code class="docutils literal"><span class="pre">exclusiveMaximum</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, so 100 is not included:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="mi">100</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Greater than <code class="docutils literal"><span class="pre">maximum</span></code>:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="mi">101</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2014, Michael Droettboom, Space Telescope Science Institute.<br/>
+      Last updated on Mar 26, 2015.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

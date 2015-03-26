@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>object &mdash; Understanding JSON Schema 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Understanding JSON Schema 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Type-specific keywords" href="type.html" />
+    <link rel="next" title="array" href="array.html" />
+    <link rel="prev" title="Numeric types" href="numeric.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+  
+  <a href="https://github.com/spacetelescope/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="numeric.html" title="Previous Chapter: Numeric types"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Numeric types</span>
+    </a>
+  </li>
+  <li>
+    <a href="array.html" title="Next Chapter: array"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">array &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="object">
+<span id="index-0"></span><span id="id1"></span><h1>object<a class="headerlink" href="#object" title="Permalink to this headline">¶</a></h1>
+<p>Objects are the mapping type in JSON.  They map &#8220;keys&#8221; to &#8220;values&#8221;.
+In JSON, the &#8220;keys&#8221; must always be strings.  Each of these pairs is
+conventionally referred to as a &#8220;property&#8221;.</p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Language-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#2afe20781b90_Python">Python</a></li>
+<li><a data-toggle="tab" href="#2afe20781b90_Ruby">Ruby</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="2afe20781b90_Python">
+<p>In Python, &#8220;objects&#8221; are analogous to the <code class="docutils literal"><span class="pre">dict</span></code> type.  An
+important difference, however, is that while Python dictionaries
+may use anything hashable as a key, in JSON all the keys
+must be strings.</p>
+<p>Try not to be confused by the two uses of the word &#8220;object&#8221; here:
+Python uses the word <code class="docutils literal"><span class="pre">object</span></code> to mean the generic base class for
+everything, whereas in JSON it is used only to mean a mapping from
+string keys to values.</p>
+</div>
+<div class="tab-pane section" id="2afe20781b90_Ruby">
+<p>In Ruby, &#8220;objects&#8221; are analogous to the <code class="docutils literal"><span class="pre">Hash</span></code> type. An important
+difference, however, is that all keys in JSON must be strings, and therefore
+any non-string keys are converted over to their string representation.</p>
+<p>Try not to be confused by the two uses of the word &#8220;object&#8221; here:
+Ruby uses the word <code class="docutils literal"><span class="pre">Object</span></code> to mean the generic base class for
+everything, whereas in JSON it is used only to mean a mapping from
+string keys to values.</p>
+</div>
+</div>
+</div><div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+   <span class="s2">&quot;key&quot;</span>         <span class="o">:</span> <span class="s2">&quot;value&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;another_key&quot;</span> <span class="o">:</span> <span class="s2">&quot;another_value&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;Sun&quot;</span>     <span class="o">:</span> <span class="mf">1.9891e30</span><span class="p">,</span>
+    <span class="s2">&quot;Jupiter&quot;</span> <span class="o">:</span> <span class="mf">1.8986e27</span><span class="p">,</span>
+    <span class="s2">&quot;Saturn&quot;</span>  <span class="o">:</span> <span class="mf">5.6846e26</span><span class="p">,</span>
+    <span class="s2">&quot;Neptune&quot;</span> <span class="o">:</span> <span class="mf">10.243e25</span><span class="p">,</span>
+    <span class="s2">&quot;Uranus&quot;</span>  <span class="o">:</span> <span class="mf">8.6810e25</span><span class="p">,</span>
+    <span class="s2">&quot;Earth&quot;</span>   <span class="o">:</span> <span class="mf">5.9736e24</span><span class="p">,</span>
+    <span class="s2">&quot;Venus&quot;</span>   <span class="o">:</span> <span class="mf">4.8685e24</span><span class="p">,</span>
+    <span class="s2">&quot;Mars&quot;</span>    <span class="o">:</span> <span class="mf">6.4185e23</span><span class="p">,</span>
+    <span class="s2">&quot;Mercury&quot;</span> <span class="o">:</span> <span class="mf">3.3022e23</span><span class="p">,</span>
+    <span class="s2">&quot;Moon&quot;</span>    <span class="o">:</span> <span class="mf">7.349e22</span><span class="p">,</span>
+    <span class="s2">&quot;Pluto&quot;</span>   <span class="o">:</span> <span class="mf">1.25e22</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Using non-strings as keys is invalid JSON:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+    <span class="mf">0.01</span> <span class="o">:</span> <span class="s2">&quot;cm&quot;</span>
+    <span class="mi">1</span>    <span class="o">:</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span>
+    <span class="mi">1000</span> <span class="o">:</span> <span class="s2">&quot;km&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;Not an object&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="s2">&quot;An&quot;</span><span class="p">,</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span> <span class="s2">&quot;not&quot;</span><span class="p">,</span> <span class="s2">&quot;an&quot;</span><span class="p">,</span> <span class="s2">&quot;object&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="properties">
+<span id="index-1"></span><h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>The properties (key-value pairs) on an object are defined using the
+<code class="docutils literal"><span class="pre">properties</span></code> keyword.  The value of <code class="docutils literal"><span class="pre">properties</span></code> is an object,
+where each key is the name of a property and each value is a JSON
+schema used to validate that property.</p>
+<p>For example, let&#8217;s say we want to define a simple schema for an
+address made up of a number, street name and street type:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;number&quot;</span><span class="o">:</span>      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Street&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;Boulevard&quot;</span><span class="p">]</span>
+                   <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">If we provide the number in the wrong type, it is invalid:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="s2">&quot;1600&quot;</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">By default, leaving out properties is valid.  See
+<a class="reference internal" href="#required"><span>Required Properties</span></a>.</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">By extension, even an empty object is valid:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">By default, providing additional properties is valid:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;direction&quot;</span><span class="o">:</span> <span class="s2">&quot;NW&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">additionalProperties</span></code> keyword is used to control the handling
+of extra stuff, that is, properties whose names are not listed in the
+<code class="docutils literal"><span class="pre">properties</span></code> keyword.  By default any additional properties are
+allowed.</p>
+<p>The <code class="docutils literal"><span class="pre">additionalProperties</span></code> keyword may be either a boolean or an
+object.  If <code class="docutils literal"><span class="pre">additionalProperties</span></code> is a boolean and set to <code class="docutils literal"><span class="pre">false</span></code>, no
+additional properties will be allowed.</p>
+<p>Reusing the example above, but this time setting
+<code class="docutils literal"><span class="pre">additionalProperties</span></code> to <code class="docutils literal"><span class="pre">false</span></code>.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;number&quot;</span><span class="o">:</span>      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Street&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;Boulevard&quot;</span><span class="p">]</span>
+                   <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;additionalProperties&quot;</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Since <code class="docutils literal"><span class="pre">additionalProperties</span></code> is <code class="docutils literal"><span class="pre">false</span></code>, this extra
+property &#8220;direction&#8221; makes the object invalid:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;direction&quot;</span><span class="o">:</span> <span class="s2">&quot;NW&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">additionalProperties</span></code> is an object, that object is a schema that will
+be used to validate any additional properties not listed in <code class="docutils literal"><span class="pre">properties</span></code>.</p>
+<p>For example, one can allow additional properties, but only if they are
+each a string:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;number&quot;</span><span class="o">:</span>      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Street&quot;</span><span class="p">,</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span> <span class="s2">&quot;Boulevard&quot;</span><span class="p">]</span>
+                   <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;additionalProperties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This is valid, since the additional property&#8217;s value is a string:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;direction&quot;</span><span class="o">:</span> <span class="s2">&quot;NW&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This is invalid, since the additional property&#8217;s value is not a
+string:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;number&quot;</span><span class="o">:</span> <span class="mi">1600</span><span class="p">,</span> <span class="s2">&quot;street_name&quot;</span><span class="o">:</span> <span class="s2">&quot;Pennsylvania&quot;</span><span class="p">,</span> <span class="s2">&quot;street_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Avenue&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;office_number&quot;</span><span class="o">:</span> <span class="mi">201</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="required-properties">
+<span id="required"></span><span id="index-2"></span><h2>Required Properties<a class="headerlink" href="#required-properties" title="Permalink to this headline">¶</a></h2>
+<p>By default, the properties defined by the <code class="docutils literal"><span class="pre">properties</span></code> keyword are
+not required.  However, one can provide a list of required properties
+using the <code class="docutils literal"><span class="pre">required</span></code> keyword.</p>
+<p>The <code class="docutils literal"><span class="pre">required</span></code> keyword takes an array of one or more strings.  Each
+of these strings must be unique.</p>
+<p>In the following example schema defining a user record, we require
+that each user has a name and e-mail address, but we don&#8217;t mind if
+they don&#8217;t provide their address or telephone number:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span>      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;email&quot;</span><span class="o">:</span>     <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;address&quot;</span><span class="o">:</span>   <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;telephone&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;William Shakespeare&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;bill@stratford-upon-avon.co.uk&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Providing extra properties is fine, even properties not defined
+in the schema:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;William Shakespeare&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;bill@stratford-upon-avon.co.uk&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="s2">&quot;Henley Street, Stratford-upon-Avon, Warwickshire, England&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authorship&quot;</span><span class="o">:</span> <span class="s2">&quot;in question&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Missing the required &#8220;email&#8221; property makes the JSON document
+invalid:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;William Shakespeare&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="s2">&quot;Henley Street, Stratford-upon-Avon, Warwickshire, England&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="size">
+<span id="index-3"></span><h2>Size<a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h2>
+<p>The number of properties on an object can be restricted using the
+<code class="docutils literal"><span class="pre">minProperties</span></code> and <code class="docutils literal"><span class="pre">maxProperties</span></code> keywords.  Each of these
+must be a non-negative integer.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;minProperties&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;maxProperties&quot;</span><span class="o">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="o">:</span> <span class="mi">3</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dependencies">
+<span id="index-4"></span><h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is an advanced feature of JSON Schema.  Windy road ahead.</p>
+</div>
+<p>The <code class="docutils literal"><span class="pre">dependencies</span></code> keyword allows the schema of the object to change
+based on the presence of certain special properties.</p>
+<p>There are two forms of dependencies in JSON Schema:</p>
+<ul class="simple">
+<li><strong>Property dependencies</strong> declare that certain other properties must
+be present if a given property is present.</li>
+<li><strong>Schema dependencies</strong> declare that the schema changes when a
+given property is present.</li>
+</ul>
+<div class="section" id="property-dependencies">
+<h3>Property dependencies<a class="headerlink" href="#property-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s start with the simpler case of property dependencies.  For
+example, suppose we have a schema representing a customer.  If you
+have their credit card number, you also want to ensure you have a
+billing address.  If you don&#8217;t have their credit card number, a
+billing address would not be required.  We represent this dependency
+of one property on another using the <code class="docutils literal"><span class="pre">dependencies</span></code> keyword. The
+value of the <code class="docutils literal"><span class="pre">dependencies</span></code> keyword is an object.  Each entry in the
+object maps from the name of a property, <em>p</em>, to an array of strings
+listing properties that are required whenever <em>p</em> is present.</p>
+<p>In the following example, whenever a <code class="docutils literal"><span class="pre">credit_card</span></code> property is
+provided, a <code class="docutils literal"><span class="pre">billing_address</span></code> property must also be present:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+
+  <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;billing_address&quot;</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mi">5555555555555555</span><span class="p">,</span>
+  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This instance has a <code class="docutils literal"><span class="pre">credit_card</span></code>, but it&#8217;s missing a
+<code class="docutils literal"><span class="pre">billing_address</span></code>.</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mi">5555555555555555</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This is okay, since we have neither a <code class="docutils literal"><span class="pre">credit_card</span></code>, or a
+<code class="docutils literal"><span class="pre">billing_address</span></code>.</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Note that dependencies are not bidirectional.  It&#8217;s okay to have
+a billing address without a credit card number.</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To fix the last issue above (that dependencies are not bidirectional),
+you can, of course, define the bidirectional dependencies explicitly:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+
+  <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;billing_address&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;credit_card&quot;</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This instance has a <code class="docutils literal"><span class="pre">credit_card</span></code>, but it&#8217;s missing a
+<code class="docutils literal"><span class="pre">billing_address</span></code>.</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mi">5555555555555555</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This has a <code class="docutils literal"><span class="pre">billing_address</span></code>, but is missing a
+<code class="docutils literal"><span class="pre">credit_card</span></code>.</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="schema-dependencies">
+<h3>Schema dependencies<a class="headerlink" href="#schema-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Schema dependencies work like property dependencies, but instead of
+just specifying other required properties, they can extend the schema
+to have other constraints.</p>
+<p>For example, here is another way to write the above:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+
+  <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;billing_address&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mi">5555555555555555</span><span class="p">,</span>
+  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This instance has a <code class="docutils literal"><span class="pre">credit_card</span></code>, but it&#8217;s missing a
+<code class="docutils literal"><span class="pre">billing_address</span></code>:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mi">5555555555555555</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This has a <code class="docutils literal"><span class="pre">billing_address</span></code>, but is missing a
+<code class="docutils literal"><span class="pre">credit_card</span></code>.  This passes, because here <code class="docutils literal"><span class="pre">billing_address</span></code>
+just looks like an additional property:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pattern-properties">
+<span id="patternproperties"></span><span id="index-5"></span><h2>Pattern Properties<a class="headerlink" href="#pattern-properties" title="Permalink to this headline">¶</a></h2>
+<p>As we saw above, <code class="docutils literal"><span class="pre">additionalProperties</span></code> can restrict the object so
+that it either has no additional properties that weren&#8217;t explicitly
+listed, or it can specify a schema for any additional properties on
+the object.  Sometimes that isn&#8217;t enough, and you may want to restrict
+the names of the extra properties, or you may want to say that, given
+a particular kind of name, the value should match a particular schema.
+That&#8217;s where <code class="docutils literal"><span class="pre">patternProperties</span></code> comes in: it is a new keyword that
+maps from regular expressions to schemas.  If an additional property
+matches a given regular expression, it must also validate against the
+corresponding schema.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When defining the regular expressions, it&#8217;s important to note that
+the expression may match anywhere within the property name.  For
+example, the regular expression <code class="docutils literal"><span class="pre">&quot;p&quot;</span></code> will match any property
+name with a <code class="docutils literal"><span class="pre">p</span></code> in it, such as <code class="docutils literal"><span class="pre">&quot;apple&quot;</span></code>, not just a property
+whose name is simply <code class="docutils literal"><span class="pre">&quot;p&quot;</span></code>.  It&#8217;s therefore usually less
+confusing to surround the regular expression in <code class="docutils literal"><span class="pre">^...$</span></code>, for
+example, <code class="docutils literal"><span class="pre">&quot;^p$&quot;</span></code>.</p>
+</div>
+<p>In this example, any additional properties whose names start with the
+prefix <code class="docutils literal"><span class="pre">S_</span></code> must be strings, and any with the prefix <code class="docutils literal"><span class="pre">I_</span></code> must be
+integers.  Any properties explicitly defined in the <code class="docutils literal"><span class="pre">properties</span></code>
+keyword are also accepted, and any additional properties that do not
+match either regular expression are forbidden.</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;patternProperties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;^S_&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;^I_&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;S_25&quot;</span><span class="o">:</span> <span class="s2">&quot;This is a string&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;I_0&quot;</span><span class="o">:</span> <span class="mi">42</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">If the name starts with <code class="docutils literal"><span class="pre">S_</span></code>, it must be a string</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;S_0&quot;</span><span class="o">:</span> <span class="mi">42</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">If the name starts with <code class="docutils literal"><span class="pre">I_</span></code>, it must be an integer</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;I_42&quot;</span><span class="o">:</span> <span class="s2">&quot;This is a string&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This is a key that doesn&#8217;t match any of the regular
+expressions:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;keyword&quot;</span><span class="o">:</span> <span class="s2">&quot;value&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">patternProperties</span></code> can be used in conjunction with
+<code class="docutils literal"><span class="pre">additionalProperties</span></code>.  In that case, <code class="docutils literal"><span class="pre">additionalProperties</span></code> will
+refer to any properties that are not explicitly listed in
+<code class="docutils literal"><span class="pre">properties</span></code> and don&#8217;t match any of the <code class="docutils literal"><span class="pre">patternProperties</span></code>.  In
+the following example, based on above, we add a <code class="docutils literal"><span class="pre">&quot;builtin&quot;</span></code>
+property, which must be a number, and declare that all additional
+properties (that are neither built-in or matched by
+<code class="docutils literal"><span class="pre">patternProperties</span></code>) must be strings:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;builtin&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;patternProperties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;^S_&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;^I_&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;additionalProperties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;builtin&quot;</span><span class="o">:</span> <span class="mi">42</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This is a key that doesn&#8217;t match any of the regular
+expressions:</p>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;keyword&quot;</span><span class="o">:</span> <span class="s2">&quot;value&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">It must be a string:</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;keyword&quot;</span><span class="o">:</span> <span class="mi">42</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2014, Michael Droettboom, Space Telescope Science Institute.<br/>
+      Last updated on Mar 26, 2015.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

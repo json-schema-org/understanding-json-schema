@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Regular Expressions &mdash; Understanding JSON Schema 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Understanding JSON Schema 1.0 documentation" href="../index.html" />
+    <link rel="up" title="JSON Schema Reference" href="index.html" />
+    <link rel="next" title="Structuring a complex schema" href="../structuring.html" />
+    <link rel="prev" title="The $schema keyword" href="schema.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+  
+  <a href="https://github.com/spacetelescope/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="schema.html" title="Previous Chapter: The $schema keyword"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; The $schema keyw...</span>
+    </a>
+  </li>
+  <li>
+    <a href="../structuring.html" title="Next Chapter: Structuring a complex schema"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Structuring a co... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="regular-expressions">
+<span id="index-0"></span><span id="id1"></span><h1>Regular Expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="string.html#pattern"><span>pattern</span></a> and <a class="reference internal" href="object.html#patternproperties"><span>Pattern Properties</span></a> keywords use
+regular expressions to express constraints.  The regular expression
+syntax used is from JavaScript (<a class="reference external" href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">ECMA 262</a>,
+specifically). However, that complete syntax is not widely supported,
+therefore it is recommended that you stick to the subset of that
+syntax described below.</p>
+<ul class="simple">
+<li>A single unicode character (other than the special characters
+below) matches itself.</li>
+<li><code class="docutils literal"><span class="pre">^</span></code>: Matches only at the beginning of the string.</li>
+<li><code class="docutils literal"><span class="pre">$</span></code>: Matches only at the end of the string.</li>
+<li><code class="docutils literal"><span class="pre">(...)</span></code>: Group a series of regular expressions into a single
+regular expression.</li>
+<li><code class="docutils literal"><span class="pre">|</span></code>: Matches either the regular expression preceding or following
+the <code class="docutils literal"><span class="pre">|</span></code> symbol.</li>
+<li><code class="docutils literal"><span class="pre">[abc]</span></code>: Matches any of the characters inside the square brackets.</li>
+<li><code class="docutils literal"><span class="pre">[a-z]</span></code>: Matches the range of characters.</li>
+<li><code class="docutils literal"><span class="pre">[^abc]</span></code>: Matches any character <em>not</em> listed.</li>
+<li><code class="docutils literal"><span class="pre">[^a-z]</span></code>: Matches any character outside of the range.</li>
+<li><code class="docutils literal"><span class="pre">+</span></code>: Matches one or more repetitions of the preceding regular
+expression.</li>
+<li><code class="docutils literal"><span class="pre">*</span></code>: Matches zero or more repetitions of the preceding regular
+expression.</li>
+<li><code class="docutils literal"><span class="pre">?</span></code>: Matches zero or one repetitions of the preceding regular
+expression.</li>
+<li><code class="docutils literal"><span class="pre">+?</span></code>, <code class="docutils literal"><span class="pre">*?</span></code>, <code class="docutils literal"><span class="pre">??</span></code>: The <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">+</span></code>, and <code class="docutils literal"><span class="pre">?</span></code> qualifiers are
+all greedy; they match as much text as possible. Sometimes this
+behavior isn&#8217;t desired and you want to match as few characters as
+possible.</li>
+<li><code class="docutils literal"><span class="pre">{x}</span></code>: Match exactly <code class="docutils literal"><span class="pre">x</span></code> occurrences of the preceding regular
+expression.</li>
+<li><code class="docutils literal"><span class="pre">{x,y}</span></code>: Match at least <code class="docutils literal"><span class="pre">x</span></code> and at most <code class="docutils literal"><span class="pre">y</span></code> occurrences of
+the preceding regular expression.</li>
+<li><code class="docutils literal"><span class="pre">{x,}</span></code>: Match <code class="docutils literal"><span class="pre">x</span></code> occurrences or more of the preceding regular
+expression.</li>
+<li><code class="docutils literal"><span class="pre">{x}?</span></code>, <code class="docutils literal"><span class="pre">{x,y}?</span></code>, <code class="docutils literal"><span class="pre">{x,}?</span></code>: Lazy versions of the above
+expressions.</li>
+</ul>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Language-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#2afe20662e50_Python">Python</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="2afe20662e50_Python">
+This subset of JavaScript regular expressions is compatible with
+Python regular expressions.  Pay close attention to what is
+missing, however.  Notably, it is not recommended to use <code class="docutils literal"><span class="pre">.</span></code> to
+match any character.</div>
+</div>
+</div><div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>The following example matches a simple North American telephone number
+with an optional area code:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+   <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;555-1212&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;(888)555-1212&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;(888)555-1212 ext. 532&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;(800)FLOWERS&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2014, Michael Droettboom, Space Telescope Science Institute.<br/>
+      Last updated on Mar 26, 2015.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

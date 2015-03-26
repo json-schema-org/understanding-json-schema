@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Type-specific keywords &mdash; Understanding JSON Schema 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.2.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Understanding JSON Schema 1.0 documentation" href="../index.html" />
+    <link rel="up" title="JSON Schema Reference" href="index.html" />
+    <link rel="next" title="string" href="string.html" />
+    <link rel="prev" title="JSON Schema Reference" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+  
+  <a href="https://github.com/spacetelescope/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: JSON Schema Reference"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; JSON Schema Refe...</span>
+    </a>
+  </li>
+  <li>
+    <a href="string.html" title="Next Chapter: string"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">string &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="type-specific-keywords">
+<span id="type"></span><span id="index-0"></span><h1>Type-specific keywords<a class="headerlink" href="#type-specific-keywords" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">type</span></code> keyword is fundamental to JSON Schema.  It specifies the
+data type for a schema.</p>
+<p>At its core, JSON Schema defines the following basic types:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="string.html">string</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numeric.html">Numeric types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object.html">object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="array.html">array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">boolean</a></li>
+<li class="toctree-l1"><a class="reference internal" href="null.html">null</a></li>
+</ul>
+</div>
+<p>These types have analogs in most programming languages, though they
+may go by different names.</p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Language-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#2afe203261d0_Python">Python</a></li>
+<li><a data-toggle="tab" href="#2afe203261d0_Ruby">Ruby</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="2afe203261d0_Python">
+<p>The following table maps from the names of JavaScript types to
+their analogous types in Python:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>JavaScript</td>
+<td>Python</td>
+</tr>
+<tr class="row-even"><td>string</td>
+<td>string
+<a class="footnote-reference" href="#id3" id="id1">[4]</a></td>
+</tr>
+<tr class="row-odd"><td>number</td>
+<td>int/float
+<a class="footnote-reference" href="#id4" id="id2">[5]</a></td>
+</tr>
+<tr class="row-even"><td>object</td>
+<td>dict</td>
+</tr>
+<tr class="row-odd"><td>array</td>
+<td>list</td>
+</tr>
+<tr class="row-even"><td>boolean</td>
+<td>bool</td>
+</tr>
+<tr class="row-odd"><td>null</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[4]</a></td><td>Since JavaScript strings always support unicode, they are
+analogous to <code class="docutils literal"><span class="pre">unicode</span></code> on Python 2.x and <code class="docutils literal"><span class="pre">str</span></code> on
+Python 3.x.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[5]</a></td><td>JavaScript does not have separate types for integer and
+floating-point.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="tab-pane section" id="2afe203261d0_Ruby">
+<p>The following table maps from the names of JavaScript types to
+their analogous types in Ruby:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>JavaScript</td>
+<td>Ruby</td>
+</tr>
+<tr class="row-even"><td>string</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>number</td>
+<td>Integer/Float
+<a class="footnote-reference" href="#id6" id="id5">[6]</a></td>
+</tr>
+<tr class="row-even"><td>object</td>
+<td>Hash</td>
+</tr>
+<tr class="row-odd"><td>array</td>
+<td>Array</td>
+</tr>
+<tr class="row-even"><td>boolean</td>
+<td>TrueClass/FalseClass</td>
+</tr>
+<tr class="row-odd"><td>null</td>
+<td>NilClass</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[6]</a></td><td>JavaScript does not have separate types for integer and
+floating-point.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><p>The <code class="docutils literal"><span class="pre">type</span></code> keyword may either be a string or an array:</p>
+<ul class="simple">
+<li>If it&#8217;s a string, it is the name of one of the basic types above.</li>
+<li>If it is an array, it must be an array of strings, where each string
+is the name of one of the basic types, and each element is unique.
+In this case, the JSON snippet is valid if it matches <em>any</em> of the
+given types.</li>
+</ul>
+<p>Here is a simple example of using the <code class="docutils literal"><span class="pre">type</span></code> keyword:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">42</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mf">42.0</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This is not a number, it is a string containing a number.</p>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;42&quot;</span>
+</pre></div>
+</div>
+<p>In the following example, we accept strings and numbers, but not
+structured data types:</p>
+<div class="jsonschema highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="mi">42</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;Life, the universe, and everything&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript"><div class="highlight"><pre><span class="p">[</span><span class="s2">&quot;Life&quot;</span><span class="p">,</span> <span class="s2">&quot;the universe&quot;</span><span class="p">,</span> <span class="s2">&quot;and everything&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For each of these types, there are keywords that only apply to those
+types.  For example, numeric types have a way of specifying a numeric
+range, that would not be applicable to other types.  In this
+reference, these validation keywords are described along with each of
+their corresponding types in the following chapters.</p>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2014, Michael Droettboom, Space Telescope Science Institute.<br/>
+      Last updated on Mar 26, 2015.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
