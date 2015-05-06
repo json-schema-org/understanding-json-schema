@@ -69,6 +69,11 @@ validator---just yet.
    There is also a `print version of this document
    <http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf>`__.
 
+.. toctree::
+   :maxdepth: 1
+
+   credits.rst
+
 .. only:: html
 
     * :ref:`genindex`
