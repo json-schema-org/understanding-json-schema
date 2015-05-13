@@ -139,6 +139,36 @@ schema for a customer:
       }
     }
 
+.. _id:
+
+The id property
+---------------
+
+The ``id`` property serves two purposes:
+
+- It declares a unique identifier for the schema.
+
+- It declares a base URL against which ``$ref`` URLs are resolved.
+
+It is best practice that ``id`` is a URL, preferably in a domain that
+you control.  For example, if you own the ``foo.bar`` domain, and you
+had a schema for addresses, you may set its ``id`` as follows::
+
+  "id": "http://foo.bar/schemas/address.json"
+
+This provides a unique identifier for the schema, as well as, in most
+cases, indicating where it may be downloaded.
+
+But be aware of the second purpose of the ``id`` property: that it
+declares a base URL for relative ``$ref`` URLs elsewhere in the file.
+For example, if you had::
+
+  { "$ref": "person.json" }
+
+in the same file, a JSON schema validation library would fetch
+``person.json`` from ``http://foo.bar/schemas/person.json``, even in
+``address.json`` was loaded from the local filesystem.
+
 Extending
 ---------
 

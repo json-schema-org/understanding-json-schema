@@ -73,3 +73,14 @@ It's generally good practice to include it, though it is not required.
 You can also use this keyword to declare which version of the JSON
 Schema specification that the schema is written to.  See `schema` for
 more information.
+
+Declaring a unique identifier
+-----------------------------
+
+It is also best practice to include an ``id`` property as a unique
+identifier for each schema.  For now, just set it to a URL at a domain
+you control, for example::
+
+   { "id": "http://yourdomain.com/schemas/myschema.json" }
+
+The details of `id` become more apparent when you start `structuring`.
