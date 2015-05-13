@@ -469,7 +469,8 @@ match either regular expression are forbidden.
       "patternProperties": {
         "^S_": { "type": "string" },
         "^I_": { "type": "integer" }
-      }
+      },
+      "additionalProperties": false
     }
     --
     { "S_25": "This is a string" }
@@ -481,7 +482,7 @@ match either regular expression are forbidden.
     --X
     // If the name starts with ``I_``, it must be an integer
     { "I_42": "This is a string" }
-    --
+    --X
     // This is a key that doesn't match any of the regular
     // expressions:
     { "keyword": "value" }
