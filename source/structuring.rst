@@ -166,7 +166,7 @@ For example, if you had::
   { "$ref": "person.json" }
 
 in the same file, a JSON schema validation library would fetch
-``person.json`` from ``http://foo.bar/schemas/person.json``, even in
+``person.json`` from ``http://foo.bar/schemas/person.json``, even if
 ``address.json`` was loaded from the local filesystem.
 
 Extending
