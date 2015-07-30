@@ -90,6 +90,89 @@ a string and a number at the same time):
     --X
     -1
 
+It is important to note that the schemas listed in an `allOf`, `anyOf`
+or `oneOf` array know nothing of one another.  While it might be
+surprising, `allOf` can not be used to "extend" a schema to add more
+details to it in the sense of object-oriented inheritance.  For
+example, say you had a schema for an address in a ``definitions``
+section, and want to extend it to include an address type:
+
+.. schema_example::
+   {
+     "definitions": {
+       "address": {
+         "type": "object",
+         "properties": {
+           "street_address": { "type": "string" },
+           "city":           { "type": "string" },
+           "state":          { "type": "string" }
+         },
+         "required": ["street_address", "city", "state"]
+       }
+     },
+
+     "allOf": [
+       { "$ref": "#/definitions/address" },
+       { "properties": {
+           "type": { "enum": [ "residential", "business" ] }
+         }
+       }
+     ]
+   }
+   --
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business"
+   }
+
+This works, but what if we wanted to restrict the schema so no
+additional properties are allowed?  One might try adding the
+highlighted line below:
+
+.. schema_example::
+   {
+     "definitions": {
+       "address": {
+         "type": "object",
+         "properties": {
+           "street_address": { "type": "string" },
+           "city":           { "type": "string" },
+           "state":          { "type": "string" }
+         },
+         "required": ["street_address", "city", "state"]
+       }
+     },
+
+     "allOf": [
+       { "$ref": "#/definitions/address" },
+       { "properties": {
+           "type": { "enum": [ "residential", "business" ] }
+         }
+       }
+     ],
+
+     *"additionalProperties": false
+   }
+   --X
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business"
+   }
+
+Unfortunately, now the schema will reject *everything*.  This is
+because the `additionalProperties` refers to the entire schema.  And
+that entire schema includes no properties, and knows nothing about the
+properties in the subschemas inside of the `allOf` array.
+
+This shortcoming is perhaps one of the biggest surprises of the
+combining operations in JSON shema: it does not behave like
+inheritance in an object-oriented language.  There are some proposals
+to address this in the next version of the JSON schema specification.
+
 .. index::
    single: anyOf
    single: combining schemas; anyOf

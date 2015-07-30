@@ -2,8 +2,10 @@ import json
 
 from docutils import nodes
 from docutils import statemachine
+from docutils.parsers.rst import directives
 from sphinx.util.compat import Directive
 from sphinx.util.nodes import set_source_info
+from sphinx.util import parselinenos
 
 import jsonschema
 
@@ -25,6 +27,13 @@ def split_content(l):
     comment = []
 
     def add_part():
+        hl_lines = []
+        for i, line in enumerate(part):
+            if line.lstrip().startswith('*'):
+                line = line.replace('*', '', 1)
+                hl_lines.append(i + 1)
+                part[i] = line
+
         content = '\n'.join(part)
         try:
             json_content = json.loads(content)
@@ -38,7 +47,9 @@ def split_content(l):
             'should_pass': should_pass,
             'content': content,
             'json': json_content,
-            'comment': comment}))
+            'comment': comment,
+            'hl_lines': hl_lines}
+        ))
 
     for line in l:
         if line.startswith('//'):
@@ -65,6 +76,7 @@ class SchemaExampleDirective(Directive):
     has_content = True
     validate = True
 
+
     def run(self):
         result = []
 
@@ -72,10 +84,13 @@ class SchemaExampleDirective(Directive):
 
         container = jsonschema_node()
         set_source_info(self, container)
+
         literal = nodes.literal_block(
             schema.content, schema.content)
         literal['language'] = 'javascript'
         literal['classes'] = container['classes'] = ['jsonschema']
+        if schema.hl_lines:
+            literal['highlight_args'] = {'hl_lines': schema.hl_lines}
         set_source_info(self, literal)
         container.append(literal)
         result.append(container)
@@ -123,6 +138,8 @@ class SchemaExampleDirective(Directive):
                 literal['classes'] = container['classes'] = ['jsonschema-pass']
             else:
                 literal['classes'] = container['classes'] = ['jsonschema-fail']
+            if part.hl_lines:
+                literal['highlight_args'] = {'hl_lines': part.hl_lines}
             set_source_info(self, literal)
             container.append(literal)
             result.append(container)

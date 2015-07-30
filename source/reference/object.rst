@@ -72,6 +72,8 @@ conventionally referred to as a "property".
    single: properties
    single: additionalProperties
 
+.. _additionalProperties:
+
 Properties
 ''''''''''
 
@@ -110,7 +112,6 @@ address made up of a number, street name and street type:
     // By default, providing additional properties is valid:
     { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue",
       "direction": "NW" }
-
 
 The ``additionalProperties`` keyword is used to control the handling
 of extra stuff, that is, properties whose names are not listed in the
