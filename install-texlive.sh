@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 # Put the current working directory into the profile file
 sed 's@PWD@'"$PWD"'@' < texlive.profile > texlive.localized.profile
 
