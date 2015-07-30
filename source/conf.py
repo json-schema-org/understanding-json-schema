@@ -12,6 +12,7 @@
 # serve to show the default.
 
 import sys, os
+import datetime
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -44,7 +45,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Understanding JSON Schema'
-copyright = u'2013-2014, Michael Droettboom, Space Telescope Science Institute'
+copyright = u'2013-{0}, Michael Droettboom, Space Telescope Science Institute'.format(
+    datetime.datetime.now().year)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -286,7 +288,8 @@ texinfo_documents = [
 epub_title = u'Understanding JSON Schema'
 epub_author = u'Michael Droettboom'
 epub_publisher = u'Space Telescope Science Institute'
-epub_copyright = u'2013-2014, Space Telescope Science Institute'
+epub_copyright = u'2013-{0}, Space Telescope Science Institute'.format(
+    datetime.datetime.now().year)
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
