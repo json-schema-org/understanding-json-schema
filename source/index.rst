@@ -56,7 +56,7 @@ validator---just yet.
     Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
    conventions.rst
    about.rst
