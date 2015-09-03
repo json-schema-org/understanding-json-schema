@@ -169,7 +169,7 @@ that entire schema includes no properties, and knows nothing about the
 properties in the subschemas inside of the `allOf` array.
 
 This shortcoming is perhaps one of the biggest surprises of the
-combining operations in JSON shema: it does not behave like
+combining operations in JSON schema: it does not behave like
 inheritance in an object-oriented language.  There are some proposals
 to address this in the next version of the JSON schema specification.
 
