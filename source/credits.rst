@@ -13,4 +13,5 @@ Michael Droettboom wishes to thank the following contributors:
 - David Worth
 - forevermatt
 - goldaxe
+- Jesse Claven
 - Vincent Jacques
