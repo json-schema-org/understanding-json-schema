@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Cabin);
+@import url(https://fonts.googleapis.com/css?family=Overlock:900);
 @import url(http://fonts.googleapis.com/css?family=Inconsolata);
 
 div.admonition {
@@ -19,21 +19,20 @@ div.jsonschema-fail {
 
 div.jsonschema .highlight {
     background-color: #f5f5f5;
-    background-image: url(schema.png);
     background-repeat: no-repeat;
     background-position: right center;
 }
 
 div.jsonschema-pass .highlight {
     background-color: #eeffcc;
-    background-image: url(pass.png);
+    background-image: url(pass.svg);
     background-repeat: no-repeat;
     background-position: right center;
 }
 
 div.jsonschema-fail .highlight {
     background-color: #ffcccc;
-    background-image: url(fail.png);
+    background-image: url(fail.svg);
     background-repeat: no-repeat;
     background-position: right center;
 }
@@ -64,6 +63,6 @@ code, pre {
 }
 
 .navbar, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "Cabin","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: normal;
+    font-family: "Overlock","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 900;
 }

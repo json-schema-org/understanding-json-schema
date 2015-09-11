@@ -18,7 +18,7 @@ validator---just yet.
 
 .. only:: html
 
-    .. image:: _static/octopus.png
+    .. image:: _static/octopus.svg
         :alt: octopus
         :align: right
 
