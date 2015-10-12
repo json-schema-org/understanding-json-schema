@@ -73,7 +73,7 @@ refer to the above, we would include::
     { "$ref": "#/definitions/address" }
 
 The value of ``$ref`` is a string in a format called `JSON Pointer
-<http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02>`__.
+<https://tools.ietf.org/html/rfc6901>`__.
 
 .. note::
     JSON Pointer aims to serve the same purpose as `XPath
