@@ -35,7 +35,9 @@ At its heart, JSON is built on the following data structures:
 
 - string:
 
-  "This is a string"
+  .. code-block:: text
+
+     "This is a string"
 
 - boolean:
 
