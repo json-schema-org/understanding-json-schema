@@ -29,6 +29,8 @@ The ``integer`` type is used for integral numbers.
     In Python, "integer" is analogous to the ``int`` type.
     --Ruby
     In Ruby, "integer" is analogous to the ``Integer`` type.
+    --PHP
+    In PHP, "integer" is analogous to the ``integer`` type.
 
 .. schema_example::
 
