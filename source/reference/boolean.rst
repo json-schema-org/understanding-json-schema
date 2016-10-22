@@ -18,6 +18,8 @@ such as 1 and 0, are not accepted by the schema.
    --Ruby
    In Ruby, "boolean" is analogous to ``TrueClass`` and ``FalseClass``.  Note
    that in Ruby there is no ``Boolean`` class.
+   --Python
+   In PHP, "boolean" is analogous to ``boolean``.
 
 .. schema_example::
     { "type": "boolean" }
