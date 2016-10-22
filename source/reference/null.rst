@@ -15,6 +15,8 @@ value: ``null``.
    In Python, ``null`` is analogous to ``None``.
    --Ruby
    In Ruby, ``null`` is analogous to ``nil``.
+   --PHP
+   In PHP, ``null`` is analogous to ``null``.
 
 .. schema_example::
     { "type": "null" }
