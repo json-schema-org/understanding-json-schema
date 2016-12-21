@@ -11,6 +11,7 @@ Michael Droettboom wishes to thank the following contributors:
 - Christopher Mark Gore
 - David Branner
 - David Worth
+- Erik Bray
 - forevermatt
 - goldaxe
 - Jesse Claven
