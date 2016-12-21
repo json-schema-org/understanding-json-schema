@@ -9,7 +9,7 @@ notifications:
 
 env:
   global:
-    - secure: "d74wliUUljSp8krWqiilGA8YFVJm3WW/bdyIfQPbSACXZ0xRU02VDNjd3Kl8uiwAZh88GwS4Im+zVs8nxLZjachb0Ot8mSaPzblwDWkJ3emQtEyWHZ+7+AeiHCBtpuEyV9rs44cGD44zfPn85OeGtsNvcmPnbTycMJ4skCnSfs0="
+    - secure: "cIRqDucMef0x4TsiCKpUhNARZY7kVqWwmNEQDXuuXlvo0/sugnJd00XaOs0csf4yR2YukeNTtdCRmReRVdhHDPipP+8AL2/UmHnykFUSi/zO0Bqq8PwrG5jJkHjen4e56RMvOxKt+fcZY3PjKzW+e6oZdqyodj/UxxAlfpqh0rY="
 
 language: python
 
