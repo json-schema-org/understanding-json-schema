@@ -203,5 +203,6 @@ def setup(app):
 
 latex_preamble = r"""
 \usepackage{changepage}
-\usepackage[dvipsnames]{xcolor}
+\usepackage{xcolor}
+\PassOptionsToPackage{dvipsnames}{xcolor}
 """
