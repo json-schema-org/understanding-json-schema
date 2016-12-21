@@ -16,4 +16,4 @@ tlmgr install cmap ec fancybox titlesec framed fancyvrb threeparttable mdwtools 
               wrapfig parskip url multirow inconsolata cabin bbding microtype \
               changepage xcolor mdframed l3kernel l3packages etoolbox needspace \
               pgf times upquote helvetic fontaxes mweights ms float fncychap \
-              tabulary capt-of eqparbox
+              tabulary capt-of eqparbox environ
