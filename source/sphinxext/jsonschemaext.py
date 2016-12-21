@@ -200,8 +200,9 @@ def setup(app):
                  html=(visit_jsonschema_node_html, depart_jsonschema_node_html),
                  latex=(visit_jsonschema_node_latex, depart_jsonschema_node_latex))
 
+passoptionstopackages = r'\PassOptionsToPackage{dvipsnames}{xcolor}'
 
 latex_preamble = r"""
 \usepackage{changepage}
-\usepackage[dvipsnames]{xcolor}
+\usepackage{xcolor}
 """
