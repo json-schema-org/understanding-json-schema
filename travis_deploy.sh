@@ -4,6 +4,7 @@
 set -e
 
 GH_ACCOUNT=spacetelescope
+GH_EMAIL=mdboom@gmail.com
 GH_REPOSITORY=understanding-json-schema
 GH_REMOTE=live
 GH_PAGESBRANCH=gh-pages
