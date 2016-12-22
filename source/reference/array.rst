@@ -17,6 +17,8 @@ array may be of a different type.
    arrays.
    --Ruby
    In Ruby, "array" is analogous to a ``Array`` type.
+   --PHP
+   In PHP, "array" is analogous to a ``Array`` type.
 
 .. schema_example::
     { "type": "array" }

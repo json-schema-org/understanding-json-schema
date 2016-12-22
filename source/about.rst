@@ -113,6 +113,32 @@ may go by different names.
     .. [#3] JavaScript does not have separate types for integer and
             floating-point.
 
+    --PHP
+    The following table maps from the names of JavaScript types to
+    their analogous types in PHP:
+
+    +----------+--------------+
+    |JavaScript|PHP           |
+    +----------+--------------+
+    |string    |String        |
+    +----------+--------------+
+    |number    |Integer/Float |
+    |          |[#4]_         |
+    +----------+--------------+
+    |object    |Object        |
+    +----------+--------------+
+    |array     |Array         |
+    +----------+--------------+
+    |boolean   |Boolean       |
+    +----------+--------------+
+    |null      |NULL          |
+    +----------+--------------+
+
+    .. rubric:: Footnotes
+
+    .. [#4] JavaScript does not have separate types for integer and
+            floating-point.
+
 With these simple data types, all kinds of structured data can be
 represented.  With that great flexibility comes great responsibility,
 however, as the same concept could be represented in myriad ways.  For

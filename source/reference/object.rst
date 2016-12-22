@@ -32,6 +32,9 @@ conventionally referred to as a "property".
    everything, whereas in JSON it is used only to mean a mapping from
    string keys to values.
 
+   --PHP
+   In PHP, "objects" are analogous to the ``object`` type. In both
+   JSON and PHP, all keys in must be strings.
 
 .. schema_example::
     { "type": "object" }

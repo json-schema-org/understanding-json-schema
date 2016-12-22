@@ -15,6 +15,8 @@ Unicode characters.
    2.x, and the ``str`` type on Python 3.x.
    --Ruby
    In Ruby, "string" is analogous to the ``String`` type.
+   --PHP
+   In PHP, "string" is analogous to the ``string`` type.
 
 .. schema_example::
 
