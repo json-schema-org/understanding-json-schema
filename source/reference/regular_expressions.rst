@@ -48,6 +48,8 @@ syntax described below.
   all greedy; they match as much text as possible. Sometimes this
   behavior isn't desired and you want to match as few characters as
   possible.
+  
+- ``(?!x}``, ``(?=x}``: Negative and positive lookahead.
 
 - ``{x}``: Match exactly ``x`` occurrences of the preceding regular
   expression.
