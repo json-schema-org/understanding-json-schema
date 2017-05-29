@@ -135,20 +135,20 @@ The following is the list of formats specified in the JSON Schema
 specification.
 
 - ``"date-time"``: Date representation, as defined by `RFC 3339, section
-  5.6 <http://tools.ietf.org/html/rfc3339>`_.
+  5.6 <http://tools.ietf.org/html/rfc3339#section-5.6>`_.
 
 - ``"email"``: Internet email address, see `RFC 5322,
-  section 3.4.1 <http://tools.ietf.org/html/rfc5322>`_.
+  section 3.4.1 <http://tools.ietf.org/html/rfc5322#section-3.4.1>`_.
 
 - ``"hostname"``: Internet host name, see `RFC 1034, section 3.1
-  <http://tools.ietf.org/html/rfc1034>`_.
+  <http://tools.ietf.org/html/rfc1034#section-3.1>`_.
 
 - ``"ipv4"``: IPv4 address, according to dotted-quad ABNF syntax as
   defined in `RFC 2673, section 3.2
-  <http://tools.ietf.org/html/rfc2673>`_.
+  <http://tools.ietf.org/html/rfc2673#section-3.2>`_.
 
 - ``"ipv6"``: IPv6 address, as defined in `RFC 2373, section 2.2
-  <http://tools.ietf.org/html/rfc2373>`_.
+  <http://tools.ietf.org/html/rfc2373#section-2.2>`_.
 
 - ``"uri"``: A universal resource identifier (URI), according to
   `RFC3986 <http://tools.ietf.org/html/rfc3986>`_.
