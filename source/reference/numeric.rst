@@ -146,44 +146,52 @@ Range
 '''''
 
 Ranges of numbers are specified using a combination of the
-``minimum``, ``maximum``, ``exclusiveMinimum`` and
-``exclusiveMaximum`` keywords.
+``minimum`` and ``maximum`` keywords (or ``exclusiveMinimum`` and
+``exclusiveMaximum`` for expressing exclusive range).
 
-- ``minimum`` specifies a minimum numeric value.
+- ``minimum`` specifies an inclusive lower limit for a numeric instance,
+  i.e., :math:`x \ge\mathrm{min}`.
+  
+- ``exclusiveMinimum`` specifies an exclusive lower limit for a numeric instance,
+  i.e., :math:`x > \mathrm{min}`.  
 
-- ``exclusiveMinimum`` is a boolean.  When ``true``, it indicates that
-  the range excludes the minimum value, i.e., :math:`x >
-  \mathrm{min}`.  When ``false`` (or not included), it indicates that
-  the range includes the minimum value, i.e., :math:`x \ge
-  \mathrm{min}`.
-
-- ``maximum`` specifies a maximum numeric value.
-
-- ``exclusiveMaximum`` is a boolean.  When ``true``, it indicates that
-  the range excludes the maximum value, i.e., :math:`x <
-  \mathrm{max}`.  When ``false`` (or not included), it indicates that
-  the range includes the maximum value, i.e., :math:`x \le
-  \mathrm{max}`.
+- ``maximum`` specifies an inclusive upper limit for a numeric instance,
+  i.e., :math:`x \le\mathrm{max}`.
+  
+- ``exclusiveMaximum`` specifies an exclusive upper limit for a numeric 
+  instance.  , i.e., :math:`x < \mathrm{max}`.
 
 .. schema_example::
     {
       "type": "number",
       "minimum": 0,
-      "maximum": 100,
-      "exclusiveMaximum": true
+      "maximum": 100
     }
     --X
     // Less than ``minimum``:
     -1
     --
-    // ``exclusiveMinimum`` was not specified, so 0 is included:
+    // ``minimum`` is inclusive, so 0 is valid:
     0
     --
     10
     --
     99
     --X
-    // ``exclusiveMaximum`` is ``true``, so 100 is not included:
+    // ``maximum`` is inclusive, so 100 is valid:
+    100
+    --X
+    // Greater than ``maximum``:
+    101
+
+.. schema_example::
+    {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 100
+    }
+    --X
+    // ``exclusiveMaximum`` is exclusive, so 100 is not valid:
     100
     --X
     // Greater than ``maximum``:
