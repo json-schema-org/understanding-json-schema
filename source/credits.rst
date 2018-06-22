@@ -15,4 +15,7 @@ Michael Droettboom wishes to thank the following contributors:
 - forevermatt
 - goldaxe
 - Jesse Claven
+- Koen Rouwhorst
+- Mike Kobit
+- Oliver Kurmis
 - Vincent Jacques
