@@ -11,6 +11,7 @@ The boolean type matches only two special values: ``true`` and
 such as 1 and 0, are not accepted by the schema.
 
 .. language_specific::
+
    --Python
    In Python, "boolean" is analogous to ``bool``.  Note that in JSON,
    ``true`` and ``false`` are lower case, whereas in Python they are
@@ -20,6 +21,7 @@ such as 1 and 0, are not accepted by the schema.
    that in Ruby there is no ``Boolean`` class.
 
 .. schema_example::
+
     { "type": "boolean" }
     --
     true

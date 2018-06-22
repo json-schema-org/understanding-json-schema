@@ -10,6 +10,7 @@ Arrays are used for ordered elements.  In JSON, each element in an
 array may be of a different type.
 
 .. language_specific::
+
    --Python
    In Python, "array" is analogous to a ``list`` or ``tuple`` type,
    depending on usage.  However, the ``json`` module in the Python
@@ -19,6 +20,7 @@ array may be of a different type.
    In Ruby, "array" is analogous to a ``Array`` type.
 
 .. schema_example::
+
     { "type": "array" }
     --
     [1, 2, 3, 4, 5]
@@ -73,6 +75,7 @@ In the following example, we define that each item in an array is a
 number:
 
 .. schema_example::
+
    {
      "type": "array",
      "items": {
@@ -218,6 +221,7 @@ non-negative number.  These keywords work whether doing
 `list-validation` or `tuple-validation`.
 
 .. schema_example::
+
    {
      "type": "array",
      "minItems": 2,
@@ -246,6 +250,7 @@ A schema can ensure that each of the items in an array is unique.
 Simply set the ``uniqueItems`` keyword to ``true``.
 
 .. schema_example::
+
    {
      "type": "array",
      "uniqueItems": true

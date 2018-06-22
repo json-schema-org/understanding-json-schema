@@ -37,6 +37,7 @@ These types have analogs in most programming languages, though they
 may go by different names.
 
 .. language_specific::
+
     --Python
     The following table maps from the names of JavaScript types to
     their analogous types in Python:
@@ -107,6 +108,7 @@ The ``type`` keyword may either be a string or an array:
 Here is a simple example of using the ``type`` keyword:
 
 .. schema_example::
+
    { "type": "number" }
    --
    42
@@ -120,6 +122,7 @@ In the following example, we accept strings and numbers, but not
 structured data types:
 
 .. schema_example::
+
    { "type": ["number", "string"] }
    --
    42

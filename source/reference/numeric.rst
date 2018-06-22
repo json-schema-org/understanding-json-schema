@@ -25,6 +25,7 @@ integer
 The ``integer`` type is used for integral numbers.
 
 .. language_specific::
+
     --Python
     In Python, "integer" is analogous to the ``int`` type.
     --Ruby
@@ -86,6 +87,7 @@ The ``number`` type is used for any numeric type, either integers or
 floating point numbers.
 
 .. language_specific::
+
     --Python
     In Python, "number" is analogous to the ``float`` type.
     --Ruby
@@ -121,6 +123,7 @@ Numbers can be restricted to a multiple of a given number, using the
 ``multipleOf`` keyword.  It may be set to any positive number.
 
 .. schema_example::
+
     {
         "type"       : "number",
         "multipleOf" : 10
@@ -166,6 +169,7 @@ Ranges of numbers are specified using a combination of the
   \mathrm{max}`.
 
 .. schema_example::
+
     {
       "type": "number",
       "minimum": 0,

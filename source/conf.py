@@ -19,6 +19,9 @@ import datetime
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath(os.path.dirname('__file__')))
 
+# The standard of JSON Schema to test the examples against
+jsonschema_standard = 4
+
 # -- General configuration -----------------------------------------------------
 
 import sphinx_bootstrap_theme
