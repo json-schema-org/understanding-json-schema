@@ -20,7 +20,7 @@ import datetime
 sys.path.insert(0, os.path.abspath(os.path.dirname('__file__')))
 
 # The standard of JSON Schema to test the examples against
-jsonschema_standard = 4
+jsonschema_standard = 6
 
 rst_prolog = """
 .. role:: new
