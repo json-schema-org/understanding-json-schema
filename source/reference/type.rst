@@ -12,20 +12,6 @@ data type for a schema.
 
 At its core, JSON Schema defines the following basic types:
 
-.. only:: html
-
-    .. toctree::
-       :maxdepth: 1
-
-       string.rst
-       numeric.rst
-       object.rst
-       array.rst
-       boolean.rst
-       null.rst
-
-.. only:: latex
-
    - `string`
    - `numeric`
    - `object`
@@ -136,15 +122,3 @@ types.  For example, numeric types have a way of specifying a numeric
 range, that would not be applicable to other types.  In this
 reference, these validation keywords are described along with each of
 their corresponding types in the following chapters.
-
-.. only:: latex
-
-    .. toctree::
-       :maxdepth: 1
-
-       string.rst
-       numeric.rst
-       object.rst
-       array.rst
-       boolean.rst
-       null.rst
