@@ -2,10 +2,8 @@ import json
 
 from docutils import nodes
 from docutils import statemachine
-from docutils.parsers.rst import directives
-from sphinx.util.compat import Directive
+from docutils.parsers.rst import Directive
 from sphinx.util.nodes import set_source_info
-from sphinx.util import parselinenos
 
 import jsonschema
 
@@ -75,7 +73,6 @@ def split_content(l):
 class SchemaExampleDirective(Directive):
     has_content = True
     validate = True
-
 
     def run(self):
         result = []
@@ -196,11 +193,14 @@ def setup(app):
     app.add_directive('schema_example_novalid',
                       SchemaExampleNoValidationDirective)
 
-    app.add_node(jsonschema_node,
-                 html=(visit_jsonschema_node_html, depart_jsonschema_node_html),
-                 latex=(visit_jsonschema_node_latex, depart_jsonschema_node_latex))
+    app.add_node(
+        jsonschema_node,
+        html=(visit_jsonschema_node_html, depart_jsonschema_node_html),
+        latex=(visit_jsonschema_node_latex, depart_jsonschema_node_latex))
+
 
 passoptionstopackages = r'\PassOptionsToPackage{dvipsnames}{xcolor}'
+
 
 latex_preamble = r"""
 \usepackage{changepage}

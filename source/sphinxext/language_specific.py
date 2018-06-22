@@ -1,6 +1,6 @@
 from docutils import nodes
 from docutils import statemachine
-from sphinx.util.compat import Directive
+from docutils.parsers.rst import Directive
 
 
 class AttrDict(dict):
