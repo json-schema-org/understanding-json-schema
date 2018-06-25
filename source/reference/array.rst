@@ -34,14 +34,15 @@ array may be of a different type.
    single: array; items
    single: items
    single: additionalItems
+   single: contains
 
 Items
 '''''
 
 By default, the elements of the array may be anything at all.
 However, it's often useful to validate the items of the array against
-some schema as well.  This is done using the ``items`` and
-``additionalItems`` keywords.
+some schema as well.  This is done using the ``items``,
+``additionalItems`` and ``contents`` keywords.
 
 There are two ways in which arrays are generally used in JSON:
 
@@ -91,6 +92,29 @@ number:
    // The empty array is always valid:
    []
 
+|draft6|
+
+While the ``items`` schema must be valid for **every** item in the array, the
+``contains`` schema only needs to validate against one or more items in the
+array.
+
+.. schema_example::
+
+   {
+      "type": "array",
+      "contains": {
+        "type": "number"
+      }
+   }
+   --
+   // A single "number" is enough to make this pass:
+   ["life", "universe", "everything", 42]
+   --X
+   // But if we have no number, it fails:
+   ["life", "universe", "everything", "forty-two"]
+   --
+   // All numbers is, of course, also okay:
+   [1, 2, 3, 4, 5]
 
 .. index::
    single: array; tuple validation
