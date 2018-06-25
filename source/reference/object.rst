@@ -234,6 +234,43 @@ they don't provide their address or telephone number:
       "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England",
     }
 
+.. index::
+   single: object; property names
+   single: propertyNames
+
+Property names
+''''''''''''''
+
+|draft6|
+
+The names of properties can be validated against a schema, irrespective of their
+values. This can be useful if you don't want to enforce a specific properties,
+but you want to make sure that the names of those properties follow a specific
+convention. You might, for example, want to enforce that all names are valid
+ASCII tokens so they can be used as attributes in a particular programming
+language.
+
+.. schema_example::
+
+    {
+      "type": "object",
+      "propertyNames": {
+       "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+      }
+    }
+    --
+    {
+      "_a_proper_token_001": "value"
+    }
+    --X
+    {
+      "001 invalid": "value"
+    }
+
+Since object keys must always be strings anyway, so it is implied that the
+schema given to ``propertyNames`` is always at least::
+
+    { "type": "string" }
 
 .. index::
    single: object; size
