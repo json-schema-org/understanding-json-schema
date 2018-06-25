@@ -55,8 +55,8 @@ The ``integer`` type is used for integral numbers.
     validators use the mathematical value to determine whether a
     number is an integer, and not the type alone.  Therefore, there is
     some disagreement between validators on this point.  For example,
-    a JavaScript-based may accept ``1.0`` as an integer, whereas the
-    Python-based `jsonschema
+    a JavaScript-based validator may accept ``1.0`` as an integer,
+    whereas the Python-based `jsonschema
     <https://pypi.python.org/pypi/jsonschema>`__ does not.
 
 Clever use of the ``multipleOf`` keyword (see `multiples`) can be used
