@@ -97,3 +97,38 @@ be valid against the enclosing schema:
    // This is in the ``enum``, but it's invalid against ``{ "type":
    // "string" }``, so it's ultimately invalid:
    null
+
+.. index::
+   single: const
+   single: constant values
+
+.. _const:
+
+Constant values
+---------------
+
+|draft6|
+
+The ``const`` keyword is used to restrict a value to a single value.
+
+For example, to if you only support shipping to the United States for export reasons:
+
+.. schema_example::
+
+   {
+     "properties": {
+       "country": {
+         "const": "United States of America"
+       }
+     }
+   }
+   --
+   { "country": "United States of America" }
+   --X
+   { "country": "Canada" }
+
+It should be noted that ``const`` is merely syntactic sugar for an ``enum`` with a single element, therefore the following are equivalent::
+
+  { "const": "United States of America" }
+
+  { "enum": [ "United States of America" ] }
