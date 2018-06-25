@@ -35,6 +35,26 @@ JSON in a few different languages:
     For C, you may want to consider using `Jansson
     <http://www.digip.org/jansson/>`_ to read and write JSON.
 
+Draft-specific notes
+--------------------
+
+The JSON Schema standard has been through a number of revisions or "drafts". The
+most important are Draft 7, the most recent at the time of this writing, and
+Draft 4, on which a lot of production software was built, and the draft for
+which an earlier version of this book was written.
+
+The text is written to encourage the use of the latest Draft 7 and gives
+priority to the latest conventions and features, but where it differs from Draft
+4, those differences are highlighted in special call-outs. If you only wish to
+target Draft 7, you can safely ignore those sections.
+
+|draft7|
+
+.. draft_specific::
+
+   --Draft 4
+   This is where anything pertaining to an old draft would be mentioned.
+
 Examples
 --------
 

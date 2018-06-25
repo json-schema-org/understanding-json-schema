@@ -12,13 +12,13 @@ class AttrDict(dict):
 def split_content(l):
     parts = []
     part = []
-    language = None
+    label = None
 
     def add_part():
-        if language is None:
-            raise ValueError("No language specified")
+        if label is None:
+            raise ValueError("No label specified")
         parts.append(AttrDict({
-            'language': language,
+            'label': label,
             'content': part}))
 
     for line in l:
@@ -26,7 +26,7 @@ def split_content(l):
             if len(part):
                 add_part()
                 part = []
-            language = line[2:].strip()
+            label = line[2:].strip()
         else:
             part.append(line)
 
@@ -35,7 +35,7 @@ def split_content(l):
     return parts
 
 
-class language_specific_pages(nodes.Element):
+class pages(nodes.Element):
     local_attributes = ['parts']
 
     def __init__(self, *args, **kwargs):
@@ -43,18 +43,26 @@ class language_specific_pages(nodes.Element):
         nodes.Element.__init__(self, *args, **kwargs)
 
 
+class language_specific_pages(pages):
+    header = 'Language-specific info:'
+
+
+class draft_pages(pages):
+    header = 'Draft-specific info:'
+
+
 class section(nodes.Element):
     pass
 
 
-def visit_language_specific_pages_node_html(self, node):
+def visit_pages_node_html(self, node):
     node['classes'] = ['tabbable']
 
     ul = nodes.bullet_list()
     ul['classes'] = ['nav', 'nav-tabs']
     # set_source_info(self, ul)
 
-    href = tab('', 'Language-specific info:')
+    href = tab('', node.header)
     href['classes'] = ['disabled']
     paragraph = nodes.paragraph('', '')
     li = nodes.list_item('')
@@ -66,8 +74,8 @@ def visit_language_specific_pages_node_html(self, node):
 
     first = True
     for part in node.parts:
-        href = tab(part.language, part.language)
-        href['refuri'] = '#' + make_id(node, part.language)
+        href = tab(part.label, part.label)
+        href['refuri'] = '#' + make_id(node, part.label)
         paragraph = nodes.paragraph('')
         li = nodes.list_item('')
         if first:
@@ -90,7 +98,7 @@ def visit_language_specific_pages_node_html(self, node):
         page['classes'] = ['tab-pane']
         if first:
             page['classes'].append('active')
-        page['ids'] = [make_id(node, part.language)]
+        page['ids'] = [make_id(node, part.label)]
 
         page.append(part.paragraph)
         pages.append(page)
@@ -102,19 +110,19 @@ def visit_language_specific_pages_node_html(self, node):
     self.body.append(self.starttag(node, 'div'))
 
 
-def depart_language_specific_pages_node_html(self, node):
+def depart_pages_node_html(self, node):
     self.body.append('</div>')
 
 
-def visit_language_specific_pages_node_latex(self, node):
+def visit_pages_node_latex(self, node):
     for part in node.parts:
         t = tab('', '')
-        t.language = part.language
+        t.label = part.label
         t.append(part.paragraph)
         node.append(t)
 
 
-def depart_language_specific_pages_node_latex(self, node):
+def depart_pages_node_latex(self, node):
     pass
 
 
@@ -135,23 +143,23 @@ def depart_tab_node_html(self, node):
 
 
 def visit_tab_node_latex(self, node):
-    self.body.append(r'\begin{jsonframe}{%s}{black}' % node.language)
+    self.body.append(r'\begin{jsonframe}{%s}{black}' % node.label)
 
 
 def depart_tab_node_latex(self, node):
     self.body.append(r'\end{jsonframe}')
 
 
-def make_id(self, language):
-    return '{0}_{1}'.format(hex(id(self))[2:], language)
+def make_id(self, label):
+    return '{0}_{1}'.format(hex(id(self))[2:], label)
 
 
-class LanguageSpecificDirective(Directive):
+class TabDirective(Directive):
     has_content = True
 
     def run(self):
         parts = split_content(self.content)
-        container = language_specific_pages(parts=parts)
+        container = self.make_container(parts)
 
         for part in parts:
             paragraph = nodes.paragraph('', '')
@@ -163,17 +171,33 @@ class LanguageSpecificDirective(Directive):
         return [container]
 
 
+class LanguageSpecificDirective(TabDirective):
+    def make_container(self, parts):
+        return language_specific_pages(parts=parts)
+
+
+class DraftDirective(TabDirective):
+    def make_container(self, parts):
+        return draft_pages(parts=parts)
+
+
 def setup(app):
     app.add_node(tab,
                  html=(visit_tab_node_html, depart_tab_node_html),
                  latex=(visit_tab_node_latex, depart_tab_node_latex))
     app.add_node(language_specific_pages,
-                 html=(visit_language_specific_pages_node_html,
-                       depart_language_specific_pages_node_html),
-                 latex=(visit_language_specific_pages_node_latex,
-                        depart_language_specific_pages_node_latex))
+                 html=(visit_pages_node_html,
+                       depart_pages_node_html),
+                 latex=(visit_pages_node_latex,
+                        depart_pages_node_latex))
+    app.add_node(draft_pages,
+                 html=(visit_pages_node_html,
+                       depart_pages_node_html),
+                 latex=(visit_pages_node_latex,
+                        depart_pages_node_latex))
 
     app.add_directive('language_specific', LanguageSpecificDirective)
+    app.add_directive('draft_specific', DraftDirective)
 
 
 latex_preamble = r"""

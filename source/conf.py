@@ -22,6 +22,13 @@ sys.path.insert(0, os.path.abspath(os.path.dirname('__file__')))
 # The standard of JSON Schema to test the examples against
 jsonschema_standard = 4
 
+rst_prolog = """
+.. role:: new
+
+.. |draft7| replace:: :new:`New in draft 7`
+.. |draft6| replace:: :new:`New in draft 6`
+"""
+
 # -- General configuration -----------------------------------------------------
 
 import sphinx_bootstrap_theme
@@ -32,7 +39,7 @@ needs_sphinx = '1.7'
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.mathjax', 'sphinx.ext.ifconfig',
-              'sphinxext.jsonschemaext', 'sphinxext.language_specific']
+              'sphinxext.jsonschemaext', 'sphinxext.tab']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -193,7 +200,7 @@ htmlhelp_basename = 'UnderstandingJSONSchemadoc'
 # -- Options for LaTeX output --------------------------------------------------
 
 from sphinxext import jsonschemaext
-from sphinxext import language_specific
+from sphinxext import tab
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
@@ -218,7 +225,7 @@ latex_elements = {
         \def\marginparright{\@mparswitchfalse}
         \def\marginparoutside{\@mparswitchtrue}
     \makeatother
-    ''' + jsonschemaext.latex_preamble + language_specific.latex_preamble,
+    ''' + jsonschemaext.latex_preamble + tab.latex_preamble,
 
     'fncychap': '\\usepackage[Conny]{fncychap}'
 }
