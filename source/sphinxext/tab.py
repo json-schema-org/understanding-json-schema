@@ -212,7 +212,7 @@ latex_preamble = r"""
     frametitle={%
     \tikz[baseline=(current bounding box.east),outer sep=0pt,text=white]
     \node[anchor=east,rectangle,fill=#2]
-    {\strut #1};}}%
+    {\strut \textsf{ #1 }};}}%
    }%
    \mdfsetup{innertopmargin=10pt,linecolor=#2,%
              skipabove=10pt,

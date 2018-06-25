@@ -211,6 +211,8 @@ latex_elements = {
     # The font size ('10pt', '11pt' or '12pt').
     'pointsize': '10pt',
 
+    'inputenc': r'\usepackage[utf8x]{inputenc}',
+
     # Additional stuff for the LaTeX preamble.
     'preamble': r'''
     % Use a more modern-looking monospace font
