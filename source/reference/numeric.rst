@@ -189,10 +189,16 @@ While you can specify both of ``minimum`` and ``exclusiveMinimum`` or both of
 .. language_specific::
 
     --Draft 4
-    In JSON Schema Draft 4, ``exclusiveMinimum`` and ``exclusiveMaximum`` work differently.  There they are boolean values, that indicate whether ``minimum`` and ``maximum`` are exclusive of the value.  For example:
+    In JSON Schema Draft 4, ``exclusiveMinimum`` and ``exclusiveMaximum`` work
+    differently. There they are boolean values, that indicate whether
+    ``minimum`` and ``maximum`` are exclusive of the value. For example:
 
     - if ``exclusiveMinimum`` is ``false``, *x* ≥ ``minimum``.
     - if ``exclusiveMinimum`` is ``true``, *x* > ``minimum``.
+
+    This was changed to have better keyword independence.
+
+    Here is an example using the older Draft 4 convention:
 
     .. schema_example:: 4
 
