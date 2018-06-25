@@ -23,7 +23,7 @@ Unicode characters.
     "This is a string"
     --
     // Unicode characters:
-    "Déjà vu"
+    "json مخطط"
     --
     ""
     --
