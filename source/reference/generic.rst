@@ -8,21 +8,22 @@ for all JSON types.
    single: metadata
    single: title
    single: description
+   single: examples
 
 .. _metadata:
 
 Metadata
 --------
 
-JSON Schema includes a few keywords, ``title``, ``description`` and
-``default``, that aren't strictly used for validation, but are used to
-describe parts of a schema.
+JSON Schema includes a few keywords, ``title``, ``description``, ``default`` and
+``examples`` that aren't strictly used for validation, but are used to describe
+parts of a schema.
 
 The ``title`` and ``description`` keywords must be strings.  A "title"
 will preferably be short, whereas a "description" will provide a more
 lengthy explanation about the purpose of the data described by the
 schema.  Neither are required, but they are encouraged for good
-practice.
+practice, and can make your schema "self-documenting".
 
 The ``default`` keyword specifies a default value for an item.  JSON
 processing tools may use this information to provide a default value
@@ -30,12 +31,23 @@ for a missing key/value pair, though many JSON schema validators
 simply ignore the ``default`` keyword.  It should validate against the
 schema in which it resides, but that isn't required.
 
+|draft6| The ``examples`` keyword is a place to provide an array of examples
+that validate against the schema. This isn't used for validation, but may help
+with explaining the effect and purpose of the schema to a reader. Each entry
+should validate against the schema in which is resides, but that isn't strictly
+required. There is no need to duplicate the ``default`` value in the
+``examples`` array, since ``default`` will be treated as another example.
+
 .. schema_example::
 
     {
       "title" : "Match anything",
       "description" : "This is a schema that matches anything.",
-      "default" : "Default value"
+      "default" : "Default value",
+      "examples" : [
+        "Anything",
+        4035
+      ]
     }
 
 .. index::
