@@ -25,6 +25,28 @@ completely valid schema that will accept any valid JSON.
    --
    { "an": [ "arbitrarily", "nested" ], "data": "structure" }
 
+|draft6|
+
+You can also use ``true`` in place of the empty object to represent a schema
+that matches anything, or ``false`` for a schema that matches nothing.
+
+.. schema_example::
+
+   true
+   --
+   // This accepts anything, as long as it's valid JSON
+   42
+   --
+   "I'm a string"
+   --
+   { "an": [ "arbitrarily", "nested" ], "data": "structure" }
+
+.. schema_example::
+
+   false
+   --X
+   "Resistance is futile...  This will always fail!!!"
+
 The type keyword
 ----------------
 
