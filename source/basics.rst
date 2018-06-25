@@ -99,10 +99,15 @@ more information.
 Declaring a unique identifier
 -----------------------------
 
-It is also best practice to include an ``id`` property as a unique
+It is also best practice to include an ``$id`` property as a unique
 identifier for each schema.  For now, just set it to a URL at a domain
 you control, for example::
 
-   { "id": "http://yourdomain.com/schemas/myschema.json" }
+   { "$id": "http://yourdomain.com/schemas/myschema.json" }
 
 The details of `id` become more apparent when you start `structuring`.
+
+.. draft_specific::
+
+    --Draft 4
+    In Draft 4, ``$id`` is just ``id`` (without the dollar-sign).
