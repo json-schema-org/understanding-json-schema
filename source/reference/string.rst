@@ -129,6 +129,17 @@ exchanging the JSON documents also exchange information about the
 custom format types.  A JSON Schema validator will ignore any format
 type that it does not understand.
 
+.. index::
+   single: date-time
+   single: email
+   single: hostname
+   single: ipv4
+   single: ipv6
+   single: uri
+   single: uri-reference
+   single: uri-template
+   single: json-pointer
+
 Built-in formats
 ^^^^^^^^^^^^^^^^
 
