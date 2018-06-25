@@ -104,7 +104,7 @@ schema for a customer:
 .. schema_example::
 
     {
-      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$schema": "http://json-schema.org/draft-06/schema#",
 
       "definitions": {
         "address": {
@@ -220,7 +220,7 @@ Tying this all together,
 .. schema_example::
 
     {
-      "$schema": "http://json-schema.org/draft-04/schema#",
+      "$schema": "http://json-schema.org/draft-06/schema#",
 
       "definitions": {
         "address": {
