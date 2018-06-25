@@ -208,12 +208,14 @@ latex_preamble = r"""
   \ifstrempty{#1}%
   {}%
   {\mdfsetup{%
+    skipabove=10pt,
     frametitle={%
     \tikz[baseline=(current bounding box.east),outer sep=0pt,text=white]
     \node[anchor=east,rectangle,fill=#2]
     {\strut #1};}}%
    }%
    \mdfsetup{innertopmargin=10pt,linecolor=#2,%
+             skipabove=10pt,
              linewidth=1pt,topline=true,nobreak=true,
              frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
    \begin{mdframed}[]\relax%

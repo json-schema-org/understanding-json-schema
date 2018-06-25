@@ -190,6 +190,7 @@ def visit_jsonschema_node_latex(self, node):
 
     if adjust:
         self.body.append(r"\begin{adjustwidth}{2.5em}{0pt}")
+    self.body.append(r"\vspace{4pt}")
     self.body.append(r"\begin{jsonframe}{%s}{%s}" % (char, color))
 
 

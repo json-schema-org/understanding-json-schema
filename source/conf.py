@@ -214,7 +214,7 @@ latex_elements = {
     # Additional stuff for the LaTeX preamble.
     'preamble': r'''
     % Use a more modern-looking monospace font
-    \usepackage[sfdefault]{cabin}
+    \usepackage{overlock}
     \usepackage{inconsolata}
     \usepackage{bbding}
     \usepackage{fixltx2e}
@@ -225,9 +225,10 @@ latex_elements = {
         \def\marginparright{\@mparswitchfalse}
         \def\marginparoutside{\@mparswitchtrue}
     \makeatother
+    \definecolor{VerbatimBorderColor}{rgb}{1,1,1}
     ''' + jsonschemaext.latex_preamble + tab.latex_preamble,
 
-    'fncychap': '\\usepackage[Conny]{fncychap}'
+    'fncychap': '\\usepackage[Sonny]{fncychap}'
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
