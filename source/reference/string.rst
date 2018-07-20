@@ -26,8 +26,6 @@ Unicode characters.
     // Unicode characters:
     "Déjà vu"
     --
-    "架构"
-    --
     ""
     --
     "42"
