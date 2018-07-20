@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Put the current working directory into the profile file
 sed 's@PWD@'"$PWD"'@' < texlive.profile > texlive.localized.profile
 
@@ -16,4 +18,5 @@ tlmgr install cmap ec fancybox titlesec framed fancyvrb threeparttable mdwtools 
               wrapfig parskip url multirow inconsolata cabin bbding microtype \
               changepage xcolor mdframed l3kernel l3packages etoolbox needspace \
               pgf times upquote helvetic fontaxes mweights ms float fncychap \
-              tabulary capt-of eqparbox environ trimspaces
+              tabulary capt-of eqparbox environ trimspaces latexmk ucs varwidth \
+              overlock xkeyval
