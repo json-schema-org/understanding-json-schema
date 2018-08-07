@@ -1,33 +1,29 @@
 sudo: false
-
 notifications:
   email:
-    - mdboom@gmail.com
-
+  - mdboom@gmail.com
   on_success: change
   on_failure: always
-
 language: python
-
 branches:
   only:
-    - master
-
+  - master
 install:
-  - pip install sphinx
-  - pip install sphinx_bootstrap_theme
-  - pip install git+https://github.com/Julian/jsonschema@97e42bfe2ec8767ffbb76ddb84625c06cbaf0184
-  - bash -x ./install-texlive.sh
-  - export PATH=$PWD/texlive/bin/x86_64-linux:$PATH
-
+- pip install sphinx
+- pip install sphinx_bootstrap_theme
+- pip install git+https://github.com/Julian/jsonschema@97e42bfe2ec8767ffbb76ddb84625c06cbaf0184
+- bash -x ./install-texlive.sh
+- export PATH=$PWD/texlive/bin/x86_64-linux:$PATH
 script:
-  - make html latexpdf
-  - cp build/latex/*.pdf build/html
-
+- make html latexpdf
+- cp build/latex/*.pdf build/html
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN
+  github-token: "$GITHUB_TOKEN"
   local-dir: build/html
   on:
     branch: master
+env:
+  global:
+    secure: HUaKpa3AWGolRF/7k72nXmaJLhTbh2XTHA6Q0kICJpZ8tAuiScsivH1wV6DhQSfOHrpQ3NlTljFteqS0AHuA2VpGMGb0HuAgRqTZHu2Cdake+AJDc3nKcke+0td7fOhU0JMqOhQrlndGObAIofKdMHMJUKnNqpN/7CL8Os6j1to=
