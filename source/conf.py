@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Understanding JSON Schema'
-copyright = u'2013-{0}, Michael Droettboom, Space Telescope Science Institute'.format(
+copyright = u'2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-{0} Michael Droettboom'.format(
     datetime.datetime.now().year)
 
 # The version info for the project you're documenting, acts as replacement for
