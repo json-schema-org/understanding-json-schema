@@ -22,15 +22,12 @@ For this example, let's say we want to define a customer record, where
 each customer may have both a shipping and a billing address.
 Addresses are always the same---they have a street address, city and
 state---so we don't want to duplicate that part of the schema
-everywhere we want to store an address.  Not only does it make the
+everywhere we want to store an address.  Not only would that make the
 schema more verbose, but it makes updating it in the future more
-difficult.  If our imaginary company were to start international
+difficult.  If our imaginary company were to start doing international
 business in the future and we wanted to add a country field to all the
 addresses, it would be better to do this in a single place rather than
 everywhere that addresses are used.
-
-.. note::
-    This is part of the draft 4 spec only, and does not exist in draft 3.
 
 So let's start with the schema that defines an address::
 
@@ -72,7 +69,12 @@ refer to the above, we would include::
 
     { "$ref": "#/definitions/address" }
 
-The value of ``$ref`` is a string in a format called `JSON Pointer
+This can be used anywhere a schema is expected. You will always use ``$ref`` as
+the only key in an object: any other keys you put there will be ignored by the
+validator.
+
+The value of ``$ref`` is a URI, and the part after ``#`` sign (the
+"fragment" or "named anchor") is in a format called `JSON Pointer
 <https://tools.ietf.org/html/rfc6901>`__.
 
 .. note::
@@ -80,9 +82,9 @@ The value of ``$ref`` is a string in a format called `JSON Pointer
     <http://www.w3.org/TR/xpath/>`_ from the XML world, but it is much
     simpler.
 
-The pound symbol (``#``) refers to the current document, and then the
-slash (``/``) separated keys thereafter just traverse the keys in the
-objects in the document.  Therefore, in our example
+If you're using a definition from the same document, the ``$ref`` value begins
+with the pound symbol (``#``). Following that, the slash-separated items traverse
+the keys in the objects in the document. Therefore, in our example
 ``"#/definitions/address"`` means:
 
 1) go to the root of the document
@@ -139,22 +141,108 @@ schema for a customer:
       }
     }
 
+.. note::
+
+    Even though the value of a ``$ref`` is a URI, it is not a network locator,
+    only an identifier. The schema may not actually exist at the address
+    specified. It is basically up to the validator implementation how external
+    schema URIs will be handled, but one should not assume the validator will
+    fetch network resources indicated in ``$ref`` values.
+
+Recursion
+`````````
+
+``$ref`` elements may be used to create recursive schemas that refer to themselves.
+For example, you might have a ``person`` schema that has an array of ``children``, each of which are also ``person`` instances.
+
+.. schema_example::
+
+    {
+      "$schema": "http://json-schema.org/draft-06/schema#",
+
+      "definitions": {
+        "person": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "children": {
+              "type": "array",
+    *          "items": { "$ref": "#/definitions/person" },
+              "default": []
+            }
+          }
+        }
+      },
+
+      "type": "object",
+
+      "properties": {
+        "person": { "$ref": "#/definitions/person" }
+      }
+    }
+    --
+    // A snippet of the British royal family tree
+    {
+      "person": {
+        "name": "Elizabeth",
+        "children": [
+          {
+            "name": "Charles",
+            "children": [
+              {
+                "name": "William",
+                "children": [
+                  { "name": "George" },
+                  { "name": "Charlotte" }
+                ]
+              },
+              {
+                "name": "Harry"
+              }
+            ]
+          }
+        ]
+      }
+    }
+
+However, a loop of ``$ref`` schemas referring to one another could cause
+infinite recursion in the validator, and is explicitly disallowed.
+
+.. schema_example::
+
+    {
+      "definitions": {
+        "alice": {
+          "anyOf": [
+            { "$ref": "#/definitions/bob" }
+          ]
+        },
+        "bob": {
+          "anyOf": [
+            { "$ref": "#/definitions/alice" }
+          ]
+        }
+      }
+    }
+
+.. index::
+    single: $id
+
 .. _id:
 
 The $id property
 ----------------
 
-|draft6|
-
-The ``$id`` property serves two purposes:
+The ``$id`` property is a URI that serves two purposes:
 
 - It declares a unique identifier for the schema.
 
-- It declares a base URL against which ``$ref`` URLs are resolved.
+- It declares a base URI against which ``$ref`` URIs are resolved.
 
-It is best practice that ``$id`` is a URL, preferably in a domain that
-you control.  For example, if you own the ``foo.bar`` domain, and you
-had a schema for addresses, you may set its ``$id`` as follows:
+It is best practice that every top-level schema should set ``$id`` to an
+absolute URI, with a domain that you control. For example, if you own the
+``foo.bar`` domain, and you had a schema for addresses, you may set its ``$id``
+as follows:
 
 .. schema_example::
 
@@ -171,25 +259,72 @@ For example, if you had:
 
   { "$ref": "person.json" }
 
-in the same file, a JSON schema validation library would fetch ``person.json``
-from ``http://foo.bar/schemas/person.json``, even if ``address.json`` was loaded
-from somewhere else, such as the local filesystem.
+in the same file, a JSON schema validation library that supported network
+fetching would fetch ``person.json`` from
+``http://foo.bar/schemas/person.json``, even if ``address.json`` was loaded from
+somewhere else, such as the local filesystem.
+
+|draft6|
 
 .. draft_specific::
 
     --Draft 4
     In Draft 4, ``$id`` is just ``id`` (without the dollar sign).
 
+The ``$id`` property should never be the empty string or an empty fragment
+(``#``), since that doesn't really make sense.
+
+Using $id with $ref
+```````````````````
+
+``$id`` also provides a way to refer to subschema without using JSON Pointer.
+This means you can refer to them by a unique name, rather than by where they
+appear in the JSON tree.
+
+Reusing the address example above, we can add an ``$id`` property to the
+address schema, and refer to it by that instead.
+
+.. schema_example::
+
+    {
+      "$schema": "http://json-schema.org/draft-06/schema#",
+
+      "definitions": {
+        "address": {
+          *"$id": "#address",
+          "type": "object",
+          "properties": {
+            "street_address": { "type": "string" },
+            "city":           { "type": "string" },
+            "state":          { "type": "string" }
+          },
+          "required": ["street_address", "city", "state"]
+        }
+      },
+
+      "type": "object",
+
+      "properties": {
+        *"billing_address": { "$ref": "#address" },
+        *"shipping_address": { "$ref": "#address" }
+      }
+    }
+
+.. note::
+
+    This functionality isn't currently supported by the Python ``jsonschema``
+    library.
+
 Extending
 ---------
 
-The power of ``$ref`` really shines when it is combined with the
+The power of ``$ref`` really shines when it is used with the
 combining keywords ``allOf``, ``anyOf`` and ``oneOf`` (see
 :ref:`combining`).
 
-Let's say that for shipping address, we want to know whether the
+Let's say that for a shipping address, we want to know whether the
 address is a residential or business address, because the shipping
-method used may depend on that.  For the billing address, we don't
+method used may depend on that.  For a billing address, we don't
 want to store that information, because it's not applicable.
 
 To handle this, we'll update our definition of shipping address::
