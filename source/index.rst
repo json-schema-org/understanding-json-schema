@@ -67,7 +67,7 @@ validator---just yet.
 .. only:: html
 
    There is also a `print version of this document
-   <http://spacetelescope.github.io/understanding-json-schema/UnderstandingJSONSchema.pdf>`__.
+   <http://json-schema.org/understanding-json-schema/UnderstandingJSONSchema.pdf>`__.
 
 .. toctree::
    :maxdepth: 1
