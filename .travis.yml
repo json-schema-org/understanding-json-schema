@@ -17,6 +17,7 @@ install:
 script:
 - make html latexpdf
 - cp build/latex/*.pdf build/html
+- touch build/html/.nojekyll
 deploy:
   provider: pages
   skip-cleanup: true
