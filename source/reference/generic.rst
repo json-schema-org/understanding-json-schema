@@ -31,6 +31,7 @@ simply ignore the ``default`` keyword.  It should validate against the
 schema in which it resides, but that isn't required.
 
 .. schema_example::
+
     {
       "title" : "Match anything",
       "description" : "This is a schema that matches anything.",
@@ -53,6 +54,7 @@ element is unique.
 The following is an example for validating street light colors:
 
 .. schema_example::
+
    {
      "type": "string",
      "enum": ["red", "amber", "green"]
@@ -67,6 +69,7 @@ different types.  Let's extend the example to use ``null`` to indicate
 "off", and also add 42, just for fun.
 
 .. schema_example::
+
    {
      "enum": ["red", "amber", "green", null, 42]
    }
@@ -83,6 +86,7 @@ However, in most cases, the elements in the ``enum`` array should also
 be valid against the enclosing schema:
 
 .. schema_example::
+
    {
      "type": "string",
      "enum": ["red", "amber", "green", null]

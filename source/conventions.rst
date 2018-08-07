@@ -25,6 +25,7 @@ For example, here's a language-specific section with advice on using
 JSON in a few different languages:
 
 .. language_specific::
+
     --Python
     In Python, JSON can be read using the json module in the standard
     library.

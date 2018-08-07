@@ -3,6 +3,7 @@ Acknowledgments
 
 Michael Droettboom wishes to thank the following contributors:
 
+- Alexander Kjeldaas
 - Anders D. Johnson
 - Armand Abric
 - Ben Hutton
@@ -11,8 +12,12 @@ Michael Droettboom wishes to thank the following contributors:
 - Christopher Mark Gore
 - David Branner
 - David Worth
-- Erik Bray
+- E. M. Bray
+- Fenhl
 - forevermatt
 - goldaxe
 - Jesse Claven
+- Koen Rouwhorst
+- Mike Kobit
+- Oliver Kurmis
 - Vincent Jacques

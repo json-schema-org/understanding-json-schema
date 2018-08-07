@@ -2,12 +2,17 @@ import json
 
 from docutils import nodes
 from docutils import statemachine
-from docutils.parsers.rst import directives
-from sphinx.util.compat import Directive
+from docutils.parsers.rst import Directive
 from sphinx.util.nodes import set_source_info
-from sphinx.util import parselinenos
 
 import jsonschema
+
+
+def get_standard_cls(standard):
+    return {
+        3: jsonschema.validators.Draft3Validator,
+        4: jsonschema.validators.Draft4Validator,
+        6: jsonschema.validators.Draft6Validator}[standard]
 
 
 class jsonschema_node(nodes.Element):
@@ -75,9 +80,16 @@ def split_content(l):
 class SchemaExampleDirective(Directive):
     has_content = True
     validate = True
-
+    optional_arguments = 1
 
     def run(self):
+        env = self.state.document.settings.env
+        if len(self.arguments) == 1:
+            standard = int(self.arguments[0])
+        else:
+            standard = env.config.jsonschema_standard
+        standard = get_standard_cls(standard)
+
         result = []
 
         schema, parts = split_content(self.content)
@@ -99,7 +111,9 @@ class SchemaExampleDirective(Directive):
             if self.validate:
                 is_valid = True
                 try:
-                    jsonschema.validate(part.json, schema.json)
+                    jsonschema.validate(
+                        part.json, schema.json,
+                        cls=standard)
                 except jsonschema.ValidationError as e:
                     is_valid = False
                 except jsonschema.SchemaError as e:
@@ -176,6 +190,7 @@ def visit_jsonschema_node_latex(self, node):
 
     if adjust:
         self.body.append(r"\begin{adjustwidth}{2.5em}{0pt}")
+    self.body.append(r"\vspace{4pt}")
     self.body.append(r"\begin{jsonframe}{%s}{%s}" % (char, color))
 
 
@@ -192,15 +207,21 @@ def depart_jsonschema_node_latex(self, node):
 
 
 def setup(app):
-    app.add_directive('schema_example', SchemaExampleDirective)
+    app.add_config_value('jsonschema_standard', 4, 'env')
+
+    app.add_directive('schema_example',
+                      SchemaExampleDirective)
     app.add_directive('schema_example_novalid',
                       SchemaExampleNoValidationDirective)
 
-    app.add_node(jsonschema_node,
-                 html=(visit_jsonschema_node_html, depart_jsonschema_node_html),
-                 latex=(visit_jsonschema_node_latex, depart_jsonschema_node_latex))
+    app.add_node(
+        jsonschema_node,
+        html=(visit_jsonschema_node_html, depart_jsonschema_node_html),
+        latex=(visit_jsonschema_node_latex, depart_jsonschema_node_latex))
+
 
 passoptionstopackages = r'\PassOptionsToPackage{dvipsnames}{xcolor}'
+
 
 latex_preamble = r"""
 \usepackage{changepage}

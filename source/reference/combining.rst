@@ -21,6 +21,7 @@ of 0.  As long as a value validates against *either* of these schemas,
 it is considered valid against the entire combined schema.
 
 .. schema_example::
+
     {
       "anyOf": [
         { "type": "string", "maxLength": 5 },
@@ -62,6 +63,7 @@ To validate against ``allOf``, the given data must be valid against all
 of the given subschemas.
 
 .. schema_example::
+
     {
       "allOf": [
         { "type": "string" },
@@ -79,6 +81,7 @@ that won't validate against anything (since something may not be both
 a string and a number at the same time):
 
 .. schema_example::
+
     {
       "allOf": [
         { "type": "string" },
@@ -98,6 +101,7 @@ example, say you had a schema for an address in a ``definitions``
 section, and want to extend it to include an address type:
 
 .. schema_example::
+
    {
      "definitions": {
        "address": {
@@ -132,6 +136,7 @@ additional properties are allowed?  One might try adding the
 highlighted line below:
 
 .. schema_example::
+
    {
      "definitions": {
        "address": {
@@ -186,6 +191,7 @@ To validate against ``anyOf``, the given data must be valid against any
 (one or more) of the given subschemas.
 
 .. schema_example::
+
    {
      "anyOf": [
        { "type": "string" },
@@ -212,6 +218,7 @@ To validate against ``oneOf``, the given data must be valid against
 exactly one of the given subschemas.
 
 .. schema_example::
+
     {
       "oneOf": [
         { "type": "number", "multipleOf": 5 },
@@ -233,7 +240,8 @@ Note that it's possible to "factor" out the common parts of the
 subschemas.  The following schema is equivalent to the one above:
 
 .. schema_example::
-    {
+
+   {
       "type": "number",
       "oneOf": [
         { "multipleOf": 5 },
@@ -260,6 +268,7 @@ For example, the following schema validates against anything that is
 not a string:
 
 .. schema_example::
+
     { "not": { "type": "string" } }
     --
     42

@@ -7,25 +7,27 @@ notifications:
   on_success: change
   on_failure: always
 
-env:
-  global:
-    - secure: "cIRqDucMef0x4TsiCKpUhNARZY7kVqWwmNEQDXuuXlvo0/sugnJd00XaOs0csf4yR2YukeNTtdCRmReRVdhHDPipP+8AL2/UmHnykFUSi/zO0Bqq8PwrG5jJkHjen4e56RMvOxKt+fcZY3PjKzW+e6oZdqyodj/UxxAlfpqh0rY="
-
 language: python
 
 branches:
   only:
     - master
 
-before_install:
-  - pip install 'sphinx<1.6'
+install:
+  - pip install sphinx
   - pip install sphinx_bootstrap_theme
-  - pip install jsonschema
+  - pip install git+https://github.com/Julian/jsonschema@97e42bfe2ec8767ffbb76ddb84625c06cbaf0184
   - bash -x ./install-texlive.sh
   - export PATH=$PWD/texlive/bin/x86_64-linux:$PATH
 
-install:
-  - make html latexpdf
-
 script:
-  - bash -x ./travis_deploy.sh
+  - make html latexpdf
+  - cp build/latex/*.pdf build/html
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  githup-token: $GITHUB_TOKEN
+  local-dir: build/html
+  on:
+    branch: master

@@ -34,6 +34,7 @@ conventionally referred to as a "property".
 
 
 .. schema_example::
+
     { "type": "object" }
     --
     {
@@ -43,7 +44,7 @@ conventionally referred to as a "property".
     --
     {
         "Sun"     : 1.9891e30,
- 	"Jupiter" : 1.8986e27,
+ 	      "Jupiter" : 1.8986e27,
         "Saturn"  : 5.6846e26,
         "Neptune" : 10.243e25,
         "Uranus"  : 8.6810e25,
@@ -86,6 +87,7 @@ For example, let's say we want to define a simple schema for an
 address made up of a number, street name and street type:
 
 .. schema_example::
+
     {
       "type": "object",
       "properties": {
@@ -126,6 +128,7 @@ Reusing the example above, but this time setting
 ``additionalProperties`` to ``false``.
 
 .. schema_example::
+
     {
       "type": "object",
       "properties": {
@@ -152,6 +155,7 @@ For example, one can allow additional properties, but only if they are
 each a string:
 
 .. schema_example::
+
     {
       "type": "object",
       "properties": {
@@ -197,6 +201,7 @@ that each user has a name and e-mail address, but we don't mind if
 they don't provide their address or telephone number:
 
 .. schema_example::
+
     {
       "type": "object",
       "properties": {
@@ -243,6 +248,7 @@ The number of properties on an object can be restricted using the
 must be a non-negative integer.
 
 .. schema_example::
+
     {
       "type": "object",
       "minProperties": 2,
@@ -299,6 +305,7 @@ In the following example, whenever a ``credit_card`` property is
 provided, a ``billing_address`` property must also be present:
 
 .. schema_example::
+
     {
       "type": "object",
 
@@ -345,6 +352,7 @@ To fix the last issue above (that dependencies are not bidirectional),
 you can, of course, define the bidirectional dependencies explicitly:
 
 .. schema_example::
+
     {
       "type": "object",
 
@@ -387,6 +395,7 @@ to have other constraints.
 For example, here is another way to write the above:
 
 .. schema_example::
+
     {
       "type": "object",
 
@@ -465,6 +474,7 @@ keyword are also accepted, and any additional properties that do not
 match either regular expression are forbidden.
 
 .. schema_example::
+
     {
       "type": "object",
       "patternProperties": {
@@ -498,6 +508,7 @@ properties (that are neither built-in or matched by
 ``patternProperties``) must be strings:
 
 .. schema_example::
+
     {
       "type": "object",
       "properties": {
