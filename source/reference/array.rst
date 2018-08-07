@@ -42,7 +42,7 @@ Items
 By default, the elements of the array may be anything at all.
 However, it's often useful to validate the items of the array against
 some schema as well.  This is done using the ``items``,
-``additionalItems`` and ``contents`` keywords.
+``additionalItems`` and ``contains`` keywords.
 
 There are two ways in which arrays are generally used in JSON:
 
