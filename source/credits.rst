@@ -11,6 +11,7 @@ Michael Droettboom wishes to thank the following contributors:
 - Chris Carpenter
 - Christopher Mark Gore
 - David Branner
+- David Michael Karr
 - David Worth
 - E. M. Bray
 - Fenhl
