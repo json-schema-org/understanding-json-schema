@@ -107,6 +107,8 @@ you control, for example::
 
 The details of `id` become more apparent when you start `structuring`.
 
+|draft6|
+
 .. draft_specific::
 
     --Draft 4
