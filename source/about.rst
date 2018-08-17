@@ -156,7 +156,7 @@ for now.  They are explained in subsequent chapters.
       "properties": {
         "first_name": { "type": "string" },
         "last_name": { "type": "string" },
-        "birthday": { "type": "string", "format": "date-time" },
+        "birthday": { "type": "string", "format": "date" },
         "address": {
           "type": "object",
           "properties": {
