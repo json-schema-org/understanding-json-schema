@@ -20,8 +20,9 @@ this at the root of your schema::
 Advanced
 --------
 
-If you need to declare that your schema was written against a specific
-version of the JSON Schema standard, you can include the draft name in the path, for example:
+If you need to declare that your schema was written against a specific version
+of the JSON Schema standard, you should include the draft name in the path, for
+example:
 
 - ``http://json-schema.org/draft-06/schema#``
 - ``http://json-schema.org/draft-04/schema#``
