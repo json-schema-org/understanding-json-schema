@@ -149,7 +149,7 @@ Range
 '''''
 
 Ranges of numbers are specified using a combination of the
-``minimum`` and ``maximum`` keywords (or ``exclusiveMinimum`` and
+``minimum`` and ``maximum`` keywords, (or ``exclusiveMinimum`` and
 ``exclusiveMaximum`` for expressing exclusive range).
 
 If *x* is the value being validated, the following must hold true:

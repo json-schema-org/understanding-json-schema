@@ -15,7 +15,7 @@ for all JSON types.
 Metadata
 --------
 
-JSON Schema includes a few keywords, ``title``, ``description``, ``default`` and
+JSON Schema includes a few keywords, ``title``, ``description``, ``default``, and
 ``examples`` that aren't strictly used for validation, but are used to describe
 parts of a schema.
 
