@@ -206,8 +206,10 @@ For example, you might have a ``person`` schema that has an array of ``children`
       }
     }
 
-However, a loop of ``$ref`` schemas referring to one another could cause
-infinite recursion in the validator, and is explicitly disallowed.
+Above, we created a schema that refers to another part of itself, effectively
+creating a "loop" in the validator, which is both allowed and useful. Note,
+however, that a loop of ``$ref`` schemas referring to one another could cause an
+infinite loop in the resolver, and is explicitly disallowed.
 
 .. schema_example::
 
