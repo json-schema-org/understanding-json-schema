@@ -144,10 +144,11 @@ schema for a customer:
 .. note::
 
     Even though the value of a ``$ref`` is a URI, it is not a network locator,
-    only an identifier. The schema may not actually exist at the address
-    specified. It is basically up to the validator implementation how external
-    schema URIs will be handled, but one should not assume the validator will
-    fetch network resources indicated in ``$ref`` values.
+    only an identifier. This means that the schema doesn't need to be accessible
+    at that URI, but it may be. It is basically up to the validator
+    implementation how external schema URIs will be handled, but one should not
+    assume the validator will fetch network resources indicated in ``$ref``
+    values.
 
 Recursion
 `````````
