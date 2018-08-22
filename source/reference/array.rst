@@ -169,7 +169,7 @@ Here's the example schema:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
 The ``additionalItems`` keyword controls whether it's valid to have
-additional items in the array beyond what is defined in the schema.
+additional items in the array beyond what is defined in ``items``.
 Here, we'll reuse the example schema above, but set
 ``additionalItems`` to ``false``, which has the effect of disallowing
 extra items in the array.
@@ -206,6 +206,43 @@ extra items in the array.
     // extra items:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
+The ``additionalItems`` keyword may also be a schema to validate against every
+additional item in the array. In that case, we could say that additional items
+are allowed, as long as they are all strings:
+
+.. schema_example::
+
+    {
+      "type": "array",
+      "items": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "enum": ["Street", "Avenue", "Boulevard"]
+        },
+        {
+          "type": "string",
+          "enum": ["NW", "NE", "SW", "SE"]
+        }
+      ],
+      "additionalItems": { "type": "string" }
+    }
+    --
+    // Extra string items are ok...
+    [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
+    --X
+    // ..but not anything else
+    [1600, "Pennsylvania", "Avenue", "NW", 20500]
+
+.. note::
+
+    ``additionalItems`` doesn't make sense if you're doing "list validation"
+    (``items`` is an object), and is ignored in the case.
 
 .. index::
    single: array; length
