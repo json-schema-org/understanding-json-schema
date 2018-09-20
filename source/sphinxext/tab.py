@@ -51,6 +51,10 @@ class draft_pages(pages):
     header = 'Draft-specific info:'
 
 
+class repr_pages(pages):
+    header = ''
+
+
 class section(nodes.Element):
     pass
 
@@ -185,16 +189,12 @@ def setup(app):
     app.add_node(tab,
                  html=(visit_tab_node_html, depart_tab_node_html),
                  latex=(visit_tab_node_latex, depart_tab_node_latex))
-    app.add_node(language_specific_pages,
-                 html=(visit_pages_node_html,
-                       depart_pages_node_html),
-                 latex=(visit_pages_node_latex,
-                        depart_pages_node_latex))
-    app.add_node(draft_pages,
-                 html=(visit_pages_node_html,
-                       depart_pages_node_html),
-                 latex=(visit_pages_node_latex,
-                        depart_pages_node_latex))
+    for pages in (language_specific_pages, draft_pages, repr_pages):
+        app.add_node(pages,
+                     html=(visit_pages_node_html,
+                           depart_pages_node_html),
+                     latex=(visit_pages_node_latex,
+                            depart_pages_node_latex))
 
     app.add_directive('language_specific', LanguageSpecificDirective)
     app.add_directive('draft_specific', DraftDirective)

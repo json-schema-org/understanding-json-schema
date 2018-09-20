@@ -67,6 +67,11 @@ examples are in green, with a checkmark.  Invalid examples are in red,
 with a cross.  Often there are comments in between to explain why
 something is or isn't valid.
 
+Even though JSON schema is designed around -- you guessed it -- JSON, it's also
+pretty common to represent it in YAML, which some find more readable. Therefore,
+the examples in this document are shown in both the JSON and YAML equivalent
+representations. Just click the tab to choose which you'd like to see.
+
 .. note::
     These examples are tested automatically whenever the book is
     built, so hopefully they are not just helpful, but also correct!

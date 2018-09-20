@@ -44,7 +44,7 @@ conventionally referred to as a "property".
     --
     {
         "Sun"     : 1.9891e30,
- 	      "Jupiter" : 1.8986e27,
+        "Jupiter" : 1.8986e27,
         "Saturn"  : 5.6846e26,
         "Neptune" : 10.243e25,
         "Uranus"  : 8.6810e25,
@@ -104,8 +104,7 @@ address made up of a number, street name and street type:
     // If we provide the number in the wrong type, it is invalid:
     { "number": "1600", "street_name": "Pennsylvania", "street_type": "Avenue" }
     --
-    // By default, leaving out properties is valid.  See
-    // `required`.
+    // By default, leaving out properties is valid.
     { "number": 1600, "street_name": "Pennsylvania" }
     --
     // By extension, even an empty object is valid:
@@ -236,7 +235,7 @@ they don't provide their address or telephone number:
     // invalid:
     {
       "name": "William Shakespeare",
-      "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England",
+      "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England"
     }
 
 .. index::
