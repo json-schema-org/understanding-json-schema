@@ -25,6 +25,28 @@ completely valid schema that will accept any valid JSON.
    --
    { "an": [ "arbitrarily", "nested" ], "data": "structure" }
 
+|draft6|
+
+You can also use ``true`` in place of the empty object to represent a schema
+that matches anything, or ``false`` for a schema that matches nothing.
+
+.. schema_example::
+
+   true
+   --
+   // This accepts anything, as long as it's valid JSON
+   42
+   --
+   "I'm a string"
+   --
+   { "an": [ "arbitrarily", "nested" ], "data": "structure" }
+
+.. schema_example::
+
+   false
+   --X
+   "Resistance is futile...  This will always fail!!!"
+
 The type keyword
 ----------------
 
@@ -77,10 +99,17 @@ more information.
 Declaring a unique identifier
 -----------------------------
 
-It is also best practice to include an ``id`` property as a unique
+It is also best practice to include an ``$id`` property as a unique
 identifier for each schema.  For now, just set it to a URL at a domain
 you control, for example::
 
-   { "id": "http://yourdomain.com/schemas/myschema.json" }
+   { "$id": "http://yourdomain.com/schemas/myschema.json" }
 
 The details of `id` become more apparent when you start `structuring`.
+
+|draft6|
+
+.. draft_specific::
+
+    --Draft 4
+    In Draft 4, ``$id`` is just ``id`` (without the dollar-sign).

@@ -129,6 +129,17 @@ exchanging the JSON documents also exchange information about the
 custom format types.  A JSON Schema validator will ignore any format
 type that it does not understand.
 
+.. index::
+   single: date-time
+   single: email
+   single: hostname
+   single: ipv4
+   single: ipv6
+   single: uri
+   single: uri-reference
+   single: uri-template
+   single: json-pointer
+
 Built-in formats
 ^^^^^^^^^^^^^^^^
 
@@ -153,3 +164,35 @@ specification.
 
 - ``"uri"``: A universal resource identifier (URI), according to
   `RFC3986 <http://tools.ietf.org/html/rfc3986>`_.
+
+- ``"uri-reference"``: |draft6| A URI Reference (either a URI or a
+  relative-reference), according to `RFC3986, section 4.1
+  <http://tools.ietf.org/html/rfc3986#section-4.1>`_.
+
+- ``"json-pointer"``: |draft6| A JSON Pointer, according to `RFC6901
+  <https://tools.ietf.org/html/rfc6901>`_. There is more discussion on the use
+  of JSON Pointer within JSON Schema in `structuring`. Note that this should be
+  used only when the entire string contains only JSON Pointer content, e.g.
+  ``/foo/bar``. JSON Pointer URI fragments, e.g. ``#/foo/bar/`` should use
+  ``"uri"`` or ``"uri-reference"``.
+
+- ``"uri-template"``: |draft6| A URI Template (of any level) according to
+  `RFC6570 <https://tools.ietf.org/html/rfc6570>`_. If you don't already know
+  what a URI Template is, you probably don't need this value.
+
+URI vs. URI reference
+`````````````````````
+
+If the values in the schema the ability to be relative to a particular source
+path (such as a link from a webpage), it is generally better practice to use
+``"uri-reference"`` rather than ``"uri"``. ``"uri"`` should only be used when
+the path must be absolute.
+
+.. draft_specific::
+
+   --Draft 4
+   Draft 4 only includes ``"uri"``, not ``"uri-reference"``. Therefore, there is
+   some ambiguity around whether ``"uri"`` should accept relative paths.
+
+
+.. TODO: Add some examples for ``format`` here

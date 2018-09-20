@@ -149,46 +149,78 @@ Range
 '''''
 
 Ranges of numbers are specified using a combination of the
-``minimum``, ``maximum``, ``exclusiveMinimum`` and
-``exclusiveMaximum`` keywords.
+``minimum`` and ``maximum`` keywords, (or ``exclusiveMinimum`` and
+``exclusiveMaximum`` for expressing exclusive range).
 
-- ``minimum`` specifies a minimum numeric value.
+If *x* is the value being validated, the following must hold true:
 
-- ``exclusiveMinimum`` is a boolean.  When ``true``, it indicates that
-  the range excludes the minimum value, i.e., :math:`x >
-  \mathrm{min}`.  When ``false`` (or not included), it indicates that
-  the range includes the minimum value, i.e., :math:`x \ge
-  \mathrm{min}`.
+  - *x* ≥ ``minimum``
+  - *x* > ``exclusiveMinimum``
+  - *x* ≤ ``maximum``
+  - *x* < ``exclusiveMaximum``
 
-- ``maximum`` specifies a maximum numeric value.
-
-- ``exclusiveMaximum`` is a boolean.  When ``true``, it indicates that
-  the range excludes the maximum value, i.e., :math:`x <
-  \mathrm{max}`.  When ``false`` (or not included), it indicates that
-  the range includes the maximum value, i.e., :math:`x \le
-  \mathrm{max}`.
+While you can specify both of ``minimum`` and ``exclusiveMinimum`` or both of
+``maximum`` and ``exclusiveMinimum``, it doesn't really make sense to do so.
 
 .. schema_example::
 
     {
       "type": "number",
       "minimum": 0,
-      "maximum": 100,
-      "exclusiveMaximum": true
+      "exclusiveMaximum": 100
     }
     --X
     // Less than ``minimum``:
     -1
     --
-    // ``exclusiveMinimum`` was not specified, so 0 is included:
+    // ``minimum`` is inclusive, so 0 is valid:
     0
     --
     10
     --
     99
     --X
-    // ``exclusiveMaximum`` is ``true``, so 100 is not included:
+    // ``exclusiveMaximum`` is exclusive, so 100 is not valid:
     100
     --X
     // Greater than ``maximum``:
     101
+
+.. language_specific::
+
+    --Draft 4
+    In JSON Schema Draft 4, ``exclusiveMinimum`` and ``exclusiveMaximum`` work
+    differently. There they are boolean values, that indicate whether
+    ``minimum`` and ``maximum`` are exclusive of the value. For example:
+
+    - if ``exclusiveMinimum`` is ``false``, *x* ≥ ``minimum``.
+    - if ``exclusiveMinimum`` is ``true``, *x* > ``minimum``.
+
+    This was changed to have better keyword independence.
+
+    Here is an example using the older Draft 4 convention:
+
+    .. schema_example:: 4
+
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "exclusiveMaximum": true
+        }
+        --X
+        // Less than ``minimum``:
+        -1
+        --
+        // ``exclusiveMinimum`` was not specified, so 0 is included:
+        0
+        --
+        10
+        --
+        99
+        --X
+        // ``exclusiveMaximum`` is ``true``, so 100 is not included:
+        100
+        --X
+        // Greater than ``maximum``:
+        101
