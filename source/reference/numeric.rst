@@ -160,7 +160,7 @@ If *x* is the value being validated, the following must hold true:
   - *x* < ``exclusiveMaximum``
 
 While you can specify both of ``minimum`` and ``exclusiveMinimum`` or both of
-``maximum`` and ``exclusiveMinimum``, it doesn't really make sense to do so.
+``maximum`` and ``exclusiveMaximum``, it doesn't really make sense to do so.
 
 .. schema_example::
 
