@@ -7,6 +7,7 @@ Michael Droettboom wishes to thank the following contributors:
 - Anders D. Johnson
 - Armand Abric
 - Ben Hutton
+- Brandon Wright
 - btubbs
 - Chris Carpenter
 - Christopher Mark Gore
