@@ -249,7 +249,7 @@ Property names
 |draft6|
 
 The names of properties can be validated against a schema, irrespective of their
-values. This can be useful if you don't want to enforce a specific properties,
+values. This can be useful if you don't want to enforce specific properties,
 but you want to make sure that the names of those properties follow a specific
 convention. You might, for example, want to enforce that all names are valid
 ASCII tokens so they can be used as attributes in a particular programming
