@@ -8,6 +8,7 @@ JSON Schema Reference
 
     type.rst
     string.rst
+    regular_expressions.rst
     numeric.rst
     object.rst
     array.rst
@@ -15,5 +16,5 @@ JSON Schema Reference
     null.rst
     generic.rst
     combining.rst
+    conditionals.rst
     schema.rst
-    regular_expressions.rst
