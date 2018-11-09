@@ -8,22 +8,29 @@ for all JSON types.
    single: metadata
    single: title
    single: description
+   single: default
    single: examples
+   single: $comment
 
 .. _metadata:
 
 Metadata
 --------
 
-JSON Schema includes a few keywords, ``title``, ``description``, ``default``, and
-``examples`` that aren't strictly used for validation, but are used to describe
-parts of a schema.
+JSON Schema includes a few keywords, ``title``, ``description``, ``default``,
+``examples``, and ``$comment`` that aren't strictly used for validation, but are
+used to describe parts of a schema.
 
-The ``title`` and ``description`` keywords must be strings.  A "title"
-will preferably be short, whereas a "description" will provide a more
-lengthy explanation about the purpose of the data described by the
-schema.  Neither are required, but they are encouraged for good
-practice, and can make your schema "self-documenting".
+|draft7| ``$comment``
+
+The ``title``, ``description``, and ``$comment`` keywords must be strings. A
+"title" will preferably be short, whereas a "description" will provide a more
+lengthy explanation about the purpose of the data described by the schema.
+``$comment`` is intended for notes to schema maintainers, while ``title`` and
+``description`` are meant for display to end users. This is somewhat analogous
+to the distinction between comments and docstrings in source code. None of these
+are required, but they are encouraged for good practice, and can make your
+schema "self-documenting".
 
 The ``default`` keyword specifies a default value for an item.  JSON
 processing tools may use this information to provide a default value
