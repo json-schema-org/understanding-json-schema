@@ -117,6 +117,7 @@ class SchemaExampleDirective(Directive):
                         cls=standard)
                 except jsonschema.ValidationError as e:
                     is_valid = False
+                    message = str(e)
                 except jsonschema.SchemaError as e:
                     raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
                         str(e), schema.content))
@@ -126,7 +127,8 @@ class SchemaExampleDirective(Directive):
                         raise ValueError(
                             "Doc says fragment should pass, "
                             "but it does not validate:\n" +
-                            part.content)
+                            part.content + "\n" +
+                            message)
                     else:
                         raise ValueError(
                             "Doc says fragment should not pass, "
