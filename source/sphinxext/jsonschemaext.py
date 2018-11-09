@@ -12,7 +12,8 @@ def get_standard_cls(standard):
     return {
         3: jsonschema.validators.Draft3Validator,
         4: jsonschema.validators.Draft4Validator,
-        6: jsonschema.validators.Draft6Validator}[standard]
+        6: jsonschema.validators.Draft6Validator,
+        7: jsonschema.validators.Draft7Validator}[standard]
 
 
 class jsonschema_node(nodes.Element):

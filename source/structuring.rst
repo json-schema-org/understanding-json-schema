@@ -106,7 +106,7 @@ schema for a customer:
 .. schema_example::
 
     {
-      "$schema": "http://json-schema.org/draft-06/schema#",
+      "$schema": "http://json-schema.org/draft-07/schema#",
 
       "definitions": {
         "address": {
@@ -159,7 +159,7 @@ For example, you might have a ``person`` schema that has an array of ``children`
 .. schema_example::
 
     {
-      "$schema": "http://json-schema.org/draft-06/schema#",
+      "$schema": "http://json-schema.org/draft-07/schema#",
 
       "definitions": {
         "person": {
@@ -290,7 +290,7 @@ address schema, and refer to it by that instead.
 .. schema_example::
 
     {
-      "$schema": "http://json-schema.org/draft-06/schema#",
+      "$schema": "http://json-schema.org/draft-07/schema#",
 
       "definitions": {
         "address": {
