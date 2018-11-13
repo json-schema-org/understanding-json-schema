@@ -28,9 +28,10 @@ The ``title``, ``description``, and ``$comment`` keywords must be strings. A
 lengthy explanation about the purpose of the data described by the schema.
 ``$comment`` is intended for notes to schema maintainers, while ``title`` and
 ``description`` are meant for display to end users. This is somewhat analogous
-to the distinction between comments and docstrings in source code. None of these
-are required, but they are encouraged for good practice, and can make your
-schema "self-documenting".
+to the distinction between comments and docstrings in source code.
+
+None of these "annotation" keywords are required, but they are encouraged for
+good practice, and can make your schema "self-documenting".
 
 The ``default`` keyword specifies a default value for an item.  JSON
 processing tools may use this information to provide a default value
