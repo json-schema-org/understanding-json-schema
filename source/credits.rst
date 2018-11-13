@@ -4,11 +4,12 @@ Acknowledgments
 Michael Droettboom wishes to thank the following contributors:
 
 - Alexander Kjeldaas
+- Alexander Lang
 - Anders D. Johnson
 - Armand Abric
 - Ben Hutton
 - Brandon Wright
-- btubbs
+- Brent Tubbs 
 - Chris Carpenter
 - Christopher Mark Gore
 - David Branner
@@ -18,8 +19,11 @@ Michael Droettboom wishes to thank the following contributors:
 - Fenhl
 - forevermatt
 - goldaxe
+- Hervé
+- Hongwei
 - Jesse Claven
 - Koen Rouwhorst
 - Mike Kobit
 - Oliver Kurmis
+- Sam Blackman
 - Vincent Jacques
