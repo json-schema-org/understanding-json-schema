@@ -15,6 +15,7 @@ JSON Schema Reference
     boolean.rst
     null.rst
     generic.rst
+    non_json_data.rst
     combining.rst
     conditionals.rst
     schema.rst
