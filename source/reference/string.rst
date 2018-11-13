@@ -130,15 +130,24 @@ custom format types.  A JSON Schema validator will ignore any format
 type that it does not understand.
 
 .. index::
+   single: format; date-time
+   single: format; email
+   single: format; hostname
+   single: format; ipv4
+   single: format; ipv6
+   single: format; json-pointer
+   single: format; uri
+   single: format; uri-reference
+   single: format; uri-template
    single: date-time
    single: email
    single: hostname
    single: ipv4
    single: ipv6
+   single: json-pointer
    single: uri
    single: uri-reference
    single: uri-template
-   single: json-pointer
 
 Built-in formats
 ^^^^^^^^^^^^^^^^
