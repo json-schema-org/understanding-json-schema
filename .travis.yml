@@ -11,7 +11,7 @@ branches:
 install:
 - pip install sphinx
 - pip install sphinx_bootstrap_theme
-- pip install git+https://github.com/Julian/jsonschema@97e42bfe2ec8767ffbb76ddb84625c06cbaf0184
+- pip install git+https://github.com/Julian/jsonschema@8cc6a5af0b5ab343707c0c71021c477651aa479b
 - bash -x ./install-texlive.sh
 - export PATH=$PWD/texlive/bin/x86_64-linux:$PATH
 script:
