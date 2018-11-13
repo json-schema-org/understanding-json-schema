@@ -282,10 +282,10 @@ Regular Expressions
 
 - ``"regex"``: |draft7| A regular expression, which should be valid according to
   the `ECMA 262
-  <http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf>`
+  <http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf>`_
   dialect.
 
 Be careful, in practice, JSON schema validators are only required to accept the
-safe subset of `regular_expressions` described elsewhere in this document.
+safe subset of `regular-expressions` described elsewhere in this document.
 
 .. TODO: Add some examples for ``format`` here
