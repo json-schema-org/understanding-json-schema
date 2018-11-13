@@ -5,17 +5,17 @@ This chapter lists some miscellaneous properties that are available
 for all JSON types.
 
 .. index::
-   single: metadata
+   single: annotation
    single: title
    single: description
    single: default
    single: examples
    single: $comment
 
-.. _metadata:
+.. _annotation:
 
-Metadata
---------
+Annotations
+-----------
 
 JSON Schema includes a few keywords, ``title``, ``description``, ``default``,
 ``examples``, and ``$comment`` that aren't strictly used for validation, but are
