@@ -28,14 +28,13 @@ entire schema:
 ==== ==== ==== ============
 if   then else whole schema
 ==== ==== ==== ============
-✗    ✗    ✗    ✗
-✗    ✗    ✓    ✓
-✗    ✓    ✗    ✗
-✗    ✓    ✓    ✓
-✓    ✗    ✗    ✗
-✓    ✗    ✓    ✗
-✓    ✓    ✗    ✓
-✓    ✓    ✓    ✓
+          X    X
+     X          
+     X    X    X
+X               
+X         X     
+X    X         X
+X    X    X    X
 ==== ==== ==== ============
 
 For example, let's say you wanted to write a schema to handle addresses in the
