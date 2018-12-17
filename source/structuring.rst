@@ -95,7 +95,7 @@ the keys in the objects in the document. Therefore, in our example
 include your definitions in separate files, you can also do that.  For
 example::
 
-    { "$ref": "definitions.json#/address" }
+    { "$ref": "definitions.json/#/address" }
 
 would load the address schema from another file residing alongside
 this one.
