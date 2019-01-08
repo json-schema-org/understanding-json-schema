@@ -17,6 +17,10 @@ syntax described below.
 - A single unicode character (other than the special characters
   below) matches itself.
 
+- ``.``: Matches any character except line break characters. (Be aware that what
+  constitutes a line break character is somewhat dependent on your platform and
+  language environment, but in practice this rarely matters).
+
 - ``^``: Matches only at the beginning of the string.
 
 - ``$``: Matches only at the end of the string.
@@ -62,13 +66,6 @@ syntax described below.
 
 - ``{x}?``, ``{x,y}?``, ``{x,}?``: Lazy versions of the above
   expressions.
-
-.. language_specific::
-   --Python
-   This subset of JavaScript regular expressions is compatible with
-   Python regular expressions.  Pay close attention to what is
-   missing, however.  Notably, it is not recommended to use ``.`` to
-   match any character.
 
 Example
 '''''''
