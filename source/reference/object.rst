@@ -44,7 +44,7 @@ conventionally referred to as a "property".
     --
     {
         "Sun"     : 1.9891e30,
- 	      "Jupiter" : 1.8986e27,
+        "Jupiter" : 1.8986e27,
         "Saturn"  : 5.6846e26,
         "Neptune" : 10.243e25,
         "Uranus"  : 8.6810e25,
