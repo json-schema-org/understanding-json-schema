@@ -19,6 +19,7 @@ Michael Droettboom wishes to thank the following contributors:
 - Fenhl
 - forevermatt
 - goldaxe
+- Henry Andrews
 - Hervé
 - Hongwei
 - Jesse Claven
