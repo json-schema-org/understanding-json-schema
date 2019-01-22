@@ -10,7 +10,6 @@ for all JSON types.
    single: description
    single: default
    single: examples
-   single: $comment
 
 .. _annotation:
 
@@ -18,20 +17,15 @@ Annotations
 -----------
 
 JSON Schema includes a few keywords, ``title``, ``description``, ``default``,
-``examples``, and ``$comment`` that aren't strictly used for validation, but are
-used to describe parts of a schema.
-
-|draft7| ``$comment``
-
-The ``title``, ``description``, and ``$comment`` keywords must be strings. A
-"title" will preferably be short, whereas a "description" will provide a more
-lengthy explanation about the purpose of the data described by the schema.
-``$comment`` is intended for notes to schema maintainers, while ``title`` and
-``description`` are meant for display to end users. This is somewhat analogous
-to the distinction between comments and docstrings in source code.
+``examples`` that aren't strictly used for validation, but are used to describe
+parts of a schema.
 
 None of these "annotation" keywords are required, but they are encouraged for
 good practice, and can make your schema "self-documenting".
+
+The ``title`` and ``description`` keywords must be strings. A "title" will
+preferably be short, whereas a "description" will provide a more lengthy
+explanation about the purpose of the data described by the schema.
 
 The ``default`` keyword specifies a default value for an item.  JSON
 processing tools may use this information to provide a default value
@@ -57,6 +51,25 @@ required. There is no need to duplicate the ``default`` value in the
         4035
       ]
     }
+
+.. index::
+   single: comment
+   single: $comment
+
+.. _comments:
+
+Comments
+--------
+
+|draft7| ``$comment``
+
+The ``$comment`` keyword is strictly intended for adding comments to the JSON
+schema source. Its value must always be a string. Unlike the annotations
+``title``, ``description`` and ``examples``, JSON schema implementations aren't
+allowed to attach any meaning or behavior to it whatsoever, and may even strip
+them at any time. Therefore, they are useful for leaving notes to future editors
+of a JSON schema, (which is quite likely your future self), but should not be
+used to communicate to users of the schema.
 
 .. index::
    single: enum
