@@ -16,6 +16,7 @@ install:
 - export PATH=$PWD/texlive/bin/x86_64-linux:$PATH
 script:
 - make html latexpdf
+- cp build/latex/*.pdf build/html
 - touch build/html/.nojekyll
 deploy:
   provider: pages
