@@ -269,8 +269,8 @@ JSON Pointer
   <https://tools.ietf.org/html/rfc6901>`_. There is more discussion on the use
   of JSON Pointer within JSON Schema in `structuring`. Note that this should be
   used only when the entire string contains only JSON Pointer content, e.g.
-  ``/foo/bar``. JSON Pointer URI fragments, e.g. ``#/foo/bar/`` should us e
-  ``"uri"`` or ``"uri-reference"``.
+  ``/foo/bar``. JSON Pointer URI fragments, e.g. ``#/foo/bar/`` should use
+  ``"uri-reference"``.
 
 - ``"relative-json-pointer"``: |draft7| A `relative JSON pointer
   <https://tools.ietf.org/html/draft-handrews-relative-json-pointer-01>`_.
