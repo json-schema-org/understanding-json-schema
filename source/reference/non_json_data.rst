@@ -50,16 +50,31 @@ JSON document.
 Without getting into the low-level details of each of these encodings, there are
 really only two options useful for modern usage:
 
-- If the string contains a binary MIME type (``image/png``, for example), set
-  ``contentEncoding`` to ``base64`` and encode the contents using `Base64
-  <https://tools.ietf.org/html/rfc4648>`_.
+- If the content is encoded in the same encoding as the enclosing JSON document
+  (which for practical purposes, is almost always UTF-8), leave
+  ``contentEncoding`` unspecified, and include the content in a string as-is.
+  This includes text-based content types, such as ``text/html`` or
+  ``application/xml``.
 
-- If the string contains a text MIME type (usually indicated with the ``text/``
-  prefix), leave ``contentEncoding`` unspecified, and encode the contents using
-  the same encoding as the enclosing JSON document.
+- If the content is binary data, set ``contentEncoding`` to ``base64`` and
+  encode the contents using `Base64 <https://tools.ietf.org/html/rfc4648>`_.
+  This would include many image types, such as ``image/png`` or audio types,
+  such as ``audio/mpeg``.
 
 Examples
 ````````
+
+The following schema indicates the string contains an HTML document, encoded
+using the same encoding as the surrounding document:
+
+.. schema_example::
+
+    {
+      "type": "string",
+      "contentMediaType": "text/html"
+    }
+    --
+    "<!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\"><head></head></html>"
 
 The following schema indicates that a string contains a `PNG
 <https://libpng.org>`_ image, encoded using Base64:
@@ -74,14 +89,3 @@ The following schema indicates that a string contains a `PNG
     --
     "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA..."
 
-The following schema indicates the string contains an HTML document, encoded
-using the same encoding as the surrounding document:
-
-.. schema_example::
-
-    {
-      "type": "string",
-      "contentMediaType": "text/html"
-    }
-    --
-    "<!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\"><head></head></html>"
