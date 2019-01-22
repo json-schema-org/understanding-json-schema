@@ -149,7 +149,9 @@ specification.
 Dates and times
 ***************
 
-Dates and times are represented in `ISO8601 format
+Dates and times are represented in `RFC 3339, section 5.6
+<https://json-schema.org/latest/json-schema-validation.html#RFC3339>`_. This is
+a subset of the date format also commonly known as `ISO8601 format
 <https://www.iso.org/iso-8601-date-and-time-format.html>`_.
 
 - ``"date-time"``: Date and time together, for example,
