@@ -39,16 +39,16 @@ Draft-specific notes
 --------------------
 
 The JSON Schema standard has been through a number of revisions or "drafts". The
-most important are Draft 6, the most recent at the time of this writing, and
+most important are Draft 7, the most recent at the time of this writing, and
 Draft 4, on which a lot of production software was built, and the draft for
 which an earlier version of this book was written.
 
-The text is written to encourage the use of Draft 6 and gives
-priority to the latest conventions and features, but where it differs from Draft
-4, those differences are highlighted in special call-outs. If you only wish to
-target Draft 6, you can safely ignore those sections.
+The text is written to encourage the use of Draft 7 and gives priority to the
+latest conventions and features, but where it differs from earlier drafts, those
+differences are highlighted in special call-outs. If you only wish to target
+Draft 7, you can safely ignore those sections.
 
-|draft6|
+|draft7|
 
 .. draft_specific::
 

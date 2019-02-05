@@ -24,9 +24,9 @@ validator---just yet.
 
 .. note::
 
-    This book describes JSON Schema draft 6. The most recent version is draft 7
-    --- stay tuned, updates are coming! Earlier and later versions of JSON Schema
-    are not completely compatible with the format described here.
+    This book describes JSON Schema draft 7. Earlier versions of JSON Schema
+    are not completely compatible with the format described here, but for the
+    most part, those differences are noted in the text.
 
 **Where to begin?**
 

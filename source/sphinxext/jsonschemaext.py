@@ -12,7 +12,8 @@ def get_standard_cls(standard):
     return {
         3: jsonschema.validators.Draft3Validator,
         4: jsonschema.validators.Draft4Validator,
-        6: jsonschema.validators.Draft6Validator}[standard]
+        6: jsonschema.validators.Draft6Validator,
+        7: jsonschema.validators.Draft7Validator}[standard]
 
 
 class jsonschema_node(nodes.Element):
@@ -116,6 +117,7 @@ class SchemaExampleDirective(Directive):
                         cls=standard)
                 except jsonschema.ValidationError as e:
                     is_valid = False
+                    message = str(e)
                 except jsonschema.SchemaError as e:
                     raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
                         str(e), schema.content))
@@ -125,7 +127,8 @@ class SchemaExampleDirective(Directive):
                         raise ValueError(
                             "Doc says fragment should pass, "
                             "but it does not validate:\n" +
-                            part.content)
+                            part.content + "\n" +
+                            message)
                     else:
                         raise ValueError(
                             "Doc says fragment should not pass, "
