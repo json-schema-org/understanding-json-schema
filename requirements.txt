@@ -1,0 +1,3 @@
+sphinx
+sphinx-bootstrap-theme
+jsonschema>=3.0.0a1
