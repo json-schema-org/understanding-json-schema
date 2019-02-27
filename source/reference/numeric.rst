@@ -188,10 +188,10 @@ While you can specify both of ``minimum`` and ``exclusiveMinimum`` or both of
     // Greater than ``maximum``:
     101
 
-.. language_specific::
+.. draft_specific::
 
-    --Draft 4
-    In JSON Schema Draft 4, ``exclusiveMinimum`` and ``exclusiveMaximum`` work
+    --Draft 4-6
+    The behavior of ``exclusiveMinimum`` and ``exclusiveMaximum`` changed in Draft 6. Before Draft 6 they work
     differently. There they are boolean values, that indicate whether
     ``minimum`` and ``maximum`` are exclusive of the value. For example:
 
