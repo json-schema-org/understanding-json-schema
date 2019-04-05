@@ -16,6 +16,6 @@ docker build -t undestanding-json-schema .
 ```
 run a container from the built image to generate the docs:
 ```
-docker run -it --rm -v $PWD:/app -w /app undestanding-json-schema sphinx-build -b html source build
+docker run -it --rm -v $PWD:/doc undestanding-json-schema
 ```
 After this you will find the generated docs inside the `build` folder.
