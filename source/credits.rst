@@ -15,7 +15,7 @@ Michael Droettboom wishes to thank the following contributors:
 - David Branner
 - David Michael Karr
 - David Worth
-- E. M. Bray
+- E\. M\. Bray
 - Fenhl
 - forevermatt
 - goldaxe
