@@ -6,6 +6,8 @@
 Regular Expressions
 ===================
 
+.. contents:: :local:
+
 The :ref:`pattern <pattern>` and `patternProperties` keywords use
 regular expressions to express constraints.  The regular expression
 syntax used is from JavaScript (`ECMA 262

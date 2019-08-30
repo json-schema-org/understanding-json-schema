@@ -3,6 +3,8 @@
 The basics
 ==========
 
+.. contents:: :local:
+
 In :ref:`about`, we described what a schema is, and hopefully
 justified the need for schema languages.  Here, we proceed to
 write a simple JSON Schema.

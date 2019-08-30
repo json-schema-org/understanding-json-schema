@@ -6,6 +6,8 @@
 Structuring a complex schema
 ============================
 
+.. contents:: :local:
+
 When writing computer programs of even moderate complexity, it's
 commonly accepted that "structuring" the program into reusable
 functions is better than copying-and-pasting duplicate bits of code

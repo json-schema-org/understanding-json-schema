@@ -7,6 +7,8 @@
 Media: string-encoding non-JSON data
 ------------------------------------
 
+.. contents:: :local:
+
 |draft7|
 
 JSON schema has a set of keywords to describe and optionally validate non-JSON
