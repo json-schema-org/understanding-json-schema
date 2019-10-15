@@ -260,7 +260,7 @@ language.
     {
       "type": "object",
       "propertyNames": {
-       "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
       }
     }
     --
