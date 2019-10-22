@@ -53,7 +53,7 @@ syntax described below.
   behavior isn't desired and you want to match as few characters as
   possible.
   
-- ``(?!x}``, ``(?=x}``: Negative and positive lookahead.
+- ``(?!x)``, ``(?=x)``: Negative and positive lookahead.
 
 - ``{x}``: Match exactly ``x`` occurrences of the preceding regular
   expression.
