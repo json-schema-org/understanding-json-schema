@@ -73,7 +73,7 @@ This can be used anywhere a schema is expected. You will always use ``$ref`` as
 the only key in an object: any other keys you put there will be ignored by the
 validator.
 
-The value of ``$ref`` is a URI, and the part after ``#`` sign (the
+The value of ``$ref`` is a URI-reference, and the part after ``#`` sign (the
 "fragment" or "named anchor") is in a format called `JSON Pointer
 <https://tools.ietf.org/html/rfc6901>`__.
 
@@ -91,7 +91,7 @@ the keys in the objects in the document. Therefore, in our example
 2) find the value of the key ``"definitions"``
 3) within that object, find the value of the key ``"address"``
 
-``$ref`` can also be a relative or absolute URI, so if you prefer to
+``$ref`` can resolve to a URI that references another file, so if you prefer to
 include your definitions in separate files, you can also do that.  For
 example::
 
@@ -143,12 +143,12 @@ schema for a customer:
 
 .. note::
 
-    Even though the value of a ``$ref`` is a URI, it is not a network locator,
-    only an identifier. This means that the schema doesn't need to be accessible
-    at that URI, but it may be. It is basically up to the validator
-    implementation how external schema URIs will be handled, but one should not
-    assume the validator will fetch network resources indicated in ``$ref``
-    values.
+    Even though the value of a ``$ref`` is a URI-reference, it is not a network
+    locator, only an identifier. This means that the schema doesn't need to be
+    accessible at the resolved URI, but it may be. It is basically up to the
+    validator implementation how external schema URIs will be handled, but one
+    should not assume the validator will fetch network resources indicated in
+    ``$ref`` values.
 
 Recursion
 `````````
@@ -236,16 +236,16 @@ infinite loop in the resolver, and is explicitly disallowed.
 The $id property
 ----------------
 
-The ``$id`` property is a URI that serves two purposes:
+The ``$id`` property is a URI-reference that serves two purposes:
 
 - It declares a unique identifier for the schema.
 
-- It declares a base URI against which ``$ref`` URIs are resolved.
+- It declares a base URI against which ``$ref`` URI-references are resolved.
 
 It is best practice that every top-level schema should set ``$id`` to an
-absolute URI, with a domain that you control. For example, if you own the
-``foo.bar`` domain, and you had a schema for addresses, you may set its ``$id``
-as follows:
+absolute-URI (not a relative reference), with a domain that you control. For
+example, if you own the ``foo.bar`` domain, and you had a schema for addresses,
+you may set its ``$id`` as follows:
 
 .. schema_example::
 
@@ -255,7 +255,7 @@ This provides a unique identifier for the schema, as well as, in most
 cases, indicating where it may be downloaded.
 
 But be aware of the second purpose of the ``$id`` property: that it
-declares a base URL for relative ``$ref`` URLs elsewhere in the file.
+declares a base URI for ``$ref`` URI-references elsewhere in the file.
 For example, if you had:
 
 .. schema_example::
@@ -263,9 +263,12 @@ For example, if you had:
   { "$ref": "person.json" }
 
 in the same file, a JSON schema validation library that supported network
-fetching would fetch ``person.json`` from
+fetching may fetch ``person.json`` from
 ``http://foo.bar/schemas/person.json``, even if ``address.json`` was loaded from
-somewhere else, such as the local filesystem.
+somewhere else, such as the local filesystem. The drafts do not define this
+area of behaviour very clearly, and validator implementations may vary in
+exactly how they try to locate the referenced schema.
+
 
 |draft6|
 
