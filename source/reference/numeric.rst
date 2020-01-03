@@ -30,6 +30,10 @@ The ``integer`` type is used for integral numbers.
     In Python, "integer" is analogous to the ``int`` type.
     --Ruby
     In Ruby, "integer" is analogous to the ``Integer`` type.
+    --Objective-C
+    In Objective-C, "integer" is analogous to the ``NSInteger`` type.
+    --Swift
+    In Swift, "integer" is analogous to the ``Int`` type.
 
 .. schema_example::
 
@@ -92,6 +96,10 @@ floating point numbers.
     In Python, "number" is analogous to the ``float`` type.
     --Ruby
     In Ruby, "number" is analogous to the ``Float`` type.
+    --Objective-C
+    In Objective-C, "number" is analogous to the ``double`` or ``NSNumber`` type.
+    --Swift
+    In Swift, "number" is analogous to the ``Double`` type.
 
 .. schema_example::
 

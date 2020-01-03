@@ -114,6 +114,60 @@ may go by different names.
     .. [#3] JavaScript does not have separate types for integer and
             floating-point.
 
+    --Objective-C
+    The following table maps from the names of JavaScript types to
+    their analogous types in Objective-C:
+
+    +----------+--------------------------+
+    |JavaScript|Objective-C               |
+    +----------+--------------------------+
+    |string    |NSString                  |
+    +----------+--------------------------+
+    |number    |NSNumber                  |
+    +----------+--------------------------+
+    |object    |NSDictionary              |
+    +----------+--------------------------+
+    |array     |NSArray                   |
+    +----------+--------------------------+
+    |boolean   |NSNumber                  |
+    |          |[#4]_                     |
+    +----------+--------------------------+
+    |null      |NSNull                    |
+    +----------+--------------------------+
+
+    .. rubric:: Footnotes
+
+    .. [#4] ``NSJSONSerialization`` represents JavaScript numbers and booleans
+    as ``NSNumber``. To distinguish them, we need to check an ``NSNumber``
+    value for identity (pointer equality) to ``@YES`` and ``@NO`` constants.
+
+    --Swift
+    The following table maps from the names of JavaScript types to
+    their analogous types in Swift:
+
+    +----------+----------------------+
+    |JavaScript|Swift                 |
+    +----------+----------------------+
+    |string    |String                |
+    +----------+----------------------+
+    |number    |Int/Double            |
+    |          |[#5]_                 |
+    +----------+----------------------+
+    |object    |Dictionary            |
+    +----------+----------------------+
+    |array     |Array                 |
+    +----------+----------------------+
+    |boolean   |Bool                  |
+    +----------+----------------------+
+    |null      |Optional              |
+    +----------+----------------------+
+
+    .. rubric:: Footnotes
+
+    .. [#5] While JavaScript does not have separate types for integer and
+            floating-point, Swift ``JSONDecoder`` throws an error on attempt
+            to decode ``Int`` from a non-integer number in JSON.
+
 With these simple data types, all kinds of structured data can be
 represented.  With that great flexibility comes great responsibility,
 however, as the same concept could be represented in myriad ways.  For

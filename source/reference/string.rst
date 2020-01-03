@@ -16,6 +16,10 @@ Unicode characters.
    2.x, and the ``str`` type on Python 3.x.
    --Ruby
    In Ruby, "string" is analogous to the ``String`` type.
+   --Objective-C
+   In Objective-C, "string" is analogous to the ``NSString`` type.
+   --Swift
+   In Swift, "string" is analogous to the ``String`` type.
 
 .. schema_example::
 

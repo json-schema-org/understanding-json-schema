@@ -32,6 +32,12 @@ conventionally referred to as a "property".
    everything, whereas in JSON it is used only to mean a mapping from
    string keys to values.
 
+   --Objective-C
+   In Objective-C, "objects" are analogous to the ``NSDictionary`` type.
+
+   --Swift
+   In Swift, "objects" are analogous to the ``Dictionary`` type.
+
 
 .. schema_example::
 

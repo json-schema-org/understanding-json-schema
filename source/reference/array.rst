@@ -17,7 +17,11 @@ array may be of a different type.
    standard library will always use Python lists to represent JSON
    arrays.
    --Ruby
-   In Ruby, "array" is analogous to a ``Array`` type.
+   In Ruby, "array" is analogous to the ``Array`` type.
+   --Objective-C
+   In Objective-C, "array" is analogous to the ``NSArray`` type.
+   --Swift
+   In Swift, "array" is analogous to the ``Array`` type.
 
 .. schema_example::
 

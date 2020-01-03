@@ -16,6 +16,10 @@ value: ``null``.
    In Python, ``null`` is analogous to ``None``.
    --Ruby
    In Ruby, ``null`` is analogous to ``nil``.
+   --Objective-C
+   In Objective-C, ``null`` is analogous to ``nil``.
+   --Swift
+   In Swift, ``null`` is analogous to ``nil``.
 
 .. schema_example::
 

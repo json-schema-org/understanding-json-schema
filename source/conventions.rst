@@ -34,6 +34,10 @@ JSON in a few different languages:
     --C
     For C, you may want to consider using `Jansson
     <http://www.digip.org/jansson/>`_ to read and write JSON.
+    --Objective-C
+    In Objective-C, JSON can be read using the ``NSJSONSerialization`` class.
+    --Swift
+    In Swift, JSON can be read using the ``JSONDecoder`` class.
 
 Draft-specific notes
 --------------------
