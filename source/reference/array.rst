@@ -12,7 +12,7 @@ array may be of a different type.
 .. language_specific::
 
    --Python
-   In Python, "array" is analogous to a ``list`` or ``tuple`` type,
+   In Python, "array" is analogous to the ``list`` or ``tuple`` type,
    depending on usage.  However, the ``json`` module in the Python
    standard library will always use Python lists to represent JSON
    arrays.
