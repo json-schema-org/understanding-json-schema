@@ -234,7 +234,7 @@ Resource identifiers
 - ``"iri-reference"``: |draft7| The internationalized equivalent of a
   "uri-reference", according to `RFC3987 <https://tools.ietf.org/html/rfc3987>`_
 
-If the values in the schema the ability to be relative to a particular source
+If the values in the schema have the ability to be relative to a particular source
 path (such as a link from a webpage), it is generally better practice to use
 ``"uri-reference"`` (or ``"iri-reference"``) rather than ``"uri"`` (or
 ``"iri"``). ``"uri"`` should only be used when the path must be absolute.
