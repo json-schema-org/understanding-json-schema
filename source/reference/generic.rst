@@ -1,6 +1,8 @@
 Generic keywords
 ================
 
+.. contents:: :local:
+
 This chapter lists some miscellaneous properties that are available
 for all JSON types.
 

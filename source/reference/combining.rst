@@ -6,6 +6,8 @@
 Combining schemas
 =================
 
+.. contents:: :local:
+
 JSON Schema includes a few keywords for combining schemas together.
 Note that this doesn't necessarily mean combining schemas from
 multiple files or JSON trees, though these facilities help to enable

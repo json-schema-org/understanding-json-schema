@@ -6,6 +6,8 @@
 array
 -----
 
+.. contents:: :local:
+
 Arrays are used for ordered elements.  In JSON, each element in an
 array may be of a different type.
 

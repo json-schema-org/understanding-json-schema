@@ -8,6 +8,8 @@
 Numeric types
 -------------
 
+.. contents:: :local:
+
 There are two numeric types in JSON Schema: `integer` and `number`.  They
 share the same validation keywords.
 

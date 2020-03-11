@@ -3,6 +3,8 @@
 Conventions used in this book
 =============================
 
+.. contents:: :local:
+
 Language-specific notes
 -----------------------
 

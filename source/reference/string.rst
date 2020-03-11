@@ -6,6 +6,8 @@
 string
 ------
 
+.. contents:: :local:
+
 The ``string`` type is used for strings of text.  It may contain
 Unicode characters.
 

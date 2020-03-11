@@ -6,6 +6,8 @@
 object
 ------
 
+.. contents:: :local:
+
 Objects are the mapping type in JSON.  They map "keys" to "values".
 In JSON, the "keys" must always be strings.  Each of these pairs is
 conventionally referred to as a "property".

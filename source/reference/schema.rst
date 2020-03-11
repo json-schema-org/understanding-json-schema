@@ -7,6 +7,8 @@
 The $schema keyword
 ===================
 
+.. contents:: :local:
+
 The ``$schema`` keyword is used to declare that a JSON fragment is
 actually a piece of JSON Schema.  It also declares which version of
 the JSON Schema standard that the schema was written against.
