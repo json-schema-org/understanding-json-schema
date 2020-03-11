@@ -19,4 +19,4 @@ tlmgr install cmap ec fancybox titlesec framed fancyvrb threeparttable mdwtools 
               changepage xcolor mdframed l3kernel l3packages etoolbox needspace \
               pgf times upquote helvetic fontaxes mweights ms float fncychap \
               tabulary capt-of eqparbox environ trimspaces latexmk ucs varwidth \
-              overlock xkeyval niceframe-type1
+              overlock xkeyval niceframe-type1 zref
