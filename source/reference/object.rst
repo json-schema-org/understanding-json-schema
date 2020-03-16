@@ -274,7 +274,7 @@ language.
       "001 invalid": "value"
     }
 
-Since object keys must always be strings anyway, so it is implied that the
+Since object keys must always be strings anyway, it is implied that the
 schema given to ``propertyNames`` is always at least::
 
     { "type": "string" }
