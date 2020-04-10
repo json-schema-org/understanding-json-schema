@@ -9,7 +9,7 @@ branches:
   only:
   - master
 install:
-- pip install sphinx
+- pip install "sphinx<2.0.0"
 - pip install sphinx_bootstrap_theme
 - pip install git+https://github.com/Julian/jsonschema@8cc6a5af0b5ab343707c0c71021c477651aa479b
 - bash -x ./install-texlive.sh
