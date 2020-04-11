@@ -31,7 +31,7 @@ example:
 - ``http://json-schema.org/draft-06/schema#``
 - ``http://json-schema.org/draft-04/schema#``
 
-Possibility to declare ``$schema`` without specific version (``http://json-schema.org/schema#``) was deprecated after Draft 4 and should no longer be used.
+The possibility to declare ``$schema`` without specific version (``http://json-schema.org/schema#``) was deprecated after Draft 4 and should no longer be used.
 
 Additionally, if you have extended the JSON Schema language to include
 your own custom keywords for validating values, you can use a custom
