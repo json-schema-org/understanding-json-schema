@@ -92,7 +92,7 @@ It's generally good practice to include it, though it is not required.
 
 .. schema_example::
 
-    { "$schema": "http://json-schema.org/schema#" }
+    { "$schema": "http://json-schema.org/draft/2019-09/schema#" }
 
 You can also use this keyword to declare which version of the JSON
 Schema specification that the schema is written to.  See `schema` for
