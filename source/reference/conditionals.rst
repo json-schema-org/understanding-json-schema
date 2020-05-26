@@ -28,14 +28,10 @@ entire schema:
 ==== ==== ==== ============
 if   then else whole schema
 ==== ==== ==== ============
-❌   ❌   ❌   ❌
-❌   ❌   ✅   ✅
-❌   ✅   ❌   ❌
-❌   ✅   ✅   ✅
-✅   ❌   ❌   ❌
-✅   ❌   ✅   ❌
-✅   ✅   ❌   ✅
-✅   ✅   ✅   ✅
+❌   ➖   ❌   ❌
+❌   ➖   ✅   ✅
+✅   ❌   ➖   ❌
+✅   ✅   ➖   ✅
 ==== ==== ==== ============
 
 For example, let's say you wanted to write a schema to handle addresses in the
@@ -64,7 +60,7 @@ letters and numbers alternate.
       "then": {
         "properties": { "postal_code": { "pattern": "[0-9]{5}(-[0-9]{4})?" } }
       },
-      "else": { 
+      "else": {
         "properties": { "postal_code": { "pattern": "[A-Z][0-9][A-Z] [0-9][A-Z][0-9]" } }
       }
     }
@@ -73,7 +69,7 @@ letters and numbers alternate.
       "street_address": "1600 Pennsylvania Avenue NW",
       "country": "United States of America",
       "postal_code": "20500"
-    } 
+    }
     --
     {
       "street_address": "24 Sussex Drive",
@@ -138,7 +134,7 @@ to the remaining postal codes of the world.
       "street_address": "1600 Pennsylvania Avenue NW",
       "country": "United States of America",
       "postal_code": "20500"
-    } 
+    }
     --
     {
       "street_address": "24 Sussex Drive",
