@@ -23,15 +23,15 @@ If ``if`` is valid, ``then`` must also be valid (and ``else`` is ignored.) If
 
 We can put this in the form of a truth table, showing the combinations of when
 ``if``, ``then``, and ``else`` are valid and the resulting validity of the
-entire schema:
+entire schema (1 = valid, 0 = invalid, x = don't care):
 
 ==== ==== ==== ============
 if   then else whole schema
 ==== ==== ==== ============
-❌   ➖   ❌   ❌
-❌   ➖   ✅   ✅
-✅   ❌   ➖   ❌
-✅   ✅   ➖   ✅
+0    x    0    0
+0    x    1    1
+1    0    x    0
+1    1    x    1
 ==== ==== ==== ============
 
 For example, let's say you wanted to write a schema to handle addresses in the
