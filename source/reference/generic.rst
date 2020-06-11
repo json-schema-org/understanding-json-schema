@@ -146,7 +146,7 @@ Constant values
 
 The ``const`` keyword is used to restrict a value to a single value.
 
-For example, to if you only support shipping to the United States for export reasons:
+For example, if you only support shipping to the United States for export reasons:
 
 .. schema_example::
 
