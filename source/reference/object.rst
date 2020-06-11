@@ -60,7 +60,7 @@ conventionally referred to as a "property".
     --X
     // Using non-strings as keys is invalid JSON:
     {
-        0.01 : "cm"
+        0.01 : "cm",
         1    : "m",
         1000 : "km"
     }
@@ -238,7 +238,7 @@ they don't provide their address or telephone number:
     // invalid:
     {
       "name": "William Shakespeare",
-      "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England",
+      "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England"
     }
 
 .. index::
