@@ -251,6 +251,9 @@ subschemas.  The following schema is equivalent to the one above:
       ]
     }
 
+.. warning::
+   Careful consideration should be taken when using multiple `oneOf` entries with nested data structures as the number of validation checks performed will increase exponentially resulting in poor performance.
+
 .. index::
    single: not
    single: combining schemas; not
