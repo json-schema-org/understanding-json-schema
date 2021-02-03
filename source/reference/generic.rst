@@ -45,10 +45,10 @@ required. There is no need to duplicate the ``default`` value in the
 .. schema_example::
 
     {
-      "title" : "Match anything",
-      "description" : "This is a schema that matches anything.",
-      "default" : "Default value",
-      "examples" : [
+      "title": "Match anything",
+      "description": "This is a schema that matches anything.",
+      "default": "Default value",
+      "examples": [
         "Anything",
         4035
       ]
@@ -72,6 +72,18 @@ allowed to attach any meaning or behavior to it whatsoever, and may even strip
 them at any time. Therefore, they are useful for leaving notes to future editors
 of a JSON schema, (which is quite likely your future self), but should not be
 used to communicate to users of the schema.
+
+.. schema_example::
+
+    {
+      "$comment": "Created by John Doe",
+      "type": "object",
+      "properties": {
+        "country": {
+          "$comment": "TODO: add enum of countries"
+        }
+      }
+    }
 
 .. index::
    single: enum
