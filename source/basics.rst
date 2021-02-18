@@ -92,11 +92,16 @@ It's generally good practice to include it, though it is not required.
 
 .. schema_example::
 
-    { "$schema": "http://json-schema.org/schema#" }
+    { "$schema": "http://json-schema.org/draft/2019-09/schema#" }
+    { "$schema": "http://json-schema.org/draft-07/schema#" }
 
-You can also use this keyword to declare which version of the JSON
-Schema specification that the schema is written to.  See `schema` for
-more information.
+The possibility to declare ``$schema`` without specific version (``http://json-schema.org/schema#``) was deprecated after Draft 4 and should no longer be used.
+
+Additionally, if you have extended the JSON Schema language to include
+your own custom keywords for validating values, you can use a custom
+URI for ``$schema``.  It must not be one of the predefined values, and
+should probably include a domain name you own.
+
 
 Declaring a unique identifier
 -----------------------------
