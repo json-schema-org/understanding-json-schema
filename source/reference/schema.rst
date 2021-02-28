@@ -17,7 +17,7 @@ It is recommended that all JSON Schemas have a ``$schema`` entry,
 which must be at the root.  Therefore most of the time, you'll want
 this at the root of your schema::
 
-    "$schema": "http://json-schema.org/draft/2019-09/schema#"
+    "$schema": "http://json-schema.org/draft/2019-09/schema"
 
 Advanced
 --------
@@ -26,7 +26,7 @@ You should declare that your schema was written against a specific version
 of the JSON Schema standard and include the draft name in the path, for
 example:
 
-- ``http://json-schema.org/draft/2019-09/schema#``
+- ``http://json-schema.org/draft/2019-09/schema``
 - ``http://json-schema.org/draft-07/schema#``
 - ``http://json-schema.org/draft-06/schema#``
 - ``http://json-schema.org/draft-04/schema#``
