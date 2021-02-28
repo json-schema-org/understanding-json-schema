@@ -93,7 +93,6 @@ It's generally good practice to include it, though it is not required.
 .. schema_example::
 
     { "$schema": "https://json-schema.org/draft/2019-09/schema" }
-    { "$schema": "http://json-schema.org/draft-07/schema#" }
 
 The possibility to declare ``$schema`` without specific version (``http://json-schema.org/schema#``) was deprecated after Draft 4 and should no longer be used.
 
