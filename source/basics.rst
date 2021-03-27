@@ -5,22 +5,20 @@ The basics
 
 .. contents:: :local:
 
-In :ref:`about`, we described what a schema is, and hopefully
-justified the need for schema languages.  Here, we proceed to
-write a simple JSON Schema.
+在 :ref:`about` 中, 我们介绍了什么是schema, 并阐明了schema语言的必要性。
+这里我们会写一个简单的JSON Schema.
 
 Hello, World!
 -------------
 
-When learning any new language, it's often helpful to start with the
-simplest thing possible.  In JSON Schema, an empty object is a
-completely valid schema that will accept any valid JSON.
+开始学一门新语言的时, 从一个尽可能简单的例子上手会对后续的学习很有帮助. 在JSON Schema中, 
+空对象就是一个最简单的schema, 可以校验通过任何合法的JSON数据.
 
 .. schema_example::
 
    { }
    --
-   // This accepts anything, as long as it's valid JSON
+   // 只要是合法的JSON就能通过校验
    42
    --
    "I'm a string"
@@ -29,14 +27,13 @@ completely valid schema that will accept any valid JSON.
 
 |draft6|
 
-You can also use ``true`` in place of the empty object to represent a schema
-that matches anything, or ``false`` for a schema that matches nothing.
+也可以使用 ``true`` 来代替空对象, 表示可以匹配任意对象， 或者用 ``false`` 来表示什么都不匹配.
 
 .. schema_example::
 
    true
    --
-   // This accepts anything, as long as it's valid JSON
+   // 只要是合法的JSON就能通过校验
    42
    --
    "I'm a string"
@@ -52,20 +49,15 @@ that matches anything, or ``false`` for a schema that matches nothing.
 The type keyword
 ----------------
 
-Of course, we wouldn't be using JSON Schema if we wanted to just
-accept any JSON document.  The most common thing to do in a JSON
-Schema is to restrict to a specific type.  The ``type`` keyword is
-used for that.
+当然, 如果我们想匹配任意的JSON文档就不会使用JSON Schema. 在JSON Schema中, 
+最常见的用法就是匹配特定类型. ``type`` 关键字就是用来限定类型的.
 
 .. note::
 
-    When this book refers to JSON Schema "keywords", it means the
-    "key" part of the key/value pair in an object.  Most of the work
-    of writing a JSON Schema involves mapping a special "keyword" to a
-    value within an object.
+   本书中提到JSON Schema的 "keywords" 是指schema对象key/value对中 "key" 的那部分.
+   编写JSON Schema大部分的工作是给特定的 "keyword" 关联特定的 value.
 
-For example, in the following, only strings are
-accepted:
+如下是一个限定string类型的例子：
 
 .. schema_example::
 
@@ -75,43 +67,38 @@ accepted:
    --X
    42
 
-The ``type`` keyword is described in more detail in `type`.
+关于 ``type`` 关键字更多的细节可以参考 `type`.
 
 Declaring a JSON Schema
 -----------------------
 
-Since JSON Schema is itself JSON, it's not always easy to tell when
-something is JSON Schema or just an arbitrary chunk of JSON.  The
-``$schema`` keyword is used to declare that something is JSON Schema.
-It's generally good practice to include it, though it is not required.
+由于 JSON Schema 本身就是 JSON, 因此很难区分 JSON Schema 和 JSON.
+``$schema`` 关键字就是用来标记当前是一个JSON Schema. 虽然 ``$schema`` 关键字不是一个必填项，
+但是一般情况下还是推荐加上 ``$schema``.
 
 .. note::
-    For brevity, the ``$schema`` keyword isn't included in most of the
-    examples in this book, but it should always be used in the real
-    world.
+    为了简单起见，本书中大部分的案例都会忽略 ``$schema`` , 但是生产应用中还是应该加上 ``$schema``.
 
 .. schema_example::
 
     { "$schema": "http://json-schema.org/schema#" }
 
-You can also use this keyword to declare which version of the JSON
-Schema specification that the schema is written to.  See `schema` for
-more information.
+还可以使用 ``$schema`` 字段来申明当前使用的是哪个版本的 JSON Schema 规范. 
+更多细节参考 `schema` .
 
 Declaring a unique identifier
 -----------------------------
 
-It is also best practice to include an ``$id`` property as a unique
-identifier for each schema.  For now, just set it to a URL at a domain
-you control, for example::
+使用 ``$id`` 属性作为 schame 的唯一标志符也是最佳实践. 现在只需要把 ``$id`` 
+设置为您域名下一个URL即可，比如::
 
    { "$id": "http://yourdomain.com/schemas/myschema.json" }
 
-The details of `id` become more apparent when you start `structuring`.
+当开始 `structuring` 的时候, `id` 相关细节会更加清楚.
 
 |draft6|
 
 .. draft_specific::
 
     --Draft 4
-    In Draft 4, ``$id`` is just ``id`` (without the dollar-sign).
+    在Draft 4中, ``$id`` 就是 ``id`` (没有$符).
