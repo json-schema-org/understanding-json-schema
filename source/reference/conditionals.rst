@@ -38,7 +38,7 @@ T    T    n/a  T
 T    F    n/a  F
 F    n/a  T    T
 F    n/a  F    F
-     n/a  n/a  T
+n/a  n/a  n/a  T
 ==== ==== ==== ============
 
 For example, let's say you wanted to write a schema to handle addresses in the
