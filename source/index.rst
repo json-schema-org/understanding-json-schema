@@ -46,7 +46,7 @@ validator---just yet.
   resources, including the official specification and tools for
   working with JSON Schema from various programming languages.
 
-- `jsonschema.net <http://jsonschema.net>`__ is an online application
+- `jsonschema.dev <https://jsonschema.dev>`__ is an online application
   run your own JSON schemas against example documents.  If you want to
   try things out without installing any software, it's a very handy
   resource.
