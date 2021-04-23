@@ -11,12 +11,12 @@ Media: string-encoding non-JSON data
 
 |draft7|
 
-JSON schema has a set of keywords to describe and optionally validate non-JSON
-data stored inside JSON strings. Since it would be difficult to write validators
-for many media types, JSON schema validators are not required to validate the
-contents of JSON strings based on these keywords. At the time of this writing,
-it appears that most of them do not. However, these keywords are still useful
-for an application that consumes validated JSON.
+JSON schema has a set of keywords to describe and optionally validate
+non-JSON data stored inside JSON strings. Since it would be difficult
+to write validators for many media types, JSON schema validators are
+not required to validate the contents of JSON strings based on these
+keywords. However, these keywords are still useful for an application
+that consumes validated JSON.
 
 .. index::
    single: contentMediaType
@@ -87,7 +87,7 @@ The following schema indicates that a string contains a `PNG
       "type": "string",
       "contentEncoding": "base64",
       "contentMediaType": "image/png"
-    } 
+    }
     --
     "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA..."
 
