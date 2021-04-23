@@ -40,15 +40,15 @@ JSON in a few different languages:
 Draft-specific notes
 --------------------
 
-The JSON Schema standard has been through a number of revisions or "drafts". The
-most important are Draft 7, the most recent at the time of this writing, and
-Draft 4, on which a lot of production software was built, and the draft for
-which an earlier version of this book was written.
+The JSON Schema standard has been through a number of revisions or
+"drafts". The the current version is Draft 7, but Draft 4 is still
+widely used as well.
 
-The text is written to encourage the use of Draft 7 and gives priority to the
-latest conventions and features, but where it differs from earlier drafts, those
-differences are highlighted in special call-outs. If you only wish to target
-Draft 7, you can safely ignore those sections.
+The text is written to encourage the use of Draft 7 and gives priority
+to the latest conventions and features, but where it differs from
+earlier drafts, those differences are highlighted in special
+call-outs. If you only wish to target Draft 7, you can safely ignore
+those sections.
 
 |draft7|
 
