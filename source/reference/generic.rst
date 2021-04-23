@@ -18,37 +18,44 @@ for all JSON types.
 Annotations
 -----------
 
-JSON Schema includes a few keywords, ``title``, ``description``, ``default``,
-``examples`` that aren't strictly used for validation, but are used to describe
-parts of a schema.
+JSON Schema includes a few keywords, ``title``, ``description``,
+``default``, ``examples`` that aren't strictly used for validation,
+but are used to describe parts of a schema.
 
-None of these "annotation" keywords are required, but they are encouraged for
-good practice, and can make your schema "self-documenting".
+None of these "annotation" keywords are required, but they are
+encouraged for good practice, and can make your schema
+"self-documenting".
 
-The ``title`` and ``description`` keywords must be strings. A "title" will
-preferably be short, whereas a "description" will provide a more lengthy
-explanation about the purpose of the data described by the schema.
+The ``title`` and ``description`` keywords must be strings. A "title"
+will preferably be short, whereas a "description" will provide a more
+lengthy explanation about the purpose of the data described by the
+schema.
 
-The ``default`` keyword specifies a default value for an item.  JSON
-processing tools may use this information to provide a default value
-for a missing key/value pair, though many JSON schema validators
-simply ignore the ``default`` keyword.  It should validate against the
-schema in which it resides, but that isn't required.
+The ``default`` keyword specifies a default value. This value is not
+used to fill in missing values during the validation process.
+Non-validation tools such as documentation generators or form
+generators may use this value to give hints to users about how to use
+a value. However, ``default`` is typically used to express that if a
+value is missing, then the value is semantically the same as if the
+value was present with the default value. The value of ``default``
+should validate against the schema in which it resides, but that isn't
+required.
 
-|draft6| The ``examples`` keyword is a place to provide an array of examples
-that validate against the schema. This isn't used for validation, but may help
-with explaining the effect and purpose of the schema to a reader. Each entry
-should validate against the schema in which is resides, but that isn't strictly
-required. There is no need to duplicate the ``default`` value in the
-``examples`` array, since ``default`` will be treated as another example.
+|draft6| The ``examples`` keyword is a place to provide an array of
+examples that validate against the schema. This isn't used for
+validation, but may help with explaining the effect and purpose of the
+schema to a reader. Each entry should validate against the schema in
+which is resides, but that isn't strictly required. There is no need
+to duplicate the ``default`` value in the ``examples`` array, since
+``default`` will be treated as another example.
 
 .. schema_example::
 
     {
-      "title" : "Match anything",
-      "description" : "This is a schema that matches anything.",
-      "default" : "Default value",
-      "examples" : [
+      "title": "Match anything",
+      "description": "This is a schema that matches anything.",
+      "default": "Default value",
+      "examples": [
         "Anything",
         4035
       ]
@@ -65,13 +72,13 @@ Comments
 
 |draft7| ``$comment``
 
-The ``$comment`` keyword is strictly intended for adding comments to the JSON
-schema source. Its value must always be a string. Unlike the annotations
-``title``, ``description`` and ``examples``, JSON schema implementations aren't
-allowed to attach any meaning or behavior to it whatsoever, and may even strip
-them at any time. Therefore, they are useful for leaving notes to future editors
-of a JSON schema, (which is quite likely your future self), but should not be
-used to communicate to users of the schema.
+The ``$comment`` keyword is strictly intended for adding comments to
+a schema. Its value must always be a string. Unlike the annotations
+``title``, ``description``, and ``examples``, JSON schema
+implementations aren't allowed to attach any meaning or behavior to it
+whatsoever, and may even strip them at any time. Therefore, they are
+useful for leaving notes to future editors of a JSON schema, but
+should not be used to communicate to users of the schema.
 
 .. index::
    single: enum
@@ -91,7 +98,6 @@ The following is an example for validating street light colors:
 .. schema_example::
 
    {
-     "type": "string",
      "enum": ["red", "amber", "green"]
    }
    --
@@ -117,22 +123,6 @@ different types.  Let's extend the example to use ``null`` to indicate
    --X
    0
 
-However, in most cases, the elements in the ``enum`` array should also
-be valid against the enclosing schema:
-
-.. schema_example::
-
-   {
-     "type": "string",
-     "enum": ["red", "amber", "green", null]
-   }
-   --
-   "red"
-   --X
-   // This is in the ``enum``, but it's invalid against ``{ "type":
-   // "string" }``, so it's ultimately invalid:
-   null
-
 .. index::
    single: const
    single: constant values
@@ -146,7 +136,8 @@ Constant values
 
 The ``const`` keyword is used to restrict a value to a single value.
 
-For example, if you only support shipping to the United States for export reasons:
+For example, if you only support shipping to the United States for
+export reasons:
 
 .. schema_example::
 
@@ -162,8 +153,3 @@ For example, if you only support shipping to the United States for export reason
    --X
    { "country": "Canada" }
 
-It should be noted that ``const`` is merely syntactic sugar for an ``enum`` with a single element, therefore the following are equivalent::
-
-  { "const": "United States of America" }
-
-  { "enum": [ "United States of America" ] }
