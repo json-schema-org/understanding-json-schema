@@ -40,29 +40,29 @@ conventionally referred to as a "property".
     { "type": "object" }
     --
     {
-       "key"         : "value",
-       "another_key" : "another_value"
+       "key": "value",
+       "another_key": "another_value"
     }
     --
     {
-        "Sun"     : 1.9891e30,
-        "Jupiter" : 1.8986e27,
-        "Saturn"  : 5.6846e26,
-        "Neptune" : 10.243e25,
-        "Uranus"  : 8.6810e25,
-        "Earth"   : 5.9736e24,
-        "Venus"   : 4.8685e24,
-        "Mars"    : 6.4185e23,
-        "Mercury" : 3.3022e23,
-        "Moon"    : 7.349e22,
-        "Pluto"   : 1.25e22
+        "Sun": 1.9891e30,
+        "Jupiter": 1.8986e27,
+        "Saturn": 5.6846e26,
+        "Neptune": 10.243e25,
+        "Uranus": 8.6810e25,
+        "Earth": 5.9736e24,
+        "Venus": 4.8685e24,
+        "Mars": 6.4185e23,
+        "Mercury": 3.3022e23,
+        "Moon": 7.349e22,
+        "Pluto": 1.25e22
     }
     --X
     // Using non-strings as keys is invalid JSON:
     {
-        0.01 : "cm",
-        1    : "m",
-        1000 : "km"
+        0.01: "cm",
+        1: "m",
+        1000: "km"
     }
     --X
     "Not an object"
@@ -73,17 +73,22 @@ conventionally referred to as a "property".
 .. index::
    single: object; properties
    single: properties
-   single: additionalProperties
 
-.. _additionalProperties:
+.. _properties:
 
 Properties
 ''''''''''
 
 The properties (key-value pairs) on an object are defined using the
 ``properties`` keyword.  The value of ``properties`` is an object,
-where each key is the name of a property and each value is a JSON
-schema used to validate that property.
+where each key is the name of a property and each value is a schema
+used to validate that property. Any property that doesn't match any of
+the property names in the ``properties`` keyword is ignored by this
+keyword.
+
+.. note::
+   See `additionalProperties` for how to disallow properties that
+   don't match any of the property names in ``properties``.
 
 For example, let's say we want to define a simple schema for an
 address made up of a number, street name and street type:
@@ -93,11 +98,9 @@ address made up of a number, street name and street type:
     {
       "type": "object",
       "properties": {
-        "number":      { "type": "number" },
+        "number": { "type": "number" },
         "street_name": { "type": "string" },
-        "street_type": { "type": "string",
-                         "enum": ["Street", "Avenue", "Boulevard"]
-                       }
+        "street_type": { "enum": ["Street", "Avenue", "Boulevard"] }
       }
     }
     --
@@ -114,19 +117,84 @@ address made up of a number, street name and street type:
     { }
     --
     // By default, providing additional properties is valid:
-    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue",
-      "direction": "NW" }
+    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue", "direction": "NW" }
+
+.. index::
+   single: object; properties; regular expression
+   single: patternProperties
+
+.. _patternProperties:
+
+Pattern Properties
+''''''''''''''''''
+
+Sometimes you want to say that, given a particular kind of property
+name, the value should match a particular schema. That's where
+``patternProperties`` comes in: it maps regular expressions to
+schemas. If a property name matches the given regular expression, the
+property value must validate against the corresponding schema.
+
+.. note::
+   Regular expressions are not anchored. This means that when defining
+   the regular expressions for ``patternProperties``, it's important
+   to note that the expression may match anywhere within the property
+   name. For example, the regular expression ``"p"`` will match any
+   property name with a ``p`` in it, such as ``"apple"``, not just a
+   property whose name is simply ``"p"``. It's therefore usually less
+   confusing to surround the regular expression in ``^...$``, for
+   example, ``"^p$"``.
+
+In this example, any properties whose names start with the prefix
+``S_`` must be strings, and any with the prefix ``I_`` must be
+integers. Any properties that do not match either regular expression
+are ignored.
+
+.. schema_example::
+
+    {
+      "type": "object",
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "integer" }
+      }
+    }
+    --
+    { "S_25": "This is a string" }
+    --
+    { "I_0": 42 }
+    --X
+    // If the name starts with ``S_``, it must be a string
+    { "S_0": 42 }
+    --X
+    // If the name starts with ``I_``, it must be an integer
+    { "I_42": "This is a string" }
+    --
+    // This is a key that doesn't match any of the regular expressions:
+    { "keyword": "value" }
+
+
+.. index::
+   single: object; properties
+   single: additionalProperties
+
+.. _additionalProperties:
+
+Additional Properties
+'''''''''''''''''''''
 
 The ``additionalProperties`` keyword is used to control the handling
 of extra stuff, that is, properties whose names are not listed in the
-``properties`` keyword.  By default any additional properties are
-allowed.
+``properties`` keyword or match any of the regular expressions in the
+``patternProperties`` keyword. By default any additional properties
+are allowed.
 
-The ``additionalProperties`` keyword may be either a boolean or an
-object.  If ``additionalProperties`` is a boolean and set to ``false``, no
-additional properties will be allowed.
+The value of the ``additionalProperties`` keyword is a schema that
+will be used to validate any properties in the instance that are not
+matched by ``properties`` or ``patternProperties``. Setting the
+``additionalProperties`` schema to ``false`` means no additional
+properties will be allowed.
 
-Reusing the example above, but this time setting
+Reusing the example from `properties`, but this time setting
 ``additionalProperties`` to ``false``.
 
 .. schema_example::
@@ -134,11 +202,9 @@ Reusing the example above, but this time setting
     {
       "type": "object",
       "properties": {
-        "number":      { "type": "number" },
+        "number": { "type": "number" },
         "street_name": { "type": "string" },
-        "street_type": { "type": "string",
-                         "enum": ["Street", "Avenue", "Boulevard"]
-                       }
+        "street_type": { "enum": ["Street", "Avenue", "Boulevard"] }
       },
       "additionalProperties": false
     }
@@ -147,25 +213,20 @@ Reusing the example above, but this time setting
     --X
     // Since ``additionalProperties`` is ``false``, this extra
     // property "direction" makes the object invalid:
-    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue",
-      "direction": "NW" }
+    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue", "direction": "NW" }
 
-If ``additionalProperties`` is an object, that object is a schema that will
-be used to validate any additional properties not listed in ``properties``.
-
-For example, one can allow additional properties, but only if they are
-each a string:
+You can use non-boolean schemas to put more complex constraints on the
+additional properties of an instance. For example, one can allow
+additional properties, but only if they are each a string:
 
 .. schema_example::
 
     {
       "type": "object",
       "properties": {
-        "number":      { "type": "number" },
+        "number": { "type": "number" },
         "street_name": { "type": "string" },
-        "street_type": { "type": "string",
-                         "enum": ["Street", "Avenue", "Boulevard"]
-                       }
+        "street_type": { "enum": ["Street", "Avenue", "Boulevard"] }
       },
       "additionalProperties": { "type": "string" }
     }
@@ -173,13 +234,39 @@ each a string:
     { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue" }
     --
     // This is valid, since the additional property's value is a string:
-    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue",
-      "direction": "NW" }
+    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue", "direction": "NW" }
     --X
-    // This is invalid, since the additional property's value is not a
-    // string:
-    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue",
-      "office_number": 201  }
+    // This is invalid, since the additional property's value is not a string:
+    { "number": 1600, "street_name": "Pennsylvania", "street_type": "Avenue", "office_number": 201 }
+
+You can use ``additionalProperties`` with a combination of
+``properties`` and ``patternProperties``. In the following example,
+based on the example from `patternProperties`, we add a ``"builtin"``
+property, which must be a number, and declare that all additional
+properties (that are neither defined by ``properties`` nor matched by
+``patternProperties``) must be strings:
+
+.. schema_example::
+
+    {
+      "type": "object",
+      "properties": {
+        "builtin": { "type": "number" }
+      },
+      "patternProperties": {
+        "^S_": { "type": "string" },
+        "^I_": { "type": "integer" }
+      },
+      "additionalProperties": { "type": "string" }
+    }
+    --
+    { "builtin": 42 }
+    --
+    // This is a key that doesn't match any of the regular expressions:
+    { "keyword": "value" }
+    --X
+    // It must be a string:
+    { "keyword": 42 }
 
 
 .. index::
@@ -212,9 +299,9 @@ they don't provide their address or telephone number:
     {
       "type": "object",
       "properties": {
-        "name":      { "type": "string" },
-        "email":     { "type": "string" },
-        "address":   { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
         "telephone": { "type": "string" }
       },
       "required": ["name", "email"]
@@ -234,16 +321,26 @@ they don't provide their address or telephone number:
       "authorship": "in question"
     }
     --X
-    // Missing the required "email" property makes the JSON document
-    // invalid:
+    // Missing the required "email" property makes the JSON document invalid:
     {
       "name": "William Shakespeare",
-      "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England"
+      "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England",
+    }
+    --X
+    // In JSON a property with value ``null`` is not equivalent to the property
+    // not being present. This fails because ``null`` is not of type "string",
+    // it's of type "null"
+    {
+      "name": "William Shakespeare",
+      "address": "Henley Street, Stratford-upon-Avon, Warwickshire, England",
+      "email": null
     }
 
 .. index::
    single: object; property names
    single: propertyNames
+
+.. _propertyNames:
 
 Property names
 ''''''''''''''
@@ -318,13 +415,10 @@ must be a non-negative integer.
 Dependencies
 ''''''''''''
 
-.. note::
-    This is an advanced feature of JSON Schema.  Windy road ahead.
-
 The ``dependencies`` keyword allows the schema of the object to change
 based on the presence of certain special properties.
 
-There are two forms of dependencies in JSON Schema:
+There are two forms of ``dependencies`` in JSON Schema:
 
 - **Property dependencies** declare that certain other properties must
   be present if a given property is present.
@@ -343,7 +437,7 @@ billing address would not be required.  We represent this dependency
 of one property on another using the ``dependencies`` keyword. The
 value of the ``dependencies`` keyword is an object.  Each entry in the
 object maps from the name of a property, *p*, to an array of strings
-listing properties that are required whenever *p* is present.
+listing properties that are required if *p* is present.
 
 In the following example, whenever a ``credit_card`` property is
 provided, a ``billing_address`` property must also be present:
@@ -372,15 +466,13 @@ provided, a ``billing_address`` property must also be present:
       "billing_address": "555 Debtor's Lane"
     }
     --X
-    // This instance has a ``credit_card``, but it's missing a
-    // ``billing_address``.
+    // This instance has a ``credit_card``, but it's missing a ``billing_address``.
     {
       "name": "John Doe",
       "credit_card": 5555555555555555
     }
     --
-    // This is okay, since we have neither a ``credit_card``, or a
-    // ``billing_address``.
+    // This is okay, since we have neither a ``credit_card``, or a ``billing_address``.
     {
       "name": "John Doe"
     }
@@ -414,15 +506,13 @@ you can, of course, define the bidirectional dependencies explicitly:
       }
     }
     --X
-    // This instance has a ``credit_card``, but it's missing a
-    // ``billing_address``.
+    // This instance has a ``credit_card``, but it's missing a ``billing_address``.
     {
       "name": "John Doe",
       "credit_card": 5555555555555555
     }
     --X
-    // This has a ``billing_address``, but is missing a
-    // ``credit_card``.
+    // This has a ``billing_address``, but is missing a ``credit_card``.
     {
       "name": "John Doe",
       "billing_address": "555 Debtor's Lane"
@@ -433,8 +523,8 @@ Schema dependencies
 ^^^^^^^^^^^^^^^^^^^
 
 Schema dependencies work like property dependencies, but instead of
-just specifying other required properties, they can extend the schema
-to have other constraints.
+just specifying required properties, they specify a schema that must
+be valid against the instance.
 
 For example, here is another way to write the above:
 
@@ -481,95 +571,3 @@ For example, here is another way to write the above:
       "billing_address": "555 Debtor's Lane"
     }
 
-
-.. index::
-   single: object; regular expression
-   single: patternProperties
-
-.. _patternProperties:
-
-Pattern Properties
-''''''''''''''''''
-
-As we saw above, ``additionalProperties`` can restrict the object so
-that it either has no additional properties that weren't explicitly
-listed, or it can specify a schema for any additional properties on
-the object.  Sometimes that isn't enough, and you may want to restrict
-the names of the extra properties, or you may want to say that, given
-a particular kind of name, the value should match a particular schema.
-That's where ``patternProperties`` comes in: it is a new keyword that
-maps from regular expressions to schemas.  If an additional property
-matches a given regular expression, it must also validate against the
-corresponding schema.
-
-.. note::
-    When defining the regular expressions, it's important to note that
-    the expression may match anywhere within the property name.  For
-    example, the regular expression ``"p"`` will match any property
-    name with a ``p`` in it, such as ``"apple"``, not just a property
-    whose name is simply ``"p"``.  It's therefore usually less
-    confusing to surround the regular expression in ``^...$``, for
-    example, ``"^p$"``.
-
-In this example, any additional properties whose names start with the
-prefix ``S_`` must be strings, and any with the prefix ``I_`` must be
-integers.  Any properties explicitly defined in the ``properties``
-keyword are also accepted, and any additional properties that do not
-match either regular expression are forbidden.
-
-.. schema_example::
-
-    {
-      "type": "object",
-      "patternProperties": {
-        "^S_": { "type": "string" },
-        "^I_": { "type": "integer" }
-      },
-      "additionalProperties": false
-    }
-    --
-    { "S_25": "This is a string" }
-    --
-    { "I_0": 42 }
-    --X
-    // If the name starts with ``S_``, it must be a string
-    { "S_0": 42 }
-    --X
-    // If the name starts with ``I_``, it must be an integer
-    { "I_42": "This is a string" }
-    --X
-    // This is a key that doesn't match any of the regular
-    // expressions:
-    { "keyword": "value" }
-
-``patternProperties`` can be used in conjunction with
-``additionalProperties``.  In that case, ``additionalProperties`` will
-refer to any properties that are not explicitly listed in
-``properties`` and don't match any of the ``patternProperties``.  In
-the following example, based on above, we add a ``"builtin"``
-property, which must be a number, and declare that all additional
-properties (that are neither built-in or matched by
-``patternProperties``) must be strings:
-
-.. schema_example::
-
-    {
-      "type": "object",
-      "properties": {
-        "builtin": { "type": "number" }
-      },
-      "patternProperties": {
-        "^S_": { "type": "string" },
-        "^I_": { "type": "integer" }
-      },
-      "additionalProperties": { "type": "string" }
-    }
-    --
-    { "builtin": 42 }
-    --
-    // This is a key that doesn't match any of the regular
-    // expressions:
-    { "keyword": "value" }
-    --X
-    // It must be a string:
-    { "keyword": 42 }
