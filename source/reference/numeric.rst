@@ -24,7 +24,12 @@ share the same validation keywords.
 integer
 '''''''
 
-The ``integer`` type is used for integral numbers.
+The ``integer`` type is used for integral numbers. JSON does not have
+distinct types for integers and floating-point values. Therefore, the
+presence or absence of a decimal point is not enough to distinguish
+between integers and non-integers. For example, ``1`` and ``1.0`` are
+two ways to represent the same value in JSON. JSON Schema considers
+that value an integer no matter which representation was used.
 
 .. language_specific::
 
@@ -40,45 +45,15 @@ The ``integer`` type is used for integral numbers.
     42
     --
     -1
+    --
+    // Numbers with a zero fractional part are considered integers
+    1.0
     --X
     // Floating point numbers are rejected:
     3.1415926
     --X
     // Numbers as strings are rejected:
     "42"
-
-.. warning::
-
-    The precise treatment of the "integer" type may depend on the
-    implementation of your JSON Schema validator.  JavaScript (and
-    thus also JSON) does not have distinct types for integers and
-    floating-point values.  Therefore, JSON Schema can not use type
-    alone to distinguish between integers and non-integers.  The JSON
-    Schema specification recommends, but does not require, that
-    validators use the mathematical value to determine whether a
-    number is an integer, and not the type alone.  Therefore, there is
-    some disagreement between validators on this point.  For example,
-    a JavaScript-based validator may accept ``1.0`` as an integer,
-    whereas the Python-based `jsonschema
-    <https://pypi.python.org/pypi/jsonschema>`__ does not.
-
-Clever use of the ``multipleOf`` keyword (see `multiples`) can be used
-to get around this discrepancy.  For example, the following likely has
-the same behavior on all JSON Schema implementations:
-
-.. schema_example::
-
-    { "type": "number", "multipleOf": 1.0 }
-    --
-    42
-    --
-    42.0
-    --X
-    3.14156926
-
-
-.. index::
-   single: number
 
 .. _number:
 
@@ -127,7 +102,7 @@ Numbers can be restricted to a multiple of a given number, using the
 .. schema_example::
 
     {
-        "type"       : "number",
+        "type": "number",
         "multipleOf" : 10
     }
     --
@@ -188,7 +163,7 @@ While you can specify both of ``minimum`` and ``exclusiveMinimum`` or both of
     // Greater than ``maximum``:
     101
 
-.. language_specific::
+.. draft_specific::
 
     --Draft 4
     In JSON Schema Draft 4, ``exclusiveMinimum`` and ``exclusiveMaximum`` work
