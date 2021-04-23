@@ -38,13 +38,10 @@ array may be of a different type.
    single: additionalItems
    single: contains
 
+.. _items:
+
 Items
 '''''
-
-By default, the elements of the array may be anything at all.
-However, it's often useful to validate the items of the array against
-some schema as well.  This is done using the ``items``,
-``additionalItems``, and ``contains`` keywords.
 
 There are two ways in which arrays are generally used in JSON:
 
@@ -94,30 +91,6 @@ number:
    // The empty array is always valid:
    []
 
-|draft6|
-
-While the ``items`` schema must be valid for **every** item in the array, the
-``contains`` schema only needs to validate against one or more items in the
-array.
-
-.. schema_example::
-
-   {
-      "type": "array",
-      "contains": {
-        "type": "number"
-      }
-   }
-   --
-   // A single "number" is enough to make this pass:
-   ["life", "universe", "everything", 42]
-   --X
-   // But if we have no number, it fails:
-   ["life", "universe", "everything", "forty-two"]
-   --
-   // All numbers is, of course, also okay:
-   [1, 2, 3, 4, 5]
-
 .. index::
    single: array; tuple validation
 
@@ -163,20 +136,10 @@ Here's the example schema:
     {
       "type": "array",
       "items": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "enum": ["Street", "Avenue", "Boulevard"]
-        },
-        {
-          "type": "string",
-          "enum": ["NW", "NE", "SW", "SE"]
-        }
+        { "type": "number" },
+        { "type": "string" },
+        { "enum": ["Street", "Avenue", "Boulevard"] },
+        { "enum": ["NW", "NE", "SW", "SE"] }
       ]
     }
     --
@@ -194,8 +157,30 @@ Here's the example schema:
     // And, by default, it's also okay to add additional items to end:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
+.. index::
+   single: array; tuple validation; additionalItems
+   single: additionalItems
+
+.. _additionalItems:
+
+Addtional Items
+'''''''''''''''
+
 The ``additionalItems`` keyword controls whether it's valid to have
-additional items in the array beyond what is defined in ``items``.
+additional items in a tuple beyond what is defined in ``items``. The
+value of the ``additionalItems`` keyword is a schema that all
+additional items must pass in order for the keyword to validate. This
+keyword is ignored if there is not a "tuple validation" ``items``
+keyword present in the same schema.
+
+.. draft_specific::
+
+   --Draft 4
+   In Draft 4, ``additionalItems`` does not require a "tuple
+   validation" ``items`` keyword to be present. There are no
+   constraints on any of the items, so all items are considered to be
+   additional items.
+
 Here, we'll reuse the example schema above, but set
 ``additionalItems`` to ``false``, which has the effect of disallowing
 extra items in the array.
@@ -205,20 +190,10 @@ extra items in the array.
     {
       "type": "array",
       "items": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "enum": ["Street", "Avenue", "Boulevard"]
-        },
-        {
-          "type": "string",
-          "enum": ["NW", "NE", "SW", "SE"]
-        }
+        { "type": "number" },
+        { "type": "string" },
+        { "enum": ["Street", "Avenue", "Boulevard"] },
+        { "enum": ["NW", "NE", "SW", "SE"] }
       ],
       "additionalItems": false
     }
@@ -232,48 +207,76 @@ extra items in the array.
     // extra items:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
-The ``additionalItems`` keyword may also be a schema to validate against every
-additional item in the array. In that case, we could say that additional items
-are allowed, as long as they are all strings:
+You can express more complex constraints by using a non-boolean schema
+to constrain what value additional items can have. In that case, we
+could say that additional items are allowed, as long as they are all
+strings:
 
 .. schema_example::
 
     {
       "type": "array",
       "items": [
-        {
-          "type": "number"
-        },
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "enum": ["Street", "Avenue", "Boulevard"]
-        },
-        {
-          "type": "string",
-          "enum": ["NW", "NE", "SW", "SE"]
-        }
+        { "type": "number" },
+        { "type": "string" },
+        { "enum": ["Street", "Avenue", "Boulevard"] },
+        { "enum": ["NW", "NE", "SW", "SE"] }
       ],
       "additionalItems": { "type": "string" }
     }
     --
-    // Extra string items are ok...
+    // Extra string items are ok ...
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
     --X
-    // ..but not anything else
+    // ... but not anything else
     [1600, "Pennsylvania", "Avenue", "NW", 20500]
 
 .. note::
 
-    ``additionalItems`` doesn't make sense if you're doing "list validation"
-    (``items`` is an object), and is ignored in the case.
+    Because "list validation" (``items`` is an object) applies to all
+    items in the list three are no additional items and therefore
+    ``additionalItems`` has nothing to apply its schema to and will
+    have no effect.
+
+.. index::
+   single: array; contains
+   single: contains
+
+.. _contains:
+
+Contains
+''''''''
+
+|draft6|
+
+While the ``items`` schema must be valid for every item in the array, the
+``contains`` schema only needs to validate against one or more items in the
+array.
+
+.. schema_example::
+
+   {
+      "type": "array",
+      "contains": {
+        "type": "number"
+      }
+   }
+   --
+   // A single "number" is enough to make this pass:
+   ["life", "universe", "everything", 42]
+   --X
+   // But if we have no number, it fails:
+   ["life", "universe", "everything", "forty-two"]
+   --
+   // All numbers is, of course, also okay:
+   [1, 2, 3, 4, 5]
 
 .. index::
    single: array; length
    single: minItems
    single: maxItems
+
+.. _length:
 
 Length
 ''''''
@@ -305,6 +308,8 @@ non-negative number.  These keywords work whether doing
 .. index::
    single: array; uniqueness
    single: uniqueItems
+
+.. _uniqueItems:
 
 Uniqueness
 ''''''''''
