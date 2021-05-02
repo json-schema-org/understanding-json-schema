@@ -44,7 +44,7 @@ required.
 examples that validate against the schema. This isn't used for
 validation, but may help with explaining the effect and purpose of the
 schema to a reader. Each entry should validate against the schema in
-which is resides, but that isn't strictly required. There is no need
+which it resides, but that isn't strictly required. There is no need
 to duplicate the ``default`` value in the ``examples`` array, since
 ``default`` will be treated as another example.
 
@@ -162,4 +162,3 @@ export reasons:
    { "country": "United States of America" }
    --X
    { "country": "Canada" }
-
