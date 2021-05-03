@@ -12,19 +12,18 @@ for all JSON types.
    single: description
    single: default
    single: examples
+   single: readOnly
+   single: writeOnly
 
 .. _annotation:
 
 Annotations
 -----------
 
-JSON Schema includes a few keywords, ``title``, ``description``,
-``default``, ``examples`` that aren't strictly used for validation,
-but are used to describe parts of a schema.
-
-None of these "annotation" keywords are required, but they are
-encouraged for good practice, and can make your schema
-"self-documenting".
+JSON Schema includes a few keywords, that aren't strictly used for
+validation, but are used to describe parts of a schema. None of these
+"annotation" keywords are required, but they are encouraged for good
+practice, and can make your schema "self-documenting".
 
 The ``title`` and ``description`` keywords must be strings. A "title"
 will preferably be short, whereas a "description" will provide a more
@@ -49,6 +48,15 @@ which is resides, but that isn't strictly required. There is no need
 to duplicate the ``default`` value in the ``examples`` array, since
 ``default`` will be treated as another example.
 
+|draft7| The boolean keywords ``readOnly`` and ``writeOnly`` are
+typically used in an API context. ``readOnly`` indicates that a value
+should not be modified. It could be used to indicate that a ``PUT``
+request that changes a value would result in a ``400 Bad Request``
+response. ``writeOnly`` indicates that a value may be set, but will
+remain hidden. In could be used to indicate you can set a value with a
+``PUT`` request, but it would not be included when retrieving that
+record with a ``GET`` request.
+
 .. schema_example::
 
     {
@@ -58,7 +66,9 @@ to duplicate the ``default`` value in the ``examples`` array, since
       "examples": [
         "Anything",
         4035
-      ]
+      ],
+      "readOnly": true,
+      "writeOnly": false
     }
 
 .. index::
