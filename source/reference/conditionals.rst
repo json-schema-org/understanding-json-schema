@@ -1,22 +1,208 @@
 .. index::
-   single: conditionals
-   single: conditionals; if
-   single: conditionals; then
-   single: conditionals; else
-   single: if
-   single: then
-   single: else
+    single: conditionals
 
 .. _conditionals:
 
 Applying subschemas conditionally
 =================================
 
-|draft7| ``if``, ``then`` and ``else`` keywords
+.. contents:: :local:
 
-The ``if``, ``then`` and ``else`` keywords allow the application of a subschema
-based on the outcome of another schema, much like the ``if/then/else``
-constructs you've probably seen in traditional programming languages.
+.. index::
+   single: conditionals; dependencies
+   single: dependencies
+
+.. _dependencies:
+
+Dependencies
+''''''''''''
+
+The ``dependencies`` keyword conditionally applies additional
+constraints to a schema based on the presence of certain properties.
+There are two forms of ``dependencies`` in JSON Schema:
+
+- **Property dependencies** declare that certain other properties must
+  be present if a given property is present.
+
+- **Schema dependencies** declare that the schema changes when a
+  given property is present.
+
+.. index::
+    single: conditionals; property dependencies
+    single: property dependencies
+
+.. _property-dependencies:
+
+Property dependencies
+^^^^^^^^^^^^^^^^^^^^^
+
+Let's start with the simpler case of property dependencies. For
+example, suppose we have a schema representing a customer. If you
+have their credit card number, you also want to ensure you have a
+billing address. If you don't have their credit card number, a
+billing address would not be required. We represent this dependency
+of one property on another using the ``dependencies`` keyword. The
+value of the ``dependencies`` keyword is an object. Each entry in the
+object maps from the name of a property, *p*, to an array of strings
+listing properties that are required if *p* is present.
+
+In the following example, whenever a ``credit_card`` property is
+provided, a ``billing_address`` property must also be present:
+
+.. schema_example::
+
+    {
+      "type": "object",
+
+      "properties": {
+        "name": { "type": "string" },
+        "credit_card": { "type": "number" },
+        "billing_address": { "type": "string" }
+      },
+
+      "required": ["name"],
+
+      "dependencies": {
+        "credit_card": ["billing_address"]
+      }
+    }
+    --
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555,
+      "billing_address": "555 Debtor's Lane"
+    }
+    --X
+    // This instance has a ``credit_card``, but it's missing a ``billing_address``.
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555
+    }
+    --
+    // This is okay, since we have neither a ``credit_card``, or a ``billing_address``.
+    {
+      "name": "John Doe"
+    }
+    --
+    // Note that dependencies are not bidirectional.  It's okay to have
+    // a billing address without a credit card number.
+    {
+      "name": "John Doe",
+      "billing_address": "555 Debtor's Lane"
+    }
+
+To fix the last issue above (that dependencies are not bidirectional),
+you can, of course, define the bidirectional dependencies explicitly:
+
+.. schema_example::
+
+    {
+      "type": "object",
+
+      "properties": {
+        "name": { "type": "string" },
+        "credit_card": { "type": "number" },
+        "billing_address": { "type": "string" }
+      },
+
+      "required": ["name"],
+
+      "dependencies": {
+        "credit_card": ["billing_address"],
+        "billing_address": ["credit_card"]
+      }
+    }
+    --X
+    // This instance has a ``credit_card``, but it's missing a ``billing_address``.
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555
+    }
+    --X
+    // This has a ``billing_address``, but is missing a ``credit_card``.
+    {
+      "name": "John Doe",
+      "billing_address": "555 Debtor's Lane"
+    }
+
+.. index::
+    single: conditionals; schema dependencies
+    single: schema dependencies
+
+.. _schema-dependencies:
+
+Schema dependencies
+^^^^^^^^^^^^^^^^^^^
+
+Schema dependencies work like property dependencies, but instead of
+just specifying additional required properties, it specifies a schema
+that will be applied to the instance. This schema is applied in the
+same way `allOf` applies schemas. Nothing is merged or extended. Both
+schemas apply independently.
+
+For example, here is another way to write the above:
+
+.. schema_example::
+
+    {
+      "type": "object",
+
+      "properties": {
+        "name": { "type": "string" },
+        "credit_card": { "type": "number" }
+      },
+
+      "required": ["name"],
+
+      "dependencies": {
+        "credit_card": {
+          "properties": {
+            "billing_address": { "type": "string" }
+          },
+          "required": ["billing_address"]
+        }
+      }
+    }
+    --
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555,
+      "billing_address": "555 Debtor's Lane"
+    }
+    --X
+    // This instance has a ``credit_card``, but it's missing a
+    // ``billing_address``:
+    {
+      "name": "John Doe",
+      "credit_card": 5555555555555555
+    }
+    --
+    // This has a ``billing_address``, but is missing a
+    // ``credit_card``.  This passes, because here ``billing_address``
+    // just looks like an additional property:
+    {
+      "name": "John Doe",
+      "billing_address": "555 Debtor's Lane"
+    }
+
+.. index::
+    single: conditionals
+    single: conditionals; if
+    single: conditionals; then
+    single: conditionals; else
+    single: if
+    single: then
+    single: else
+
+.. _ifthenelse:
+
+If-Then-Else
+''''''''''''
+
+|draft7| The ``if``, ``then`` and ``else`` keywords allow the
+application of a subschema based on the outcome of another schema,
+much like the ``if``/``then``/``else`` constructs you've probably seen
+in traditional programming languages.
 
 If ``if`` is valid, ``then`` must also be valid (and ``else`` is ignored.) If
 ``if`` is invalid, ``else`` must also be valid (and ``then`` is ignored).
