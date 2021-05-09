@@ -395,3 +395,57 @@ to the remaining postal codes of the world.
     error results because it will validate the "postal_code" against all three
     of the "then" schemas leading to irrelevant errors.
 
+.. index::
+    single: conditionals; implication
+    single: implication
+
+.. _implication:
+
+Implication
+'''''''''''
+
+Before Draft 7, you can express an "if-then" conditional using the
+`combining` keywords and a boolean algebra concept called
+"implication". ``A -> B`` (pronounced, A implies B) means that if A is
+true, then B must also be true. It can be expressed as ``!A || B``
+which can be expressed as a JSON Schema.
+
+.. schema_example::
+
+    {
+      "type": "object",
+      "properties": {
+        "foo": { "type": "string" },
+        "bar": { "type": "number" },
+        "baz": { "type": "number" }
+      },
+      "anyOf": [
+        {
+          "not": {
+            "properties": { "foo": { "const": "bar" } },
+            "required": ["foo"]
+          }
+        },
+        { "required": ["bar"] }
+      ]
+    }
+    --
+    { "foo": "bar", "bar": 42 }
+    --X
+    { "foo": "bar" }
+    --
+    { "foo": "not bar" }
+    --
+    {}
+
+Variations of implication can be used to express the same things you
+can express with the ``if``/``then``/``else`` keywords.
+``if``/``then`` can be expressed as ``A -> B``, ``if``/``else`` can be
+expressed as ``!A -> B``, and ``if``/``then``/``else`` can be
+expressed as ``A -> B AND !A -> C``.
+
+.. note::
+    Since this pattern is not very intuitive, it's recommended to
+    put your conditionals in ``definitions`` with a descriptive name and
+    ``$ref`` it into your schema with ``"allOf": [{ "$ref":
+    "#/definitions/foo-bar-implies-bar-is-required" }]``.
