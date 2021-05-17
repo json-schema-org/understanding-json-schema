@@ -58,11 +58,11 @@ may go by different names.
 .. language_specific::
 
     --Python
-    The following table maps from the names of JavaScript types to
-    their analogous types in Python:
+    The following table maps from the names of JSON types to their
+    analogous types in Python:
 
     +----------+-----------+
-    |JavaScript|Python     |
+    |JSON      |Python     |
     +----------+-----------+
     |string    |string     |
     |          |[#1]_      |
@@ -81,19 +81,19 @@ may go by different names.
 
     .. rubric:: Footnotes
 
-    .. [#1] Since JavaScript strings always support unicode, they are
+    .. [#1] Since JSON strings always support unicode, they are
             analogous to ``unicode`` on Python 2.x and ``str`` on
             Python 3.x.
 
-    .. [#2] JavaScript does not have separate types for integer and
+    .. [#2] JSON does not have separate types for integer and
             floating-point.
 
     --Ruby
-    The following table maps from the names of JavaScript types to
-    their analogous types in Ruby:
+    The following table maps from the names of JSON types to their
+    analogous types in Ruby:
 
     +----------+----------------------+
-    |JavaScript|Ruby                  |
+    |JSON      |Ruby                  |
     +----------+----------------------+
     |string    |String                |
     +----------+----------------------+
@@ -111,7 +111,7 @@ may go by different names.
 
     .. rubric:: Footnotes
 
-    .. [#3] JavaScript does not have separate types for integer and
+    .. [#3] JSON does not have separate types for integer and
             floating-point.
 
 With these simple data types, all kinds of structured data can be
@@ -181,7 +181,7 @@ for now.  They are explained in subsequent chapters.
     {
       "first_name": "George",
       "last_name": "Washington",
-      "birthday": "22-02-1732",
+      "birthday": "1732-02-22",
       "address": {
         "street_address": "3200 Mount Vernon Memorial Highway",
         "city": "Mount Vernon",

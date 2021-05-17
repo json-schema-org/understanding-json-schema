@@ -80,10 +80,11 @@ The ``type`` keyword is described in more detail in `type`.
 Declaring a JSON Schema
 -----------------------
 
-Since JSON Schema is itself JSON, it's not always easy to tell when
-something is JSON Schema or just an arbitrary chunk of JSON.  The
-``$schema`` keyword is used to declare that something is JSON Schema.
-It's generally good practice to include it, though it is not required.
+It's not always easy to tell which draft a JSON Schema is using. You
+can use the ``$schema`` keyword to declare which version of the JSON
+Schema specification the schema is written to. See `schema` for more
+information. It's generally good practice to include it, though it is
+not required.
 
 .. note::
     For brevity, the ``$schema`` keyword isn't included in most of the
@@ -92,11 +93,15 @@ It's generally good practice to include it, though it is not required.
 
 .. schema_example::
 
-    { "$schema": "http://json-schema.org/schema#" }
+    { "$schema": "http://json-schema.org/draft-07/schema#" }
 
-You can also use this keyword to declare which version of the JSON
-Schema specification that the schema is written to.  See `schema` for
-more information.
+.. draft_specific::
+
+    --Draft 4
+    In Draft 4, a ``$schema`` value of
+    ``http://json-schema.org/schema#`` referred to the latest version
+    of JSON Schema. This usage has since been deprecated and the use
+    of specific version URIs is required.
 
 Declaring a unique identifier
 -----------------------------
