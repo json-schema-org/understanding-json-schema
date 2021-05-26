@@ -415,28 +415,38 @@ which can be expressed as a JSON Schema.
     {
       "type": "object",
       "properties": {
-        "foo": { "type": "string" },
-        "bar": { "type": "number" },
-        "baz": { "type": "number" }
+        "resturauntType": { "enum": ["fast-food", "sit-down"] },
+        "total": { "type": "number" },
+        "tip": { "type": "number" }
       },
       "anyOf": [
         {
           "not": {
-            "properties": { "foo": { "const": "bar" } },
-            "required": ["foo"]
+            "properties": { "restaurantType": { "const": "sit-down" } },
+            "required": ["restaurantType"]
           }
         },
-        { "required": ["bar"] }
+        { "required": ["tip"] }
       ]
     }
     --
-    { "foo": "bar", "bar": 42 }
+    {
+      "restaurantType": "sit-down",
+      "total": 16.99,
+      "tip": 3.4
+    }
     --X
-    { "foo": "bar" }
+    {
+      "restaurantType": "sit-down",
+      "total": 16.99
+    }
     --
-    { "foo": "not bar" }
+    {
+      "restaurantType": "fast-food",
+      "total": 6.99
+    }
     --
-    {}
+    { "total": 5.25 }
 
 Variations of implication can be used to express the same things you
 can express with the ``if``/``then``/``else`` keywords.
@@ -448,4 +458,4 @@ expressed as ``A -> B AND !A -> C``.
     Since this pattern is not very intuitive, it's recommended to
     put your conditionals in ``definitions`` with a descriptive name and
     ``$ref`` it into your schema with ``"allOf": [{ "$ref":
-    "#/definitions/foo-bar-implies-bar-is-required" }]``.
+    "#/definitions/sit-down-restaurant-implies-tip-is-required" }]``.
