@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Understanding JSON Schema &#8212; Understanding JSON Schema 7.0 documentation</title>
+    <link rel="stylesheet" href="_static/jsonschema.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/jsonschema.js"></script>
+    <link rel="shortcut icon" href="_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Conventions used in this book" href="conventions.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+  
+  <a href="https://github.com/json-schema-org/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>7.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">The basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structuring.html">Structuring a complex schema</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Acknowledgments</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="conventions.html" title="Next Chapter: Conventions used in this book"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Conventions u... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="understanding-json-schema">
+<h1>Understanding JSON Schema<a class="headerlink" href="#understanding-json-schema" title="Permalink to this headline">¶</a></h1>
+<p>JSON Schema is a powerful tool for validating the structure of JSON
+data.  However, learning to use it by reading its specification is
+like learning to drive a car by looking at its blueprints.  You don’t
+need to know how an electric motor fits together if all
+you want to do is pick up the groceries.  This book, therefore, aims
+to be the friendly driving instructor for JSON Schema.  It’s for those
+that want to write it and understand it, but maybe aren’t interested
+in building their own car—er, writing their own JSON Schema
+validator—just yet.</p>
+<div align="right" class="align-right"><img alt="octopus" src="_images/octopus.svg" /></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This book describes JSON Schema draft 7. Earlier versions of JSON Schema
+are not completely compatible with the format described here, but for the
+most part, those differences are noted in the text.</p>
+</div>
+<p><strong>Where to begin?</strong></p>
+<ul class="simple">
+<li>This book uses some novel <a class="reference internal" href="conventions.html#conventions"><span class="std std-ref">conventions</span></a> for showing
+schema examples and relating JSON Schema to your programming
+language of choice.</li>
+<li>If you’re not sure what a schema is, check out <a class="reference internal" href="about.html#about"><span class="std std-ref">What is a schema?</span></a>.</li>
+<li><a class="reference internal" href="basics.html#basics"><span class="std std-ref">The basics</span></a> chapter should be enough to get you started with
+understanding the core <a class="reference internal" href="reference/index.html#reference"><span class="std std-ref">JSON Schema Reference</span></a>.</li>
+<li>When you start developing large schemas with many nested and
+repeated sections, check out <a class="reference internal" href="structuring.html#structuring"><span class="std std-ref">Structuring a complex schema</span></a>.</li>
+<li><a class="reference external" href="http://json-schema.org">json-schema.org</a> has a number of
+resources, including the official specification and tools for
+working with JSON Schema from various programming languages.</li>
+<li>There are a number of <a class="reference external" href="https://json-schema.org/implementations.html#validator-web%20(online)">online JSON Schema tools</a>
+that allow you to run your own JSON schemas against example
+documents. These can be very handy if you want to try things out
+without installing any software.</li>
+</ul>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Conventions used in this book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#language-specific-notes">Language-specific notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#draft-specific-notes">Draft-specific notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conventions.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">The basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#hello-world">Hello, World!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#the-type-keyword">The type keyword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#declaring-a-json-schema">Declaring a JSON Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#declaring-a-unique-identifier">Declaring a unique identifier</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">JSON Schema Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/type.html">Type-specific keywords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/string.html">string</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/string.html#length">Length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/string.html#regular-expressions">Regular Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/string.html#format">Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/regular_expressions.html">Regular Expressions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/regular_expressions.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/numeric.html">Numeric types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/numeric.html#integer">integer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/numeric.html#number">number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/numeric.html#multiples">Multiples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/numeric.html#range">Range</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/object.html">object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#properties">Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#pattern-properties">Pattern Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#additional-properties">Additional Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#required-properties">Required Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#property-names">Property names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#size">Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/array.html">array</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/array.html#items">Items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/array.html#addtional-items">Addtional Items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/array.html#contains">Contains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/array.html#length">Length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/array.html#uniqueness">Uniqueness</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/boolean.html">boolean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/null.html">null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/generic.html">Generic keywords</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/generic.html#annotations">Annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/generic.html#comments">Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/generic.html#enumerated-values">Enumerated values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/generic.html#constant-values">Constant values</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/non_json_data.html">Media: string-encoding non-JSON data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/non_json_data.html#contentmediatype">contentMediaType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/non_json_data.html#contentencoding">contentEncoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/non_json_data.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/combining.html">Schema Composition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/combining.html#allof">allOf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/combining.html#anyof">anyOf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/combining.html#oneof">oneOf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/combining.html#not">not</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/combining.html#properties-of-schema-composition">Properties of Schema Composition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference/conditionals.html">Applying subschemas conditionally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/schema.html">The $schema keyword</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/schema.html#advanced">Advanced</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="structuring.html">Structuring a complex schema</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#reuse">Reuse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structuring.html#recursion">Recursion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#the-id-property">The $id property</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structuring.html#using-id-with-ref">Using $id with $ref</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#extending">Extending</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>There is also a <a class="reference external" href="UnderstandingJSONSchema.pdf">print version of this document</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Acknowledgments</a></li>
+</ul>
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
+      Last updated on May 27, 2021.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+@import url(bootstrap-sphinx.css);
+
+@import url(https://fonts.googleapis.com/css?family=Overlock:900);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+
+div.admonition {
+    margin-top: 0;
+}
+
+div.highlight pre {
+    background-color: transparent;
+}
+
+div.jsonschema-pass {
+    margin-left: 48px;
+}
+
+div.jsonschema-fail {
+    margin-left: 48px;
+}
+
+div.jsonschema .highlight {
+    background-color: #f5f5f5;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+div.jsonschema-pass .highlight {
+    background-color: #eeffcc;
+    background-image: url(pass.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+div.jsonschema-fail .highlight {
+    background-color: #ffcccc;
+    background-image: url(fail.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+p.jsonschema-comment {
+    margin-left: 48px;
+}
+
+.tabbable {
+    margin-bottom: 12px;
+}
+
+.nav {
+    margin-bottom: 0px;
+    margin-left: 0;
+    list-style: none;
+}
+
+.tab-content {
+    padding: 9.5px;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+code, pre {
+    font-family: Inconsolata,Monaco,Menlo,Consolas,"Courier New",monospace;
+}
+
+.navbar, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .new {
+    font-family: "Overlock","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 900;
+}
+
+.new {
+    color: #3333ff;
+}
+
+.new:before {
+    content: "★ ";
+}

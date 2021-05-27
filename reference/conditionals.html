@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Applying subschemas conditionally &#8212; Understanding JSON Schema 7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The $schema keyword" href="schema.html" />
+    <link rel="prev" title="Schema Composition" href="combining.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+  
+  <a href="https://github.com/json-schema-org/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>7.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Acknowledgments</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="combining.html" title="Previous Chapter: Schema Composition"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Schema Composition</span>
+    </a>
+  </li>
+  <li>
+    <a href="schema.html" title="Next Chapter: The $schema keyword"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">The $schema keyword &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="applying-subschemas-conditionally">
+<span id="conditionals"></span><span id="index-0"></span><h1>Applying subschemas conditionally<a class="headerlink" href="#applying-subschemas-conditionally" title="Permalink to this headline">¶</a></h1>
+<p><span class="new">New in draft 7</span> <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">then</span></code> and <code class="docutils literal notranslate"><span class="pre">else</span></code> keywords</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">then</span></code> and <code class="docutils literal notranslate"><span class="pre">else</span></code> keywords allow the application of a subschema
+based on the outcome of another schema, much like the <code class="docutils literal notranslate"><span class="pre">if/then/else</span></code>
+constructs you’ve probably seen in traditional programming languages.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">if</span></code> is valid, <code class="docutils literal notranslate"><span class="pre">then</span></code> must also be valid (and <code class="docutils literal notranslate"><span class="pre">else</span></code> is ignored.) If
+<code class="docutils literal notranslate"><span class="pre">if</span></code> is invalid, <code class="docutils literal notranslate"><span class="pre">else</span></code> must also be valid (and <code class="docutils literal notranslate"><span class="pre">then</span></code> is ignored).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">then</span></code> or <code class="docutils literal notranslate"><span class="pre">else</span></code> is not defined, <code class="docutils literal notranslate"><span class="pre">if</span></code> behaves as if they have a value
+of <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">then</span></code> and/or <code class="docutils literal notranslate"><span class="pre">else</span></code> appear in a schema without <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">then</span></code> and
+<code class="docutils literal notranslate"><span class="pre">else</span></code> are ignored.</p>
+<p>We can put this in the form of a truth table, showing the combinations of when
+<code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">then</span></code>, and <code class="docutils literal notranslate"><span class="pre">else</span></code> are valid and the resulting validity of the
+entire schema:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">if</th>
+<th class="head">then</th>
+<th class="head">else</th>
+<th class="head">whole schema</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>T</td>
+<td>T</td>
+<td>n/a</td>
+<td>T</td>
+</tr>
+<tr class="row-odd"><td>T</td>
+<td>F</td>
+<td>n/a</td>
+<td>F</td>
+</tr>
+<tr class="row-even"><td>F</td>
+<td>n/a</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr class="row-odd"><td>F</td>
+<td>n/a</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr class="row-even"><td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>For example, let’s say you wanted to write a schema to handle addresses in the
+United States and Canada. These countries have different postal code formats,
+and we want to select which format to validate against based on the country. If
+the address is in the United States, the <code class="docutils literal notranslate"><span class="pre">postal_code</span></code> field is a “zipcode”:
+five numeric digits followed by an optional four digit suffix. If the address is
+in Canada, the <code class="docutils literal notranslate"><span class="pre">postal_code</span></code> field is a six digit alphanumeric string where
+letters and numbers alternate.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;United States of America&quot;</span><span class="p">,</span> <span class="s2">&quot;Canada&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;if&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;const&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span> <span class="p">}</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;then&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;[0-9]{5}(-[0-9]{4})?&quot;</span> <span class="p">}</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;else&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;[A-Z][0-9][A-Z] [0-9][A-Z][0-9]&quot;</span> <span class="p">}</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;20500&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;20500&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;24 Sussex Drive&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;K1M 1M4&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;24 Sussex Drive&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;10000&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;K1M 1M4&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this example, “country” is not a required property. Because the “if”
+schema also doesn’t require the “country” property, it will pass and the
+“then” schema will apply. Therefore, if the “country” property is not
+defined, the default behavior is to validate “postal_code” as a USA postal
+code. The “default” keyword doesn’t have an effect, but is nice to include
+for readers of the schema to more easily recognize the default behavior.</p>
+</div>
+<p>Unfortunately, this approach above doesn’t scale to more than two countries. You
+can, however, wrap pairs of <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">then</span></code> inside an <code class="docutils literal notranslate"><span class="pre">allOf</span></code> to create
+something that would scale. In this example, we’ll use United States and
+Canadian postal codes, but also add Netherlands postal codes, which are 4 digits
+followed by two letters. It’s left as an exercise to the reader to expand this
+to the remaining postal codes of the world.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;United States of America&quot;</span><span class="p">,</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span> <span class="s2">&quot;Netherlands&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;allOf&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;if&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;const&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span> <span class="p">}</span> <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;then&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;[0-9]{5}(-[0-9]{4})?&quot;</span> <span class="p">}</span> <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;if&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;const&quot;</span><span class="o">:</span> <span class="s2">&quot;Canada&quot;</span> <span class="p">}</span> <span class="p">},</span>
+        <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;country&quot;</span><span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;then&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;[A-Z][0-9][A-Z] [0-9][A-Z][0-9]&quot;</span> <span class="p">}</span> <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;if&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;const&quot;</span><span class="o">:</span> <span class="s2">&quot;Netherlands&quot;</span> <span class="p">}</span> <span class="p">},</span>
+        <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;country&quot;</span><span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;then&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;[0-9]{4} [A-Z]{2}&quot;</span> <span class="p">}</span> <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;20500&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;20500&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;24 Sussex Drive&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;K1M 1M4&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;Adriaan Goekooplaan&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;Netherlands&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;2517 JX&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;24 Sussex Drive&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;10000&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;K1M 1M4&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The “required” keyword is necessary in the “if” schemas or they would all
+apply if the “country” is not defined. Leaving “required” off of the
+“United States of America” “if” schema makes it effectively the default if
+no “country” is defined.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Even if “country” was a required field, it’s still recommended to have the
+“required” keyword in each “if” schema. The validation result will be the
+same because “required” will fail, but not including it will add noise to
+error results because it will validate the “postal_code” against all three
+of the “then” schemas leading to irrelevant errors.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
+      Last updated on May 27, 2021.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Generic keywords &#8212; Understanding JSON Schema 7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/jsonschema.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Media: string-encoding non-JSON data" href="non_json_data.html" />
+    <link rel="prev" title="null" href="null.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+  
+  <a href="https://github.com/json-schema-org/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>7.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">The basics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structuring.html">Structuring a complex schema</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Acknowledgments</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="null.html" title="Previous Chapter: null"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; null</span>
+    </a>
+  </li>
+  <li>
+    <a href="non_json_data.html" title="Next Chapter: Media: string-encoding non-JSON data"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Media: string... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="generic-keywords">
+<h1>Generic keywords<a class="headerlink" href="#generic-keywords" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#annotations" id="id2">Annotations</a></li>
+<li><a class="reference internal" href="#comments" id="id3">Comments</a></li>
+<li><a class="reference internal" href="#enumerated-values" id="id4">Enumerated values</a></li>
+<li><a class="reference internal" href="#constant-values" id="id5">Constant values</a></li>
+</ul>
+</div>
+<p>This chapter lists some miscellaneous properties that are available
+for all JSON types.</p>
+<div class="section" id="annotations">
+<span id="annotation"></span><span id="index-0"></span><h2><a class="toc-backref" href="#id2">Annotations</a><a class="headerlink" href="#annotations" title="Permalink to this headline">¶</a></h2>
+<p>JSON Schema includes a few keywords, that aren’t strictly used for
+validation, but are used to describe parts of a schema. None of these
+“annotation” keywords are required, but they are encouraged for good
+practice, and can make your schema “self-documenting”.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code> keywords must be strings. A “title”
+will preferably be short, whereas a “description” will provide a more
+lengthy explanation about the purpose of the data described by the
+schema.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">default</span></code> keyword specifies a default value. This value is not
+used to fill in missing values during the validation process.
+Non-validation tools such as documentation generators or form
+generators may use this value to give hints to users about how to use
+a value. However, <code class="docutils literal notranslate"><span class="pre">default</span></code> is typically used to express that if a
+value is missing, then the value is semantically the same as if the
+value was present with the default value. The value of <code class="docutils literal notranslate"><span class="pre">default</span></code>
+should validate against the schema in which it resides, but that isn’t
+required.</p>
+<p><span class="new">New in draft 6</span> The <code class="docutils literal notranslate"><span class="pre">examples</span></code> keyword is a place to provide an array of
+examples that validate against the schema. This isn’t used for
+validation, but may help with explaining the effect and purpose of the
+schema to a reader. Each entry should validate against the schema in
+which it resides, but that isn’t strictly required. There is no need
+to duplicate the <code class="docutils literal notranslate"><span class="pre">default</span></code> value in the <code class="docutils literal notranslate"><span class="pre">examples</span></code> array, since
+<code class="docutils literal notranslate"><span class="pre">default</span></code> will be treated as another example.</p>
+<p><span class="new">New in draft 7</span> The boolean keywords <code class="docutils literal notranslate"><span class="pre">readOnly</span></code> and <code class="docutils literal notranslate"><span class="pre">writeOnly</span></code> are
+typically used in an API context. <code class="docutils literal notranslate"><span class="pre">readOnly</span></code> indicates that a value
+should not be modified. It could be used to indicate that a <code class="docutils literal notranslate"><span class="pre">PUT</span></code>
+request that changes a value would result in a <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code>
+response. <code class="docutils literal notranslate"><span class="pre">writeOnly</span></code> indicates that a value may be set, but will
+remain hidden. In could be used to indicate you can set a value with a
+<code class="docutils literal notranslate"><span class="pre">PUT</span></code> request, but it would not be included when retrieving that
+record with a <code class="docutils literal notranslate"><span class="pre">GET</span></code> request.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;Match anything&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;This is a schema that matches anything.&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;Default value&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;examples&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;Anything&quot;</span><span class="p">,</span>
+    <span class="mf">4035</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;readOnly&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">&quot;writeOnly&quot;</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="comments">
+<span id="index-1"></span><span id="id1"></span><h2><a class="toc-backref" href="#id3">Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p><span class="new">New in draft 7</span> <code class="docutils literal notranslate"><span class="pre">$comment</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">$comment</span></code> keyword is strictly intended for adding comments to
+a schema. Its value must always be a string. Unlike the annotations
+<code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code>, and <code class="docutils literal notranslate"><span class="pre">examples</span></code>, JSON schema
+implementations aren’t allowed to attach any meaning or behavior to it
+whatsoever, and may even strip them at any time. Therefore, they are
+useful for leaving notes to future editors of a JSON schema, but
+should not be used to communicate to users of the schema.</p>
+</div>
+<div class="section" id="enumerated-values">
+<span id="enum"></span><span id="index-2"></span><h2><a class="toc-backref" href="#id4">Enumerated values</a><a class="headerlink" href="#enumerated-values" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">enum</span></code> keyword is used to restrict a value to a fixed set of
+values.  It must be an array with at least one element, where each
+element is unique.</p>
+<p>The following is an example for validating street light colors:</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;amber&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;red&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;blue&quot;</span>
+</pre></div>
+</div>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">enum</span></code> even without a type, to accept values of
+different types.  Let’s extend the example to use <code class="docutils literal notranslate"><span class="pre">null</span></code> to indicate
+“off”, and also add 42, just for fun.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;amber&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mf">42</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;red&quot;</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kc">null</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="mf">42</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="mf">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constant-values">
+<span id="const"></span><span id="index-3"></span><h2><a class="toc-backref" href="#id5">Constant values</a><a class="headerlink" href="#constant-values" title="Permalink to this headline">¶</a></h2>
+<p><span class="new">New in draft 6</span></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">const</span></code> keyword is used to restrict a value to a single value.</p>
+<p>For example, if you only support shipping to the United States for
+export reasons:</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;const&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;United States of America&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;Canada&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
+      Last updated on May 27, 2021.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

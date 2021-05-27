@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Structuring a complex schema &#8212; Understanding JSON Schema 7.0 documentation</title>
+    <link rel="stylesheet" href="_static/jsonschema.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/jsonschema.js"></script>
+    <link rel="shortcut icon" href="_static/logo.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Acknowledgments" href="credits.html" />
+    <link rel="prev" title="The $schema keyword" href="reference/schema.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+  
+  <a href="https://github.com/json-schema-org/understanding-json-schema"
+     class="visible-desktop"><img
+    style="position: absolute; z-index: 10; top: 40px; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
+    alt="Fork me on GitHub"></a>
+
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Understanding JSON Schema</a>
+        <span class="navbar-text navbar-version pull-left"><b>7.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Document <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Conventions used in this book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">What is a schema?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">The basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">JSON Schema Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Structuring a complex schema</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Acknowledgments</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="reference/schema.html" title="Previous Chapter: The $schema keyword"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; The $schema keyword</span>
+    </a>
+  </li>
+  <li>
+    <a href="credits.html" title="Next Chapter: Acknowledgments"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Acknowledgments &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="structuring-a-complex-schema">
+<span id="structuring"></span><span id="index-0"></span><h1>Structuring a complex schema<a class="headerlink" href="#structuring-a-complex-schema" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#reuse" id="id1">Reuse</a><ul>
+<li><a class="reference internal" href="#recursion" id="id2">Recursion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-id-property" id="id3">The $id property</a><ul>
+<li><a class="reference internal" href="#using-id-with-ref" id="id4">Using $id with $ref</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extending" id="id5">Extending</a></li>
+</ul>
+</div>
+<p>When writing computer programs of even moderate complexity, it’s
+commonly accepted that “structuring” the program into reusable
+functions is better than copying-and-pasting duplicate bits of code
+everywhere they are used.  Likewise in JSON Schema, for anything but
+the most trivial schema, it’s really useful to structure the schema
+into parts that can be reused in a number of places.  This chapter
+will present some practical examples that use the tools available for
+reusing and structuring schemas.</p>
+<div class="section" id="reuse">
+<h2><a class="toc-backref" href="#id1">Reuse</a><a class="headerlink" href="#reuse" title="Permalink to this headline">¶</a></h2>
+<p>For this example, let’s say we want to define a customer record, where
+each customer may have both a shipping and a billing address.
+Addresses are always the same—they have a street address, city and
+state—so we don’t want to duplicate that part of the schema
+everywhere we want to store an address.  Not only would that make the
+schema more verbose, but it makes updating it in the future more
+difficult.  If our imaginary company were to start doing international
+business in the future and we wanted to add a country field to all the
+addresses, it would be better to do this in a single place rather than
+everywhere that addresses are used.</p>
+<p>So let’s start with the schema that defines an address:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;city&quot;</span><span class="o">:</span>           <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;state&quot;</span><span class="o">:</span>          <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Since we are going to reuse this schema, it is customary (but not
+required) to put it in the parent schema under a key called
+<code class="docutils literal notranslate"><span class="pre">definitions</span></code>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;definitions&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;city&quot;</span><span class="o">:</span>           <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;state&quot;</span><span class="o">:</span>          <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p id="index-1">We can then refer to this schema snippet from elsewhere using the
+<code class="docutils literal notranslate"><span class="pre">$ref</span></code> keyword.  The easiest way to describe <code class="docutils literal notranslate"><span class="pre">$ref</span></code> is that it
+gets logically replaced with the thing that it points to.  So, to
+refer to the above, we would include:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/address&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>This can be used anywhere a schema is expected. You will always use <code class="docutils literal notranslate"><span class="pre">$ref</span></code> as
+the only key in an object: any other keys you put there will be ignored by the
+validator.</p>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">$ref</span></code> is a URI-reference, and the part after <code class="docutils literal notranslate"><span class="pre">#</span></code> sign (the
+“fragment” or “named anchor”) is in a format called <a class="reference external" href="https://tools.ietf.org/html/rfc6901">JSON Pointer</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">JSON Pointer aims to serve the same purpose as <a class="reference external" href="http://www.w3.org/TR/xpath/">XPath</a> from the XML world, but it is much
+simpler.</p>
+</div>
+<p>If you’re using a definition from the same document, the <code class="docutils literal notranslate"><span class="pre">$ref</span></code> value begins
+with the pound symbol (<code class="docutils literal notranslate"><span class="pre">#</span></code>). Following that, the slash-separated items traverse
+the keys in the objects in the document. Therefore, in our example
+<code class="docutils literal notranslate"><span class="pre">&quot;#/definitions/address&quot;</span></code> means:</p>
+<ol class="arabic simple">
+<li>go to the root of the document</li>
+<li>find the value of the key <code class="docutils literal notranslate"><span class="pre">&quot;definitions&quot;</span></code></li>
+<li>within that object, find the value of the key <code class="docutils literal notranslate"><span class="pre">&quot;address&quot;</span></code></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">$ref</span></code> can resolve to a URI that references another file, so if you prefer to
+include your definitions in separate files, you can also do that.  For
+example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;definitions.json#/address&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>would load the address schema from another file residing alongside
+this one.</p>
+<p>Now let’s put this together and use our address schema to create a
+schema for a customer:</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;definitions&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;city&quot;</span><span class="o">:</span>           <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;state&quot;</span><span class="o">:</span>          <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/address&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/address&quot;</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="s2">&quot;Washington&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="s2">&quot;DC&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1st Street SE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="s2">&quot;Washington&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="s2">&quot;DC&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Even though the value of a <code class="docutils literal notranslate"><span class="pre">$ref</span></code> is a URI-reference, it is not a network
+locator, only an identifier. This means that the schema doesn’t need to be
+accessible at the resolved URI, but it may be. It is basically up to the
+validator implementation how external schema URIs will be handled, but one
+should not assume the validator will fetch network resources indicated in
+<code class="docutils literal notranslate"><span class="pre">$ref</span></code> values.</p>
+</div>
+<div class="section" id="recursion">
+<h3><a class="toc-backref" href="#id2">Recursion</a><a class="headerlink" href="#recursion" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">$ref</span></code> elements may be used to create recursive schemas that refer to themselves.
+For example, you might have a <code class="docutils literal notranslate"><span class="pre">person</span></code> schema that has an array of <code class="docutils literal notranslate"><span class="pre">children</span></code>, each of which are also <code class="docutils literal notranslate"><span class="pre">person</span></code> instances.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;definitions&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;person&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="hll">          <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/person&quot;</span> <span class="p">},</span>
+</span>          <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;person&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/person&quot;</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">A snippet of the British royal family tree</p>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;person&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Elizabeth&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Charles&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;William&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">[</span>
+              <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;George&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Charlotte&quot;</span> <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Harry&quot;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Above, we created a schema that refers to another part of itself, effectively
+creating a “loop” in the validator, which is both allowed and useful. Note,
+however, that a loop of <code class="docutils literal notranslate"><span class="pre">$ref</span></code> schemas referring to one another could cause an
+infinite loop in the resolver, and is explicitly disallowed.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;definitions&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;alice&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;anyOf&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/bob&quot;</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;bob&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;anyOf&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/alice&quot;</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-id-property">
+<span id="id"></span><span id="index-2"></span><h2><a class="toc-backref" href="#id3">The $id property</a><a class="headerlink" href="#the-id-property" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">$id</span></code> property is a URI-reference that serves two purposes:</p>
+<ul class="simple">
+<li>It declares a unique identifier for the schema.</li>
+<li>It declares a base URI against which <code class="docutils literal notranslate"><span class="pre">$ref</span></code> URI-references are resolved.</li>
+</ul>
+<p>It is best practice that every top-level schema should set <code class="docutils literal notranslate"><span class="pre">$id</span></code> to an
+absolute-URI (not a relative reference), with a domain that you control. For
+example, if you own the <code class="docutils literal notranslate"><span class="pre">foo.bar</span></code> domain, and you had a schema for addresses,
+you may set its <code class="docutils literal notranslate"><span class="pre">$id</span></code> as follows:</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;$id&quot;</span><span class="o">:</span> <span class="s2">&quot;http://foo.bar/schemas/address.json&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>This provides a unique identifier for the schema, as well as, in most
+cases, indicating where it may be downloaded.</p>
+<p>But be aware of the second purpose of the <code class="docutils literal notranslate"><span class="pre">$id</span></code> property: that it
+declares a base URI for <code class="docutils literal notranslate"><span class="pre">$ref</span></code> URI-references elsewhere in the file.
+For example, if you had:</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;person.json&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>in the same file, a JSON schema validation library that supported network
+fetching may fetch <code class="docutils literal notranslate"><span class="pre">person.json</span></code> from
+<code class="docutils literal notranslate"><span class="pre">http://foo.bar/schemas/person.json</span></code>, even if <code class="docutils literal notranslate"><span class="pre">address.json</span></code> was loaded from
+somewhere else, such as the local filesystem. The drafts do not define this
+area of behaviour very clearly, and validator implementations may vary in
+exactly how they try to locate the referenced schema.</p>
+<p><span class="new">New in draft 6</span></p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Draft-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#7f25049ae128_Draft 4">Draft 4</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="7f25049ae128_Draft 4">
+In Draft 4, <code class="docutils literal notranslate"><span class="pre">$id</span></code> is just <code class="docutils literal notranslate"><span class="pre">id</span></code> (without the dollar sign).</div>
+</div>
+</div><p>The <code class="docutils literal notranslate"><span class="pre">$id</span></code> property should never be the empty string or an empty fragment
+(<code class="docutils literal notranslate"><span class="pre">#</span></code>), since that doesn’t really make sense.</p>
+<div class="section" id="using-id-with-ref">
+<h3><a class="toc-backref" href="#id4">Using $id with $ref</a><a class="headerlink" href="#using-id-with-ref" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">$id</span></code> also provides a way to refer to subschema without using JSON Pointer.
+This means you can refer to them by a unique name, rather than by where they
+appear in the JSON tree.</p>
+<p>Reusing the address example above, we can add an <code class="docutils literal notranslate"><span class="pre">$id</span></code> property to the
+address schema, and refer to it by that instead.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;definitions&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="hll">      <span class="s2">&quot;$id&quot;</span><span class="o">:</span> <span class="s2">&quot;#address&quot;</span><span class="p">,</span>
+</span>      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;city&quot;</span><span class="o">:</span>           <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;state&quot;</span><span class="o">:</span>          <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="hll">    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#address&quot;</span> <span class="p">},</span>
+</span><span class="hll">    <span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#address&quot;</span> <span class="p">}</span>
+</span>  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This functionality isn’t currently supported by the Python <code class="docutils literal notranslate"><span class="pre">jsonschema</span></code>
+library.</p>
+</div>
+</div>
+</div>
+<div class="section" id="extending">
+<h2><a class="toc-backref" href="#id5">Extending</a><a class="headerlink" href="#extending" title="Permalink to this headline">¶</a></h2>
+<p>The power of <code class="docutils literal notranslate"><span class="pre">$ref</span></code> really shines when it is used with the
+combining keywords <code class="docutils literal notranslate"><span class="pre">allOf</span></code>, <code class="docutils literal notranslate"><span class="pre">anyOf</span></code> and <code class="docutils literal notranslate"><span class="pre">oneOf</span></code> (see
+<a class="reference internal" href="reference/combining.html#combining"><span class="std std-ref">Schema Composition</span></a>).</p>
+<p>Let’s say that for a shipping address, we want to know whether the
+address is a residential or business address, because the shipping
+method used may depend on that.  For a billing address, we don’t
+want to store that information, because it’s not applicable.</p>
+<p>To handle this, we’ll update our definition of shipping address:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/address&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>to instead use an <code class="docutils literal notranslate"><span class="pre">allOf</span></code> keyword entry combining both the core
+address schema definition and an extra schema snippet for the address
+type:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="s2">&quot;allOf&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="c1">// Here, we include our &quot;core&quot; address schema...</span>
+    <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/address&quot;</span> <span class="p">},</span>
+
+    <span class="c1">// ...and then extend it with stuff specific to a shipping</span>
+    <span class="c1">// address</span>
+    <span class="p">{</span> <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;residential&quot;</span><span class="p">,</span> <span class="s2">&quot;business&quot;</span> <span class="p">]</span> <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Tying this all together,</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;http://json-schema.org/draft-06/schema#&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;definitions&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;city&quot;</span><span class="o">:</span>           <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+        <span class="s2">&quot;state&quot;</span><span class="o">:</span>          <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/address&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;allOf&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/address&quot;</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="s2">&quot;properties&quot;</span><span class="o">:</span>
+          <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;residential&quot;</span><span class="p">,</span> <span class="s2">&quot;business&quot;</span> <span class="p">]</span> <span class="p">}</span> <span class="p">},</span>
+          <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">This fails, because it’s missing an address type:</p>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="s2">&quot;Washington&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="s2">&quot;DC&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;shipping_address&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="s2">&quot;Washington&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="s2">&quot;DC&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;business&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>From these basic pieces, it’s possible to build very powerful
+constructions without a lot of duplication.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
+      Last updated on May 27, 2021.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
