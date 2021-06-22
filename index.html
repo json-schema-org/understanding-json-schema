@@ -189,7 +189,6 @@ without installing any software.</li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#required-properties">Required Properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#property-names">Property names</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#size">Size</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/object.html#dependencies">Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="reference/array.html">array</a><ul>
@@ -223,7 +222,12 @@ without installing any software.</li>
 <li class="toctree-l3"><a class="reference internal" href="reference/combining.html#properties-of-schema-composition">Properties of Schema Composition</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="reference/conditionals.html">Applying subschemas conditionally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/conditionals.html">Applying subschemas conditionally</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#if-then-else">If-Then-Else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#implication">Implication</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/schema.html">The $schema keyword</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/schema.html#advanced">Advanced</a></li>
 </ul>
@@ -231,15 +235,20 @@ without installing any software.</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="structuring.html">Structuring a complex schema</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structuring.html#reuse">Reuse</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structuring.html#recursion">Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#schema-identification">Schema Identification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structuring.html#json-pointer">JSON Pointer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structuring.html#named-anchors">Named Anchors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="structuring.html#the-id-property">The $id property</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="structuring.html#using-id-with-ref">Using $id with $ref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#base-uri">Base URI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="structuring.html#retrieval-uri">Retrieval URI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structuring.html#id">$id</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="structuring.html#extending">Extending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#ref">$ref</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#definitions">definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#recursion">Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#bundling">Bundling</a></li>
 </ul>
 </li>
 </ul>
@@ -269,7 +278,7 @@ without installing any software.</li>
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on May 27, 2021.<br/>
+      Last updated on Jun 22, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>

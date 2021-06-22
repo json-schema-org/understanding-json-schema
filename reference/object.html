@@ -125,11 +125,6 @@
 <li><a class="reference internal" href="#required-properties" id="id6">Required Properties</a></li>
 <li><a class="reference internal" href="#property-names" id="id7">Property names</a></li>
 <li><a class="reference internal" href="#size" id="id8">Size</a></li>
-<li><a class="reference internal" href="#dependencies" id="id9">Dependencies</a><ul>
-<li><a class="reference internal" href="#property-dependencies" id="id10">Property dependencies</a></li>
-<li><a class="reference internal" href="#schema-dependencies" id="id11">Schema dependencies</a></li>
-</ul>
-</li>
 </ul>
 </div>
 <p>Objects are the mapping type in JSON.  They map “keys” to “values”.
@@ -138,11 +133,11 @@ conventionally referred to as a “property”.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Language-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f2504d94b00_Python">Python</a></li>
-<li><a data-toggle="tab" href="#7f2504d94b00_Ruby">Ruby</a></li>
+<li class="active"><a data-toggle="tab" href="#7fea4a1ee550_Python">Python</a></li>
+<li><a data-toggle="tab" href="#7fea4a1ee550_Ruby">Ruby</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f2504d94b00_Python">
+<div class="tab-pane active section" id="7fea4a1ee550_Python">
 <p>In Python, &quot;objects&quot; are analogous to the <code class="docutils literal notranslate"><span class="pre">dict</span></code> type.  An
 important difference, however, is that while Python dictionaries
 may use anything hashable as a key, in JSON all the keys
@@ -152,7 +147,7 @@ Python uses the word <code class="docutils literal notranslate"><span class="pre
 everything, whereas in JSON it is used only to mean a mapping from
 string keys to values.</p>
 </div>
-<div class="tab-pane section" id="7f2504d94b00_Ruby">
+<div class="tab-pane section" id="7fea4a1ee550_Ruby">
 <p>In Ruby, &quot;objects&quot; are analogous to the <code class="docutils literal notranslate"><span class="pre">Hash</span></code> type. An important
 difference, however, is that all keys in JSON must be strings, and therefore
 any non-string keys are converted over to their string representation.</p>
@@ -395,10 +390,10 @@ of these strings must be unique.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f2504d2bbe0_Draft 4">Draft 4</a></li>
+<li class="active"><a data-toggle="tab" href="#7fea4a1dcd90_Draft 4">Draft 4</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f2504d2bbe0_Draft 4">
+<div class="tab-pane active section" id="7fea4a1dcd90_Draft 4">
 In Draft 4, <code class="docutils literal notranslate"><span class="pre">required</span></code> must contain at least one string.</div>
 </div>
 </div><p>In the following example schema defining a user record, we require
@@ -511,163 +506,6 @@ must be a non-negative integer.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="dependencies">
-<span id="index-7"></span><h2><a class="toc-backref" href="#id9">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> keyword allows the schema of the object to change
-based on the presence of certain special properties.</p>
-<p>There are two forms of <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> in JSON Schema:</p>
-<ul class="simple">
-<li><strong>Property dependencies</strong> declare that certain other properties must
-be present if a given property is present.</li>
-<li><strong>Schema dependencies</strong> declare that the schema changes when a
-given property is present.</li>
-</ul>
-<div class="section" id="property-dependencies">
-<h3><a class="toc-backref" href="#id10">Property dependencies</a><a class="headerlink" href="#property-dependencies" title="Permalink to this headline">¶</a></h3>
-<p>Let’s start with the simpler case of property dependencies.  For
-example, suppose we have a schema representing a customer.  If you
-have their credit card number, you also want to ensure you have a
-billing address.  If you don’t have their credit card number, a
-billing address would not be required.  We represent this dependency
-of one property on another using the <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> keyword. The
-value of the <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> keyword is an object.  Each entry in the
-object maps from the name of a property, <em>p</em>, to an array of strings
-listing properties that are required if <em>p</em> is present.</p>
-<p>In the following example, whenever a <code class="docutils literal notranslate"><span class="pre">credit_card</span></code> property is
-provided, a <code class="docutils literal notranslate"><span class="pre">billing_address</span></code> property must also be present:</p>
-<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-
-  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">},</span>
-    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
-  <span class="p">},</span>
-
-  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
-
-  <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;billing_address&quot;</span><span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mf">5555555555555555</span><span class="p">,</span>
-  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p class="jsonschema-comment">This instance has a <code class="docutils literal notranslate"><span class="pre">credit_card</span></code>, but it’s missing a <code class="docutils literal notranslate"><span class="pre">billing_address</span></code>.</p>
-<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mf">5555555555555555</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p class="jsonschema-comment">This is okay, since we have neither a <code class="docutils literal notranslate"><span class="pre">credit_card</span></code>, or a <code class="docutils literal notranslate"><span class="pre">billing_address</span></code>.</p>
-<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p class="jsonschema-comment">Note that dependencies are not bidirectional.  It’s okay to have
-a billing address without a credit card number.</p>
-<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>To fix the last issue above (that dependencies are not bidirectional),
-you can, of course, define the bidirectional dependencies explicitly:</p>
-<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-
-  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">},</span>
-    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
-  <span class="p">},</span>
-
-  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
-
-  <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;billing_address&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;credit_card&quot;</span><span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p class="jsonschema-comment">This instance has a <code class="docutils literal notranslate"><span class="pre">credit_card</span></code>, but it’s missing a <code class="docutils literal notranslate"><span class="pre">billing_address</span></code>.</p>
-<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mf">5555555555555555</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p class="jsonschema-comment">This has a <code class="docutils literal notranslate"><span class="pre">billing_address</span></code>, but is missing a <code class="docutils literal notranslate"><span class="pre">credit_card</span></code>.</p>
-<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="schema-dependencies">
-<h3><a class="toc-backref" href="#id11">Schema dependencies</a><a class="headerlink" href="#schema-dependencies" title="Permalink to this headline">¶</a></h3>
-<p>Schema dependencies work like property dependencies, but instead of
-just specifying required properties, they specify a schema that must
-be valid against the instance.</p>
-<p>For example, here is another way to write the above:</p>
-<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-
-  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span> <span class="p">}</span>
-  <span class="p">},</span>
-
-  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
-
-  <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;billing_address&quot;</span><span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mf">5555555555555555</span><span class="p">,</span>
-  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p class="jsonschema-comment">This instance has a <code class="docutils literal notranslate"><span class="pre">credit_card</span></code>, but it’s missing a
-<code class="docutils literal notranslate"><span class="pre">billing_address</span></code>:</p>
-<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;credit_card&quot;</span><span class="o">:</span> <span class="mf">5555555555555555</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p class="jsonschema-comment">This has a <code class="docutils literal notranslate"><span class="pre">billing_address</span></code>, but is missing a
-<code class="docutils literal notranslate"><span class="pre">credit_card</span></code>.  This passes, because here <code class="docutils literal notranslate"><span class="pre">billing_address</span></code>
-just looks like an additional property:</p>
-<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;billing_address&quot;</span><span class="o">:</span> <span class="s2">&quot;555 Debtor&#39;s Lane&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 
 
@@ -683,7 +521,7 @@ just looks like an additional property:</p>
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on May 27, 2021.<br/>
+      Last updated on Jun 22, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
