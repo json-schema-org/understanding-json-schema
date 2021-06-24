@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 services:
   web:
@@ -6,4 +6,5 @@ services:
     volumes:
       - .:/code:Z
     ports:
-      - "8000:8000"
+      - '8000:8000'
+    command: '/usr/bin/python3 -m http.server 8000 --directory build/html'

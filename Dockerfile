@@ -24,4 +24,4 @@ COPY . /code
 WORKDIR /code
 
 # Build and serve website
-CMD make html latexpdf && cp build/latex/*.pdf build/html && python3 -m http.server 8000 --directory build/html
+ENTRYPOINT ["./entrypoint.sh"]
