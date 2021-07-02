@@ -6,14 +6,48 @@ from docutils.parsers.rst import Directive
 from sphinx.util.nodes import set_source_info
 
 import jsonschema
+from jschon import Catalogue, JSON, JSONSchema, URI
 
 
-def get_standard_cls(standard):
-    return {
-        3: jsonschema.validators.Draft3Validator,
-        4: jsonschema.validators.Draft4Validator,
-        6: jsonschema.validators.Draft6Validator,
-        7: jsonschema.validators.Draft7Validator}[standard]
+legacy = {
+    'http://json-schema.org/draft-03/schema#': jsonschema.validators.Draft3Validator,
+    'http://json-schema.org/draft-04/schema#': jsonschema.validators.Draft4Validator,
+    'http://json-schema.org/draft-06/schema#': jsonschema.validators.Draft6Validator,
+    'http://json-schema.org/draft-07/schema#': jsonschema.validators.Draft7Validator
+}
+
+def validate(schema, part, standard):
+    if standard in legacy:
+        cls = legacy[standard]
+
+        try:
+            jsonschema.validate(part.json, schema.json, cls=cls)
+            return (True, '')
+        except jsonschema.ValidationError as e:
+            return (False, str(e))
+        except jsonschema.SchemaError as e:
+            raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
+                str(e), schema.content))
+
+        return (is_valid, message)
+    else:
+        catalogue = Catalogue('2019-09')
+        Catalogue._default_catalogue = catalogue
+
+        compiled_schema = JSONSchema(schema.json, metaschema_uri=URI(standard))
+        if not compiled_schema.validate().valid:
+            raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
+                "INVALID SCHEMA", schema.content))
+        elif part.json is (1+1j):
+            return (False, 'INVALID JSON')
+        else:
+            jsonValue = JSON.loads(part.content)
+            validation_result = compiled_schema.evaluate(jsonValue)
+
+            if validation_result.valid:
+                return (True, '');
+            else:
+                return (False, 'VALIDATION ERROR');
 
 
 class jsonschema_node(nodes.Element):
@@ -86,10 +120,9 @@ class SchemaExampleDirective(Directive):
     def run(self):
         env = self.state.document.settings.env
         if len(self.arguments) == 1:
-            standard = int(self.arguments[0])
+            standard = self.arguments[0]
         else:
             standard = env.config.jsonschema_standard
-        standard = get_standard_cls(standard)
 
         result = []
 
@@ -110,17 +143,7 @@ class SchemaExampleDirective(Directive):
 
         for part in parts:
             if self.validate:
-                is_valid = True
-                try:
-                    jsonschema.validate(
-                        part.json, schema.json,
-                        cls=standard)
-                except jsonschema.ValidationError as e:
-                    is_valid = False
-                    message = str(e)
-                except jsonschema.SchemaError as e:
-                    raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
-                        str(e), schema.content))
+                is_valid, message = validate(schema, part, standard)
 
                 if is_valid != part.should_pass:
                     if part.should_pass:
@@ -210,7 +233,7 @@ def depart_jsonschema_node_latex(self, node):
 
 
 def setup(app):
-    app.add_config_value('jsonschema_standard', 4, 'env')
+    app.add_config_value('jsonschema_standard', 'http://json-schema.org/draft-04/schema#', 'env')
 
     app.add_directive('schema_example',
                       SchemaExampleDirective)
