@@ -19,8 +19,8 @@ import datetime
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath(os.path.dirname('__file__')))
 
-# The standard of JSON Schema to test the examples against
-jsonschema_standard = 7
+# The default JSON Schema dialect to test the examples against
+jsonschema_standard = 'http://json-schema.org/draft-07/schema#'
 
 rst_prolog = """
 .. role:: new

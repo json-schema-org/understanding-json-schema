@@ -177,7 +177,7 @@ While you can specify both of ``minimum`` and ``exclusiveMinimum`` or both of
 
     Here is an example using the older Draft 4 convention:
 
-    .. schema_example:: 4
+    .. schema_example:: http://json-schema.org/draft-04/schema#
 
         {
           "type": "number",
