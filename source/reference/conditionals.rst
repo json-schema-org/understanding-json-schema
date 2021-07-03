@@ -456,6 +456,6 @@ expressed as ``A -> B AND !A -> C``.
 
 .. note::
     Since this pattern is not very intuitive, it's recommended to
-    put your conditionals in ``definitions`` with a descriptive name and
+    put your conditionals in ``$defs`` with a descriptive name and
     ``$ref`` it into your schema with ``"allOf": [{ "$ref":
-    "#/definitions/sit-down-restaurant-implies-tip-is-required" }]``.
+    "#/$defs/sit-down-restaurant-implies-tip-is-required" }]``.
