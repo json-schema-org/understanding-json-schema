@@ -64,6 +64,17 @@ really only two options useful for modern usage:
   This would include many image types, such as ``image/png`` or audio types,
   such as ``audio/mpeg``.
 
+.. index::
+   single: contentSchema
+   single: media; contentSchema
+
+contentSchema
+`````````````
+
+|draft2019-09|
+
+Documentation Coming soon
+
 Examples
 ````````
 
