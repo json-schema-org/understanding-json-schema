@@ -266,6 +266,9 @@ While the ``items`` schema must be valid for every item in the array, the
 ``contains`` schema only needs to validate against one or more items in the
 array.
 
+|draft2019-09| ``minContains`` and ``maxContains`` documentation
+coming soon.
+
 .. schema_example::
 
    {
