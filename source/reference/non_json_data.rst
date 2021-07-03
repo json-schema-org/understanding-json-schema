@@ -43,11 +43,12 @@ contentEncoding
 
 The ``contentEncoding`` keyword specifies the encoding used to store the
 contents, as specified in `RFC 2054, part 6.1
-<https://tools.ietf.org/html/rfc2045>`_.
+<https://tools.ietf.org/html/rfc2045>`_ and `RFC 4648
+<https://datatracker.ietf.org/doc/html/rfc4648>`_.
 
-The acceptable values are ``7bit``, ``8bit``, ``binary``, ``quoted-printable``
-and ``base64``. If not specified, the encoding is the same as the containing
-JSON document.
+The acceptable values are ``7bit``, ``8bit``, ``binary``,
+``quoted-printable``, ``base16``, ``base32``, and ``base64``. If not
+specified, the encoding is the same as the containing JSON document.
 
 Without getting into the low-level details of each of these encodings, there are
 really only two options useful for modern usage:
