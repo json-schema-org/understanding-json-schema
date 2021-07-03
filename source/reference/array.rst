@@ -239,6 +239,19 @@ strings:
     have no effect.
 
 .. index::
+   single: array; tuple validation; unevaluatedItems
+   single: unevaluatedItems
+
+.. _unevaluateditems:
+
+Unevaluated Items
+'''''''''''''''''
+
+|draft2019-09|
+
+Documentation Coming Soon
+
+.. index::
    single: array; contains
    single: contains
 
