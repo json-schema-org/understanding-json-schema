@@ -33,7 +33,7 @@ Schema documents are identified by non-relative URIs.
 
 Schema documents are not required to have an identifier, but
 you will need one if you want to reference one schema from
-another. In this document, we will refer to schemas with no
+another. In this documentation, we will refer to schemas with no
 identifier as "anonymous schemas".
 
 In the following sections we will see how the "identifier" for a
@@ -221,7 +221,6 @@ The base URI for this schema is the same as the retrieval URI,
 
 .. index::
    single: $id
-   single: canonical URI
    single: structuring; base URI; $id
 
 .. _id:
@@ -239,10 +238,10 @@ The resulting URI is the base URI for the schema.
     In Draft 4, ``$id`` is just ``id`` (without the dollar sign).
 
 .. note::
-   This is analogous to the ``<base>`` `tag HTML
+   This is analogous to the ``<base>`` `tag in HTML
    <https://html.spec.whatwg.org/multipage/semantics.html#the-base-element>`__.
 
-Let's assume the URI ``https://example.com/schema/address`` and
+Let's assume the URIs ``https://example.com/schema/address`` and
 ``https://example.com/schema/billing-address`` both identify the
 following schema.
 

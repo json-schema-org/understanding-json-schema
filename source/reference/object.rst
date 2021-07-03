@@ -87,7 +87,7 @@ the property names in the ``properties`` keyword is ignored by this
 keyword.
 
 .. note::
-   See `additionalProperties` for how to disallow properties that
+   See `additionalproperties` for how to disallow properties that
    don't match any of the property names in ``properties``.
 
 For example, let's say we want to define a simple schema for an
@@ -177,7 +177,7 @@ are ignored.
    single: object; properties
    single: additionalProperties
 
-.. _additionalProperties:
+.. _additionalproperties:
 
 Additional Properties
 '''''''''''''''''''''
