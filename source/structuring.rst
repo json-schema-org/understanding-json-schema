@@ -372,25 +372,25 @@ that schema and uses it to evaluate the "shipping_address" and
    address schema.
 
 .. index::
-   single: definitions
-   single: structuring; definitions
+   single: $defs
+   single: structuring; $defs
 
-.. _definitions:
+.. _defs:
 
-definitions
------------
+$defs
+-----
 
 Sometimes we have small subschemas that are only intended for use in
 the current schema and it doesn't make sense to define them as
 separate schemas. Although we can identify any subschema using JSON
-Pointers or named anchors, the ``definitions`` keyword gives us a
+Pointers or named anchors, the ``$defs`` keyword gives us a
 standardized place to keep subschemas intended for reuse in the
 current schema document.
 
 Let's extend the previous customer schema example to use a common
 schema for the name properties. It doesn't make sense to define a new
 schema for this and it will only be used in this schema, so it's a
-good candidate for using ``definitions``.
+good candidate for using ``$defs``.
 
 .. schema_example::
 
@@ -399,21 +399,21 @@ good candidate for using ``definitions``.
 
       "type": "object",
       "properties": {
-        "first_name": { "$ref": "#/definitions/name" },
-        "last_name": { "$ref": "#/definitions/name" },
+        "first_name": { "$ref": "#/$defs/name" },
+        "last_name": { "$ref": "#/$defs/name" },
         "shipping_address": { "$ref": "/schemas/address" },
         "billing_address": { "$ref": "/schemas/address" }
       },
       "required": ["first_name", "last_name", "shipping_address", "billing_address"],
 
-      "definitions": {
+      "$defs": {
         "name": { "type": "string" }
       }
     }
 
 ``$ref`` isn't just good for avoiding duplication. It can also be
 useful for writing schemas that are easier to read and maintain.
-Complex parts of the schema can be defined in ``definitions`` with
+Complex parts of the schema can be defined in ``$defs`` with
 descriptive names and referenced where it's needed. This allows
 readers of the schema to more quickly and easily understand the schema
 at a high level before diving into the more complex parts.
@@ -421,7 +421,7 @@ at a high level before diving into the more complex parts.
 .. note::
    It's possible to reference an external subschema, but generally you
    want to limit a ``$ref`` to referencing either an external schema
-   or an internal subschema defined in ``definitions``.
+   or an internal subschema defined in ``$defs``.
 
 .. index::
    single: recursion
@@ -481,9 +481,9 @@ an infinite loop in the resolver, and is explicitly disallowed.
 .. schema_example::
 
     {
-      "definitions": {
-        "alice": { "$ref": "#/definitions/bob" },
-        "bob": { "$ref": "#/definitions/alice" }
+      "$defs": {
+        "alice": { "$ref": "#/$defs/bob" },
+        "bob": { "$ref": "#/$defs/alice" }
       }
     }
 
@@ -528,7 +528,7 @@ example bundled into a single schema document.
       },
       "required": ["first_name", "last_name", "shipping_address", "billing_address"],
 
-      "definitions": {
+      "$defs": {
         "address": {
           "$id": "/schemas/address",
 
@@ -536,11 +536,11 @@ example bundled into a single schema document.
           "properties": {
             "street_address": { "type": "string" },
             "city": { "type": "string" },
-            "state": { "$ref": "#/definitions/state" }
+            "state": { "$ref": "#/$defs/state" }
           },
           "required": ["street_address", "city", "state"],
 
-          "definitions": {
+          "$defs": {
             "state": { "enum": ["CA", "NY", "... etc ..."] }
           }
         }
@@ -549,17 +549,17 @@ example bundled into a single schema document.
 
 Notice that the ``$ref`` keywords from the customer schema resolve the
 same way they did before except that the address schema is now defined
-at ``/definitions/address`` instead of a separate schema document. You
-should also see that ``"$ref": "#/definitions/state"`` resolves to the
-``definitions`` keyword in the address schema rather than the one at
-the top level schema like it would if the subschema ``$id`` wasn't
+at ``/$defs/address`` instead of a separate schema document. You
+should also see that ``"$ref": "#/$defs/state"`` resolves to the
+``$defs`` keyword in the address schema rather than the one at
+the top level schema like it would if the embedded schema wasn't
 used.
 
 You might notice that this creates a situation where there are
 multiple ways to identify a schema. Instead of referencing
 ``/schemas/address`` (``https://example.com/schemas/address``) You
-could have used ``#/definitions/address``
-(``https://example.com/schemas/customer#/definitions/address``). While
+could have used ``#/$defs/address``
+(``https://example.com/schemas/customer#/$defs/address``). While
 both of these will work, the one shown in the example is preferred.
 
 .. note::
