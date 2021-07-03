@@ -488,6 +488,21 @@ an infinite loop in the resolver, and is explicitly disallowed.
     }
 
 .. index::
+   single: Extending Recursive Schemas
+   single: $recursiveRef
+   single: $recursiveAnchor
+   single: structuring; Extending Recursive Schemas
+
+.. _extending-recursive-schemas:
+
+Extending Recursive Schemas
+---------------------------
+
+|Draft2019-09|
+
+Documentation Coming Soon
+
+.. index::
    single: bundling
    single: $id
    single: structuring; bundling; $id
