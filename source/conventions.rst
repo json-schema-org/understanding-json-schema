@@ -41,8 +41,8 @@ Draft-specific notes
 --------------------
 
 The JSON Schema standard has been through a number of revisions or
-"drafts". The the current version is Draft 7, but Draft 4 is still
-widely used as well.
+"drafts". The current version is Draft 7, but Draft 4 is still widely
+used as well.
 
 The text is written to encourage the use of Draft 7 and gives priority
 to the latest conventions and features, but where it differs from

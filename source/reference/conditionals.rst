@@ -3,7 +3,7 @@
 
 .. _conditionals:
 
-Applying subschemas conditionally
+Applying Subschemas Conditionally
 =================================
 
 .. contents:: :local:
