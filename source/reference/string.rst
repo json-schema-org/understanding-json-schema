@@ -163,6 +163,11 @@ a subset of the date format also commonly known as `ISO8601 format
 
 - ``"date"``: |draft7| Date, for example, ``2018-11-13``.
 
+- ``"duration"``: |draft2019-09| A duration as defined by the `ISO
+  8601 ABNF for "duration"
+  <https://datatracker.ietf.org/doc/html/rfc3339#appendix-A>`_.  For
+  example, ``P3D`` expresses a duration of 3 days.
+
 .. index::
    single: email
    single: idn-email
@@ -187,11 +192,11 @@ Email addresses
 Hostnames
 *********
 
-- ``"hostname"``: Internet host name, see `RFC 1034, section 3.1
-  <http://tools.ietf.org/html/rfc1034#section-3.1>`_.
+- ``"hostname"``: Internet host name, see `RFC 1123, section 2.1
+  <https://datatracker.ietf.org/doc/html/rfc1123#section-2.1>`_.
 
-- ``"idn-hostname"``: |draft7| An internationalized Internet host name, see
-  `RFC5890, section 2.3.2.3
+- ``"idn-hostname"``: |draft7| An internationalized Internet host
+  name, see `RFC5890, section 2.3.2.3
   <https://tools.ietf.org/html/rfc5890#section-2.3.2.3>`_.
 
 .. index::
@@ -211,10 +216,12 @@ IP Addresses
   <http://tools.ietf.org/html/rfc2373#section-2.2>`_.
 
 .. index::
+   single: uuid
    single: uri
    single: uri-reference
    single: iri
    single: iri-reference
+   single: format; uuid
    single: format; uri
    single: format; uri-reference
    single: format; iri
@@ -222,6 +229,11 @@ IP Addresses
 
 Resource identifiers
 ********************
+
+- ``"uuid"``: |draft2019-09| A Universally Unique Identifier as
+  defined by `RFC 4122
+  <https://datatracker.ietf.org/doc/html/rfc4122>`_. Example:
+  ``3e4666bf-d5e5-4aa7-b8ce-cefe41c7568a``
 
 - ``"uri"``: A universal resource identifier (URI), according to
   `RFC3986 <http://tools.ietf.org/html/rfc3986>`_.
