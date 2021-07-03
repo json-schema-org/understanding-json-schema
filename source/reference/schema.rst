@@ -40,7 +40,7 @@ communicate to readers and tooling which specification version is
 intended. Therefore most of the time, you'll want this at the root of
 your schema::
 
-    "$schema": "http://json-schema.org/draft-07/schema#"
+    "$schema": "https://json-schema.org/draft/2019-09/schema"
 
 .. draft_specific::
 
@@ -63,6 +63,9 @@ your schema::
 
     --Draft 6
     The identifier for Draft 6 is ``http://json-schema.org/draft-06/schema#``.
+
+    --Draft 7
+    The identifier for Draft 7 is ``http://json-schema.org/draft-07/schema#``.
 
 .. index::
    single: $schema
