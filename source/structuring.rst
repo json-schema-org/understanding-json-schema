@@ -313,15 +313,19 @@ $ref
 
 A schema can reference another schema using the ``$ref`` keyword. The
 value of ``$ref`` is a URI-reference that is resolved against the
-schema's `base-uri`. When evaluating a schema, an implementation uses
-the resolved identifier to retrieve the referenced schema and
-evaluation is continued from the retrieved schema.
+schema's `base-uri`. When evaluating a ``$ref``, an implementation
+uses the resolved identifier to retrieve the referenced schema and
+applies that schema to the instance.
 
-``$ref`` can be used anywhere a schema is expected. When an object
-contains a ``$ref`` property, the object is considered a reference,
-not a schema. Therefore, any other properties you put there will not
-be treated as JSON Schema keywords and will be ignored by the
-validator.
+.. draft_specific::
+
+   -- Draft 4-7
+   In Draft 4-7, ``$ref`` behaves a little differently. When an
+   object contains a ``$ref`` property, the object is considered a
+   reference, not a schema. Therefore, any other properties you put
+   in that object will not be treated as JSON Schema keywords and will
+   be ignored by the validator. ``$ref`` can only be used where a
+   schema is expected.
 
 For this example, let's say we want to define a customer record, where
 each customer may have both a shipping and a billing address.
