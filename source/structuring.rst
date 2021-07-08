@@ -230,18 +230,29 @@ The base URI for this schema is the same as the retrieval URI,
 $id
 ~~~
 
-You can set the base URI using the ``$id`` keyword. The value of
-``$id`` is a URI-reference that resolves against the `retrieval-uri`.
-The resulting URI is the base URI for the schema.
+You can set the base URI by using the ``$id`` keyword at the root of
+the schema. The value of ``$id`` is a URI-reference without a fragment
+that resolves against the `retrieval-uri`. The resulting URI is the
+base URI for the schema.
 
 .. draft_specific::
 
     --Draft 4
     In Draft 4, ``$id`` is just ``id`` (without the dollar sign).
 
+    --Draft 4-7
+    In Draft 4-7 it was allowed to have fragments in an ``$id`` (or
+    ``id`` in Draft 4). However, the behavior when setting a base URI
+    that contains a URI fragment is undefined and should not be used
+    because implementations may treat them differently.
+
 .. note::
    This is analogous to the ``<base>`` `tag in HTML
    <https://html.spec.whatwg.org/multipage/semantics.html#the-base-element>`__.
+
+.. note::
+   When the ``$id`` keyword appears in a subschema, it means something
+   slightly different. See the `bundling` section for more.
 
 Let's assume the URIs ``https://example.com/schema/address`` and
 ``https://example.com/schema/billing-address`` both identify the
@@ -290,11 +301,6 @@ The base URI of the following schema will always be
       },
       "required": ["street_address", "city", "state"]
     }
-
-.. note::
-   The behavior when setting a base URI that contains a URI fragment
-   is undefined and should not be used because implementations may
-   treat them differently.
 
 .. index::
    single: $ref
