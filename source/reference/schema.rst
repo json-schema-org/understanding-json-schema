@@ -44,7 +44,7 @@ your schema::
 
 .. draft_specific::
 
-    --Draft-4
+    --Draft 4
     The identifier for Draft 4 is ``http://json-schema.org/draft-04/schema#``.
 
     Draft 4 defined a value for ``$schema`` without a specific version
@@ -61,7 +61,7 @@ your schema::
     Draft 4. We no longer use the "draft" terminology to refer to
     patch releases to avoid this confusion.
 
-    --Draft-6
+    --Draft 6
     The identifier for Draft 6 is ``http://json-schema.org/draft-06/schema#``.
 
 .. index::

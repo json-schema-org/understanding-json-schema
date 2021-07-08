@@ -1,6 +1,7 @@
 from docutils import nodes
 from docutils import statemachine
 from docutils.parsers.rst import Directive
+import re
 
 
 class AttrDict(dict):
@@ -151,7 +152,7 @@ def depart_tab_node_latex(self, node):
 
 
 def make_id(self, label):
-    return '{0}_{1}'.format(hex(id(self))[2:], label)
+    return '{0}_{1}'.format(hex(id(self))[2:], re.sub(r"\W", "_", label))
 
 
 class TabDirective(Directive):
