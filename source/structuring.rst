@@ -112,26 +112,34 @@ identifies the highlighted subschema in the following schema.
     }
 
 .. index::
-   single: $id
-   single: named anchors
-   single: structuring; subschema identification; $id
+   single: $anchor
+   single: structuring; subschema identification; $anchor
 
 .. _anchor:
 
-Named Anchors
-~~~~~~~~~~~~~
+$anchor
+~~~~~~~
 
 A less common way to identify a subschema is to create a named anchor
-in the schema using the ``$id`` keyword and using that name in the URI
-fragment. When the ``$id`` keyword contains a URI fragment, the
-fragment defines a named anchor using the value of the fragment. Named
-anchors must start with a letter followed by any number of letters,
-digits, ``-``, ``_``, ``:``, or ``.``.
+in the schema using the ``$anchor`` keyword and using that name in the
+URI fragment. Anchors must start with a letter followed by any number
+of letters, digits, ``-``, ``_``, ``:``, or ``.``.
 
 .. draft_specific::
 
     --Draft 4
-    In Draft 4, ``$id`` is just ``id`` (without the dollar sign).
+    In Draft 4, you declare an anchor the same way you do in Draft 6-7
+    except that ``$id`` is just ``id`` (without the dollar sign).
+
+    --Draft 6-7
+    In Draft 6-7, a named anchor is defined using an ``$id`` that
+    contains only a URI fragment. The value of the URI fragment is the
+    name of the anchor.
+
+    JSON Schema doesn't define how ``$id`` should be interpreted when
+    it contains both fragment and non-fragment URI parts. Therefore,
+    when setting a named anchor, you should not use non-fragment URI
+    parts in the URI-reference.
 
 .. note::
    If a named anchor is defined that doesn't follow these naming
@@ -151,7 +159,7 @@ schema.
       "properties": {
         "street_address":
     *      {
-    *        "$id": "#street_address",
+    *        "$anchor": "#street_address",
     *        "type": "string"
     *      },
         "city": { "type": "string" },
@@ -159,12 +167,6 @@ schema.
       },
       "required": ["street_address", "city", "state"]
     }
-
-.. note::
-   JSON Schema doesn't define how ``$id`` should be interpreted when
-   it contains both fragment and non-fragment URI parts. Therefore,
-   when setting a named anchor, you should not use non-fragment URI
-   parts in the URI-reference.
 
 .. index::
    single: base URI
