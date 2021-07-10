@@ -525,26 +525,43 @@ Bundling
 --------
 
 Working with multiple schema documents is convenient for development,
-but it is often more convenient for distribution to bundle all of your
+but it's often more convenient for distribution to bundle all of your
 schemas into a single schema document. This can be done using the
 ``$id`` keyword in a subschema. When ``$id`` is used in a subschema,
-it creates a new `base-uri` that any references in that subschema and
-any descendant subschemas will resolve against. The new `base-uri` is
-the value of ``$id`` resolved against the `base-uri` of the schema it
-appears in.
+it indicates an embedded schema. The identifier for the embedded
+schema is the value of ``$id`` resolved against the `base-uri` of the
+schema it appears in. A schema document that includes embedded schemas
+is called a Compound Schema Document. Each schema with an ``$id`` in a
+Compound Schema Document is called a Schema Resource.
 
 .. draft_specific::
 
     --Draft 4
     In Draft 4, ``$id`` is just ``id`` (without the dollar sign).
 
+    --Draft 4-7
+    In Draft 4-7, an ``$id`` in a subschema did not indicate an
+    embedded schema. Instead it was simply a base URI change in a
+    single schema document.
+
+.. note::
+   This is analogous to the ``<iframe>`` `tag in HTML
+   <https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element>`__.
+
+.. note::
+   It is unusual to use embedded schemas when developing schemas. It's
+   generally best not to use this feature explicitly and use schema
+   bundling tools to construct bundled schemas if such a thing is
+   needed.
+
 This example shows the customer schema example and the address schema
-example bundled into a single schema document.
+example bundled into a Compound Schema Document.
 
 .. schema_example::
 
     {
       "$id": "https://example.com/schemas/customer",
+      "$schema": "https://json-schema.org/draft/2019-09/schema",
 
       "type": "object",
       "properties": {
@@ -558,39 +575,53 @@ example bundled into a single schema document.
       "$defs": {
         "address": {
           "$id": "/schemas/address",
+          "$schema": "http://json-schema.org/draft-07/schema#",
 
           "type": "object",
           "properties": {
             "street_address": { "type": "string" },
             "city": { "type": "string" },
-            "state": { "$ref": "#/$defs/state" }
+            "state": { "$ref": "#/definitions/state" }
           },
           "required": ["street_address", "city", "state"],
 
-          "$defs": {
+          "definitions": {
             "state": { "enum": ["CA", "NY", "... etc ..."] }
           }
         }
       }
     }
 
-Notice that the ``$ref`` keywords from the customer schema resolve the
-same way they did before except that the address schema is now defined
-at ``/$defs/address`` instead of a separate schema document. You
-should also see that ``"$ref": "#/$defs/state"`` resolves to the
-``$defs`` keyword in the address schema rather than the one at
-the top level schema like it would if the embedded schema wasn't
+All references in a Compound Schema Document need to be the same
+whether the Schema Resources are bundled or not. Notice that the
+``$ref`` keywords from the customer schema have not changed. The only
+difference is that the address schema is now defined at
+``/$defs/address`` instead of a separate schema document. You couldn't
+use ``#/$defs/address`` to reference the address schema because if you
+unbundled the schema, that reference would no longer point to the
+address schema.
+
+.. draft_specific::
+   -- Draft 4-7
+   In Draft 4-7, both of these URIs are valid because a subschema
+   ``$id`` only represented a base URI change, not an embedded schema.
+   However, even though it's allowed, it's still highly recommended
+   that JSON Pointers don't cross a schema with a base URI change.
+
+You should also see that ``"$ref": "#/definitions/state"`` resolves to
+the ``definitions`` keyword in the address schema rather than the one
+at the top level schema like it would if the embedded schema wasn't
 used.
 
-You might notice that this creates a situation where there are
-multiple ways to identify a schema. Instead of referencing
-``/schemas/address`` (``https://example.com/schemas/address``) You
-could have used ``#/$defs/address``
-(``https://example.com/schemas/customer#/$defs/address``). While
-both of these will work, the one shown in the example is preferred.
+Each Schema Resource is evaluated independently and may use different
+JSON Schema dialects. The example above has the address Schema
+Resource using Draft 7 while the customer Schema Resource uses Draft
+2019-09. If no ``$schema`` is declared in an embedded schema, it
+defaults using to the dialect of the parent schema.
 
-.. note::
-   It is unusual to use ``$id`` in a subschema when developing
-   schemas. It's generally best not to use this feature explicitly and
-   use schema bundling tools to construct bundled schemas if such a
-   thing is needed.
+.. draft_specific::
+   -- Draft 4-7
+   In Draft 4-7, a subschema ``$id`` is just a base URI change and not
+   considered an independent Schema Resource. Because ``$schema`` is
+   only allowed at the root of a Schema Resource, all schemas bundled
+   using subschema ``$id`` must use the same dialect.
