@@ -163,8 +163,8 @@ Here's the example schema:
 
 .. _additionalItems:
 
-Addtional Items
-'''''''''''''''
+Additional Items
+''''''''''''''''
 
 The ``additionalItems`` keyword controls whether it's valid to have
 additional items in a tuple beyond what is defined in ``items``. The
