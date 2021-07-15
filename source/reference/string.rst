@@ -75,7 +75,8 @@ The ``pattern`` keyword is used to restrict a string to a particular
 regular expression.  The regular expression syntax is the one defined
 in JavaScript (`ECMA 262
 <http://www.ecma-international.org/publications/standards/Ecma-262.htm>`__
-specifically).  See `regular-expressions` for more information.
+specifically) with Unicode support.  See `regular-expressions` for
+more information.
 
 .. note::
     When defining the regular expressions, it's important to note that

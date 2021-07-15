@@ -41,20 +41,20 @@ Draft-specific notes
 --------------------
 
 The JSON Schema standard has been through a number of revisions or
-"drafts". The current version is Draft 2019-09, but some older drafts
+"drafts". The current version is Draft 2020-12, but some older drafts
 are still widely used as well.
 
-The text is written to encourage the use of Draft 2019-09 and gives
+The text is written to encourage the use of Draft 2020-12 and gives
 priority to the latest conventions and features, but where it differs
 from earlier drafts, those differences are highlighted in special
-call-outs. If you only wish to target Draft 2019-09, you can safely
+call-outs. If you only wish to target Draft 2020-12, you can safely
 ignore those sections.
 
-|draft2019-09|
+|draft2020-12|
 
 .. draft_specific::
 
-   --Draft 7
+   --Draft 2019-09
    This is where anything pertaining to an old draft would be mentioned.
 
 
