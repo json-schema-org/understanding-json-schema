@@ -31,7 +31,7 @@ def validate(schema, part, standard):
 
         return (is_valid, message)
     else:
-        catalogue = Catalogue('2019-09')
+        catalogue = Catalogue('2019-09', '2020-12')
         Catalogue._default_catalogue = catalogue
 
         compiled_schema = JSONSchema(schema.json, metaschema_uri=URI(standard))
