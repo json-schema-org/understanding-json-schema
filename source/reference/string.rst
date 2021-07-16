@@ -114,15 +114,32 @@ with an optional area code:
 Format
 ''''''
 
-The ``format`` keyword allows for basic semantic validation on certain
-kinds of string values that are commonly used.  This allows values to
-be constrained beyond what the other tools in JSON Schema, including
-`regular-expressions` can do.
+The ``format`` keyword allows for basic semantic identification of
+certain kinds of string values that are commonly used. For example,
+because JSON doesn't have a "DateTime" type, dates need to be encoded
+as strings. ``format`` allows the schema author to indicate that the
+string value should be interpreted as a date. By default, ``format``
+is just an annotation and does not effect validation.
+
+Optionally, validator implementations can provide a configuration
+option to enable ``format`` to function as an assertion rather than
+just an annotation. That means that validation will fail if, for
+example, a value with a ``date`` format isn't in a form that can be
+parsed as a date. This can allow values to be constrained beyond what
+the other tools in JSON Schema, including `regular-expressions` can
+do.
 
 .. note::
+   Implementations may provide validation for only a subset of the
+   built-in formats or do partial validation for a given format. For
+   example, some implementations may consider a string an email if it
+   contains a ``@``, while others might be more do additional checks
+   for other aspects of a well formed email address.
 
-    JSON Schema implementations are not required to implement this
-    part of the specification, and many of them do not.
+.. draft-specific::
+   --Draft 4-7
+   In Draft 4-7, there is no guarantee that you get annotation-only
+   behavior by default.
 
 There is a bias toward networking-related formats in the JSON Schema
 specification, most likely due to its heritage in web technologies.
