@@ -195,8 +195,8 @@ a subset of the date format also commonly known as `ISO8601 format
 Email addresses
 ***************
 
-- ``"email"``: Internet email address, see `RFC 5322,
-  section 3.4.1 <http://tools.ietf.org/html/rfc5322#section-3.4.1>`_.
+- ``"email"``: Internet email address, see `RFC 5321,
+  section 4.1.2 <http://tools.ietf.org/html/rfc5321#section-4.1.2>`_.
 
 - ``"idn-email"``: |draft7| The internationalized form of an Internet email address, see
   `RFC 6531 <https://tools.ietf.org/html/rfc6531>`_.
