@@ -31,18 +31,6 @@ array may be of a different type.
     --X
     {"Not": "an array"}
 
-
-.. index::
-   single: array; items
-   single: items
-   single: additionalItems
-   single: contains
-
-.. _items:
-
-Items
-'''''
-
 There are two ways in which arrays are generally used in JSON:
 
 - **List validation:** a sequence of arbitrary length where each
@@ -55,21 +43,18 @@ There are two ways in which arrays are generally used in JSON:
   languages, such as Python's ``tuple``).
 
 .. index::
-   single: array; list validation
+   single: array; items
+   single: items
 
-.. _list-validation:
+.. _items:
 
-List validation
-~~~~~~~~~~~~~~~
+Items
+'''''
 
 List validation is useful for arrays of arbitrary length where each
 item matches the same schema.  For this kind of array, set the
 ``items`` keyword to a single schema that will be used to validate all
 of the items in the array.
-
-.. note::
-   When ``items`` is a single schema, the ``additionalItems`` keyword
-   is meaningless, and it should not be used.
 
 In the following example, we define that each item in an array is a
 number:
@@ -97,7 +82,7 @@ number:
 .. _tuple-validation:
 
 Tuple validation
-~~~~~~~~~~~~~~~~
+''''''''''''''''
 
 Tuple validation is useful when the array is a collection of items
 where each has a different schema and the ordinal index of each item
@@ -123,11 +108,18 @@ Each of these fields will have a different schema:
 - ``direction``: The city quadrant of the address.  Should be a string
   from a different set of values.
 
-To do this, we set the ``items`` keyword to an array, where each item
-is a schema that corresponds to each index of the document's array.
-That is, an array where the first element validates the first element
-of the input array, the second element validates the second element of
-the input array, etc.
+To do this, we use the ``prefixItems`` keyword. ``prefixItems`` is an
+array, where each item is a schema that corresponds to each index of
+the document's array. That is, an array where the first element
+validates the first element of the input array, the second element
+validates the second element of the input array, etc.
+
+.. draft_specific::
+   --Draft 4 - 2019-09
+   In Draft 4 - 2019-09, tuple validation was handled by an alternate
+   form of the ``items`` keyword. When ``items`` was an array of
+   schemas instead of a single schema, it behaved the way
+   ``prefixItems`` behaves.
 
 Here's the example schema:
 
@@ -135,7 +127,7 @@ Here's the example schema:
 
     {
       "type": "array",
-      "items": [
+      "prefixItems": [
         { "type": "number" },
         { "type": "string" },
         { "enum": ["Street", "Avenue", "Boulevard"] },
@@ -158,44 +150,46 @@ Here's the example schema:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
 .. index::
-   single: array; tuple validation; additionalItems
-   single: additionalItems
+   single: array; tuple validation; items
+   single: items
 
-.. _additionalItems:
+.. _additionalitems:
 
 Additional Items
-''''''''''''''''
+~~~~~~~~~~~~~~~~
 
-The ``additionalItems`` keyword controls whether it's valid to have
-additional items in a tuple beyond what is defined in ``items``. The
-value of the ``additionalItems`` keyword is a schema that all
-additional items must pass in order for the keyword to validate. This
-keyword is ignored if there is not a "tuple validation" ``items``
-keyword present in the same schema.
+The ``items`` keyword can be used to control whether it's valid to
+have additional items in a tuple beyond what is defined in
+``prefixItems``. The value of the ``items`` keyword is a schema that
+all additional items must pass in order for the keyword to validate.
 
 .. draft_specific::
 
-   --Draft 4
-   In Draft 4, ``additionalItems`` does not require a "tuple
-   validation" ``items`` keyword to be present. There are no
-   constraints on any of the items, so all items are considered to be
-   additional items.
+   --Draft 4 - 2019-09
+   Before to Draft 2020-12, you would use the ``additionalItems``
+   keyword to constrain additional items on a tuple. It works the same
+   as ``items``, only the name has changed.
+
+   --Draft 6 - 2019-09
+   In Draft 6 - 2019-09, the ``additionalItems`` keyword is ignored if
+   there is not a "tuple validation" ``items`` keyword present in the
+   same schema.
 
 Here, we'll reuse the example schema above, but set
 ``additionalItems`` to ``false``, which has the effect of disallowing
-extra items in the array.
+extra items in the tuple.
 
 .. schema_example::
 
     {
       "type": "array",
-      "items": [
+      "prefixItems": [
         { "type": "number" },
         { "type": "string" },
         { "enum": ["Street", "Avenue", "Boulevard"] },
         { "enum": ["NW", "NE", "SW", "SE"] }
       ],
-      "additionalItems": false
+      "items": false
     }
     --
     [1600, "Pennsylvania", "Avenue", "NW"]
@@ -203,7 +197,7 @@ extra items in the array.
     // It's ok to not provide all of the items:
     [1600, "Pennsylvania", "Avenue"]
     --X
-    // But, since ``additionalItems`` is ``false``, we can't provide
+    // But, since ``items`` is ``false``, we can't provide
     // extra items:
     [1600, "Pennsylvania", "Avenue", "NW", "Washington"]
 
@@ -216,13 +210,13 @@ strings:
 
     {
       "type": "array",
-      "items": [
+      "prefixItems": [
         { "type": "number" },
         { "type": "string" },
         { "enum": ["Street", "Avenue", "Boulevard"] },
         { "enum": ["NW", "NE", "SW", "SE"] }
       ],
-      "additionalItems": { "type": "string" }
+      "items": { "type": "string" }
     }
     --
     // Extra string items are ok ...
@@ -230,13 +224,6 @@ strings:
     --X
     // ... but not anything else
     [1600, "Pennsylvania", "Avenue", "NW", 20500]
-
-.. note::
-
-    Because "list validation" (``items`` is an object) applies to all
-    items in the list three are no additional items and therefore
-    ``additionalItems`` has nothing to apply its schema to and will
-    have no effect.
 
 .. index::
    single: array; tuple validation; unevaluatedItems
