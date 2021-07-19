@@ -14,6 +14,7 @@ for all JSON types.
    single: examples
    single: readOnly
    single: writeOnly
+   single: deprecated
 
 .. _annotation:
 
@@ -57,6 +58,10 @@ remain hidden. In could be used to indicate you can set a value with a
 ``PUT`` request, but it would not be included when retrieving that
 record with a ``GET`` request.
 
+|draft2019-09| The ``deprecated`` keyword is a boolean that indicates
+that the instance value the keyword applies to should not be used and
+may be removed in the future.
+
 .. schema_example::
 
     {
@@ -67,6 +72,7 @@ record with a ``GET`` request.
         "Anything",
         4035
       ],
+      "deprecated": true,
       "readOnly": true,
       "writeOnly": false
     }
