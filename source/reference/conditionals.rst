@@ -415,7 +415,7 @@ which can be expressed as a JSON Schema.
     {
       "type": "object",
       "properties": {
-        "resturauntType": { "enum": ["fast-food", "sit-down"] },
+        "restaurantType": { "enum": ["fast-food", "sit-down"] },
         "total": { "type": "number" },
         "tip": { "type": "number" }
       },
