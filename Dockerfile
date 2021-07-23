@@ -1,8 +1,8 @@
 FROM fedora
 
-# Install texlive
+# Install system dependencies
 RUN dnf update -y
-RUN dnf install -y make latexmk texlive
+RUN dnf install -y make latexmk texlive pipenv
 RUN dnf install -y 'tex(fncychap.sty)' \
                    'tex(tabulary.sty)' \
                    'tex(framed.sty)' \
@@ -17,11 +17,11 @@ RUN dnf install -y 'tex(fncychap.sty)' \
                    'tex(bbding10.pfb)'
 RUN texhash
 
-# Install sphinx
-RUN pip install "sphinx<2.0.0" sphinx-bootstrap-theme jsonschema
-
 COPY . /code
 WORKDIR /code
 
-# Build and serve website
+# Install Python dependencies
+RUN pipenv install --system
+
+# Build website
 ENTRYPOINT ["./entrypoint.sh"]
