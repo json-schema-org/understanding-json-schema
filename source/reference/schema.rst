@@ -30,7 +30,7 @@ identifies. A schema that describes another schema is called a
 
 ``$schema`` applies to the entire document and must be at the root
 level. It does not apply to externally referenced (``$ref``,
-``$recursiveRef``) documents. Those schemas need to declare their own
+``$dynamicRef``) documents. Those schemas need to declare their own
 ``$schema``.
 
 If ``$schema`` is not used, an implementation might allow you to
@@ -41,7 +41,7 @@ communicate to readers and tooling which specification version is
 intended. Therefore most of the time, you'll want this at the root of
 your schema::
 
-    "$schema": "https://json-schema.org/draft/2019-09/schema"
+    "$schema": "https://json-schema.org/draft/2020-12/schema"
 
 .. draft_specific::
 
@@ -67,6 +67,9 @@ your schema::
 
     --Draft 7
     The identifier for Draft 7 is ``http://json-schema.org/draft-07/schema#``.
+
+    --Draft 2019-09
+    The identifier for Draft 2019-09 is ``https://json-schema.org/draft/20129-09/schema``.
 
 .. index::
    single: $vocabularies
