@@ -87,8 +87,9 @@ the property names in the ``properties`` keyword is ignored by this
 keyword.
 
 .. note::
-   See `additionalProperties` for how to disallow properties that
-   don't match any of the property names in ``properties``.
+   See `additionalproperties` and `unevaluatedproperties` for how to
+   disallow properties that don't match any of the property names in
+   ``properties``.
 
 For example, let's say we want to define a simple schema for an
 address made up of a number, street name and street type:
@@ -177,7 +178,7 @@ are ignored.
    single: object; properties
    single: additionalProperties
 
-.. _additionalProperties:
+.. _additionalproperties:
 
 Additional Properties
 '''''''''''''''''''''
@@ -268,6 +269,19 @@ properties (that are neither defined by ``properties`` nor matched by
     // It must be a string:
     { "keyword": 42 }
 
+
+.. index::
+   single: object; properties
+   single: unevaluatedProperties
+
+.. _unevaluatedproperties:
+
+Unevaluated Properties
+''''''''''''''''''''''
+
+|draft2019-09|
+
+Documentation Coming Soon
 
 .. index::
    single: object; required properties

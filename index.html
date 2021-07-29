@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Understanding JSON Schema &#8212; Understanding JSON Schema 7.0 documentation</title>
+    <title>Understanding JSON Schema &#8212; Understanding JSON Schema 2019-09 documentation</title>
     <link rel="stylesheet" href="_static/jsonschema.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -58,7 +58,7 @@
         </button>
         <a class="navbar-brand" href="#">
           Understanding JSON Schema</a>
-        <span class="navbar-text navbar-version pull-left"><b>7.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2019-09</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -135,9 +135,10 @@ validator—just yet.</p>
 <div align="right" class="align-right"><img alt="octopus" src="_images/octopus.svg" /></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This book describes JSON Schema draft 7. Earlier versions of JSON Schema
-are not completely compatible with the format described here, but for the
-most part, those differences are noted in the text.</p>
+<p class="last">This book describes JSON Schema draft 2019-09. Earlier versions of
+JSON Schema are not completely compatible with the format
+described here, but for the most part, those differences are noted
+in the text.</p>
 </div>
 <p><strong>Where to begin?</strong></p>
 <ul class="simple">
@@ -197,6 +198,7 @@ without installing any software.</li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#properties">Properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#pattern-properties">Pattern Properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#additional-properties">Additional Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/object.html#unevaluated-properties">Unevaluated Properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#required-properties">Required Properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#property-names">Property names</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/object.html#size">Size</a></li>
@@ -205,6 +207,7 @@ without installing any software.</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/array.html">array</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/array.html#items">Items</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/array.html#additional-items">Additional Items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/array.html#unevaluated-items">Unevaluated Items</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/array.html#contains">Contains</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/array.html#length">Length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/array.html#uniqueness">Uniqueness</a></li>
@@ -222,6 +225,7 @@ without installing any software.</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/non_json_data.html">Media: string-encoding non-JSON data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/non_json_data.html#contentmediatype">contentMediaType</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/non_json_data.html#contentencoding">contentEncoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/non_json_data.html#contentschema">contentSchema</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/non_json_data.html#examples">Examples</a></li>
 </ul>
 </li>
@@ -233,15 +237,16 @@ without installing any software.</li>
 <li class="toctree-l3"><a class="reference internal" href="reference/combining.html#properties-of-schema-composition">Properties of Schema Composition</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="reference/conditionals.html">Applying subschemas conditionally</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/conditionals.html">Applying Subschemas Conditionally</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#dependentrequired">dependentRequired</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#dependentschemas">dependentSchemas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#if-then-else">If-Then-Else</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reference/conditionals.html#implication">Implication</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="reference/schema.html">Declaring a Specification Version</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/schema.html">Declaring a Dialect</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/schema.html#schema">$schema</a></li>
-<li class="toctree-l3"><a class="reference internal" href="reference/schema.html#extending-json-schema">Extending JSON Schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/schema.html#vocabularies">Vocabularies</a></li>
 </ul>
 </li>
 </ul>
@@ -249,7 +254,7 @@ without installing any software.</li>
 <li class="toctree-l1"><a class="reference internal" href="structuring.html">Structuring a complex schema</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structuring.html#schema-identification">Schema Identification</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="structuring.html#json-pointer">JSON Pointer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="structuring.html#named-anchors">Named Anchors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="structuring.html#anchor">$anchor</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structuring.html#base-uri">Base URI</a><ul>
@@ -258,8 +263,9 @@ without installing any software.</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="structuring.html#ref">$ref</a></li>
-<li class="toctree-l2"><a class="reference internal" href="structuring.html#definitions">definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#defs">$defs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="structuring.html#recursion">Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="structuring.html#extending-recursive-schemas">Extending Recursive Schemas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="structuring.html#bundling">Bundling</a></li>
 </ul>
 </li>
@@ -290,7 +296,7 @@ without installing any software.</li>
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on Jul 28, 2021.<br/>
+      Last updated on Jul 29, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>

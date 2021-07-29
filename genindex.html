@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Index &#8212; Understanding JSON Schema 7.0 documentation</title>
+    <title>Index &#8212; Understanding JSON Schema 2019-09 documentation</title>
     <link rel="stylesheet" href="_static/jsonschema.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -58,7 +58,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           Understanding JSON Schema</a>
-        <span class="navbar-text navbar-version pull-left"><b>7.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2019-09</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -145,15 +145,25 @@
 <h2 id="Symbols">Symbols</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="structuring.html#index-3">$anchor</a>
+</li>
       <li><a href="reference/generic.html#index-1">$comment</a>
 </li>
-      <li><a href="structuring.html#index-10">$id</a>, <a href="structuring.html#index-3">[1]</a>, <a href="structuring.html#index-6">[2]</a>
+      <li><a href="structuring.html#index-8">$defs</a>
+</li>
+      <li><a href="structuring.html#index-11">$id</a>, <a href="structuring.html#index-6">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="structuring.html#index-10">$recursiveAnchor</a>
+</li>
+      <li><a href="structuring.html#index-10">$recursiveRef</a>
+</li>
       <li><a href="structuring.html#index-7">$ref</a>, <a href="structuring.html#index-9">[1]</a>
 </li>
-      <li><a href="reference/schema.html#index-0">$schema</a>, <a href="reference/schema.html#index-1">[1]</a>, <a href="reference/schema.html#index-2">[2]</a>
+      <li><a href="reference/schema.html#index-0">$schema</a>, <a href="reference/schema.html#index-1">[1]</a>
+</li>
+      <li><a href="reference/schema.html#index-2">$vocabularies</a>, <a href="reference/schema.html#index-3">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -174,11 +184,11 @@
       <li><a href="reference/array.html#index-0">array</a>
 
       <ul>
-        <li><a href="reference/array.html#index-5">contains</a>
+        <li><a href="reference/array.html#index-6">contains</a>
 </li>
         <li><a href="reference/array.html#index-1">items</a>
 </li>
-        <li><a href="reference/array.html#index-6">length</a>
+        <li><a href="reference/array.html#index-7">length</a>
 </li>
         <li><a href="reference/array.html#index-2">list validation</a>
 </li>
@@ -186,7 +196,9 @@
 </li>
         <li><a href="reference/array.html#index-4">tuple validation; additionalItems</a>
 </li>
-        <li><a href="reference/array.html#index-7">uniqueness</a>
+        <li><a href="reference/array.html#index-5">tuple validation; unevaluatedItems</a>
+</li>
+        <li><a href="reference/array.html#index-8">uniqueness</a>
 </li>
       </ul></li>
   </ul></td>
@@ -201,7 +213,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/boolean.html#index-0">boolean</a>
 </li>
-      <li><a href="structuring.html#index-10">bundling</a>
+      <li><a href="structuring.html#index-11">bundling</a>
 </li>
   </ul></td>
 </tr></table>
@@ -209,26 +221,22 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="structuring.html#index-6">canonical URI</a>
-</li>
       <li><a href="reference/generic.html#index-1">comment</a>
 </li>
-      <li><a href="reference/conditionals.html#index-0">conditionals</a>, <a href="reference/conditionals.html#index-4">[1]</a>
+      <li><a href="reference/conditionals.html#index-0">conditionals</a>, <a href="reference/conditionals.html#index-3">[1]</a>
 
       <ul>
-        <li><a href="reference/conditionals.html#index-1">dependencies</a>
+        <li><a href="reference/conditionals.html#index-1">dependentRequired</a>
 </li>
-        <li><a href="reference/conditionals.html#index-4">else</a>
+        <li><a href="reference/conditionals.html#index-2">dependentSchemas</a>
 </li>
-        <li><a href="reference/conditionals.html#index-4">if</a>
+        <li><a href="reference/conditionals.html#index-3">else</a>
 </li>
-        <li><a href="reference/conditionals.html#index-5">implication</a>
+        <li><a href="reference/conditionals.html#index-3">if</a>
 </li>
-        <li><a href="reference/conditionals.html#index-2">property dependencies</a>
+        <li><a href="reference/conditionals.html#index-4">implication</a>
 </li>
-        <li><a href="reference/conditionals.html#index-3">schema dependencies</a>
-</li>
-        <li><a href="reference/conditionals.html#index-4">then</a>
+        <li><a href="reference/conditionals.html#index-3">then</a>
 </li>
       </ul></li>
   </ul></td>
@@ -237,11 +245,13 @@
 </li>
       <li><a href="reference/generic.html#index-3">constant values</a>
 </li>
-      <li><a href="reference/array.html#index-1">contains</a>, <a href="reference/array.html#index-5">[1]</a>
+      <li><a href="reference/array.html#index-1">contains</a>, <a href="reference/array.html#index-6">[1]</a>
 </li>
       <li><a href="reference/non_json_data.html#index-2">contentEncoding</a>
 </li>
       <li><a href="reference/non_json_data.html#index-1">contentMediaType</a>
+</li>
+      <li><a href="reference/non_json_data.html#index-3">contentSchema</a>
 </li>
   </ul></td>
 </tr></table>
@@ -257,9 +267,9 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="structuring.html#index-8">definitions</a>
+      <li><a href="reference/conditionals.html#index-2">dependentSchemas</a>
 </li>
-      <li><a href="reference/conditionals.html#index-1">dependencies</a>
+      <li><a href="reference/generic.html#index-0">deprecated</a>
 </li>
       <li><a href="reference/generic.html#index-0">description</a>
 </li>
@@ -269,21 +279,23 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/conditionals.html#index-4">else</a>
+      <li><a href="reference/conditionals.html#index-3">else</a>
 </li>
       <li><a href="reference/string.html#index-6">email</a>
 </li>
       <li><a href="reference/generic.html#index-2">enum</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generic.html#index-2">enumerated values</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generic.html#index-0">examples</a>
 </li>
       <li><a href="reference/numeric.html#index-2">exclusiveMaximum</a>
 </li>
       <li><a href="reference/numeric.html#index-2">exclusiveMinimum</a>
+</li>
+      <li><a href="structuring.html#index-10">Extending Recursive Schemas</a>
 </li>
   </ul></td>
 </tr></table>
@@ -328,6 +340,8 @@
 </li>
         <li><a href="reference/string.html#index-10">uri-template</a>
 </li>
+        <li><a href="reference/string.html#index-9">uuid</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -347,9 +361,9 @@
 </li>
       <li><a href="reference/string.html#index-7">idn-hostname</a>
 </li>
-      <li><a href="reference/conditionals.html#index-4">if</a>
+      <li><a href="reference/conditionals.html#index-3">if</a>
 </li>
-      <li><a href="reference/conditionals.html#index-5">implication</a>
+      <li><a href="reference/conditionals.html#index-4">implication</a>
 </li>
       <li><a href="reference/numeric.html#index-0">integer</a>
 </li>
@@ -385,11 +399,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/numeric.html#index-2">maximum</a>
 </li>
-      <li><a href="reference/array.html#index-6">maxItems</a>
+      <li><a href="reference/array.html#index-7">maxItems</a>
 </li>
       <li><a href="reference/string.html#index-1">maxLength</a>
 </li>
-      <li><a href="reference/object.html#index-6">maxProperties</a>
+      <li><a href="reference/object.html#index-7">maxProperties</a>
 </li>
       <li><a href="reference/non_json_data.html#index-0">media</a>
 
@@ -398,16 +412,18 @@
 </li>
         <li><a href="reference/non_json_data.html#index-1">contentMediaType</a>
 </li>
+        <li><a href="reference/non_json_data.html#index-3">contentSchema</a>
+</li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/numeric.html#index-2">minimum</a>
 </li>
-      <li><a href="reference/array.html#index-6">minItems</a>
+      <li><a href="reference/array.html#index-7">minItems</a>
 </li>
       <li><a href="reference/string.html#index-1">minLength</a>
 </li>
-      <li><a href="reference/object.html#index-6">minProperties</a>
+      <li><a href="reference/object.html#index-7">minProperties</a>
 </li>
       <li><a href="reference/numeric.html#index-1">multipleOf</a>
 </li>
@@ -417,16 +433,14 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="structuring.html#index-3">named anchors</a>
-</li>
       <li><a href="reference/non_json_data.html#index-0">non-JSON data</a>
 </li>
       <li><a href="reference/combining.html#index-4">not</a>, <a href="reference/combining.html#index-5">[1]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/null.html#index-0">null</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/numeric.html#index-0">number</a>
 
       <ul>
@@ -444,15 +458,15 @@
       <li><a href="reference/object.html#index-0">object</a>
 
       <ul>
-        <li><a href="reference/object.html#index-1">properties</a>, <a href="reference/object.html#index-3">[1]</a>
+        <li><a href="reference/object.html#index-1">properties</a>, <a href="reference/object.html#index-3">[1]</a>, <a href="reference/object.html#index-4">[2]</a>
 </li>
         <li><a href="reference/object.html#index-2">properties; regular expression</a>
 </li>
-        <li><a href="reference/object.html#index-5">property names</a>
+        <li><a href="reference/object.html#index-6">property names</a>
 </li>
-        <li><a href="reference/object.html#index-4">required properties</a>
+        <li><a href="reference/object.html#index-5">required properties</a>
 </li>
-        <li><a href="reference/object.html#index-6">size</a>
+        <li><a href="reference/object.html#index-7">size</a>
 </li>
       </ul></li>
   </ul></td>
@@ -473,9 +487,9 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/object.html#index-1">properties</a>
 </li>
-      <li><a href="reference/conditionals.html#index-2">property dependencies</a>
+      <li><a href="reference/conditionals.html#index-1">property dependentRequired</a>
 </li>
-      <li><a href="reference/object.html#index-5">propertyNames</a>
+      <li><a href="reference/object.html#index-6">propertyNames</a>
 </li>
   </ul></td>
 </tr></table>
@@ -495,7 +509,7 @@
 </li>
       <li><a href="reference/string.html#index-11">relative-json-pointer</a>
 </li>
-      <li><a href="reference/object.html#index-4">required</a>
+      <li><a href="reference/object.html#index-5">required</a>
 </li>
       <li><a href="structuring.html#index-5">retrieval URI</a>
 </li>
@@ -509,9 +523,9 @@
     schema
 
       <ul>
-        <li><a href="reference/schema.html#index-2">custom</a>
+        <li><a href="reference/schema.html#index-2">$vocabularies</a>
 </li>
-        <li><a href="reference/schema.html#index-2">extending</a>
+        <li><a href="reference/schema.html#index-3">$vocabularies; guidelines</a>
 </li>
         <li><a href="reference/schema.html#index-1">keyword</a>
 </li>
@@ -530,8 +544,6 @@
         <li><a href="reference/combining.html#index-5">subschema independence</a>
 </li>
       </ul></li>
-      <li><a href="reference/conditionals.html#index-3">schema dependencies</a>
-</li>
       <li><a href="structuring.html#index-1">schema identification</a>
 </li>
       <li><a href="reference/string.html#index-0">string</a>
@@ -552,7 +564,11 @@
     structuring
 
       <ul>
+        <li><a href="structuring.html#index-8">$defs</a>
+</li>
         <li><a href="structuring.html#index-7">$ref</a>
+</li>
+        <li><a href="structuring.html#index-10">Extending Recursive Schemas</a>
 </li>
         <li><a href="structuring.html#index-4">base URI</a>
 </li>
@@ -560,15 +576,13 @@
 </li>
         <li><a href="structuring.html#index-5">base URI; retrieval URI</a>
 </li>
-        <li><a href="structuring.html#index-10">bundling; $id</a>
-</li>
-        <li><a href="structuring.html#index-8">definitions</a>
+        <li><a href="structuring.html#index-11">bundling; $id</a>
 </li>
         <li><a href="structuring.html#index-9">recursion; $ref</a>
 </li>
         <li><a href="structuring.html#index-1">schema identification</a>
 </li>
-        <li><a href="structuring.html#index-3">subschema identification; $id</a>
+        <li><a href="structuring.html#index-3">subschema identification; $anchor</a>
 </li>
         <li><a href="structuring.html#index-2">subschema identification; JSON Pointer</a>
 </li>
@@ -579,7 +593,7 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/conditionals.html#index-4">then</a>
+      <li><a href="reference/conditionals.html#index-3">then</a>
 </li>
       <li><a href="reference/string.html#index-5">time</a>
 </li>
@@ -604,15 +618,21 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/array.html#index-7">uniqueItems</a>
+      <li><a href="reference/array.html#index-5">unevaluatedItems</a>
 </li>
-      <li><a href="reference/string.html#index-9">uri</a>
+      <li><a href="reference/object.html#index-4">unevaluatedProperties</a>
+</li>
+      <li><a href="reference/array.html#index-8">uniqueItems</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/string.html#index-9">uri</a>
+</li>
       <li><a href="reference/string.html#index-9">uri-reference</a>
 </li>
       <li><a href="reference/string.html#index-10">uri-template</a>
+</li>
+      <li><a href="reference/string.html#index-9">uuid</a>
 </li>
   </ul></td>
 </tr></table>
@@ -639,7 +659,7 @@
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on Jul 28, 2021.<br/>
+      Last updated on Jul 29, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>

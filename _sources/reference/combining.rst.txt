@@ -166,13 +166,13 @@ Subschema Independence
 
 It is important to note that the schemas listed in an `allOf`, `anyOf`
 or `oneOf` array know nothing of one another. For example, say you had
-a schema for an address in a ``definitions`` section, and want to
+a schema for an address in a ``$defs`` section, and want to
 "extend" it to include an address type:
 
 .. schema_example::
 
    {
-     "definitions": {
+     "$defs": {
        "address": {
          "type": "object",
          "properties": {
@@ -185,7 +185,7 @@ a schema for an address in a ``definitions`` section, and want to
      },
 
      "allOf": [
-       { "$ref": "#/definitions/address" },
+       { "$ref": "#/$defs/address" },
        {
          "properties": {
            "type": { "enum": [ "residential", "business" ] }
@@ -208,7 +208,7 @@ highlighted line below:
 .. schema_example::
 
    {
-     "definitions": {
+     "$defs": {
        "address": {
          "type": "object",
          "properties": {
@@ -221,7 +221,7 @@ highlighted line below:
      },
 
      "allOf": [
-       { "$ref": "#/definitions/address" },
+       { "$ref": "#/$defs/address" },
        {
          "properties": {
            "type": { "enum": [ "residential", "business" ] }

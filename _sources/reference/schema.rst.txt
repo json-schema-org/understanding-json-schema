@@ -1,16 +1,16 @@
 .. index::
    single: $schema
 
-Declaring a Specification Version
-=================================
+Declaring a Dialect
+===================
 
 .. contents:: :local:
 
-Not only have there have been multiple versions of the specification,
-but it's also possible to add your own extensions to create your own
-version. JSON Schema provides ways for you to declare which version
-a schema conforms to and provides ways to describe your custom
-keywords.
+A version of JSON Schema is called a dialect. A dialect represents the
+set of keywords and semantics that can be used to evaluate a schema.
+Each JSON Schema release is a new dialect of JSON Schema. JSON Schema
+provides a way for you to declare which dialect a schema conforms to
+and provides ways to describe your own custom dialects.
 
 .. index::
    single: $schema
@@ -21,35 +21,36 @@ keywords.
 $schema
 -------
 
-The ``$schema`` keyword is used to declare which version of the JSON
-Schema specification the schema was written for. The value of the
-``$schema`` keyword is also the identifier for a schema that can be
-used to verify that the schema is valid according to the specification
-version ``$schema`` identifies. A schema that describes another schema
-is called a "meta-schema".
+The ``$schema`` keyword is used to declare which dialect of JSON
+Schema the schema was written for. The value of the ``$schema``
+keyword is also the identifier for a schema that can be used to verify
+that the schema is valid according to the dialect ``$schema``
+identifies. A schema that describes another schema is called a
+"meta-schema".
 
 ``$schema`` applies to the entire document and must be at the root
-level. It does not apply to externally referenced (``$ref``)
-documents. Those schemas need to declare their own ``$schema``.
+level. It does not apply to externally referenced (``$ref``,
+``$recursiveRef``) documents. Those schemas need to declare their own
+``$schema``.
 
 If ``$schema`` is not used, an implementation might allow you to
 specify a value externally or it might make assumptions about which
 specification version should be used to evaluate the schema. It's
-recommended that all JSON Schemas have a ``$schema`` entry to
+recommended that all JSON Schemas have a ``$schema`` keyword to
 communicate to readers and tooling which specification version is
 intended. Therefore most of the time, you'll want this at the root of
 your schema::
 
-    "$schema": "http://json-schema.org/draft-07/schema#"
+    "$schema": "https://json-schema.org/draft/2019-09/schema"
 
 .. draft_specific::
 
-    --Draft-4
+    --Draft 4
     The identifier for Draft 4 is ``http://json-schema.org/draft-04/schema#``.
 
-    Draft 4 defined a value for ``$schema`` without a specific version
+    Draft 4 defined a value for ``$schema`` without a specific dialect
     (``http://json-schema.org/schema#``) which meant, use the latest
-    version. This has since been deprecated and should no longer be
+    dialect. This has since been deprecated and should no longer be
     used.
 
     You might come across references to Draft 5. There is no Draft 5
@@ -61,38 +62,61 @@ your schema::
     Draft 4. We no longer use the "draft" terminology to refer to
     patch releases to avoid this confusion.
 
-    --Draft-6
+    --Draft 6
     The identifier for Draft 6 is ``http://json-schema.org/draft-06/schema#``.
 
+    --Draft 7
+    The identifier for Draft 7 is ``http://json-schema.org/draft-07/schema#``.
+
 .. index::
-   single: $schema
-   single: schema; custom
-   single: schema; extending
+   single: $vocabularies
+   single: schema; $vocabularies
 
-Extending JSON Schema
----------------------
+.. _vocabularies:
 
-You can extended the JSON Schema language to include your own custom
-keywords. To do this, you need to create a meta-schema that includes
-your custom keywords. The best way to do this is to make a copy of the
-meta-schema for the version you want to extend and make your changes
-to your copy. You will need to choose a custom URI to identify your
-custom version. This URI must not be one of the URIs used to identify
-official JSON Schema specification drafts and should probably include
-a domain name you own. You can use this URI with the ``$schema``
-keyword to declare that your schemas use your custom version.
+Vocabularies
+------------
 
-.. note::
-   Not all implementations support extending JSON Schema.
+|draft2019-09|
+
+Documentation Coming Soon
+
+.. draft_specific::
+   --Draft 4-7
+
+   Before the introduction of Vocabularies, you could still extend
+   JSON Schema with your custom keywords but the process was much less
+   formalized. The first thing you'll need is a meta-schema that
+   includes your custom keywords. The best way to do this is to make a
+   copy of the meta-schema for the version you want to extend and make
+   your changes to your copy. You will need to choose a custom URI to
+   identify your custom version. This URI must not be one of the URIs
+   used to identify official JSON Schema specification drafts and
+   should probably include a domain name you own. You can use this URI
+   with the ``$schema`` keyword to declare that your schemas use your
+   custom version.
+
+   .. note::
+      Not all implementations support custom meta-schemas and custom
+      keyword implementations.
+
+.. index::
+   single: $vocabularies
+   single: schema; $vocabularies; guidelines
+
+.. _guidelines:
+
+Guidelines
+''''''''''
 
 One of the strengths of JSON Schema is that it can be written in JSON
 and used in a variety of environments. For example, it can be used for
 both front-end and back-end HTML Form validation. The problem with
-adding custom keywords is that every environment where you want to use
-your schemas needs to understand how to evaluate your custom keywords.
-Meta-schemas can be used to ensure that schemas are written correctly,
-but each implementation will need custom code to understand how to
-evaluate the custom keywords.
+using custom vocabularies is that every environment where you want to
+use your schemas needs to understand how to evaluate your vocabulary's
+keywords. Meta-schemas can be used to ensure that schemas are written
+correctly, but each implementation will need custom code to understand
+how to evaluate the vocabulary's keywords.
 
 Meta-data keywords are the most interoperable because they don't
 affect validation. For example, you could add a ``units`` keyword.

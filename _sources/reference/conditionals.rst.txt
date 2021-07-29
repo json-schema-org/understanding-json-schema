@@ -3,48 +3,30 @@
 
 .. _conditionals:
 
-Applying subschemas conditionally
+Applying Subschemas Conditionally
 =================================
 
 .. contents:: :local:
 
 .. index::
-   single: conditionals; dependencies
-   single: dependencies
+   single: conditionals; dependentRequired
+   single: property dependentRequired
 
-.. _dependencies:
+.. _dependentRequired:
 
-Dependencies
-''''''''''''
+dependentRequired
+'''''''''''''''''
 
-The ``dependencies`` keyword conditionally applies additional
-constraints to a schema based on the presence of certain properties.
-There are two forms of ``dependencies`` in JSON Schema:
-
-- **Property dependencies** declare that certain other properties must
-  be present if a given property is present.
-
-- **Schema dependencies** declare that the schema changes when a
-  given property is present.
-
-.. index::
-    single: conditionals; property dependencies
-    single: property dependencies
-
-.. _property-dependencies:
-
-Property dependencies
-^^^^^^^^^^^^^^^^^^^^^
-
-Let's start with the simpler case of property dependencies. For
-example, suppose we have a schema representing a customer. If you
-have their credit card number, you also want to ensure you have a
-billing address. If you don't have their credit card number, a
+The ``dependentRequired`` keyword conditionally requires that certain
+properties must be present if a given property is present in an
+object. For example, suppose we have a schema representing a customer.
+If you have their credit card number, you also want to ensure you have
+a billing address. If you don't have their credit card number, a
 billing address would not be required. We represent this dependency
-of one property on another using the ``dependencies`` keyword. The
-value of the ``dependencies`` keyword is an object. Each entry in the
-object maps from the name of a property, *p*, to an array of strings
-listing properties that are required if *p* is present.
+of one property on another using the ``dependentRequired`` keyword.
+The value of the ``dependentRequired`` keyword is an object. Each
+entry in the object maps from the name of a property, *p*, to an array
+of strings listing properties that are required if *p* is present.
 
 In the following example, whenever a ``credit_card`` property is
 provided, a ``billing_address`` property must also be present:
@@ -62,7 +44,7 @@ provided, a ``billing_address`` property must also be present:
 
       "required": ["name"],
 
-      "dependencies": {
+      "dependentRequired": {
         "credit_card": ["billing_address"]
       }
     }
@@ -107,7 +89,7 @@ you can, of course, define the bidirectional dependencies explicitly:
 
       "required": ["name"],
 
-      "dependencies": {
+      "dependentRequired": {
         "credit_card": ["billing_address"],
         "billing_address": ["credit_card"]
       }
@@ -125,19 +107,26 @@ you can, of course, define the bidirectional dependencies explicitly:
       "billing_address": "555 Debtor's Lane"
     }
 
+.. draft_specific::
+   --Draft 4-7
+   Previously to Draft 2019-09, ``dependentRequired`` and
+   ``dependentSchemas`` were one keyword called ``dependencies``. If
+   the dependency value was an array, it would behave like
+   ``dependentRequired`` and if the dependency value was a schema, it
+   would behave like ``dependentSchema``.
+
 .. index::
-    single: conditionals; schema dependencies
-    single: schema dependencies
+    single: conditionals; dependentSchemas
+    single: dependentSchemas
 
-.. _schema-dependencies:
+.. _dependentSchemas:
 
-Schema dependencies
-^^^^^^^^^^^^^^^^^^^
+dependentSchemas
+''''''''''''''''
 
-Schema dependencies work like property dependencies, but instead of
-just specifying additional required properties, it specifies a schema
-that will be applied to the instance. This schema is applied in the
-same way `allOf` applies schemas. Nothing is merged or extended. Both
+The ``dependenciesSchemas`` keyword conditionally applies a subschema
+when a given property is present. This schema is applied in the same
+way `allOf` applies schemas. Nothing is merged or extended. Both
 schemas apply independently.
 
 For example, here is another way to write the above:
@@ -154,7 +143,7 @@ For example, here is another way to write the above:
 
       "required": ["name"],
 
-      "dependencies": {
+      "dependentSchemas": {
         "credit_card": {
           "properties": {
             "billing_address": { "type": "string" }
@@ -184,6 +173,14 @@ For example, here is another way to write the above:
       "name": "John Doe",
       "billing_address": "555 Debtor's Lane"
     }
+
+.. draft_specific::
+   --Draft 4-7
+   Previously to Draft 2019-09, ``dependentRequired`` and
+   ``dependentSchemas`` were one keyword called ``dependencies``. If
+   the dependency value was an array, it would behave like
+   ``dependentRequired`` and if the dependency value was a schema, it
+   would behave like ``dependentSchema``.
 
 .. index::
     single: conditionals
@@ -456,6 +453,6 @@ expressed as ``A -> B AND !A -> C``.
 
 .. note::
     Since this pattern is not very intuitive, it's recommended to
-    put your conditionals in ``definitions`` with a descriptive name and
+    put your conditionals in ``$defs`` with a descriptive name and
     ``$ref`` it into your schema with ``"allOf": [{ "$ref":
-    "#/definitions/sit-down-restaurant-implies-tip-is-required" }]``.
+    "#/$defs/sit-down-restaurant-implies-tip-is-required" }]``.

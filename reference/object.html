@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>object &#8212; Understanding JSON Schema 7.0 documentation</title>
+    <title>object &#8212; Understanding JSON Schema 2019-09 documentation</title>
     <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -59,7 +59,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Understanding JSON Schema</a>
-        <span class="navbar-text navbar-version pull-left"><b>7.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2019-09</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -133,9 +133,10 @@
 <li><a class="reference internal" href="#properties" id="id3">Properties</a></li>
 <li><a class="reference internal" href="#pattern-properties" id="id4">Pattern Properties</a></li>
 <li><a class="reference internal" href="#additional-properties" id="id5">Additional Properties</a></li>
-<li><a class="reference internal" href="#required-properties" id="id6">Required Properties</a></li>
-<li><a class="reference internal" href="#property-names" id="id7">Property names</a></li>
-<li><a class="reference internal" href="#size" id="id8">Size</a></li>
+<li><a class="reference internal" href="#unevaluated-properties" id="id6">Unevaluated Properties</a></li>
+<li><a class="reference internal" href="#required-properties" id="id7">Required Properties</a></li>
+<li><a class="reference internal" href="#property-names" id="id8">Property names</a></li>
+<li><a class="reference internal" href="#size" id="id9">Size</a></li>
 </ul>
 </div>
 <p>Objects are the mapping type in JSON.  They map “keys” to “values”.
@@ -144,11 +145,11 @@ conventionally referred to as a “property”.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Language-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f4732bf17c0_Python">Python</a></li>
-<li><a data-toggle="tab" href="#7f4732bf17c0_Ruby">Ruby</a></li>
+<li class="active"><a data-toggle="tab" href="#7fafaa92c8b0_Python">Python</a></li>
+<li><a data-toggle="tab" href="#7fafaa92c8b0_Ruby">Ruby</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f4732bf17c0_Python">
+<div class="tab-pane active section" id="7fafaa92c8b0_Python">
 <p>In Python, &quot;objects&quot; are analogous to the <code class="docutils literal notranslate"><span class="pre">dict</span></code> type.  An
 important difference, however, is that while Python dictionaries
 may use anything hashable as a key, in JSON all the keys
@@ -158,7 +159,7 @@ Python uses the word <code class="docutils literal notranslate"><span class="pre
 everything, whereas in JSON it is used only to mean a mapping from
 string keys to values.</p>
 </div>
-<div class="tab-pane section" id="7f4732bf17c0_Ruby">
+<div class="tab-pane section" id="7fafaa92c8b0_Ruby">
 <p>In Ruby, &quot;objects&quot; are analogous to the <code class="docutils literal notranslate"><span class="pre">Hash</span></code> type. An important
 difference, however, is that all keys in JSON must be strings, and therefore
 any non-string keys are converted over to their string representation.</p>
@@ -216,8 +217,9 @@ the property names in the <code class="docutils literal notranslate"><span class
 keyword.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">See <a class="reference internal" href="#additionalproperties"><span class="std std-ref">Additional Properties</span></a> for how to disallow properties that
-don’t match any of the property names in <code class="docutils literal notranslate"><span class="pre">properties</span></code>.</p>
+<p class="last">See <a class="reference internal" href="#additionalproperties"><span class="std std-ref">Additional Properties</span></a> and <a class="reference internal" href="#unevaluatedproperties"><span class="std std-ref">Unevaluated Properties</span></a> for how to
+disallow properties that don’t match any of the property names in
+<code class="docutils literal notranslate"><span class="pre">properties</span></code>.</p>
 </div>
 <p>For example, let’s say we want to define a simple schema for an
 address made up of a number, street name and street type:</p>
@@ -391,8 +393,13 @@ properties (that are neither defined by <code class="docutils literal notranslat
 </pre></div>
 </div>
 </div>
+<div class="section" id="unevaluated-properties">
+<span id="unevaluatedproperties"></span><span id="index-4"></span><h2><a class="toc-backref" href="#id6">Unevaluated Properties</a><a class="headerlink" href="#unevaluated-properties" title="Permalink to this headline">¶</a></h2>
+<p><span class="new">New in draft 2019-09</span></p>
+<p>Documentation Coming Soon</p>
+</div>
 <div class="section" id="required-properties">
-<span id="required"></span><span id="index-4"></span><h2><a class="toc-backref" href="#id6">Required Properties</a><a class="headerlink" href="#required-properties" title="Permalink to this headline">¶</a></h2>
+<span id="required"></span><span id="index-5"></span><h2><a class="toc-backref" href="#id7">Required Properties</a><a class="headerlink" href="#required-properties" title="Permalink to this headline">¶</a></h2>
 <p>By default, the properties defined by the <code class="docutils literal notranslate"><span class="pre">properties</span></code> keyword are
 not required.  However, one can provide a list of required properties
 using the <code class="docutils literal notranslate"><span class="pre">required</span></code> keyword.</p>
@@ -401,10 +408,10 @@ of these strings must be unique.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f4732bc0e50_Draft 4">Draft 4</a></li>
+<li class="active"><a data-toggle="tab" href="#7fafaae94910_Draft_4">Draft 4</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f4732bc0e50_Draft 4">
+<div class="tab-pane active section" id="7fafaae94910_Draft_4">
 In Draft 4, <code class="docutils literal notranslate"><span class="pre">required</span></code> must contain at least one string.</div>
 </div>
 </div><p>In the following example schema defining a user record, we require
@@ -457,7 +464,7 @@ it’s of type “null”</p>
 </div>
 </div>
 <div class="section" id="property-names">
-<span id="propertynames"></span><span id="index-5"></span><h2><a class="toc-backref" href="#id7">Property names</a><a class="headerlink" href="#property-names" title="Permalink to this headline">¶</a></h2>
+<span id="propertynames"></span><span id="index-6"></span><h2><a class="toc-backref" href="#id8">Property names</a><a class="headerlink" href="#property-names" title="Permalink to this headline">¶</a></h2>
 <p><span class="new">New in draft 6</span></p>
 <p>The names of properties can be validated against a schema, irrespective of their
 values. This can be useful if you don’t want to enforce specific properties,
@@ -490,7 +497,7 @@ schema given to <code class="docutils literal notranslate"><span class="pre">pro
 </div>
 </div>
 <div class="section" id="size">
-<span id="index-6"></span><h2><a class="toc-backref" href="#id8">Size</a><a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h2>
+<span id="index-7"></span><h2><a class="toc-backref" href="#id9">Size</a><a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h2>
 <p>The number of properties on an object can be restricted using the
 <code class="docutils literal notranslate"><span class="pre">minProperties</span></code> and <code class="docutils literal notranslate"><span class="pre">maxProperties</span></code> keywords.  Each of these
 must be a non-negative integer.</p>
@@ -532,7 +539,7 @@ must be a non-negative integer.</p>
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on Jul 28, 2021.<br/>
+      Last updated on Jul 29, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
