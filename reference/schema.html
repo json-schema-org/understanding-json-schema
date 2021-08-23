@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Declaring a Dialect &#8212; Understanding JSON Schema 2019-09 documentation</title>
+    <title>Declaring a Dialect &#8212; Understanding JSON Schema 2020-12 documentation</title>
     <link rel="stylesheet" href="../_static/jsonschema.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -59,7 +59,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Understanding JSON Schema</a>
-        <span class="navbar-text navbar-version pull-left"><b>2019-09</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>2020-12</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -152,7 +152,7 @@ identifies. A schema that describes another schema is called a
 “meta-schema”.</p>
 <p><code class="docutils literal notranslate"><span class="pre">$schema</span></code> applies to the entire document and must be at the root
 level. It does not apply to externally referenced (<code class="docutils literal notranslate"><span class="pre">$ref</span></code>,
-<code class="docutils literal notranslate"><span class="pre">$recursiveRef</span></code>) documents. Those schemas need to declare their own
+<code class="docutils literal notranslate"><span class="pre">$dynamicRef</span></code>) documents. Those schemas need to declare their own
 <code class="docutils literal notranslate"><span class="pre">$schema</span></code>.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">$schema</span></code> is not used, an implementation might allow you to
 specify a value externally or it might make assumptions about which
@@ -161,18 +161,19 @@ recommended that all JSON Schemas have a <code class="docutils literal notransla
 communicate to readers and tooling which specification version is
 intended. Therefore most of the time, you’ll want this at the root of
 your schema:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;https://json-schema.org/draft/2019-09/schema&quot;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span>
 </pre></div>
 </div>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7fafaa90b250_Draft_4">Draft 4</a></li>
-<li><a data-toggle="tab" href="#7fafaa90b250_Draft_6">Draft 6</a></li>
-<li><a data-toggle="tab" href="#7fafaa90b250_Draft_7">Draft 7</a></li>
+<li class="active"><a data-toggle="tab" href="#7f06e1fbd1c0_Draft_4">Draft 4</a></li>
+<li><a data-toggle="tab" href="#7f06e1fbd1c0_Draft_6">Draft 6</a></li>
+<li><a data-toggle="tab" href="#7f06e1fbd1c0_Draft_7">Draft 7</a></li>
+<li><a data-toggle="tab" href="#7f06e1fbd1c0_Draft_2019_09">Draft 2019-09</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7fafaa90b250_Draft_4">
+<div class="tab-pane active section" id="7f06e1fbd1c0_Draft_4">
 <p>The identifier for Draft 4 is <code class="docutils literal notranslate"><span class="pre">http://json-schema.org/draft-04/schema#</span></code>.</p>
 <p>Draft 4 defined a value for <code class="docutils literal notranslate"><span class="pre">$schema</span></code> without a specific dialect
 (<code class="docutils literal notranslate"><span class="pre">http://json-schema.org/schema#</span></code>) which meant, use the latest
@@ -187,10 +188,12 @@ here looking for information about Draft 5, you'll find it under
 Draft 4. We no longer use the &quot;draft&quot; terminology to refer to
 patch releases to avoid this confusion.</p>
 </div>
-<div class="tab-pane section" id="7fafaa90b250_Draft_6">
+<div class="tab-pane section" id="7f06e1fbd1c0_Draft_6">
 The identifier for Draft 6 is <code class="docutils literal notranslate"><span class="pre">http://json-schema.org/draft-06/schema#</span></code>.</div>
-<div class="tab-pane section" id="7fafaa90b250_Draft_7">
+<div class="tab-pane section" id="7f06e1fbd1c0_Draft_7">
 The identifier for Draft 7 is <code class="docutils literal notranslate"><span class="pre">http://json-schema.org/draft-07/schema#</span></code>.</div>
+<div class="tab-pane section" id="7f06e1fbd1c0_Draft_2019_09">
+The identifier for Draft 2019-09 is <code class="docutils literal notranslate"><span class="pre">https://json-schema.org/draft/20129-09/schema</span></code>.</div>
 </div>
 </div></div>
 <div class="section" id="vocabularies">
@@ -200,10 +203,10 @@ The identifier for Draft 7 is <code class="docutils literal notranslate"><span c
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7fafaa8bf550_Draft_4_7">Draft 4-7</a></li>
+<li class="active"><a data-toggle="tab" href="#7f06e2557df0_Draft_4_7">Draft 4-7</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7fafaa8bf550_Draft_4_7">
+<div class="tab-pane active section" id="7f06e2557df0_Draft_4_7">
 <p>Before the introduction of Vocabularies, you could still extend
 JSON Schema with your custom keywords but the process was much less
 formalized. The first thing you'll need is a meta-schema that
@@ -316,7 +319,7 @@ doesn’t understand custom keywords.</p>
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on Jul 29, 2021.<br/>
+      Last updated on Aug 23, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>

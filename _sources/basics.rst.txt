@@ -93,7 +93,7 @@ not required.
 
 .. schema_example::
 
-    { "$schema": "https://json-schema.org/draft/2019-09/schema" }
+    { "$schema": "https://json-schema.org/draft/2020-12/schema" }
 
 .. draft_specific::
 
