@@ -69,7 +69,7 @@ your schema::
     The identifier for Draft 7 is ``http://json-schema.org/draft-07/schema#``.
 
     --Draft 2019-09
-    The identifier for Draft 2019-09 is ``https://json-schema.org/draft/20129-09/schema``.
+    The identifier for Draft 2019-09 is ``https://json-schema.org/draft/2019-09/schema``.
 
 .. index::
    single: $vocabularies
