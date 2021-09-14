@@ -176,7 +176,7 @@ all additional items must pass in order for the keyword to validate.
    same schema.
 
 Here, we'll reuse the example schema above, but set
-``additionalItems`` to ``false``, which has the effect of disallowing
+``items`` to ``false``, which has the effect of disallowing
 extra items in the tuple.
 
 .. schema_example::
