@@ -189,7 +189,7 @@ extra items in the tuple.
         { "enum": ["Street", "Avenue", "Boulevard"] },
         { "enum": ["NW", "NE", "SW", "SE"] }
       ],
-      "additionalItems": false
+      "items": false
     }
     --
     [1600, "Pennsylvania", "Avenue", "NW"]
@@ -216,7 +216,7 @@ strings:
         { "enum": ["Street", "Avenue", "Boulevard"] },
         { "enum": ["NW", "NE", "SW", "SE"] }
       ],
-      "additionalItems": { "type": "string" }
+      "items": { "type": "string" }
     }
     --
     // Extra string items are ok ...
