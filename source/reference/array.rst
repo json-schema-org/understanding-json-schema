@@ -249,12 +249,9 @@ Contains
 
 |draft6|
 
-While the ``items`` schema must be valid for every item in the array, the
-``contains`` schema only needs to validate against one or more items in the
-array.
-
-|draft2019-09| ``minContains`` and ``maxContains`` documentation
-coming soon.
+While the ``items`` schema must be valid for every item in the array,
+the ``contains`` schema only needs to validate against one or more
+items in the array.
 
 .. schema_example::
 
@@ -273,6 +270,36 @@ coming soon.
    --
    // All numbers is, of course, also okay:
    [1, 2, 3, 4, 5]
+
+minContains / maxContains
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+|draft2019-09|
+
+``minContains`` and ``maxContains`` can be used with ``contains`` to
+further specify how many times a schema matches a ``contains``
+constraint.
+
+.. schema_example::
+
+   {
+     "type": "array",
+     "contains": {
+       "type": "number"
+     },
+     "minContains": 2,
+     "maxContains": 3
+   }
+   --X
+   // Fails ``minContains``
+   ["apple", "orange", 2]
+   --
+   ["apple", "orange", 2, 4]
+   --
+   ["apple", "orange", 2, 4, 8]
+   --X
+   // Fails ``maxContains``
+   ["apple", "orange", 2, 4, 8, 16]
 
 .. index::
    single: array; length
