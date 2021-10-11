@@ -136,9 +136,12 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#unevaluated-items" id="id9">Unevaluated Items</a></li>
-<li><a class="reference internal" href="#contains" id="id10">Contains</a></li>
-<li><a class="reference internal" href="#length" id="id11">Length</a></li>
-<li><a class="reference internal" href="#uniqueness" id="id12">Uniqueness</a></li>
+<li><a class="reference internal" href="#contains" id="id10">Contains</a><ul>
+<li><a class="reference internal" href="#mincontains-maxcontains" id="id11">minContains / maxContains</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#length" id="id12">Length</a></li>
+<li><a class="reference internal" href="#uniqueness" id="id13">Uniqueness</a></li>
 </ul>
 </div>
 <p>Arrays are used for ordered elements.  In JSON, each element in an
@@ -146,16 +149,16 @@ array may be of a different type.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Language-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7fdc52535430_Python">Python</a></li>
-<li><a data-toggle="tab" href="#7fdc52535430_Ruby">Ruby</a></li>
+<li class="active"><a data-toggle="tab" href="#7f8fd2c60c40_Python">Python</a></li>
+<li><a data-toggle="tab" href="#7f8fd2c60c40_Ruby">Ruby</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7fdc52535430_Python">
+<div class="tab-pane active section" id="7f8fd2c60c40_Python">
 In Python, &quot;array&quot; is analogous to a <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">tuple</span></code> type,
 depending on usage.  However, the <code class="docutils literal notranslate"><span class="pre">json</span></code> module in the Python
 standard library will always use Python lists to represent JSON
 arrays.</div>
-<div class="tab-pane section" id="7fdc52535430_Ruby">
+<div class="tab-pane section" id="7f8fd2c60c40_Ruby">
 In Ruby, &quot;array&quot; is analogous to a <code class="docutils literal notranslate"><span class="pre">Array</span></code> type.</div>
 </div>
 </div><div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span> <span class="p">}</span>
@@ -237,10 +240,10 @@ validates the second element of the input array, etc.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7fdc52159a60_Draft_4___2019_09">Draft 4 - 2019-09</a></li>
+<li class="active"><a data-toggle="tab" href="#7f8fd2c55b80_Draft_4___2019_09">Draft 4 - 2019-09</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7fdc52159a60_Draft_4___2019_09">
+<div class="tab-pane active section" id="7f8fd2c55b80_Draft_4___2019_09">
 In Draft 4 - 2019-09, tuple validation was handled by an alternate
 form of the <code class="docutils literal notranslate"><span class="pre">items</span></code> keyword. When <code class="docutils literal notranslate"><span class="pre">items</span></code> was an array of
 schemas instead of a single schema, it behaved the way
@@ -286,15 +289,15 @@ all additional items must pass in order for the keyword to validate.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7fdc51f37700_Draft_4___2019_09">Draft 4 - 2019-09</a></li>
-<li><a data-toggle="tab" href="#7fdc51f37700_Draft_6___2019_09">Draft 6 - 2019-09</a></li>
+<li class="active"><a data-toggle="tab" href="#7f8fd2c8ee80_Draft_4___2019_09">Draft 4 - 2019-09</a></li>
+<li><a data-toggle="tab" href="#7f8fd2c8ee80_Draft_6___2019_09">Draft 6 - 2019-09</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7fdc51f37700_Draft_4___2019_09">
+<div class="tab-pane active section" id="7f8fd2c8ee80_Draft_4___2019_09">
 Before to Draft 2020-12, you would use the <code class="docutils literal notranslate"><span class="pre">additionalItems</span></code>
 keyword to constrain additional items on a tuple. It works the same
 as <code class="docutils literal notranslate"><span class="pre">items</span></code>, only the name has changed.</div>
-<div class="tab-pane section" id="7fdc51f37700_Draft_6___2019_09">
+<div class="tab-pane section" id="7f8fd2c8ee80_Draft_6___2019_09">
 In Draft 6 - 2019-09, the <code class="docutils literal notranslate"><span class="pre">additionalItems</span></code> keyword is ignored if
 there is not a &quot;tuple validation&quot; <code class="docutils literal notranslate"><span class="pre">items</span></code> keyword present in the
 same schema.</div>
@@ -360,11 +363,9 @@ strings:</p>
 <div class="section" id="contains">
 <span id="index-5"></span><span id="id4"></span><h2><a class="toc-backref" href="#id10">Contains</a><a class="headerlink" href="#contains" title="Permalink to this headline">¶</a></h2>
 <p><span class="new">New in draft 6</span></p>
-<p>While the <code class="docutils literal notranslate"><span class="pre">items</span></code> schema must be valid for every item in the array, the
-<code class="docutils literal notranslate"><span class="pre">contains</span></code> schema only needs to validate against one or more items in the
-array.</p>
-<p><span class="new">New in draft 2019-09</span> <code class="docutils literal notranslate"><span class="pre">minContains</span></code> and <code class="docutils literal notranslate"><span class="pre">maxContains</span></code> documentation
-coming soon.</p>
+<p>While the <code class="docutils literal notranslate"><span class="pre">items</span></code> schema must be valid for every item in the array,
+the <code class="docutils literal notranslate"><span class="pre">contains</span></code> schema only needs to validate against one or more
+items in the array.</p>
 <div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
    <span class="s2">&quot;contains&quot;</span><span class="o">:</span> <span class="p">{</span>
@@ -385,9 +386,40 @@ coming soon.</p>
 <div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">3</span><span class="p">,</span> <span class="mf">4</span><span class="p">,</span> <span class="mf">5</span><span class="p">]</span>
 </pre></div>
 </div>
+<div class="section" id="mincontains-maxcontains">
+<h3><a class="toc-backref" href="#id11">minContains / maxContains</a><a class="headerlink" href="#mincontains-maxcontains" title="Permalink to this headline">¶</a></h3>
+<p><span class="new">New in draft 2019-09</span></p>
+<p><code class="docutils literal notranslate"><span class="pre">minContains</span></code> and <code class="docutils literal notranslate"><span class="pre">maxContains</span></code> can be used with <code class="docutils literal notranslate"><span class="pre">contains</span></code> to
+further specify how many times a schema matches a <code class="docutils literal notranslate"><span class="pre">contains</span></code>
+constraint.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;contains&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;minContains&quot;</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+  <span class="s2">&quot;maxContains&quot;</span><span class="o">:</span> <span class="mf">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Fails <code class="docutils literal notranslate"><span class="pre">minContains</span></code></p>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="mf">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">4</span><span class="p">,</span> <span class="mf">8</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="jsonschema-comment">Fails <code class="docutils literal notranslate"><span class="pre">maxContains</span></code></p>
+<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">4</span><span class="p">,</span> <span class="mf">8</span><span class="p">,</span> <span class="mf">16</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="length">
-<span id="index-6"></span><span id="id5"></span><h2><a class="toc-backref" href="#id11">Length</a><a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h2>
+<span id="index-6"></span><span id="id5"></span><h2><a class="toc-backref" href="#id12">Length</a><a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h2>
 <p>The length of the array can be specified using the <code class="docutils literal notranslate"><span class="pre">minItems</span></code> and
 <code class="docutils literal notranslate"><span class="pre">maxItems</span></code> keywords.  The value of each keyword must be a
 non-negative number.  These keywords work whether doing
@@ -416,7 +448,7 @@ non-negative number.  These keywords work whether doing
 </div>
 </div>
 <div class="section" id="uniqueness">
-<span id="uniqueitems"></span><span id="index-7"></span><h2><a class="toc-backref" href="#id12">Uniqueness</a><a class="headerlink" href="#uniqueness" title="Permalink to this headline">¶</a></h2>
+<span id="uniqueitems"></span><span id="index-7"></span><h2><a class="toc-backref" href="#id13">Uniqueness</a><a class="headerlink" href="#uniqueness" title="Permalink to this headline">¶</a></h2>
 <p>A schema can ensure that each of the items in an array is unique.
 Simply set the <code class="docutils literal notranslate"><span class="pre">uniqueItems</span></code> keyword to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
 <div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -451,7 +483,7 @@ Simply set the <code class="docutils literal notranslate"><span class="pre">uniq
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on Sep 14, 2021.<br/>
+      Last updated on Oct 11, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
