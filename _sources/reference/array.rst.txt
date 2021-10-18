@@ -278,7 +278,8 @@ minContains / maxContains
 
 ``minContains`` and ``maxContains`` can be used with ``contains`` to
 further specify how many times a schema matches a ``contains``
-constraint.
+constraint. These keywords can be any non-negative number including
+zero.
 
 .. schema_example::
 
