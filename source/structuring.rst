@@ -561,7 +561,7 @@ example bundled into a Compound Schema Document.
 
     {
       "$id": "https://example.com/schemas/customer",
-      "$schema": "https://json-schema.org/draft/2019-09/schema",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
 
       "type": "object",
       "properties": {
@@ -616,8 +616,8 @@ used.
 Each Schema Resource is evaluated independently and may use different
 JSON Schema dialects. The example above has the address Schema
 Resource using Draft 7 while the customer Schema Resource uses Draft
-2019-09. If no ``$schema`` is declared in an embedded schema, it
-defaults using to the dialect of the parent schema.
+2020-12. If no ``$schema`` is declared in an embedded schema, it
+defaults to using the dialect of the parent schema.
 
 .. draft_specific::
    -- Draft 4-7
