@@ -72,103 +72,6 @@ schema is determined.
    schema is retrieved from the internal schema database.
 
 .. index::
-   single: JSON Pointer
-   single: structuring; subschema identification; JSON Pointer
-
-.. _json-pointer:
-
-JSON Pointer
-~~~~~~~~~~~~
-
-In addition to identifying a schema document, you can also identify
-subschemas. The most common way to do that is to use a `JSON Pointer
-<https://tools.ietf.org/html/rfc6901>`__ in the URI fragment that
-points to the subschema.
-
-A JSON Pointer describes a slash-separated path to traverse the keys
-in the objects in the document. Therefore,
-``/properties/street_address`` means:
-
-1) find the value of the key ``properties``
-2) within that object, find the value of the key ``street_address``
-
-The URI
-``https://example.com/schemas/address#/properties/street_address``
-identifies the highlighted subschema in the following schema.
-
-.. schema_example::
-
-    {
-      "$id": "https://example.com/schemas/address",
-
-      "type": "object",
-      "properties": {
-        "street_address":
-      *    { "type": "string" },
-        "city": { "type": "string" },
-        "state": { "type": "string" }
-      },
-      "required": ["street_address", "city", "state"]
-    }
-
-.. index::
-   single: $anchor
-   single: structuring; subschema identification; $anchor
-
-.. _anchor:
-
-$anchor
-~~~~~~~
-
-A less common way to identify a subschema is to create a named anchor
-in the schema using the ``$anchor`` keyword and using that name in the
-URI fragment. Anchors must start with a letter followed by any number
-of letters, digits, ``-``, ``_``, ``:``, or ``.``.
-
-.. draft_specific::
-
-    --Draft 4
-    In Draft 4, you declare an anchor the same way you do in Draft 6-7
-    except that ``$id`` is just ``id`` (without the dollar sign).
-
-    --Draft 6-7
-    In Draft 6-7, a named anchor is defined using an ``$id`` that
-    contains only a URI fragment. The value of the URI fragment is the
-    name of the anchor.
-
-    JSON Schema doesn't define how ``$id`` should be interpreted when
-    it contains both fragment and non-fragment URI parts. Therefore,
-    when setting a named anchor, you should not use non-fragment URI
-    parts in the URI-reference.
-
-.. note::
-   If a named anchor is defined that doesn't follow these naming
-   rules, then behavior is undefined. Your anchors might work in some
-   implementation, but not others.
-
-The URI ``https://example.com/schemas/address#street_address``
-identifies the subschema on the highlighted part of the following
-schema.
-
-.. schema_example::
-
-    {
-      "$id": "https://example.com/schemas/address",
-
-      "type": "object",
-      "properties": {
-        "street_address":
-    *      {
-    *        "$anchor": "#street_address",
-    *        "type": "string"
-    *      },
-        "city": { "type": "string" },
-        "state": { "type": "string" }
-      },
-      "required": ["street_address", "city", "state"]
-    }
-
-.. index::
    single: base URI
    single: structuring; base URI
 
@@ -296,6 +199,103 @@ The base URI of the following schema will always be
       "type": "object",
       "properties": {
         "street_address": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" }
+      },
+      "required": ["street_address", "city", "state"]
+    }
+
+.. index::
+   single: JSON Pointer
+   single: structuring; subschema identification; JSON Pointer
+
+.. _json-pointer:
+
+JSON Pointer
+~~~~~~~~~~~~
+
+In addition to identifying a schema document, you can also identify
+subschemas. The most common way to do that is to use a `JSON Pointer
+<https://tools.ietf.org/html/rfc6901>`__ in the URI fragment that
+points to the subschema.
+
+A JSON Pointer describes a slash-separated path to traverse the keys
+in the objects in the document. Therefore,
+``/properties/street_address`` means:
+
+1) find the value of the key ``properties``
+2) within that object, find the value of the key ``street_address``
+
+The URI
+``https://example.com/schemas/address#/properties/street_address``
+identifies the highlighted subschema in the following schema.
+
+.. schema_example::
+
+    {
+      "$id": "https://example.com/schemas/address",
+
+      "type": "object",
+      "properties": {
+        "street_address":
+      *    { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" }
+      },
+      "required": ["street_address", "city", "state"]
+    }
+
+.. index::
+   single: $anchor
+   single: structuring; subschema identification; $anchor
+
+.. _anchor:
+
+$anchor
+~~~~~~~
+
+A less common way to identify a subschema is to create a named anchor
+in the schema using the ``$anchor`` keyword and using that name in the
+URI fragment. Anchors must start with a letter followed by any number
+of letters, digits, ``-``, ``_``, ``:``, or ``.``.
+
+.. draft_specific::
+
+    --Draft 4
+    In Draft 4, you declare an anchor the same way you do in Draft 6-7
+    except that ``$id`` is just ``id`` (without the dollar sign).
+
+    --Draft 6-7
+    In Draft 6-7, a named anchor is defined using an ``$id`` that
+    contains only a URI fragment. The value of the URI fragment is the
+    name of the anchor.
+
+    JSON Schema doesn't define how ``$id`` should be interpreted when
+    it contains both fragment and non-fragment URI parts. Therefore,
+    when setting a named anchor, you should not use non-fragment URI
+    parts in the URI-reference.
+
+.. note::
+   If a named anchor is defined that doesn't follow these naming
+   rules, then behavior is undefined. Your anchors might work in some
+   implementation, but not others.
+
+The URI ``https://example.com/schemas/address#street_address``
+identifies the subschema on the highlighted part of the following
+schema.
+
+.. schema_example::
+
+    {
+      "$id": "https://example.com/schemas/address",
+
+      "type": "object",
+      "properties": {
+        "street_address":
+    *      {
+    *        "$anchor": "#street_address",
+    *        "type": "string"
+    *      },
         "city": { "type": "string" },
         "state": { "type": "string" }
       },
