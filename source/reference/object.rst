@@ -375,7 +375,7 @@ see how the ``unevaluatedProperties`` keyword solves this problem
 without needing to redeclare properties.
 
 .. index::
-   single: object; properties
+   single: object; properties; extending
    single: unevaluatedProperties
 
 .. _unevaluatedproperties:
@@ -385,7 +385,104 @@ Unevaluated Properties
 
 |draft2019-09|
 
-Documentation Coming Soon
+In the previous section we saw the challenges with using
+``additionalProperties`` when "extending" a schema using
+`combining`. The ``unevaluatedProperties`` keyword is similar to
+``additionalProperties`` except that it can recognize properties
+declared in subschemas. So, the example from the previous section can
+be rewritten without the need to redeclare properties.
+
+.. schema_example::
+
+   {
+     "allOf": [
+       {
+         "type": "object",
+         "properties": {
+           "street_address": { "type": "string" },
+           "city": { "type": "string" },
+           "state": { "type": "string" }
+         },
+         "required": ["street_address", "city", "state"]
+       }
+     ],
+
+     "properties": {
+       "type": { "enum": ["residential", "business"] }
+     },
+     "required": ["type"],
+     "unevaluatedProperties": false
+   }
+   --
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business"
+   }
+   --X
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business",
+      "something that doesn't belong": "hi!"
+   }
+
+``unevaluatedProperties`` works by collecting any properties that are
+successfully validated when processing the schemas and using those as
+the allowed list of properties. This allows you to do more complex
+things like conditionally adding properties. The following example
+allows the "department" property only if the "type" of address is
+"business".
+
+.. schema_example::
+
+   {
+     "type": "object",
+     "properties": {
+       "street_address": { "type": "string" },
+       "city": { "type": "string" },
+       "state": { "type": "string" },
+       "type": { "enum": ["residential", "business"] }
+     },
+     "required": ["street_address", "city", "state", "type"],
+
+     "if": {
+       "type": "object",
+       "properties": {
+         "type": { "const": "business" }
+       },
+       "required": ["type"]
+     },
+     "then": {
+       "properties": {
+         "department": { "type": "string" }
+       }
+     },
+
+     "unevaluatedProperties": false
+   }
+   --
+   {
+     "street_address": "1600 Pennsylvania Avenue NW",
+     "city": "Washington",
+     "state": "DC",
+     "type": "business",
+     "department": "HR"
+   }
+   --X
+   {
+     "street_address": "1600 Pennsylvania Avenue NW",
+     "city": "Washington",
+     "state": "DC",
+     "type": "residential",
+     "department": "HR"
+   }
+
+In this schema, the properties declared in the ``then`` schema only
+count as "evaluated" properties if the "type" of the address is
+"business".
 
 .. index::
    single: object; required properties
