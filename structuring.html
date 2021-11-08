@@ -130,14 +130,12 @@
 <span id="structuring"></span><span id="index-0"></span><h1>Structuring a complex schema<a class="headerlink" href="#structuring-a-complex-schema" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#schema-identification" id="id12">Schema Identification</a><ul>
-<li><a class="reference internal" href="#json-pointer" id="id13">JSON Pointer</a></li>
-<li><a class="reference internal" href="#anchor" id="id14">$anchor</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#base-uri" id="id15">Base URI</a><ul>
-<li><a class="reference internal" href="#retrieval-uri" id="id16">Retrieval URI</a></li>
-<li><a class="reference internal" href="#id" id="id17">$id</a></li>
+<li><a class="reference internal" href="#schema-identification" id="id12">Schema Identification</a></li>
+<li><a class="reference internal" href="#base-uri" id="id13">Base URI</a><ul>
+<li><a class="reference internal" href="#retrieval-uri" id="id14">Retrieval URI</a></li>
+<li><a class="reference internal" href="#id" id="id15">$id</a></li>
+<li><a class="reference internal" href="#json-pointer" id="id16">JSON Pointer</a></li>
+<li><a class="reference internal" href="#anchor" id="id17">$anchor</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ref" id="id18">$ref</a></li>
@@ -198,92 +196,9 @@ Instead, they provide a way to load schemas into an internal schema
 database. When a schema is referenced by it’s URI identifier, the
 schema is retrieved from the internal schema database.</p>
 </div>
-<div class="section" id="json-pointer">
-<span id="index-2"></span><span id="id2"></span><h3><a class="toc-backref" href="#id13">JSON Pointer</a><a class="headerlink" href="#json-pointer" title="Permalink to this headline">¶</a></h3>
-<p>In addition to identifying a schema document, you can also identify
-subschemas. The most common way to do that is to use a <a class="reference external" href="https://tools.ietf.org/html/rfc6901">JSON Pointer</a> in the URI fragment that
-points to the subschema.</p>
-<p>A JSON Pointer describes a slash-separated path to traverse the keys
-in the objects in the document. Therefore,
-<code class="docutils literal notranslate"><span class="pre">/properties/street_address</span></code> means:</p>
-<ol class="arabic simple">
-<li>find the value of the key <code class="docutils literal notranslate"><span class="pre">properties</span></code></li>
-<li>within that object, find the value of the key <code class="docutils literal notranslate"><span class="pre">street_address</span></code></li>
-</ol>
-<p>The URI
-<code class="docutils literal notranslate"><span class="pre">https://example.com/schemas/address#/properties/street_address</span></code>
-identifies the highlighted subschema in the following schema.</p>
-<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;$id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/schemas/address&quot;</span><span class="p">,</span>
-
-  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span>
-<span class="hll">      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-</span>    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="anchor">
-<span id="index-3"></span><span id="id3"></span><h3><a class="toc-backref" href="#id14">$anchor</a><a class="headerlink" href="#anchor" title="Permalink to this headline">¶</a></h3>
-<p>A less common way to identify a subschema is to create a named anchor
-in the schema using the <code class="docutils literal notranslate"><span class="pre">$anchor</span></code> keyword and using that name in the
-URI fragment. Anchors must start with a letter followed by any number
-of letters, digits, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">_</span></code>, <code class="docutils literal notranslate"><span class="pre">:</span></code>, or <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
-<div class="tabbable">
-<ul class="nav nav-tabs simple">
-<li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f1555a82bb0_Draft_4">Draft 4</a></li>
-<li><a data-toggle="tab" href="#7f1555a82bb0_Draft_6_7">Draft 6-7</a></li>
-</ul>
-<div class="tab-content section">
-<div class="tab-pane active section" id="7f1555a82bb0_Draft_4">
-In Draft 4, you declare an anchor the same way you do in Draft 6-7
-except that <code class="docutils literal notranslate"><span class="pre">$id</span></code> is just <code class="docutils literal notranslate"><span class="pre">id</span></code> (without the dollar sign).</div>
-<div class="tab-pane section" id="7f1555a82bb0_Draft_6_7">
-<p>In Draft 6-7, a named anchor is defined using an <code class="docutils literal notranslate"><span class="pre">$id</span></code> that
-contains only a URI fragment. The value of the URI fragment is the
-name of the anchor.</p>
-<p>JSON Schema doesn't define how <code class="docutils literal notranslate"><span class="pre">$id</span></code> should be interpreted when
-it contains both fragment and non-fragment URI parts. Therefore,
-when setting a named anchor, you should not use non-fragment URI
-parts in the URI-reference.</p>
-</div>
-</div>
-</div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If a named anchor is defined that doesn’t follow these naming
-rules, then behavior is undefined. Your anchors might work in some
-implementation, but not others.</p>
-</div>
-<p>The URI <code class="docutils literal notranslate"><span class="pre">https://example.com/schemas/address#street_address</span></code>
-identifies the subschema on the highlighted part of the following
-schema.</p>
-<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;$id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/schemas/address&quot;</span><span class="p">,</span>
-
-  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span>
-<span class="hll">      <span class="p">{</span>
-</span><span class="hll">        <span class="s2">&quot;$anchor&quot;</span><span class="o">:</span> <span class="s2">&quot;#street_address&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-</span><span class="hll">      <span class="p">},</span>
-</span>    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="base-uri">
-<span id="index-4"></span><span id="id4"></span><h2><a class="toc-backref" href="#id15">Base URI</a><a class="headerlink" href="#base-uri" title="Permalink to this headline">¶</a></h2>
+<span id="index-2"></span><span id="id2"></span><h2><a class="toc-backref" href="#id13">Base URI</a><a class="headerlink" href="#base-uri" title="Permalink to this headline">¶</a></h2>
 <p>Using non-relative URIs can be cumbersome, so any URIs used in
 JSON Schema can be URI-references that resolve against the schema’s
 base URI resulting in a non-relative URI. This section describes how a
@@ -296,7 +211,7 @@ you are familiar with how this works in HTML, this section should
 feel very familiar.</p>
 </div>
 <div class="section" id="retrieval-uri">
-<span id="index-5"></span><span id="id5"></span><h3><a class="toc-backref" href="#id16">Retrieval URI</a><a class="headerlink" href="#retrieval-uri" title="Permalink to this headline">¶</a></h3>
+<span id="index-3"></span><span id="id3"></span><h3><a class="toc-backref" href="#id14">Retrieval URI</a><a class="headerlink" href="#retrieval-uri" title="Permalink to this headline">¶</a></h3>
 <p>The URI used to fetch a schema is known as the “retrieval URI”. It’s
 often possible to pass an anonymous schema to an implementation in
 which case that schema would have no retrieval URI.</p>
@@ -318,7 +233,7 @@ retrieved.</p>
 <code class="docutils literal notranslate"><span class="pre">https://example.com/schemas/address</span></code>.</p>
 </div>
 <div class="section" id="id">
-<span id="index-6"></span><span id="id6"></span><h3><a class="toc-backref" href="#id17">$id</a><a class="headerlink" href="#id" title="Permalink to this headline">¶</a></h3>
+<span id="index-4"></span><span id="id4"></span><h3><a class="toc-backref" href="#id15">$id</a><a class="headerlink" href="#id" title="Permalink to this headline">¶</a></h3>
 <p>You can set the base URI by using the <code class="docutils literal notranslate"><span class="pre">$id</span></code> keyword at the root of
 the schema. The value of <code class="docutils literal notranslate"><span class="pre">$id</span></code> is a URI-reference without a fragment
 that resolves against the <a class="reference internal" href="#retrieval-uri"><span class="std std-ref">Retrieval URI</span></a>. The resulting URI is the
@@ -326,13 +241,13 @@ base URI for the schema.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f1556220160_Draft_4">Draft 4</a></li>
-<li><a data-toggle="tab" href="#7f1556220160_Draft_4_7">Draft 4-7</a></li>
+<li class="active"><a data-toggle="tab" href="#7f3188882ef0_Draft_4">Draft 4</a></li>
+<li><a data-toggle="tab" href="#7f3188882ef0_Draft_4_7">Draft 4-7</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f1556220160_Draft_4">
+<div class="tab-pane active section" id="7f3188882ef0_Draft_4">
 In Draft 4, <code class="docutils literal notranslate"><span class="pre">$id</span></code> is just <code class="docutils literal notranslate"><span class="pre">id</span></code> (without the dollar sign).</div>
-<div class="tab-pane section" id="7f1556220160_Draft_4_7">
+<div class="tab-pane section" id="7f3188882ef0_Draft_4_7">
 In Draft 4-7 it was allowed to have fragments in an <code class="docutils literal notranslate"><span class="pre">$id</span></code> (or
 <code class="docutils literal notranslate"><span class="pre">id</span></code> in Draft 4). However, the behavior when setting a base URI
 that contains a URI fragment is undefined and should not be used
@@ -390,6 +305,89 @@ declaring a base URI with <code class="docutils literal notranslate"><span class
 </pre></div>
 </div>
 </div>
+<div class="section" id="json-pointer">
+<span id="index-5"></span><span id="id5"></span><h3><a class="toc-backref" href="#id16">JSON Pointer</a><a class="headerlink" href="#json-pointer" title="Permalink to this headline">¶</a></h3>
+<p>In addition to identifying a schema document, you can also identify
+subschemas. The most common way to do that is to use a <a class="reference external" href="https://tools.ietf.org/html/rfc6901">JSON Pointer</a> in the URI fragment that
+points to the subschema.</p>
+<p>A JSON Pointer describes a slash-separated path to traverse the keys
+in the objects in the document. Therefore,
+<code class="docutils literal notranslate"><span class="pre">/properties/street_address</span></code> means:</p>
+<ol class="arabic simple">
+<li>find the value of the key <code class="docutils literal notranslate"><span class="pre">properties</span></code></li>
+<li>within that object, find the value of the key <code class="docutils literal notranslate"><span class="pre">street_address</span></code></li>
+</ol>
+<p>The URI
+<code class="docutils literal notranslate"><span class="pre">https://example.com/schemas/address#/properties/street_address</span></code>
+identifies the highlighted subschema in the following schema.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;$id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/schemas/address&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span>
+<span class="hll">      <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+</span>    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="anchor">
+<span id="index-6"></span><span id="id6"></span><h3><a class="toc-backref" href="#id17">$anchor</a><a class="headerlink" href="#anchor" title="Permalink to this headline">¶</a></h3>
+<p>A less common way to identify a subschema is to create a named anchor
+in the schema using the <code class="docutils literal notranslate"><span class="pre">$anchor</span></code> keyword and using that name in the
+URI fragment. Anchors must start with a letter followed by any number
+of letters, digits, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">_</span></code>, <code class="docutils literal notranslate"><span class="pre">:</span></code>, or <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
+<div class="tabbable">
+<ul class="nav nav-tabs simple">
+<li class="disabled"><a class="disabled">Draft-specific info:</a></li>
+<li class="active"><a data-toggle="tab" href="#7f3188e0da50_Draft_4">Draft 4</a></li>
+<li><a data-toggle="tab" href="#7f3188e0da50_Draft_6_7">Draft 6-7</a></li>
+</ul>
+<div class="tab-content section">
+<div class="tab-pane active section" id="7f3188e0da50_Draft_4">
+In Draft 4, you declare an anchor the same way you do in Draft 6-7
+except that <code class="docutils literal notranslate"><span class="pre">$id</span></code> is just <code class="docutils literal notranslate"><span class="pre">id</span></code> (without the dollar sign).</div>
+<div class="tab-pane section" id="7f3188e0da50_Draft_6_7">
+<p>In Draft 6-7, a named anchor is defined using an <code class="docutils literal notranslate"><span class="pre">$id</span></code> that
+contains only a URI fragment. The value of the URI fragment is the
+name of the anchor.</p>
+<p>JSON Schema doesn't define how <code class="docutils literal notranslate"><span class="pre">$id</span></code> should be interpreted when
+it contains both fragment and non-fragment URI parts. Therefore,
+when setting a named anchor, you should not use non-fragment URI
+parts in the URI-reference.</p>
+</div>
+</div>
+</div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If a named anchor is defined that doesn’t follow these naming
+rules, then behavior is undefined. Your anchors might work in some
+implementation, but not others.</p>
+</div>
+<p>The URI <code class="docutils literal notranslate"><span class="pre">https://example.com/schemas/address#street_address</span></code>
+identifies the subschema on the highlighted part of the following
+schema.</p>
+<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;$id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/schemas/address&quot;</span><span class="p">,</span>
+
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;street_address&quot;</span><span class="o">:</span>
+<span class="hll">      <span class="p">{</span>
+</span><span class="hll">        <span class="s2">&quot;$anchor&quot;</span><span class="o">:</span> <span class="s2">&quot;#street_address&quot;</span><span class="p">,</span>
+</span><span class="hll">        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
+</span><span class="hll">      <span class="p">},</span>
+</span>    <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="ref">
 <span id="index-7"></span><span id="id7"></span><h2><a class="toc-backref" href="#id18">$ref</a><a class="headerlink" href="#ref" title="Permalink to this headline">¶</a></h2>
@@ -401,10 +399,10 @@ applies that schema to the instance.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f1555904160_Draft_4_7">Draft 4-7</a></li>
+<li class="active"><a data-toggle="tab" href="#7f3188e0fd30_Draft_4_7">Draft 4-7</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f1555904160_Draft_4_7">
+<div class="tab-pane active section" id="7f3188e0fd30_Draft_4_7">
 In Draft 4-7, <code class="docutils literal notranslate"><span class="pre">$ref</span></code> behaves a little differently. When an
 object contains a <code class="docutils literal notranslate"><span class="pre">$ref</span></code> property, the object is considered a
 reference, not a schema. Therefore, any other properties you put
@@ -581,13 +579,13 @@ Compound Schema Document is called a Schema Resource.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f1556482dc0_Draft_4">Draft 4</a></li>
-<li><a data-toggle="tab" href="#7f1556482dc0_Draft_4_7">Draft 4-7</a></li>
+<li class="active"><a data-toggle="tab" href="#7f3188832680_Draft_4">Draft 4</a></li>
+<li><a data-toggle="tab" href="#7f3188832680_Draft_4_7">Draft 4-7</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f1556482dc0_Draft_4">
+<div class="tab-pane active section" id="7f3188832680_Draft_4">
 In Draft 4, <code class="docutils literal notranslate"><span class="pre">$id</span></code> is just <code class="docutils literal notranslate"><span class="pre">id</span></code> (without the dollar sign).</div>
-<div class="tab-pane section" id="7f1556482dc0_Draft_4_7">
+<div class="tab-pane section" id="7f3188832680_Draft_4_7">
 In Draft 4-7, an <code class="docutils literal notranslate"><span class="pre">$id</span></code> in a subschema did not indicate an
 embedded schema. Instead it was simply a base URI change in a
 single schema document.</div>
@@ -607,7 +605,7 @@ needed.</p>
 example bundled into a Compound Schema Document.</p>
 <div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;$id&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/schemas/customer&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;https://json-schema.org/draft/2019-09/schema&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;$schema&quot;</span><span class="o">:</span> <span class="s2">&quot;https://json-schema.org/draft/2020-12/schema&quot;</span><span class="p">,</span>
 
   <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
   <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
@@ -650,10 +648,10 @@ address schema.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f1556442850_Draft_4_7">Draft 4-7</a></li>
+<li class="active"><a data-toggle="tab" href="#7f3188831cc0_Draft_4_7">Draft 4-7</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f1556442850_Draft_4_7">
+<div class="tab-pane active section" id="7f3188831cc0_Draft_4_7">
 In Draft 4-7, both of these URIs are valid because a subschema
 <code class="docutils literal notranslate"><span class="pre">$id</span></code> only represented a base URI change, not an embedded schema.
 However, even though it's allowed, it's still highly recommended
@@ -666,15 +664,15 @@ used.</p>
 <p>Each Schema Resource is evaluated independently and may use different
 JSON Schema dialects. The example above has the address Schema
 Resource using Draft 7 while the customer Schema Resource uses Draft
-2019-09. If no <code class="docutils literal notranslate"><span class="pre">$schema</span></code> is declared in an embedded schema, it
-defaults using to the dialect of the parent schema.</p>
+2020-12. If no <code class="docutils literal notranslate"><span class="pre">$schema</span></code> is declared in an embedded schema, it
+defaults to using the dialect of the parent schema.</p>
 <div class="tabbable">
 <ul class="nav nav-tabs simple">
 <li class="disabled"><a class="disabled">Draft-specific info:</a></li>
-<li class="active"><a data-toggle="tab" href="#7f1556541160_Draft_4_7">Draft 4-7</a></li>
+<li class="active"><a data-toggle="tab" href="#7f3188830640_Draft_4_7">Draft 4-7</a></li>
 </ul>
 <div class="tab-content section">
-<div class="tab-pane active section" id="7f1556541160_Draft_4_7">
+<div class="tab-pane active section" id="7f3188830640_Draft_4_7">
 In Draft 4-7, a subschema <code class="docutils literal notranslate"><span class="pre">$id</span></code> is just a base URI change and not
 considered an independent Schema Resource. Because <code class="docutils literal notranslate"><span class="pre">$schema</span></code> is
 only allowed at the root of a Schema Resource, all schemas bundled
@@ -696,7 +694,7 @@ using subschema <code class="docutils literal notranslate"><span class="pre">$id
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on Oct 18, 2021.<br/>
+      Last updated on Nov 08, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
