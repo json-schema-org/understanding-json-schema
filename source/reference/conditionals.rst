@@ -124,7 +124,7 @@ you can, of course, define the bidirectional dependencies explicitly:
 dependentSchemas
 ''''''''''''''''
 
-The ``dependenciesSchemas`` keyword conditionally applies a subschema
+The ``dependentSchemas`` keyword conditionally applies a subschema
 when a given property is present. This schema is applied in the same
 way `allOf` applies schemas. Nothing is merged or extended. Both
 schemas apply independently.
