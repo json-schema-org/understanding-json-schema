@@ -135,9 +135,8 @@
 <li><a class="reference internal" href="#oneof" id="id7">oneOf</a></li>
 <li><a class="reference internal" href="#not" id="id8">not</a></li>
 <li><a class="reference internal" href="#properties-of-schema-composition" id="id9">Properties of Schema Composition</a><ul>
-<li><a class="reference internal" href="#subschema-independence" id="id10">Subschema Independence</a></li>
-<li><a class="reference internal" href="#illogical-schemas" id="id11">Illogical Schemas</a></li>
-<li><a class="reference internal" href="#factoring-schemas" id="id12">Factoring Schemas</a></li>
+<li><a class="reference internal" href="#illogical-schemas" id="id10">Illogical Schemas</a></li>
+<li><a class="reference internal" href="#factoring-schemas" id="id11">Factoring Schemas</a></li>
 </ul>
 </li>
 </ul>
@@ -187,7 +186,7 @@ of the given subschemas.</p>
 <p class="last"><a class="reference internal" href="#allof"><span class="std std-ref">allOf</span></a> can not be used to “extend” a schema to add more details to
 it in the sense of object-oriented inheritance. Instances must
 independently be valid against “all of” the schemas in the
-<code class="docutils literal notranslate"><span class="pre">allOf</span></code>. See the section on <a class="reference internal" href="#subschemaindependence"><span class="std std-ref">Subschema Independence</span></a> for more
+<code class="docutils literal notranslate"><span class="pre">allOf</span></code>. See the section on <span class="xref std std-ref">subschemaindependence</span> for more
 information.</p>
 </div>
 </div>
@@ -264,91 +263,8 @@ not a string:</p>
 </div>
 <div class="section" id="properties-of-schema-composition">
 <span id="composition"></span><span id="index-5"></span><h2><a class="toc-backref" href="#id9">Properties of Schema Composition</a><a class="headerlink" href="#properties-of-schema-composition" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="subschema-independence">
-<span id="subschemaindependence"></span><h3><a class="toc-backref" href="#id10">Subschema Independence</a><a class="headerlink" href="#subschema-independence" title="Permalink to this headline">¶</a></h3>
-<p>It is important to note that the schemas listed in an <a class="reference internal" href="#allof"><span class="std std-ref">allOf</span></a>, <a class="reference internal" href="#anyof"><span class="std std-ref">anyOf</span></a>
-or <a class="reference internal" href="#oneof"><span class="std std-ref">oneOf</span></a> array know nothing of one another. For example, say you had
-a schema for an address in a <code class="docutils literal notranslate"><span class="pre">$defs</span></code> section, and want to
-“extend” it to include an address type:</p>
-<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;$defs&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-        <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-        <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-
-  <span class="s2">&quot;allOf&quot;</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/$defs/address&quot;</span> <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;residential&quot;</span><span class="p">,</span> <span class="s2">&quot;business&quot;</span> <span class="p">]</span> <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="jsonschema-pass highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="s2">&quot;Washington&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="s2">&quot;DC&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;business&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>This works, but what if we wanted to restrict the schema so no
-additional properties are allowed?  One might try adding the
-highlighted line below:</p>
-<div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;$defs&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-        <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">},</span>
-        <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span> <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;street_address&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;state&quot;</span><span class="p">]</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-
-  <span class="s2">&quot;allOf&quot;</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span> <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/$defs/address&quot;</span> <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;residential&quot;</span><span class="p">,</span> <span class="s2">&quot;business&quot;</span> <span class="p">]</span> <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">],</span>
-
-<span class="hll">  <span class="s2">&quot;additionalProperties&quot;</span><span class="o">:</span> <span class="kc">false</span>
-</span><span class="p">}</span>
-</pre></div>
-</div>
-<div class="jsonschema-fail highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-   <span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;1600 Pennsylvania Avenue NW&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="s2">&quot;Washington&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;state&quot;</span><span class="o">:</span> <span class="s2">&quot;DC&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;business&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Unfortunately, now the schema will reject <em>everything</em>.  This is
-because <code class="docutils literal notranslate"><span class="pre">additionalProperties</span></code> knows nothing about the properties
-declared in the subschemas inside of the <a class="reference internal" href="#allof"><span class="std std-ref">allOf</span></a> array.</p>
-<p>To many, this is one of the biggest surprises of the combining
-operations in JSON schema: it does not behave like inheritance in an
-object-oriented language. There are some proposals to address this in
-the next version of the JSON schema specification.</p>
-</div>
 <div class="section" id="illogical-schemas">
-<span id="illogicalschemas"></span><h3><a class="toc-backref" href="#id11">Illogical Schemas</a><a class="headerlink" href="#illogical-schemas" title="Permalink to this headline">¶</a></h3>
+<span id="illogicalschemas"></span><h3><a class="toc-backref" href="#id10">Illogical Schemas</a><a class="headerlink" href="#illogical-schemas" title="Permalink to this headline">¶</a></h3>
 <p>Note that it’s quite easy to create schemas that are logical
 impossibilities with these keywords. The following example creates a
 schema that won’t validate against anything (since something may not
@@ -369,7 +285,7 @@ be both a string and a number at the same time):</p>
 </div>
 </div>
 <div class="section" id="factoring-schemas">
-<span id="factoringschemas"></span><h3><a class="toc-backref" href="#id12">Factoring Schemas</a><a class="headerlink" href="#factoring-schemas" title="Permalink to this headline">¶</a></h3>
+<span id="factoringschemas"></span><h3><a class="toc-backref" href="#id11">Factoring Schemas</a><a class="headerlink" href="#factoring-schemas" title="Permalink to this headline">¶</a></h3>
 <p>Note that it’s possible to “factor” out the common parts of the
 subschemas.  The following two schemas are equivalent.</p>
 <div class="jsonschema highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -406,7 +322,7 @@ subschemas.  The following two schemas are equivalent.</p>
     </p>
     <p>
         &copy; Copyright 2013-2016 Michael Droettboom, Space Telescope Science Institute; © 2016-2021 Michael Droettboom.<br/>
-      Last updated on Dec 01, 2021.<br/>
+      Last updated on Dec 16, 2021.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>

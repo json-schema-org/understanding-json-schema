@@ -4,7 +4,7 @@
 .. _object:
 
 object
-------
+======
 
 .. contents:: :local:
 
@@ -77,7 +77,7 @@ conventionally referred to as a "property".
 .. _properties:
 
 Properties
-''''''''''
+----------
 
 The properties (key-value pairs) on an object are defined using the
 ``properties`` keyword.  The value of ``properties`` is an object,
@@ -127,7 +127,7 @@ address made up of a number, street name and street type:
 .. _patternProperties:
 
 Pattern Properties
-''''''''''''''''''
+------------------
 
 Sometimes you want to say that, given a particular kind of property
 name, the value should match a particular schema. That's where
@@ -181,7 +181,7 @@ are ignored.
 .. _additionalproperties:
 
 Additional Properties
-'''''''''''''''''''''
+---------------------
 
 The ``additionalProperties`` keyword is used to control the handling
 of extra stuff, that is, properties whose names are not listed in the
@@ -269,19 +269,220 @@ properties (that are neither defined by ``properties`` nor matched by
     // It must be a string:
     { "keyword": 42 }
 
+.. index::
+   single: object; properties; additionalProperties
+   single: extending
+
+.. _extending:
+
+Extending Closed Schemas
+''''''''''''''''''''''''
+
+It's important to note that ``additionalProperties`` only recognizes
+properties declared in the same subschema as itself. So,
+``additionalProperties`` can restrict you from "extending" a schema
+using `combining` keywords such as `allOf`. In the following example,
+we can see how the ``additionalProperties`` can cause attempts to
+extend the address schema example to fail.
+
+.. schema_example::
+
+   {
+     "allOf": [
+       {
+         "type": "object",
+         "properties": {
+           "street_address": { "type": "string" },
+           "city": { "type": "string" },
+           "state": { "type": "string" }
+         },
+         "required": ["street_address", "city", "state"],
+         "additionalProperties": false
+       }
+     ],
+
+     "properties": {
+       "type": { "enum": [ "residential", "business" ] }
+     },
+     "required": ["type"]
+   }
+   --X
+   // Fails ``additionalProperties``. "type" is considered additional.
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business"
+   }
+   --X
+   // Fails ``required``. "type" is required.
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC"
+   }
+
+Because ``additionalProperties`` only recognizes properties declared
+in the same subschema, it considers anything other than
+"street_address", "city", and "state" to be additional. Combining the
+schemas with `allOf` doesn't change that. A workaround you can use is
+to move ``additionalProperties`` to the extending schema and redeclare
+the properties from the extended schema.
+
+.. schema_example::
+
+   {
+     "allOf": [
+       {
+         "type": "object",
+         "properties": {
+           "street_address": { "type": "string" },
+           "city": { "type": "string" },
+           "state": { "type": "string" }
+         },
+         "required": ["street_address", "city", "state"]
+       }
+     ],
+
+     "properties": {
+       "street_address": true,
+       "city": true,
+       "state": true,
+       "type": { "enum": [ "residential", "business" ] }
+     },
+     "required": ["type"],
+     "additionalProperties": false
+   }
+   --
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business"
+   }
+   --X
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business",
+      "something that doesn't belong": "hi!"
+   }
+
+Now the ``additionalProperties`` keyword is able to recognize all the
+necessary properties and the schema works as expected. Keep reading to
+see how the ``unevaluatedProperties`` keyword solves this problem
+without needing to redeclare properties.
 
 .. index::
-   single: object; properties
+   single: object; properties; extending
    single: unevaluatedProperties
 
 .. _unevaluatedproperties:
 
 Unevaluated Properties
-''''''''''''''''''''''
+----------------------
 
 |draft2019-09|
 
-Documentation Coming Soon
+In the previous section we saw the challenges with using
+``additionalProperties`` when "extending" a schema using
+`combining`. The ``unevaluatedProperties`` keyword is similar to
+``additionalProperties`` except that it can recognize properties
+declared in subschemas. So, the example from the previous section can
+be rewritten without the need to redeclare properties.
+
+.. schema_example::
+
+   {
+     "allOf": [
+       {
+         "type": "object",
+         "properties": {
+           "street_address": { "type": "string" },
+           "city": { "type": "string" },
+           "state": { "type": "string" }
+         },
+         "required": ["street_address", "city", "state"]
+       }
+     ],
+
+     "properties": {
+       "type": { "enum": ["residential", "business"] }
+     },
+     "required": ["type"],
+     "unevaluatedProperties": false
+   }
+   --
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business"
+   }
+   --X
+   {
+      "street_address": "1600 Pennsylvania Avenue NW",
+      "city": "Washington",
+      "state": "DC",
+      "type": "business",
+      "something that doesn't belong": "hi!"
+   }
+
+``unevaluatedProperties`` works by collecting any properties that are
+successfully validated when processing the schemas and using those as
+the allowed list of properties. This allows you to do more complex
+things like conditionally adding properties. The following example
+allows the "department" property only if the "type" of address is
+"business".
+
+.. schema_example::
+
+   {
+     "type": "object",
+     "properties": {
+       "street_address": { "type": "string" },
+       "city": { "type": "string" },
+       "state": { "type": "string" },
+       "type": { "enum": ["residential", "business"] }
+     },
+     "required": ["street_address", "city", "state", "type"],
+
+     "if": {
+       "type": "object",
+       "properties": {
+         "type": { "const": "business" }
+       },
+       "required": ["type"]
+     },
+     "then": {
+       "properties": {
+         "department": { "type": "string" }
+       }
+     },
+
+     "unevaluatedProperties": false
+   }
+   --
+   {
+     "street_address": "1600 Pennsylvania Avenue NW",
+     "city": "Washington",
+     "state": "DC",
+     "type": "business",
+     "department": "HR"
+   }
+   --X
+   {
+     "street_address": "1600 Pennsylvania Avenue NW",
+     "city": "Washington",
+     "state": "DC",
+     "type": "residential",
+     "department": "HR"
+   }
+
+In this schema, the properties declared in the ``then`` schema only
+count as "evaluated" properties if the "type" of the address is
+"business".
 
 .. index::
    single: object; required properties
@@ -290,7 +491,7 @@ Documentation Coming Soon
 .. _required:
 
 Required Properties
-'''''''''''''''''''
+-------------------
 
 By default, the properties defined by the ``properties`` keyword are
 not required.  However, one can provide a list of required properties
@@ -357,7 +558,7 @@ they don't provide their address or telephone number:
 .. _propertyNames:
 
 Property names
-''''''''''''''
+--------------
 
 |draft6|
 
@@ -396,7 +597,7 @@ schema given to ``propertyNames`` is always at least::
    single: maxProperties
 
 Size
-''''
+----
 
 The number of properties on an object can be restricted using the
 ``minProperties`` and ``maxProperties`` keywords.  Each of these
