@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Understanding JSON Schema
-=========================
+Misunderstanding JSON Schema
+============================
 
 JSON Schema is a powerful tool for validating the structure of JSON
 data.  However, learning to use it by reading its specification is
