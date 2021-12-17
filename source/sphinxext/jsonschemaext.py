@@ -6,7 +6,7 @@ from docutils.parsers.rst import Directive
 from sphinx.util.nodes import set_source_info
 
 import jsonschema
-from jschon import Catalogue, JSON, JSONSchema, URI
+from jschon import create_catalog, JSON, JSONSchema, URI
 
 
 legacy = {
@@ -31,14 +31,13 @@ def validate(schema, part, standard):
 
         return (is_valid, message)
     else:
-        catalogue = Catalogue('2019-09', '2020-12')
-        Catalogue._default_catalogue = catalogue
+        catalogue = create_catalog('2019-09', '2020-12')
 
         compiled_schema = JSONSchema(schema.json, metaschema_uri=URI(standard))
         if not compiled_schema.validate().valid:
             raise ValueError("Schema is invalid:\n{0}\n\n{1}".format(
                 "INVALID SCHEMA", schema.content))
-        elif part.json is (1+1j):
+        elif part.json == (1+1j):
             return (False, 'INVALID JSON')
         else:
             jsonValue = JSON.loads(part.content)
