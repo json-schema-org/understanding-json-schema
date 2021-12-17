@@ -2,7 +2,7 @@ FROM fedora
 
 # Install system dependencies
 RUN dnf update -y
-RUN dnf install -y make latexmk texlive pipenv
+RUN dnf install -y make latexmk texlive pipenv python3.8
 RUN dnf install -y 'tex(fncychap.sty)' \
                    'tex(tabulary.sty)' \
                    'tex(framed.sty)' \
@@ -16,6 +16,7 @@ RUN dnf install -y 'tex(fncychap.sty)' \
                    'tex(mdframed.sty)' \
                    'tex(bbding10.pfb)'
 RUN texhash
+RUN alternatives --install /usr/bin/python python /usr/bin/python3.8 1
 
 COPY . /code
 WORKDIR /code
