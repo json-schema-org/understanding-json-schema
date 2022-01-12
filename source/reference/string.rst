@@ -134,7 +134,7 @@ do.
    Implementations may provide validation for only a subset of the
    built-in formats or do partial validation for a given format. For
    example, some implementations may consider a string an email if it
-   contains a ``@``, while others might be more do additional checks
+   contains a ``@``, while others might do additional checks
    for other aspects of a well formed email address.
 
 .. draft-specific::
