@@ -246,12 +246,15 @@ letters and numbers alternate.
         }
       },
       "if": {
+        "required": [ "country" ],
         "properties": { "country": { "const": "United States of America" } }
       },
       "then": {
+        "required": [ "postal_code" ],
         "properties": { "postal_code": { "pattern": "[0-9]{5}(-[0-9]{4})?" } }
       },
       "else": {
+        "required": [ "postal_code" ],
         "properties": { "postal_code": { "pattern": "[A-Z][0-9][A-Z] [0-9][A-Z][0-9]" } }
       }
     }
@@ -316,27 +319,31 @@ to the remaining postal codes of the world.
       "allOf": [
         {
           "if": {
+           "required": [ "country" ],
             "properties": { "country": { "const": "United States of America" } }
           },
           "then": {
+            "required": [ "postal_code" ],
             "properties": { "postal_code": { "pattern": "[0-9]{5}(-[0-9]{4})?" } }
           }
         },
         {
           "if": {
+           "required": [ "country" ],
             "properties": { "country": { "const": "Canada" } },
-            "required": ["country"]
           },
           "then": {
+            "required": [ "postal_code" ],
             "properties": { "postal_code": { "pattern": "[A-Z][0-9][A-Z] [0-9][A-Z][0-9]" } }
           }
         },
         {
           "if": {
+            "required": [ "country" ],
             "properties": { "country": { "const": "Netherlands" } },
-            "required": ["country"]
           },
           "then": {
+            "required": [ "postal_code" ],
             "properties": { "postal_code": { "pattern": "[0-9]{4} [A-Z]{2}" } }
           }
         }
