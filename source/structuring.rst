@@ -293,7 +293,7 @@ schema.
       "properties": {
         "street_address":
     *      {
-    *        "$anchor": "#street_address",
+    *        "$anchor": "street_address",
     *        "type": "string"
     *      },
         "city": { "type": "string" },
