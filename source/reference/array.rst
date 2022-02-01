@@ -315,7 +315,7 @@ Length
 The length of the array can be specified using the ``minItems`` and
 ``maxItems`` keywords.  The value of each keyword must be a
 non-negative number.  These keywords work whether doing
-`list-validation` or `tuple-validation`.
+`list validation <items>` or `tuple-validation`.
 
 .. schema_example::
 
