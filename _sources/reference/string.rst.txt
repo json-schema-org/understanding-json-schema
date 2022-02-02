@@ -137,7 +137,7 @@ do.
    contains a ``@``, while others might do additional checks
    for other aspects of a well formed email address.
 
-.. draft-specific::
+.. draft_specific::
    --Draft 4-7
    In Draft 4-7, there is no guarantee that you get annotation-only
    behavior by default.

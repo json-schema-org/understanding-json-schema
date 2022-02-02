@@ -62,7 +62,7 @@ of the given subschemas.
    `allOf` can not be used to "extend" a schema to add more details to
    it in the sense of object-oriented inheritance. Instances must
    independently be valid against "all of" the schemas in the
-   ``allOf``. See the section on `subschemaindependence` for more
+   ``allOf``. See the section on `extending` for more
    information.
 
 .. index::
