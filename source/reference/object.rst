@@ -218,7 +218,7 @@ Reusing the example from `properties`, but this time setting
 
 You can use non-boolean schemas to put more complex constraints on the
 additional properties of an instance. For example, one can allow
-additional properties, but only if they are each a string:
+additional properties, but only if their values are each a string:
 
 .. schema_example::
 
