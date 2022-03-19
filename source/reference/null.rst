@@ -23,7 +23,7 @@ acceptable value: ``null``.
 
 .. schema_example::
 
-    { "type": "null" }
+    { "type": null }
     --
     null
     --X
