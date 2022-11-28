@@ -298,13 +298,16 @@ extend the address schema example to fail.
          },
          "required": ["street_address", "city", "state"],
          "additionalProperties": false
+       }, 
+       
+       {
+         "type": "object",
+         "properties": {
+           "type": { "enum": [ "residential", "business" ] }
+         },
+         "required": ["type"]
        }
      ],
-
-     "properties": {
-       "type": { "enum": [ "residential", "business" ] }
-     },
-     "required": ["type"]
    }
    --X
    // Fails ``additionalProperties``. "type" is considered additional.
@@ -341,16 +344,20 @@ the properties from the extended schema.
            "state": { "type": "string" }
          },
          "required": ["street_address", "city", "state"]
+       },
+       
+       {
+         "type": "object",
+         "properties": {
+           "street_address": true,
+           "city": true,
+           "state": true,
+           "type": { "enum": [ "residential", "business" ] }
+         },
+         "required": ["type"],
        }
      ],
 
-     "properties": {
-       "street_address": true,
-       "city": true,
-       "state": true,
-       "type": { "enum": [ "residential", "business" ] }
-     },
-     "required": ["type"],
      "additionalProperties": false
    }
    --
@@ -404,14 +411,17 @@ be rewritten without the need to redeclare properties.
            "state": { "type": "string" }
          },
          "required": ["street_address", "city", "state"]
+       },
+       
+       {
+         "type": "object",
+         "properties": {
+           "type": { "enum": ["residential", "business"] }
+         },
+         "required": ["type"],
+         "unevaluatedProperties": false
        }
      ],
-
-     "properties": {
-       "type": { "enum": ["residential", "business"] }
-     },
-     "required": ["type"],
-     "unevaluatedProperties": false
    }
    --
    {
