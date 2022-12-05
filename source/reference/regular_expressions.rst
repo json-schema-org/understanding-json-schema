@@ -21,7 +21,9 @@ syntax described below.
 
 - ``.``: Matches any character except line break characters. (Be aware that what
   constitutes a line break character is somewhat dependent on your platform and
-  language environment, but in practice this rarely matters).
+  language environment, but in practice this rarely matters). To include
+  newlines use ``(.|\n\r)*`` pattern which avoids use of regex flags/modifiers
+  and have a very good support across regex libraries.
 
 - ``^``: Matches only at the beginning of the string.
 
@@ -54,7 +56,7 @@ syntax described below.
   all greedy; they match as much text as possible. Sometimes this
   behavior isn't desired and you want to match as few characters as
   possible.
-  
+
 - ``(?!x)``, ``(?=x)``: Negative and positive lookahead.
 
 - ``{x}``: Match exactly ``x`` occurrences of the preceding regular
@@ -68,6 +70,9 @@ syntax described below.
 
 - ``{x}?``, ``{x,y}?``, ``{x,}?``: Lazy versions of the above
   expressions.
+
+- Use only standard escapes like ``\n``, ``\r``, ``\t`` and keep in mind that
+  you also need to do JSON escaping.
 
 Example
 '''''''
@@ -89,3 +94,17 @@ with an optional area code:
    "(888)555-1212 ext. 532"
    --X
    "(800)FLOWERS"
+
+The following example checks that the string starts with `{{` and ends with `}}`
+and that it also allows multiline strings.
+
+.. schema_example::
+
+   {
+      "type": "string",
+      "pattern": "^\\{\\{(.|[\r\n])*\\}\\}$",
+   }
+   --
+   "{{ foo\nbar }}"
+   --X
+   "{ foo }"
