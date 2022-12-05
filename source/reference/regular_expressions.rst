@@ -22,8 +22,8 @@ syntax described below.
 - ``.``: Matches any character except line break characters. (Be aware that what
   constitutes a line break character is somewhat dependent on your platform and
   language environment, but in practice this rarely matters). To include
-  newlines use ``(.|\n\r)*`` pattern which avoids use of regex flags/modifiers
-  and have a very good support across regex libraries.
+  newlines use the ``(.|\n\r)*`` pattern which avoids the use of regex flags/modifiers
+  and has good support across regex libraries.
 
 - ``^``: Matches only at the beginning of the string.
 
