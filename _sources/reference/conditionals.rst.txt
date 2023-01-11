@@ -113,7 +113,7 @@ you can, of course, define the bidirectional dependencies explicitly:
    ``dependentSchemas`` were one keyword called ``dependencies``. If
    the dependency value was an array, it would behave like
    ``dependentRequired`` and if the dependency value was a schema, it
-   would behave like ``dependentSchema``.
+   would behave like ``dependentSchemas``.
 
 .. index::
     single: conditionals; dependentSchemas
@@ -180,7 +180,7 @@ For example, here is another way to write the above:
    ``dependentSchemas`` were one keyword called ``dependencies``. If
    the dependency value was an array, it would behave like
    ``dependentRequired`` and if the dependency value was a schema, it
-   would behave like ``dependentSchema``.
+   would behave like ``dependentSchemas``.
 
 .. index::
     single: conditionals
