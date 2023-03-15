@@ -120,7 +120,7 @@ certain kinds of string values that are commonly used. For example,
 because JSON doesn't have a "DateTime" type, dates need to be encoded
 as strings. ``format`` allows the schema author to indicate that the
 string value should be interpreted as a date. By default, ``format``
-is just an annotation and does not effect validation.
+is just an annotation and does not affect validation.
 
 Optionally, validator implementations can provide a configuration
 option to enable ``format`` to function as an assertion rather than
