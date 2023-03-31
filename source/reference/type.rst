@@ -32,7 +32,7 @@ may go by different names.
     +----------+-----------+
     |JSON      |Python     |
     +----------+-----------+
-    |string    |string     |
+    |string    |str        |
     |          |[#1]_      |
     +----------+-----------+
     |number    |int/float  |
