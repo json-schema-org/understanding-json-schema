@@ -236,52 +236,136 @@ Unevaluated Items
 
 |draft2019-09|
 
-The ``unevaluatedItems`` keyword selects any data types not evaluated
+The ``unevaluatedItems`` keyword applies to any values not evaluated
 by an ``items``, ``prefixItems``, or `contains` keyword. Just as
-unevaluated"properties" affect only "properties" in an object, only
-"item"-related keywords affect unevaluated"items".
-
-It also applies inside valid subschemas with these keywords:
-- ``allOf``
-- ``anyOf``
-- ``oneOf``
-- ``not``
-- ``if``
-- ``then``
-- ``else``
-
-The main reason to use this keyword is to extend an array with extra
-arguments.
-
-For this first example, we'll use ``unevaluatedItems`` to select any
-unexpected strings.
-
-.. schema_example::
-
-    {
-        "items": {"type": "number"},
-        "unevaluatedItems": {"type": "string"}
-    }
-    --X
-    // If any strings appear, then the schema doesn't validate. There are no unevaluated items in that case.
-    { 99, "waffles" }
-    --
-    // But it passes so long as JSON finds all entries in an ``items``, ``prefixItems``, or ``contains``. There *are* unevaluated items in that case.
-    { 99, 0, 3.14159 }
+unevaluated**properties** affect only **properties** in an object, only
+**item**-related keywords affect unevaluated**items**.
 
 .. note::
 Watch out! The word "unevaluated" *does not* mean "not evaluated by
 ``items``, ``prefixItems``, or ``contains``." "Unevaluated" means
 "not successfully evaluated", or "doesn't evaluate to true".
 
-You can also set ``unevaluatedItems`` as a boolean.
+For this first example, let's assume you want to allow lists of items
+that begin with either "1" or "A," but anything after must be 2.
+
+..schema_example::
+
+{
+    "oneOf": [{"prefixItems": [{"const": 1}]}, {"prefixItems": [{"const": "a"}]}],
+    "items": {"const": 2},
+}
+
+The logic here seems like it should be "one of either 1 or A and then 2."
+Actually, it's "either 1 or A **or 2** and also 2." So anything that's
+not a 2 fails validation. That's because ``allOf``, ``anyOf``, and ``oneOf``
+attach themselves to ``items`` in the same subschema.
+
+But if you replace ``items`` with ``unevaluatedItems``, it passes.
+Anything that starts with "1" or "A" and then continues with a "2" is
+valid in that case. ``allOf``, ``anyOf``, and ``oneOf`` do not attach
+themselves to ``unevaluatedItems``.
+
+You can also define ``unevaluatedItems`` as a boolean. In the next
+example, let's use ``unevaluatedItems`` to make sure we have no values
+outside of "SKU" and "product."
+
+..schema_example::
+
+    {
+      "allOf": [
+        {
+          "type": "array",
+          "items": {
+            "SKU": "number",
+            "product": "string",
+          },
+          "unevaluatedItems": false
+        }
+      ],
+
+      "items": {
+        "quantity": { "enum": ["1", "2", "3"] }
+      },
+        "required": ["quantity"],
+    }
+
+This schema will always fail validation because "quantity" is required,
+but it's outside of the ``allOf``, and ``unevaluatedItems`` *does not recognize any values outside of its own subschema*.
+Here, ``unevaluatedItems`` considers anything outside of "SKU" and
+"product" to be additional. Combining the schemas with ``allOf`` won’t
+change that.
+
+Instead, keep all your ``unevaluatedItems`` in the same list:
+
+..schema_example::
+
+    {
+      "items": {
+        "SKU": "number",
+        "product": "string",
+        "quantity": { "enum": ["1", "2", "3"] }
+      },
+        "required": ["quantity"],
+        "unevaluatedItems": false
+    }
+
+Similarly, you can use ``unevaluatedItems`` if you're `structuring`.
+Let's make a "half-closed" schema: something useful when you want to
+keep the first two arguments, but also add more in certain situations.
+("Closed" to two arguments in some places, "open" to more arguments
+when you need it to be.)
+
+.. schema_example::
+
+    {
+      "$id": "https://example.com/my-tuple",
+
+      "type": "array",
+      "prefixItems": [
+        true,
+        { "type": "boolean" }
+      ],
+
+      "$defs": {
+        "closed": {
+          "$anchor": "closed",
+          "$ref": "#",
+          "unevaluatedItems": false
+        }
+      }
+    }
+
+Then we can extend the tuple with another value:
+
+.. schema_example::
+
+    {
+      "$id": "https://example.com/my-extended-tuple",
+
+      "$ref": "https://example.com/my-tuple",
+      "prefixItems": [
+        true,
+        true,
+        { "type": "boolean" }
+      ],
+      "unevaluatedItems": false
+    }
+
+With this, you can use ``$ref`` to reference the first two
+``prefixItems`` and keep the schema "closed" to two arguments when
+you need it, "open" to more arguments when you need it. A reference to
+``/my-tuple#closed`` would disallow more than two items.
+``unevaluatedItems`` only reads inside the subschema it's attached to,
+so if you want to add an item, add it inside that subschema.
+
+You can also set ``unevaluatedItems`` in a nested tuple.
 
 .. schema_example::
 
     {
         "description": "unevaluatedItems with nested tuple",
         "schema": {
-            "$schema": "https://json-schema.org/draft/2020-12/schema",
             "prefixItems": [
                 { "type": "string" }
             ],
@@ -309,7 +393,7 @@ You can also set ``unevaluatedItems`` as a boolean.
         ]
     }
 
-In the first test, all the "data" items are evaluated, but in the
+In the first test, all the "data" values are evaluated, but in the
 second test, the ``null`` value is a type not specified by
 ``prefixItems``. It's therefore valid and ``true`` that
 ``unevaluatedItems`` returns ``false`` in the first test, and invalid
@@ -317,38 +401,10 @@ and ``false`` in the second test. In other words, it is valid that no
 unevaluated items exist until something not matching the string/number
 pattern shows up.
 
-You can also select ``unevaluatedItems`` when and only when an ``if``
-statement runs.
-
-.. schema_example::
-
-    {
-            "description": "unevaluatedItems can see annotations from if even without then and else",
-            "schema": {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "if": {
-                    "prefixItems": [{"const": "a"}]
-                },
-                "unevaluatedItems": false
-            },
-            "tests": [
-                {
-                    "description": "valid in case if is evaluated",
-                    "data": [ "a" ],
-                    "valid": true
-                },
-                {
-                    "description": "invalid in case if is evaluated",
-                    "data": [ "b" ],
-                    "valid": false
-                }
-            ]
-    }
-
-And an important note: ``unevaluatedItems`` can't see inside cousins
-(a vertically adjacent item inside a separate pair of {curly braces}
-with the same "parent"— ``anyOf``, ``if``, ``not``, or similar). Such
-an instance always fails evaluation.
+Lastly, here's an important note: ``unevaluatedItems`` can't see inside
+cousins (a vertically adjacent item inside a separate pair of {curly
+braces} with the same "parent"— ``anyOf``, ``if``, ``not``, or similar).
+Such an instance always fails validation.
 
 .. schema_example::
 
@@ -356,7 +412,7 @@ an instance always fails evaluation.
         "description": "unevaluatedItems can't see inside cousins",
         "schema": {
             "$schema": "https://json-schema.org/draft/2020-12/schema",
-            "allOf": [
+            "oneOf": [
                 {
                   "prefixItems": [ true ]
                 },
@@ -372,64 +428,17 @@ an instance always fails evaluation.
         ]
     }
 
-Finally, here's an example of ``unevaluatedItems`` if you're
-`structuring`. Let's make a "half-closed" schema: something useful
-when you want to keep the first two arguments, but also add more in
-certain situations. ("Closed" to two in some places, "open" to more
-in others.)
-
-.. schema_example::
-
-    {
-      "$id": "https://example.com/my-tuple",
-
-      "type": "array",
-      "prefixItems": [
-        true,
-        { "type": "boolean" }
-      ],
-
-      "$defs": {
-        "closed": {
-          "$anchor": "closed",
-          "$ref": "#",
-          "unevaluatedItems": false
-        }
-      }
-    }
-
-Then we can extend the tuple:
-
-.. schema_example::
-
-    {
-      "$id": "https://example.com/my-extended-tuple",
-
-      "$ref": "/my-tuple",
-      "prefixItems": [
-        true,
-        true,
-        { "type": "boolean" }
-      ],
-      "unevaluatedItems": false
-    }
-
-With this, you can use ``$ref`` to reference the first two
-``prefixItems`` and keep the schema "closed" to two when necessary,
-"open" to more when necessary. A reference to ``/my-tuple#closed``
-would disallow more than two items, when you need it to.
-
 .. note::
-   For a tower of more examples, read our `unevaluatedItems Test Suite <https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/draft2020-12/unevaluatedItems.json>`_ on GitHub.
+   For a tall list of more examples, read our `unevaluatedItems Test Suite <https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/draft2020-12/unevaluatedItems.json>`_ on GitHub.
    We test a lot of use cases there, including uncommon ones. Do any
    of these apply to your schema?
-   - using ``unevaluatedItems`` as a schema
    - ``unevaluatedItems`` nested inside another ``unevaluatedItems``
    - ``if/then/else`` statements with ``unevaluatedItems``
    - multiples nested ``if``/``then``s
    - multiple nested instances of ``contains``
    - ignoring non-array types
    - ``not``
+   - and more
 
 .. index::
    single: array; contains
