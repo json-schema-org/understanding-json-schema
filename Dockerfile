@@ -1,4 +1,4 @@
-FROM fedora
+FROM fedora:37
 
 # Install system dependencies
 RUN dnf update -y
