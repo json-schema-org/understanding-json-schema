@@ -237,19 +237,19 @@ Unevaluated Items
 |draft2019-09|
 
 The ``unevaluatedItems`` keyword applies to any values not evaluated
-by an ``items``, ``prefixItems``, or `contains` keyword. Just as
+by an ``items``, ``prefixItems``, or ``contains`` keyword. Just as
 ``unevaluatedProperties`` affects only **properties** in an object,
 ``unevaluatedItems`` affects only **item**-related keywords.
 
 For this first example, let's assume you want to allow lists of items
 that begin with either ``1`` or ``"A"``, but anything after must be ``2``.
 
-..schema_example::
+.. schema_example::
 
-{
-    "oneOf": [{"prefixItems": [{"const": 1}]}, {"prefixItems": [{"const": "a"}]}],
-    "items": {"const": 2},
-}
+    {
+      "oneOf": [{"prefixItems": [{"const": 1}]}, {"prefixItems": [{"const": "a"}]}],
+      "items": {"const": 2},
+    }
 
 The logic here seems like it should be "one of either ``1`` or ``"A"``
 and then ``2``." Actually, it's "either ``1`` or ``"A"`` *and also* ``2``."
@@ -267,28 +267,32 @@ also prevent additional items by setting ``unevaluatedItems`` to
 sure we allow no properties besides ``SKU`` and ``product``.
 
 .. note::
-Watch out! The word "unevaluated" *does not* mean "not evaluated by
-``items``, ``prefixItems``, or ``contains``." "Unevaluated" means
-"not successfully evaluated", or "doesn't evaluate to true".
+    Watch out! The word "unevaluated" *does not* mean "not evaluated by
+    ``items``, ``prefixItems``, or ``contains``." "Unevaluated" means
+    "not successfully evaluated", or "doesn't evaluate to true".
 
-..schema_example::
+.. schema_example::
 
     {
       "allOf": [
         {
           "type": "array",
           "items": {
-            "SKU": "number",
-            "product": "string",
+            "properties": {
+              "SKU": "number",
+              "product": "string"
+            }
           },
           "unevaluatedItems": false
         }
       ],
 
       "items": {
-        "quantity": { "enum": ["1", "2", "3"] }
-      },
-      "required": ["quantity"],
+        "properties": {
+          "quantity": { "enum": ["1", "2", "3"] }
+        },
+        "required": ["quantity"]
+      }
     }
 
 This schema will always fail validation because ``quantity`` is required
@@ -299,16 +303,18 @@ to be additional.
 
 Instead, keep all your ``unevaluatedItems`` in the same subschema:
 
-..schema_example::
+.. schema_example::
 
     {
       "items": {
-        "SKU": "number",
-        "product": "string",
-        "quantity": { "enum": ["1", "2", "3"] }
+        "properties": {
+          "SKU": "number",
+          "product": "string",
+          "quantity": { "enum": ["1", "2", "3"] }
+        }
+        "required": ["quantity"]
       },
-        "required": ["quantity"],
-        "unevaluatedItems": false
+      "unevaluatedItems": false
     }
 
 Similarly, ``unevaluatedItems`` can't see inside cousins (vertically
@@ -322,23 +328,13 @@ matches only empty arrays, all instances fail validation.
 .. schema_example::
 
     {
-        "schema": {
-            "oneOf": [
-                {
-                  "prefixItems": [ true ]
-                },
-                { "unevaluatedItems": false }
-            ]
-        },
-        "tests": [
-            {
-                "description": "always fails",
-                "data": [ 1 ],
-                "valid": false
-            }
-        ]
+      "oneOf": [
+        { "prefixItems": [true] },
+        { "unevaluatedItems": false }
+      ]
     }
-
+    --X
+    [1]
 
 You can also use ``unevaluatedItems`` when you're `structuring`.
 Let's make a "half-closed" schema: something useful when you want to
@@ -394,33 +390,23 @@ This means you can also put ``unevaluatedItems`` in a nested tuple.
 .. schema_example::
 
     {
-        "schema": {
-            "prefixItems": [
-                { "type": "string" }
-            ],
-            "allOf": [
-                {
-                    "prefixItems": [
-                      true,
-                      { "type": "number" }
-                    ]
-                }
-            ],
-            "unevaluatedItems": false
-        },
-        "tests": [
-            {
-                "description": "with no unevaluated items",
-                "data": ["foo", 42],
-                "valid": true
-            },
-            {
-                "description": "with an unevaluated item",
-                "data": ["foo", 42, null],
-                "valid": false
-            }
-        ]
+      "prefixItems": [
+        { "type": "string" }
+      ],
+      "allOf": [
+        {
+          "prefixItems": [
+            true,
+            { "type": "number" }
+          ]
+        }
+      ],
+      "unevaluatedItems": false
     }
+    --
+    ["foo", 42]
+    --X
+    ["foo", 42, null]
 
 In the first test, all the ``data`` values are evaluated, but in the
 second test, a third value exists. ``prefixItems`` contrains only two
