@@ -248,7 +248,7 @@ that begin with either ``1`` or ``"A"``, but anything after must be ``2``.
 
     {
       "oneOf": [{"prefixItems": [{"const": 1}]}, {"prefixItems": [{"const": "a"}]}],
-      "items": {"const": 2},
+      "items": {"const": 2}
     }
 
 The logic here seems like it should be "one of either ``1`` or ``"A"``
@@ -311,7 +311,7 @@ Instead, keep all your ``unevaluatedItems`` in the same subschema:
           "SKU": "number",
           "product": "string",
           "quantity": { "enum": ["1", "2", "3"] }
-        }
+        },
         "required": ["quantity"]
       },
       "unevaluatedItems": false
@@ -320,15 +320,15 @@ Instead, keep all your ``unevaluatedItems`` in the same subschema:
 Similarly, ``unevaluatedItems`` can't see inside cousins (vertically
 adjacent properties inside a separate pair of {curly braces} with the
 same "parent"— ``anyOf``, ``if``, ``not``, or similar). For instance,
-in the example below, the ``unevaluatedItems`` doesn't "see inside" the
-``prefixItems`` cousin before it. So since ``"prefixItems": [ true ]``
-matches only length 1 arrays, and ``{ "unevaluatedItems": false }``
-matches only empty arrays, all instances fail validation.
+in the example below, the ``unevaluatedItems`` doesn't "see inside"
+the ``prefixItems`` cousin before it. All instances fail vallidation
+because ``"prefixItems": [ true ]`` matches only length 1 arrays, and
+``{ "unevaluatedItems": false }`` matches only empty arrays.
 
 .. schema_example::
 
     {
-      "oneOf": [
+      "allOf": [
         { "prefixItems": [true] },
         { "unevaluatedItems": false }
       ]
@@ -413,15 +413,16 @@ second test, a third value exists. ``prefixItems`` contrains only two
 items, and ``unevaluatedItems`` applies only to those two.
 
 .. note::
-   For a tall list of more examples, read our `unevaluatedItems Test Suite <https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/draft2020-12/unevaluatedItems.json>`_ on GitHub.
-   We test a lot of use cases there, including uncommon ones. Do any
-   of these apply to your schema?
-   - ``unevaluatedItems`` nested inside another ``unevaluatedItems``
-   - ``if/then/else`` statements interacting with ``unevaluatedItems``
-   -  nested ``if/then/else`` statements interacting with ``unevaluatedItems``
-   - ``unevaluatedItems`` ignoring non-arrays
-   - ``unevaluatedItems`` interacting with the ``not`` keyword
-   - and more
+   For a tall list of more examples, read our `unevaluatedItems Test Suite <https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/draft2020-12/unevaluatedItems.json>`_ on GitHub. We test a lot of use cases
+   there, including uncommon ones.
+
+Here are some of our examples in the suite:
+   * ``unevaluatedItems`` nested inside another ``unevaluatedItems``
+   * ``if/then/else`` statements interacting with ``unevaluatedItems``
+   * nested ``if/then/else`` statements interacting with ``unevaluatedItems``
+   * ``unevaluatedItems`` ignoring non-arrays
+   * ``unevaluatedItems`` interacting with the ``not`` keyword
+   * and more
 
 .. index::
    single: array; contains
