@@ -239,108 +239,17 @@ Unevaluated Items
 The ``unevaluatedItems`` keyword applies to any values not evaluated
 by an ``items``, ``prefixItems``, or ``contains`` keyword. Just as
 ``unevaluatedProperties`` affects only **properties** in an object,
-``unevaluatedItems`` affects only **item**-related keywords.
-
-For this first example, let's assume you want to allow lists of items
-that begin with either ``1`` or ``"A"``, but anything after must be ``2``.
-
-.. schema_example::
-
-    {
-      "oneOf": [{"prefixItems": [{"const": 1}]}, {"prefixItems": [{"const": "a"}]}],
-      "items": {"const": 2}
-    }
-
-The logic here seems like it should be "one of either ``1`` or ``"A"``
-and then ``2``." Actually, it's "either ``1`` or ``"A"`` *and also* ``2``."
-And ``items`` expects a ``2`` here, so anything that's not a ``2``
-fails validation. That's because ``items`` doesn't "see inside" any
-instances of ``oneOf``, ``anyOf``, or ``allOf`` in the same subschema.
-
-But if you replace ``items`` with ``unevaluatedItems``, it passes.
-Anything that starts with ``1`` or ``A`` and then continues with a ``2``
-is valid in that case.
-
-Because booleans are valid schemas for any JSON Schema keyword, you can
-also prevent additional items by setting ``unevaluatedItems`` to
-``false.`` In the next example, let's use ``unevaluatedItems`` to make
-sure we allow no properties besides ``SKU`` and ``product``.
+``unevaluatedItems`` affects only **items** in an array.
 
 .. note::
     Watch out! The word "unevaluated" *does not* mean "not evaluated by
     ``items``, ``prefixItems``, or ``contains``." "Unevaluated" means
     "not successfully evaluated", or "doesn't evaluate to true".
 
-.. schema_example::
-
-    {
-      "allOf": [
-        {
-          "type": "array",
-          "items": {
-            "properties": {
-              "SKU": "number",
-              "product": "string"
-            }
-          },
-          "unevaluatedItems": false
-        }
-      ],
-
-      "items": {
-        "properties": {
-          "quantity": { "enum": ["1", "2", "3"] }
-        },
-        "required": ["quantity"]
-      }
-    }
-
-This schema will always fail validation because ``quantity`` is required
-but it's outside the ``allOf``, and ``unevaluatedItems``
-*does not see any items outside its own subschema*. Here,
-``unevaluatedItems`` considers anything outside of ``SKU`` and ``product``
-to be additional.
-
-Instead, keep all your ``unevaluatedItems`` in the same subschema:
-
-.. schema_example::
-
-    {
-      "items": {
-        "properties": {
-          "SKU": "number",
-          "product": "string",
-          "quantity": { "enum": ["1", "2", "3"] }
-        },
-        "required": ["quantity"]
-      },
-      "unevaluatedItems": false
-    }
-
-Similarly, ``unevaluatedItems`` can't see inside cousins (vertically
-adjacent properties inside a separate pair of {curly braces} with the
-same "parent"— ``anyOf``, ``if``, ``not``, or similar). For instance,
-in the example below, the ``unevaluatedItems`` doesn't "see inside"
-the ``prefixItems`` cousin before it. All instances fail vallidation
-because ``"prefixItems": [ true ]`` matches only length 1 arrays, and
-``{ "unevaluatedItems": false }`` matches only empty arrays.
-
-.. schema_example::
-
-    {
-      "allOf": [
-        { "prefixItems": [true] },
-        { "unevaluatedItems": false }
-      ]
-    }
-    --X
-    [1]
-
-You can also use ``unevaluatedItems`` when you're `structuring`.
-Let's make a "half-closed" schema: something useful when you want to
-keep the first two arguments, but also add more in certain situations.
-("Closed" to two arguments in some places, "open" to more arguments
-when you need it to be.)
+For this first example, let's make a "half-closed" schema: something
+useful when you want to keep the first two arguments, but also add
+more in certain situations. ("Closed" to two arguments in some
+places, "open" to more arguments when you need it to be.)
 
 .. schema_example::
 
@@ -348,7 +257,7 @@ when you need it to be.)
       "$id": "https://example.com/my-tuple",
 
       "type": "array",
-      "prefixItems": [
+      "items": [
         true,
         { "type": "boolean" }
       ],
@@ -356,13 +265,15 @@ when you need it to be.)
       "$defs": {
         "closed": {
           "$anchor": "closed",
-          "$ref": "#",
-          "unevaluatedItems": false
+          "$ref": "#"
         }
       }
     }
 
-Then we can extend the tuple with another value:
+``items`` evaluates only the items in the initial array. Any items
+you add when you extend the tuple later *are not evaluated*. When
+you extend the tuple, the schema passes validation only if you include
+``unevaluatedItems`` like this:
 
 .. schema_example::
 
@@ -381,8 +292,8 @@ Then we can extend the tuple with another value:
 With this, you can use ``$ref`` to reference the first two
 ``prefixItems`` and keep the schema "closed" to two arguments when
 you need it, "open" to more arguments when you need it. A reference to
-``/my-tuple#closed`` would disallow more than two items.
-``unevaluatedItems`` only sees inside its own subschema, so if you
+``/my-tuple#closed`` would disallow more than two items. And because
+``unevaluatedItems`` only sees inside its own subschema, if you
 want to add an item, add it inside that subschema.
 
 This means you can also put ``unevaluatedItems`` in a nested tuple.
@@ -405,12 +316,44 @@ This means you can also put ``unevaluatedItems`` in a nested tuple.
     }
     --
     ["foo", 42]
+    // All the array items are evaluated. The schema passes validation.
     --X
     ["foo", 42, null]
+    // The third value is unevaluated, so ``unevaluatedItems`` is true,
+    // not false. The schema fails validation.
 
-In the first test, all the ``data`` values are evaluated, but in the
-second test, a third value exists. ``prefixItems`` contrains only two
-items, and ``unevaluatedItems`` applies only to those two.
+Note these two restraints, though. First, ``items`` doesn't "see
+inside" any instances of ``allOf``, ``anyOf``, or ``oneOf`` in the
+same subschema. In this next example, ``items`` ignores ``allOf`` and
+thus fails to validate.
+
+.. schema_example::
+
+    {
+      "allOf": [{ "prefixItems": [{ "enum": [1, "a"] }]  }],
+      "items": { "const": 2 }
+    }
+    --X
+    [1, "a", 2]
+
+Second, ``unevaluatedItems`` can't "see inside" cousins (vertically
+adjacent properties inside a separate pair of {curly braces} with the
+same "parent"— ``anyOf``, ``if``, ``not``, or similar). For instance,
+in the example below, the ``unevaluatedItems`` doesn't "see inside"
+the ``prefixItems`` cousin before it. All instances fail validation
+because ``"prefixItems": [ true ]`` matches only length 1 arrays, and
+``{ "unevaluatedItems": false }`` matches only empty arrays.
+
+.. schema_example::
+
+    {
+      "allOf": [
+        { "prefixItems": [true] },
+        { "unevaluatedItems": false }
+      ]
+    }
+    --X
+    [1]
 
 .. note::
    For a tall list of more examples, read our `unevaluatedItems Test Suite <https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/draft2020-12/unevaluatedItems.json>`_ on GitHub. We test a lot of use cases
