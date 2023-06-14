@@ -242,14 +242,59 @@ by an ``items``, ``prefixItems``, or ``contains`` keyword. Just as
 ``unevaluatedItems`` affects only **items** in an array.
 
 .. note::
-    Watch out! The word "unevaluated" *does not* mean "not evaluated by
+    Watch out! The word "unevaluated" *does not mean* "not evaluated by
     ``items``, ``prefixItems``, or ``contains``." "Unevaluated" means
     "not successfully evaluated", or "doesn't evaluate to true".
 
-For this first example, let's make a "half-closed" schema: something
-useful when you want to keep the first two arguments, but also add
-more in certain situations. ("Closed" to two arguments in some
-places, "open" to more arguments when you need it to be.)
+``items`` doesn't "see inside" any instances of ``allOf``, ``anyOf``,
+or ``oneOf`` in the same subschema. In this first example, ``items``
+ignores ``allOf`` and thus fails to validate.
+
+.. schema_example::
+
+    {
+      "allOf": [{ "prefixItems": [{ "type": "boolean" }, { "type": "string" }] }],
+      "items": { "const": 2 }
+    }
+    --X
+    [true, "a", 2]
+
+But if you replace ``items`` with ``unevaluatedItems``, then the same
+array validates.
+
+.. schema_example::
+
+    {
+      "allOf": [{ "prefixItems": [{ "type": "boolean" }, { "type": "string" }] }],
+      "unevaluatedItems": { "const": 2 }
+    }
+    --
+    [true, "a", 2]
+
+Like with ``items``, if you set ``unevaluatedItems`` to ``false``, you
+can disallow extra items in the array.
+
+.. schema_example::
+
+    {
+      "prefixItems": [
+        { "type": "string" }, { "type": "number" }
+      ],
+      "unevaluatedItems": false
+    }
+    --
+    ["foo", 42]
+    // All the values are evaluated. The schema passes validation.
+    --X
+    ["foo", 42, null]
+    // The schema fails validation because ``"unevaluatedItems": false"``
+    // specifies no extra values should exist.
+
+``unevaluatedItems`` is used mainly when extending a tuple. So with
+this in mind, you can make a "half-closed" schema: something useful
+when you want to keep the first two arguments, but also add more in
+certain situations. ("Closed" to two arguments in some places, "open"
+to more arguments when you need it to be.)
 
 .. schema_example::
 
@@ -257,10 +302,11 @@ places, "open" to more arguments when you need it to be.)
       "$id": "https://example.com/my-tuple",
 
       "type": "array",
-      "items": [
-        true,
-        { "type": "boolean" }
+      "prefixItems": [
+        { "type": "boolean" },
+        { "type": "string" }
       ],
+      "unevaluatedItems": false,
 
       "$defs": {
         "closed": {
@@ -270,10 +316,8 @@ places, "open" to more arguments when you need it to be.)
       }
     }
 
-``items`` evaluates only the items in the initial array. Any items
-you add when you extend the tuple later *are not evaluated*. When
-you extend the tuple, the schema passes validation only if you include
-``unevaluatedItems`` like this:
+Here the schema is "closed" to two array items. You can then later
+use ``$ref`` and add another item like this:
 
 .. schema_example::
 
@@ -282,90 +326,23 @@ you extend the tuple, the schema passes validation only if you include
 
       "$ref": "https://example.com/my-tuple",
       "prefixItems": [
-        true,
-        true,
-        { "type": "boolean" }
+        { "type": "boolean" },
+        { "type": "string" },
+        { "type": "number" }
       ],
-      "unevaluatedItems": false
-    }
+      "unevaluatedItems": false,
 
-With this, you can use ``$ref`` to reference the first two
-``prefixItems`` and keep the schema "closed" to two arguments when
-you need it, "open" to more arguments when you need it. A reference to
-``/my-tuple#closed`` would disallow more than two items. And because
-``unevaluatedItems`` only sees inside its own subschema, if you
-want to add an item, add it inside that subschema.
-
-This means you can also put ``unevaluatedItems`` in a nested tuple.
-
-.. schema_example::
-
-    {
-      "prefixItems": [
-        { "type": "string" }
-      ],
-      "allOf": [
-        {
-          "prefixItems": [
-            true,
-            { "type": "number" }
-          ]
+        "$defs": {
+          "extended": {
+            "$anchor": "extended",
+            "$ref": "#"
         }
-      ],
-      "unevaluatedItems": false
+      }
     }
-    --
-    ["foo", 42]
-    // All the array items are evaluated. The schema passes validation.
-    --X
-    ["foo", 42, null]
-    // The third value is unevaluated, so ``unevaluatedItems`` is true,
-    // not false. The schema fails validation.
 
-Note these two restraints, though. First, ``items`` doesn't "see
-inside" any instances of ``allOf``, ``anyOf``, or ``oneOf`` in the
-same subschema. In this next example, ``items`` ignores ``allOf`` and
-thus fails to validate.
-
-.. schema_example::
-
-    {
-      "allOf": [{ "prefixItems": [{ "enum": [1, "a"] }]  }],
-      "items": { "const": 2 }
-    }
-    --X
-    [1, "a", 2]
-
-Second, ``unevaluatedItems`` can't "see inside" cousins (vertically
-adjacent properties inside a separate pair of {curly braces} with the
-same "parent"— ``anyOf``, ``if``, ``not``, or similar). For instance,
-in the example below, the ``unevaluatedItems`` doesn't "see inside"
-the ``prefixItems`` cousin before it. All instances fail validation
-because ``"prefixItems": [ true ]`` matches only length 1 arrays, and
-``{ "unevaluatedItems": false }`` matches only empty arrays.
-
-.. schema_example::
-
-    {
-      "allOf": [
-        { "prefixItems": [true] },
-        { "unevaluatedItems": false }
-      ]
-    }
-    --X
-    [1]
-
-.. note::
-   For a tall list of more examples, read our `unevaluatedItems Test Suite <https://github.com/json-schema-org/JSON-Schema-Test-Suite/blob/main/tests/draft2020-12/unevaluatedItems.json>`_ on GitHub. We test a lot of use cases
-   there, including uncommon ones.
-
-Here are some of our examples in the suite:
-   * ``unevaluatedItems`` nested inside another ``unevaluatedItems``
-   * ``if/then/else`` statements interacting with ``unevaluatedItems``
-   * nested ``if/then/else`` statements interacting with ``unevaluatedItems``
-   * ``unevaluatedItems`` ignoring non-arrays
-   * ``unevaluatedItems`` interacting with the ``not`` keyword
-   * and more
+Thus, you would reference ``my-tuple#closed`` when you need only
+two array items and reference ``my-tuple#extended`` when you need
+three items.
 
 .. index::
    single: array; contains
