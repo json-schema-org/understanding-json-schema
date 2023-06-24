@@ -236,19 +236,41 @@ Unevaluated Items
 
 |draft2019-09|
 
-The ``unevaluatedItems`` keyword applies to any values not evaluated
-by an ``items``, ``prefixItems``, or ``contains`` keyword. Just as
+The ``unevaluatedItems`` keyword is useful mainly when you want to add
+or disallow extra items to an array.
+
+``unevaluatedItems`` applies to any values not evaluated by an
+``items``, ``prefixItems``, or ``contains`` keyword. Just as
 ``unevaluatedProperties`` affects only **properties** in an object,
 ``unevaluatedItems`` affects only **items** in an array.
 
 .. note::
     Watch out! The word "unevaluated" *does not mean* "not evaluated by
     ``items``, ``prefixItems``, or ``contains``." "Unevaluated" means
-    "not successfully evaluated", or "doesn't evaluate to true".
+    "not successfully evaluated", or "does not evaluate to true".
 
-``items`` doesn't "see inside" any instances of ``allOf``, ``anyOf``,
-or ``oneOf`` in the same subschema. In this first example, ``items``
-ignores ``allOf`` and thus fails to validate.
+Like with ``items``, if you set ``unevaluatedItems`` to ``false``, you
+can disallow extra items in the array.
+
+.. schema_example::
+
+    {
+      "prefixItems": [
+        { "type": "string" }, { "type": "number" }
+      ],
+      "unevaluatedItems": false
+    }
+    --
+    ["foo", 42]
+    // All the values are evaluated. The schema passes validation.
+    --X
+    ["foo", 42, null]
+    // The schema fails validation because ``"unevaluatedItems": false"``
+    // specifies no extra values should exist.
+
+Note that ``items`` doesn't "see inside" any instances of ``allOf``,
+``anyOf``, or ``oneOf`` in the same subschema. So in this next example,
+``items`` ignores ``allOf`` and thus fails to validate.
 
 .. schema_example::
 
@@ -271,47 +293,26 @@ array validates.
     --
     [true, "a", 2]
 
-Like with ``items``, if you set ``unevaluatedItems`` to ``false``, you
-can disallow extra items in the array.
-
-.. schema_example::
-
-    {
-      "prefixItems": [
-        { "type": "string" }, { "type": "number" }
-      ],
-      "unevaluatedItems": false
-    }
-    --
-    ["foo", 42]
-    // All the values are evaluated. The schema passes validation.
-    --X
-    ["foo", 42, null]
-    // The schema fails validation because ``"unevaluatedItems": false"``
-    // specifies no extra values should exist.
-
-``unevaluatedItems`` is used mainly when extending a tuple. So with
-this in mind, you can make a "half-closed" schema: something useful
-when you want to keep the first two arguments, but also add more in
-certain situations. ("Closed" to two arguments in some places, "open"
-to more arguments when you need it to be.)
+You can also make a "half-closed" schema: something useful when you
+want to keep the first two arguments, but also add more in certain
+situations. ("Closed" to two arguments in some places, "open" to
+more arguments when you need it to be.)
 
 .. schema_example::
 
     {
       "$id": "https://example.com/my-tuple",
-
       "type": "array",
       "prefixItems": [
         { "type": "boolean" },
         { "type": "string" }
       ],
-      "unevaluatedItems": false,
 
       "$defs": {
         "closed": {
           "$anchor": "closed",
-          "$ref": "#"
+          "$ref": "#",
+          "unevaluatedItems": false
         }
       }
     }
@@ -323,26 +324,25 @@ use ``$ref`` and add another item like this:
 
     {
       "$id": "https://example.com/my-extended-tuple",
-
       "$ref": "https://example.com/my-tuple",
       "prefixItems": [
         { "type": "boolean" },
         { "type": "string" },
         { "type": "number" }
       ],
-      "unevaluatedItems": false,
 
         "$defs": {
-          "extended": {
-            "$anchor": "extended",
-            "$ref": "#"
+          "closed": {
+            "$anchor": "closed",
+            "$ref": "#",
+            "unevaluatedItems": false
         }
       }
     }
 
 Thus, you would reference ``my-tuple#closed`` when you need only
-two array items and reference ``my-tuple#extended`` when you need
-three items.
+two items and reference ``my-tuple#extended`` when you need three
+items.
 
 .. index::
    single: array; contains
