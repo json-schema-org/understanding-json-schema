@@ -331,11 +331,11 @@ use ``$ref`` and add another item like this:
         { "type": "number" }
       ],
 
-        "$defs": {
-          "closed": {
-            "$anchor": "closed",
-            "$ref": "#",
-            "unevaluatedItems": false
+      "$defs": {
+        "closed": {
+          "$anchor": "closed",
+          "$ref": "#",
+          "unevaluatedItems": false
         }
       }
     }
