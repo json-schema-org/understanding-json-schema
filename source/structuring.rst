@@ -423,7 +423,7 @@ good candidate for using ``$defs``.
       }
     }
 
-``$ref`` isn't just good for avoiding duplication. It can also be
+``$defs`` isn't just good for avoiding duplication. It can also be
 useful for writing schemas that are easier to read and maintain.
 Complex parts of the schema can be defined in ``$defs`` with
 descriptive names and referenced where it's needed. This allows
